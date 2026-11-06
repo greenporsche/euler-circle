@@ -1,6 +1,6 @@
 # Euler Circle Coursework
 
-My problem set solutions and papers from courses at [Euler Circle](https://eulercircle.com/), spanning from fall 2023 to present. Each problem set and paper has its own folder with the LaTeX source and the compiled PDF.
+My problem set solutions and papers from courses at [Euler Circle](https://eulercircle.com/), spanning from fall 2023 to present. Each problem set and paper has its own folder with the LaTeX source and the compiled PDF, except Transitions 1–6, which weren't written in LaTeX and have only the PDF.
 
 ## Courses
 
