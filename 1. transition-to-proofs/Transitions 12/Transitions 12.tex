@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Chapter 12 Problem Set}
+\author{Siddharth K}
+\date{January 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} There are $20\choose 7$ ways to choose which cubes are blue, $13\choose 8$ to choose which are green, $5\choose 2$ for red, and $3\choose 3$ for yellow. Multiplying them together, we get $77520 \cdot 1287 \cdot 10 \cdot 1 = 997682400$.
+\newline
+
+\textbf{2a.} Finding the number of subsets of $[10]$ that contain $1$ is equivalent to finding the number of subsets of $\{2, 3, \ldots, 10\}$, which is $2^9 = 512$.
+\newline
+
+\textbf{2b.} To do this, we can find the number of subsets that contain $1$ but not $2$, the number of subsets that contain $2$ but not $1$, and the number of subsets that contain both $1$ and $2$, and add all three numbers. The number of subsets that contain $1$ but not $2$ is $2^8$, and the same for the number of subsets that contain $2$ but not $1$, and the subsets that contain both $1$ and $2$. Therefore, the answer is $3 \cdot 2^8 = 768$.
+\newline
+
+\textbf{2c.} We know that there are $2^{10}$ subsets in total, so we can subtract from that the number of subsets containing only even numbers, which is $2^5$; $2^{10} - 2^5 = 992$.
+\newline
+
+\textbf{3a.} The function $f:Z \rightarrow Z, f(n) = n$ is surjective and injective because $f$ maps every integer to the same integer. Therefore, it is also bijective.
+\newline
+
+\textbf{3b.} The function $f:Z \rightarrow Z, f(n) = n^2$ is not surjective because every non-perfect square doesn't have a corresponding input value. It is not injective because an integer and the negation of that integer have the same square.
+\newline
+
+\textbf{3c.} This one is the same as the previous one, except it is injective because no two distinct positive integers have the same square.
+\newline
+
+\textbf{3d.} The function $f:Z \rightarrow Z, f(n) = \lfloor \frac{n}{3} \rfloor$ is surjective because every integer is equal to the floor of three times that integer over $3$. However, it is not injective because, for example, $\lfloor \frac{3}{3} \rfloor = \lfloor \frac{4}{3} \rfloor$.
+\newline
+
+\textbf{4.} We must choose at least one element from one of the $S_i$'s. Assume that we choose $S_1$ for that. Then, from every other set, we can either choose none or one of its elements. Therefore, if $n_i$ is the number of elements in that set, then there are $n_i + 1$ ways to deal with it. So, assuming that we must choose an element from $S_1$, there are $n_1(n_2 + 1)(n_3 + 1)\cdots (n_k + 1)$ ways to satisfy the conditions of the problem. Doing the same for $S_2$, $S_3$, through $S_k$, we see that the total sum is $n_1(n_2 + 1)\cdots(n_k + 1) + n_2(n_1 + 1)(n_3 + 1)\cdots(n_k + 1) + \cdots + n_k(n_1 + 1)\cdots(n_{k - 1} + 1)$.
+\newline
+
+\textbf{5.} Without loss of generality, let's assume that $m$ is the number of rows. The $k$ rooks must be on $k$ different rows, so we need to choose $k$ rows from $m$ total. This gives us $m\choose k$ ways to choose the rows that the rooks will be placed on. 
+\newline
+
+Now, we must choose which of the $n$ columns will have rooks on them. Since there are $k$ rooks, this is just $n\choose k$. Now, when we multiply that by the number of ways to choose the $k$ rows, we get $m\choose k$$n\choose k$ ways to place $k$ rooks on an $m\times n$ chessboard.
+\newline
+
+\textbf{6a.} Let's say $f$ maps $[m]$ to $[n]$. Each input value from $1$ to $m$ has $n$ possible output values. Therefore, there are $m^n$ ways to map $[m]$ to $[n]$.
+\newline
+
+\textbf{6b.} Now that $f$ is injective, once an output value is taken, $f$ can't map any other input value to that output. That means each output value is mapped to by one input value. There are $m$ choices for the first output value, $m - 1$ for the next output value, and so on until either we run out of input or output values. If $m > n$, this gives us $n!$ possible functions. If $m < n$, there are $(n - m)!$ possible functions.
+\newline
+
+\textbf{7.} The number of compositions of a number $n$ is $2^{n - 1}$. We know that $n$ can be written as $1 + 1 + \ldots + 1$ with $n$ ones. To generate a new composition, we can either add two of the ones connected by the plus sign between them to create a new part, or we can leave them as individual parts. Let these actions be represented by the numbers $1$ and $0$ respectively. Then, we can create a set $S$ with $n - 1$ elements, which are either $0$ or $1$.
+\newline
+
+Now, we need to prove a bijection between the compositions of $n$ and the number possible sets $S$. We know that such a relation is surjective because, given a binary set of length $n - 1$, we can construct a composition of $n$ by interpreting each $1$ as creating a new part and each $0$ as keeping the current part. So we can create a composition of $n$ given any set $S$.
+\newline
+
+We know that it is injective as well, because given a composition of $n$, we can construct a binary set using $1$ to split a part of the composition, $n_i$, into $1$ and $n_i - 1$, until we get a sum of $n - 1$ ones.
+\newline
+
+Therefore, there is a bijection between the number of compositions of $n$ and the number of possible sets $S$. Since there are $n - 1$ terms which can each be $0$ or $1$, there are $2^{n - 1}$ possible sets $S$, and therefore $2^{n - 1}$ compositions of $n$.
+\newline
+
+\textbf{8.} Let's consider all compositions of $n$ with $k$ parts. From the problem 9, we know that there are ${n - 1}\choose {k - 1}$ of them. When $k = n$, the only composition is $1 + 1 + \ldots + 1$ with $n$ ones. That composition has zero even parts.
+\newline
+
+When $k = n - 1$, the composition consists of $n - 2$ ones and a two. That means it has an odd number of even parts ($1$). When $k = n - 2$, either the $2$ from the previous compositions is turned into a $3$ or two of the ones combine to form a $2$. Either way, there is an even number of even parts in the new composition.
+\newline
+
+This pattern continues until $k = 1$; when $k = n - a$ where $a$ is even, then all such compositions have an even amount of even parts. When $a$ is odd, there is an odd number of even parts. Therefore, our overall sum becomes ${n - 1}\choose {k - 1}$$+$${n - 1}\choose {k - 3}$$+\ldots +$${n - 1}\choose {n - 2\lfloor \frac{n - 1}{2} \rfloor}$. Expanding $(x + y)^{n - 1}$ and $(x - y)^{n - 1}$ using the Binomial Theorem, subtracting the second equation from the first, and substituting $x = y = 1$ shows us that the above expression is equal to $2^{n - 2}$. Therefore, there are $2^{n - 2}$ compositions of $n$ with an even number of even parts.
+\newline
+
+\textbf{9.} We saw that we can use a set of $n - 1$ zeros and ones to represent any composition. If a composition has $k$ parts, then that set needs to contain $n - (k - 1)$ ones. So there are ${n - 1}\choose {n - (k - 1)}$$=$${n - 1}\choose {k - 1}$ compositions of $n$ with $k$ elements.
+\newline
+
+\textbf{11.} We can fill the first $m - 1$ rows and $n - 1$ columns however we want, and the rest of the board depends on what we choose.  Therefore, the answer is $2^{(m - 1)(n - 1)}$.
+\newline
+
+\end{document}

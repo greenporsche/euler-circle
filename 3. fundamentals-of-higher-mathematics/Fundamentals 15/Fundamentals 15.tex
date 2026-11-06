@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\OO}{\mathcal{O}}
+
+\title{Fundamentals 15}
+\author{Siddharth K}
+\date{February 2025}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} We have that $x \in (a, b)$ iff $x > a$ and $x < b$. Let $x \in (a, b)$ and $\eps = \min(b - x, x - a)$. Now let $y \in \R$ such that $|x - y| < \eps$. If $y \ge x$, we have that
+$$|x - y| = y - x < \eps \le b - x,$$
+$$y - x < b - x, \quad y < b.$$
+Therefore, $a < x \le y < b$, so $y \in (a, b)$. If $y < x$, we have that
+$$|x - y| = x - y < \eps \le x - a,$$
+$$x - y < x - a, \quad a < y.$$
+Therefore, $a < y \le x < b$, so $y \in (a, b)$. \\
+
+Now we show that $S = \R\, \backslash\, [a, b] = (-\infty, a) \cup (b, \infty)$ is open. We know that $x \in S$ iff $x < a$ or $x > b$. Let $x \in S$ and $\eps = \min(a - x, x - b)$. Now let $y \in \R$ such that $|x - y| < \eps$. \\
+
+First, we consider the case where $x < a$. If $y \le x$ then $y < a$ so $y \in S$. If $y > x$,
+$$|x - y| = y - x < \eps \le a - x,$$
+$$y - x < a - x, \quad y < a,$$
+so $y \in S$. \\
+
+Now, assume $x > b$. If $y \ge x$ then $y > b$ so $y \in S$. If $y < x$,
+$$|x - y| = x - y < \eps \le x - b,$$
+$$x - y < x - b, \quad b < y,$$
+so $y \in S$. \\
+
+\textbf{2.} Let $S_n = \left(-\frac{1}{n}, 1 + \frac{1}{n}\right)$, and let $S = \bigcap_{n = 1}^\infty S_n$. We claim that this is equal to $[0, 1]$. \\
+
+If $x \in [0, 1]$, then $x > -\frac{1}{n}$ and $x < 1 + \frac{1}{n}$ for all $n \in \N$, so any $x \in [0, 1]$ is also in $S$. Now, let $x \in S$, and for contradiction, assume it is not in $[0, 1]$. Then, if $x < 0$, we can choose $n > \frac{1}{-x}$, so that $x < -\frac{1}{n}$ and $x \not\in S_n$ and therefore $x \not\in S$. If $x > 0$, we can choose $n > \frac{1}{x - 1}$ so that $x > 1 + \frac{1}{n}$ and $x \not\in S$. This is a contradiction, so all elements of $S$ are in $[0, 1]$. \\
+
+\textbf{3.} A finite subset $U$ of the metric space $(X, d)$ consists of points $x_1, x_2, \ldots, x_n$ in order. Let $x_k \in U$. Consider the open ball $B_r(x_k)$ where $r = \min(x_k - x_{k - 1}, x_{k + 1} - x_k)$. Since any point $x \in X$ is at least $r$ away from $x_k$, the open ball only contains $x_k$, meaning it is not a limit point. So $U$ does not contain any limit points. \\
+
+Also, we have that $\R\, \backslash\, U = (-\infty, x_1) \cup (x_1, x_2) \cup \cdots \cup (x_n, \infty)$. Since this is a union of open sets, $\R\, \backslash\, U$ is open, so $U$ is closed. \\
+
+\textbf{4.} Let $S$ be an open neighborhood, and let $x \in S$. Then there is $\eps > 0$ such that for all $y \in X$, $d(x, y) < \eps \implies y \in S$. The set of all $y$ where $d(x, y) < \eps$ is the open ball $B_\eps(x)$, and we have that $y \in S$ for all such $y$, so $B_\eps(x) \subseteq S$. \\
+
+\textbf{5.} Since $x$ is a limit point of $U$, for all $\eps > 0$, the open ball $B_\eps(x)$ contains at least one point of $U$ different from $x$. We construct a sequence $(x_n)$ in $U$ that converges to $x$: \\
+For each $n \in \N$, there exists a point $x_n \in U$ such that $x_n \neq x$ and $d(x, x_n) < \eps_n$. \\
+
+To show that this converges to $x$, let $\eps > 0$ be arbitrary, and let $N > \frac{1}{\eps}$. Then for all $n > N$,
+$$d(x, x_n) < \frac{1}{n} < \frac{1}{N} < \eps,$$
+so $(x_n)$ converges to $x$. \\
+
+\textbf{6.} Assume $S \subseteq \R$ is open and closed. Then $S$ and $S^c$ are open. Take any element $x \in S$ (unless $S = \varnothing$). Since $S$ is open, there exists $\eps > 0$ such that for all $y \in \R$, $|x - y| < \eps \implies y \in S$. \\
+
+First, we consider values for $y$ that are $> x$. Let $B = \{\eps: y > x,\, |x - y| < \eps \implies y \in S\}$. Since $S$ is open, there is an open ball centered at $x + \eps$ completely contained in $S$. So there always exists $\eps' > \eps$ that works as well. \\
+
+Let $a = \sup(B)$ (unless $B$ is unbounded above, meaning all neighborhoods containing $x$ are unbounded above) and $x' = x + a$. Since $B$ has no greatest element, $x' \not \in S$, so $x' \in S^c$. Since $S^c$ is closed, there exists $\eps > 0$ such that for all $y \in \R$, if $|x' - y| < \eps$ then $y \in S^c$. \\
+
+Choose $\eps > 0$ so that it satisfies the above, and also so that $x' - \eps \in S$. This exists because $x' = x + a$ where $a$ is the least possible number such that $x + a \in S^c$. Then let $y$ be such that $|x' - y| < \eps$, and therefore, $y \in S^c$. But this is a contradiction. \\
+
+By a similar argument where $y < x$, $S$ cannot be open and closed unless all neighborhoods containing $x$ are unbounded below. So we have that $S$ is open and closed only if $S = \varnothing$ or $S = \R$. \\
+
+\textbf{8.} Let $\OO$ be an open cover of $S = \{1/n: n \in \N\} \cup \{0\}$. We know that $\OO = \{U_\alpha: \alpha \in A\}$ for some set $A$ and open sets $U_\alpha$. We need to find $F \subseteq A$ where $F$ is finite so that $\{U_\alpha: \alpha \in F\}$ also covers $S$. \\
+
+Let $\alpha \in A$ be such that $U_\alpha$ contains $0$ and let $\alpha \in F$. Since $U_\alpha$ is open, it includes all $x$ where $|x| < \eps$ for some $\eps$. So for all $n > \frac{1}{\eps}$, $\frac{1}{n} \in U_\alpha$. The only remaining terms in $S$ to cover are $\frac{1}{n}$ where $1 \le n \le \frac{1}{\eps}$, which are finitely many. Constructing $F$ this way involves putting finitely many terms, so $\{U_\alpha: \alpha \in F\}$ is a finite subcover of $\OO$. \\
+
+\textbf{9a.} All subsets $U$ of $(X, d)$ are open because, for all $x \in U$, we can set $\eps = \frac{1}{2}$ so that if $d(x, y) < \eps$ then $x = y$, which means $y \in U$. \\
+
+\textbf{9b.} Consider a finite subset $U \subseteq X$. Any open cover of $U$ consists of open sets that include each element of $U$. Since $U$ is finite, we can select a finite number of these open sets to cover $U$. \\
+
+If $U \subseteq X$ is infinite, consider the open cover given by $\{\{x\}: x \in U\}$. This is an open cover since $\{x\}$ is open. But no finite collection of these sets can cover $U$ (since each set in the open cover contains exactly one point and $U$ is infinite), so $U$ is not compact. Therefore, $U$ is compact iff it is finite. \\
+
+\textbf{9c.} A function $f$ is continuous if for all $x \in X$ if for all $\eps > 0$ there exists $\delta > 0$ such that
+$$d(x, y) < \delta \implies d(f(x), f(y)) < \eps.$$
+We can always set $\delta = \frac{1}{2}$, so that $d(x, y) < \delta \implies x = y$, so $d(f(x), f(y)) = 0 < \eps$ regardless of $\eps$. So every function is continuous under the discrete metric. \\
+
+\textbf{12.} $f^{-1}(f(U))= U$ when $f$ is surjective, and $f(f^{-1}(V)) = V$ when $V \subseteq \{f(x): x \in \R\}$. For this to be true for all $V$, the range of $f$ must be $\R$.
+
+\end{document}

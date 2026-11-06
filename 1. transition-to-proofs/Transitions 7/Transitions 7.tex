@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\newcommand{\lcm}{\mathop{\mathrm{lcm}}\nolimits}
+
+\title{Chapter 7 Problem Set}
+\author{Siddharth K}
+\date{November 2023}
+
+\begin{document}
+
+\maketitle
+
+$\textbf{1.}$ We know that if $ab \equiv ac \pmod{m}$, $b\equiv c \pmod{\frac{m}{\gcd(a, m)}}$. In our case, since $6x \equiv 4\pmod{28}$, we know that $3x \equiv 2 \pmod{14}$. And because $2 \equiv 30 \pmod{14}$, we can see that $3x \equiv 30 \pmod{14}$, so $x \equiv 10 \pmod{14}$.
+\newline
+
+$\textbf{2.}$ Essentially, we want to find an integer $x$ such that $ax \equiv 1 \pmod{m}$. We are given that $\gcd(a, m) = 1$, so by Bezout's Lemma, there exist integers $x$ and $y$ such that $ax + by = 1$. We can use the Euclidean algorithm on $a$ and $m$ to find $x$ and $y$. The value of $x$ that we found is equivalent to $a$ modulo $m$.
+\newline
+
+To compute $\frac{1}{14} \pmod{107}$, we are looking for an integer $x$ such that $14x \equiv 1 \pmod{107}$. Now, we can run the Euclidean Algorithm on $a$ and $m$. We have: $$9 = 107 - 14 \cdot 7$$ $$5 = 14 - 9 \cdot 1$$ $$4 = 9 - 5 \cdot 1$$ $$1 = 5 - 4 \cdot 1.$$ Substituting backward multiple times, we get $$1 = 5 - 4 \cdot 1 = 5 - (9 - 5 \cdot 1) = 2 \cdot 5 - 9 = 2(14 - 9 \cdot 1) - 9 = 2 \cdot 14 - 3 \cdot 9 = 2 \cdot 14 - 3(107 - 14 \cdot 7) = 23 \cdot 14 - 3 \cdot 107.$$ We see that $23 \cdot 14 - 3 \cdot 107 = 1$, so the value of $x$ is $23$.
+\newline
+
+$\textbf{3.}$ We are trying to prove that the only values of $x$ such that $x \equiv \frac{1}{x} \pmod{p}$ are $\pm 1$. That equivalence is the same as saying that $x^2 \equiv 1 \pmod{p}$. That means $x^2 - 1 \equiv (x - 1)(x + 1) \pmod{p}$. Since $p$ is prime, $x - 1$ and $x + 1$ can only be $0$ or multiples of $p$. That means either $x - 1 \equiv 0 \pmod{p}$ or $x + 1 \equiv 0  \pmod{p}$, so $x \equiv \pm 1 \pmod{p}$.
+\newline
+
+$\textbf{4.}$ Let's say that $a = ga'$ and $b = gb'$ where $\gcd(a', b') = 1$. Since $\gcd(a', b')\lcm(a', b') = a'b'$, we have that $\lcm(a', b') = \frac{ab}{g^2}$, and also, since $a'$ and $b'$ are relatively prime, we know that $\lcm(a', b') = a'b'$. Therefore, $ab = g^2a'b'$.
+\newline
+
+Now, because the totient function is multiplicative and each of $g^2$, $a'$, and $b'$ are relatively prime to each other, we know that $\phi(ab) = \phi(g^2a'b') = \phi(g^2)\phi(a')\phi(b')$. Earlier, we stated that $a = ga'$ and $b = gb'$, which means $\phi(a) = \phi(g)\phi(a')$ and $\phi(b) = \phi(g)\phi(b')$. Isolating $\phi(a')$ and $\phi(b')$ and substituting into our earlier equation, we have $\phi(ab) = \frac{\phi(g^2)\phi(a)\phi(b)}{(\phi(g))^2}$.
+\newline
+
+To proceed, I would have to prove that $\phi(g^2) = g\phi(g)$, but I couldn't figure out how to do so.
+
+\end{document}

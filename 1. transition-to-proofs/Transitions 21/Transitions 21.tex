@@ -1,0 +1,23 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{mathtools}
+\def\multiset#1#2{\ensuremath{\left(\kern-.3em\left(\genfrac{}{}{0pt}{}{#1}{#2}\right)\kern-.3em\right)}}
+
+\title{Chapter 21 Problem Set}
+\author{Siddharth K}
+\date{March 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} We can interpret this problem as putting $n$ balls in $26$ boxes, where each box represents a letter of the alphabet. After that is done, a word can be formed by looking at the number of balls in each box and appending that many instances of the letter represented by the box it's in to the word. For example, three dots in the first box would correspond to the word 'aaa'. The balls are indistinguishable and the boxes are distinguishable. This is essentially multichoosing $n$ elements from a set of size $26$, so the answer is $\multiset{26}{n}$.
+\newline
+
+\textbf{2.} We are partitioning $[n]$ into three disjoint subsets. By definition, the number of ways to do this is ${n\brace k}$.
+\newline
+
+\textbf{3a.} Let the elements of $[n]$ be balls and the $k$ equivalence classes be boxes. Once we place the balls into the boxes, we can say that all the balls in one box are in the same equivalence class. Since every box needs at least one ball, the function is surjective. The balls and the boxes are distinguishable. Checking the twelvefold way, we get an answer of $k!{n\brace k}$.
+\newline
+
+\end{document}

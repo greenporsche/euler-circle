@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eps}{\varepsilon}
+
+\title{Fundamentals 17}
+\author{Siddharth K}
+\date{March 2025}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} We do this by showing that $f$ is Lipschitz continuous, so we want to show that there exists $K$ such that $|f(x) - f(y)| \le K|x - y|$ for all $x, y \in \R$. Since $f'(x)$ is bounded, let $A \le f'(x) \le B$ for all $x$, and let $K = \max(|A|, |B|)$. We claim that $|f(x) - f(y)| \le K|x - y|$ for all $x, y$. \\
+
+Assume not, for contradiction. Then there exist some $x, y \in \R$ such that $\frac{|f(x) - f(y)|}{|x - y|} > K$. This means the slope between the points $(x, f(x))$ and $(y, f(y)$ is $> K$. By MVT, there exists $a \in [x, y]$ such that $f'(a) > K = \max(|A|, |B|)$, but $A \le f'(x) \le B$, so we have a contradiction. \\
+
+\textbf{2a.} $$\frac{d}{dx}(kf) = \lim_{h\to 0} \frac{kf(x + h) - kf(x)}{h} = k\lim_{h\to 0} \frac{f(x + h) - f(x)}{h} = k\frac{df}{dx}.$$
+
+\textbf{2b.} $$\frac{d}{dx}(f + g) = \lim_{h\to 0} \frac{f(x + h) - f(x) + g(x + h) - g(x)}{h} = \frac{df}{dx} + \frac{dg}{dx}.$$
+
+\textbf{3.} $(x^2\sin x)' = (x^2)'\sin x + x^2(\sin x)' = 2x\sin x + x^2\cos x$. \\
+
+\textbf{4.} By chain rule, $(\sin(x^n))' = \cos(x^n)(x^n)' = nx^{n - 1}\cos(x^n)$. \\
+
+\textbf{5.} We have that
+$$f'(x) = \lim_{h\to 0} \frac{f(x + h) - f(x)}{h} = \lim_{h\to 0} \frac{\sqrt{x + h} - \sqrt{x}}{h}$$
+$$= \lim_{h\to 0} \frac{x + h - x}{h(\sqrt{x + h} + \sqrt{x})} = \lim_{h\to 0} \frac{h}{h(\sqrt{x + h} + \sqrt{x})}$$
+$$= \lim_{h\to 0} \frac{1}{\sqrt{x + h} + \sqrt{x}} = \frac{1}{\sqrt{x} + \sqrt{x}} = \frac{1}{2\sqrt{x}}.$$
+
+\textbf{6.} We claim that
+$$(f_1f_2\ldots f_n)' = (f_1'f_2\ldots f_n) + (f_1f_2'f_3\ldots f_n) + \cdots + (f_1\ldots f_{n - 1}f_n').$$
+We can prove this by induction. From the product rule, this is true when $n = 2$. Now, assume that the above is true. Then
+$$(f_1f_2\ldots f_nf_{n + 1})' = (f_1f_2\ldots f_n)'f_{n + 1} + (f_1f_2\ldots f_n)f_{n + 1}'$$
+$$= (f_1'f_2\ldots f_n) + (f_1f_2'f_3\ldots f_n) + \cdots + (f_1\ldots f_{n - 1}f_n') + (f_1f_2\ldots f_nf_{n + 1}'),$$
+as desired. \\
+
+\textbf{7.} $$f(x) = \tan x, \quad f(x)\cos x = \sin x,$$
+$$(f(x)\cos x)' = \cos x, \quad f'(x)\cos x - f(x)\sin x = \cos x,$$
+$$f'(x) = \frac{\cos x + (\tan x)(\sin x)}{\cos x} = 1 + \tan^2 x = \sec^2 x.$$
+
+\textbf{8.} $$f(x) = \sec x, \quad f(x)\cos x = 1,$$
+$$(f(x)\cos x)' = 0, \quad f'(x)\cos x - f(x)\sin x = 0,$$
+$$f'(x) = \frac{(\sec x)(\sin x)}{\cos x} = (\sec x)(\tan x).$$
+
+\textbf{9.} Let $f: \R \to \R$ be defined as
+$$f(x) = \begin{cases}
+    x^2\sin\left(\frac{1}{x}\right) & \text{if } x \neq 0 \\
+    0 & \text{otherwise}.
+\end{cases}$$
+The derivative is $2x\sin\left(\frac{1}{x}\right) - \cos\left(\frac{1}{x}\right)$, which is discontinuous at $0$. \\
+
+We claim that $f'(0)$ exists, and we can prove this using squeeze theorem. We have that
+$$f'(0) = \lim_{h\to 0} \frac{f(h) - f(0)}{h} = \lim_{h\to 0} \frac{f(h)}{h} = \lim_{h\to 0}\, h\sin\left(\frac{1}{h}\right).$$
+Since $-|x| \le x\sin\left(\frac{1}{x}\right) \le |x|$ for all $x \neq 0$ and $\lim_{x \to 0} |x| = \lim_{x \to 0} -|x| = 0$, by squeeze theorem, $\lim_{h\to 0}\, h\sin\left(\frac{1}{h}\right) = 0$, so $f'(0) = 0$.
+
+\end{document}

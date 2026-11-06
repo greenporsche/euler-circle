@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+
+\title{Chapter 27 Problem Set}
+\author{Siddharth K}
+\date{May 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1a.} If $a_n = 1 - \frac{1}{n^3}$, then $a_n$ converges to $1$, and it is therefore Cauchy. To prove this, we need to show that for any $\epsilon > 0$, there exists $N > 0$ such that if $n > N$ then $|a_n - 1| < \epsilon$. Since $a_n = 1 - \frac{1}{n^3}$, $|a_n - 1| = \frac{1}{n^3}$. If $\frac{1}{n^3} < \epsilon$, then $n > \sqrt[3]{\epsilon}$. So setting $N = \sqrt[3]{\epsilon}$ works.
+\newline
+
+\textbf{1b.} If $a_n = \frac{2n^2}{n^2 + 1}$, then $a_n$ converges to $2$, and $a_n$ is Cauchy. We know that $|a_n - 2| = |\frac{2n^2}{n^2 + 1} - 2| = |\frac{-2}{n^2 + 1}| = \frac{2}{n^2 + 1}$. So if $\frac{2}{n^2 + 1} < \epsilon$ then $n > \sqrt{2\epsilon - 1}$. Setting $N = \sqrt{2\epsilon - 1}$ guarantees that $|a_n - 2| < \epsilon$.
+\newline
+
+\textbf{1c.} If $a_n = \frac{n^2}{n + 6}$, then it is not convergent or Cauchy. Given a number $a$, there exists $n$ such that $a_n > a$. To see this, consider the inequality $\frac{n^2}{n + 6} > a$. Then $n^2 > an + 6a$, or $n^2 - an - 6a > 0$. Since $n^2 - an - 6a$ represents an upward-opening parabola, there are values of $n$ such that $n^2 - an - 6a > 0$. This means $a_n$ grows without bound, so it cannot be Cauchy.
+\newline
+
+\textbf{2.} If $a_n = a$, then it converges to $a$. For all $n$ and $\epsilon > 0$, $|a_n - a| = 0 < \epsilon$.
+\newline
+
+\textbf{3.} An example is the sequence $a_n = (-1)^n + 1$.
+\newline
+
+\textbf{4.} Since $a_n$ is Cauchy, for all $m, n > N$, $|a_m - a_n| < \epsilon$ where $\epsilon > 0$. Since infinitely many values of $n$ give $a_n = 0$, infinitely many of those values of $n$ are greater than $N$. By the definition of a Cauchy sequence, we can find $m$ greater than $N$ such that $|a_m - 0| < \epsilon$ for all $\epsilon > 0$. This means $a_n$ converges to $0$.
+\newline
+
+\textbf{5.} Consider the sequence $a_n = \frac{1}{n}(-1)^n$. This converges to $0$ because the absolute value is just $\frac{1}{n}$, which we know converges to $0$. But when we take the floor, the new sequence switches between $-1$ and $0$ at every $n$, so it is not convergent.
+\newline
+
+\textbf{6.} Let's say $a_n$ converges to $a$. Then $|a_n - a| < \epsilon$ for all $n$ greater than some $N > 0$ and $\epsilon > 0$. Since $n_1, n_2, n_3, \ldots$ is infinite, there is an infinite number of them greater than $N$. We know that $|a_n - a| < \epsilon$ for all those values, so the subsequence converges too.
+\newline
+
+\textbf{7.} Consider the sequence $a_n = (-1)^n$. The subsequence consisting of all even indices $n$ converges to $1$ because they are all within $0$ of $1$, but $a_n$ itself doesn't converge.
+\newline
+
+\textbf{8.} A counterexample is the sequence $a_n = (-1)^n$. For every $k$, either $a_n = 1$ or $-1$. Then a subsequence can consist of all the other values of $n$ that give $a_n = a_k$ (there are an infinite number of them). Since all terms of the subsequence are equal, it converges but $a_n$ doesn't.
+\newline
+
+\textbf{9.} Assume for contradiction that $a_n$ does not converge to $r$. Then there must exist an $\epsilon > 0$ such that for every $N \in \mathbb{N}$, there is some $k > N$ with $|a_k - r| \ge \epsilon$. But each such $k$ is part of a subsequence converging to $r$, so within that subsequence, $a_k$ will tend to $r$, which contradicts the existence of $\epsilon$ working for all $N$.
+
+\end{document}

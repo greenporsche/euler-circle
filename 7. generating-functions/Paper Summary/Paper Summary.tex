@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+\newcommand{\PP}{\mathbb{P}}
+
+\title{Generating Functions Paper Summary}
+\author{Siddharth K}
+\date{October 2026}
+
+\begin{document}
+
+\maketitle
+
+In this paper, I will investigate the limiting distribution of the number of children of the root in a uniformly random rooted tree. I'll compare two classes of trees: plane trees, where the children of each vertex have a specified order, and Cayley trees, where the vertices are labelled, but the children are unordered. Their root degrees follow different probability distributions as the number of vertices tends to infinity.
+
+I'll start with plane trees, whose OGF satisfies
+
+\[
+    T(z)=\frac{z}{1-T(z)}.
+\]
+
+Introducing a second variable $u$ to keep track of the number of children of the root gives the bivariate generating function
+
+\[
+    T(z,u)=\frac{z}{1-uT(z)}.
+\]
+
+I'll show that, if $X_n$ is the root degree of a uniformly random plane tree with $n$ vertices, then for all fixed $k \ge 1$,
+
+\[
+    \lim_{n\to\infty}\PP(X_n=k)=\frac{k}{2^{k+1}}.
+\]
+
+Then, I'll consider Cayley trees, whose EGF is
+
+\[
+    T(z)=ze^{T(z)}.
+\]
+
+Marking the root degree gives $T(z,u)=ze^{uT(z)}$. I will show that the root degree as the number of vertices tends to infinity is
+
+\[
+\lim_{n\to\infty}\PP(X_n=k)=\frac{e^{-1}}{(k-1)!}.
+\]
+
+Finally, I'll conclude by showing how both distributions fit into Flajolet and Sedgewick's general framework of simply generated trees. For tree classes described by a generator of the form $T(z) = z\Phi(T(z))$ where $\Phi$ is a tree generator, they show that, under certain conditions, the limiting probability generating function for the root degree is
+
+\[
+    P(u)=\frac{u\Phi'(\tau u)}{\Phi'(\tau)},
+\]
+
+where $\tau$ satisfies $\Phi(\tau)=\tau\Phi'(\tau)$. I'll show how this recovers the two distributions derived earlier.
+
+The main reference is \url{https://algo.inria.fr/flajolet/Publications/book.pdf}.
+
+\end{document}

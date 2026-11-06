@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+
+\title{Chapter 17 Problem Set}
+\author{Siddharth K}
+\date{February 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Expanding $(5x + \frac{2}{x^2})^{24}$ using the Binomial Theorem, we get $\sum_{k = 0}^{24}{{24}\choose k}(5x)^k\left(\frac{2}{x^2}\right)^{24 - k}$. Simplifying that, we get $\sum_{k = 0}^{24}{{24}\choose k}(5^k)(2^{24 - k})x^{3k - 48}$. We are interested in the part where $3k - 48 = 3$, so $k = 17$. Therefore, the coefficient is ${{24}\choose {17}}(5^{17})(2^7)$.
+\newline
+
+\textbf{2.} Let's consider the ratio $\frac{{n\choose {k + 1}}}{{n\choose k}}$. Evaluating it, we get $\frac{n - k}{k + 1}$. From this, we see that for $k < \frac{n}{2}$, $\frac{n - k}{k + 1} > 1$, so the coefficients are increasing. Also, for $k > \frac{n}{2}$, $\frac{n - k}{k + 1} < 1$, so the coefficients are decreasing. Therefore, the maximum is at $n\choose {\lfloor \frac{n}{2} \rfloor}$, so that is the largest coefficient of $(x + y)^n$.
+\newline
+
+We know that $(x + 2y)^n = \sum_{k = 0}^n 2^k{n\choose k}x^ky^k$. Let's consider the ratio $\frac{2^{k + 1}{n\choose {k + 1}}}{2^k{n\choose k}} = \frac{2(n - k)}{k + 1}$. Solving for $\frac{2(n - k)}{n + 1} > 1$, we get $k < \frac{1}{2}(n - 1)$, so the coefficients are increasing until $k = \lfloor 
+\frac{1}{2}(n - 1) \rfloor$. Therefore, the largest coefficient is $n\choose {\lfloor \frac{1}{2}(n - 1) \rfloor}$.
+\newline
+
+\textbf{3.} We see that $\frac{1}{k + 1}{n\choose k} = \frac{n!}{(k + 1)!(n - k)!}$, and we know ${{n + 1}\choose {k + 1}} = \frac{(n + 1)!}{(k + 1)!(n - k)!}$. Therefore, $\frac{1}{k + 1}{n\choose k} = \frac{1}{n + 1}{{n + 1}\choose {k + 1}}$. So $\sum_{k = 0}^n \frac{1}{k + 1}{n\choose k} = \frac{1}{n + 1}\sum_{k = 0}^n{{n + 1}\choose {k + 1}} = \frac{1}{n + 1}(\sum_{k = 0}^n{{n + 1}\choose k} + {n\choose n} - {n\choose 0}) =\frac{2^{n + 1}}{n + 1}$.
+\newline
+
+\textbf{4.} We know that $(1 + 3)^n = \sum_{k = 0}^n {n\choose k}3^k$ and that $(1 - 3)^n = \sum_{k = 0}^n (-1)^k{n\choose k}3^k$. Subtracting both sums gives us the double desired sum. Therefore, the answer is $\frac{1}{2}(4^n - (-2)^n) = 2^{2n - 1} + (-2)^{n - 1}$.
+\newline
+
+\textbf{5.} We know from before that $\sum_{0\le 2\vert k \le n}{n\choose k}x^k = \frac{1}{2}((1 + x)^n + (1 - x)^n)$. Substituting $x = 1$, we get ${n\choose 0} + {n\choose 2} + \cdots = 2^{n - 1}$. Also, we know that $\sum_{0\le 4\vert k \le n}{n\choose k} = \frac{2^n + (1 + i)^n + (1 - i)^n}{4}$. Therefore, the answer we want is $2\sum_{0\le 4\vert k \le n}{n\choose k} - \sum_{0\le 2\vert k \le n}{n\choose k} = \frac{2^n + (1 + i)^n + (1 - i)^n}{2} - 2^{n - 1} = \frac{(1 + i)^n + (1 - i)^n}{2}$.
+\newline
+
+\textbf{6.} We know that $\sum_{k = 0}^{2n} {{2n}\choose n} = 2^{2n} = 4^n$, so every component of that sum, including ${2n}\choose n$, must be less than $4^n$. For the lower bound, we can rewrite $\frac{2^{2n - 1}}{n}$ as $\frac{4^n}{2n}$, which is the average of all the components of the sum. Since ${2n}\choose n$ is the largest component, it is greater than the average.
+\newline
+
+\textbf{8.} Let's consider the number of $k$-dimensional faces of an $n$-dimensional cube. We can figure out the number of those $k$-dimensional faces based on the number of $k - 1$ and $k$ dimensional faces of an $(n - 1)$-dimensional cube. Let's say $f(n, k)$ represents the number of $k$-dimensional faces of an $n$-dimensional cube. Then $f(n, k) = f(n - 1, k - 1) + 2f(n - 1, k)$.
+\newline
+
+This can be thought of as extending the $(k - 1)$-dimensional face into a new dimension and putting two $k$-dimensional faces on the ends. For example, you can create the twelve edges of a cube by extruding the four vertices and putting four edges each for the front and back, or you can create the six $2$-dimensional faces of a cube by extruding the four edges of a square and putting two squares at the front and back.
+\newline
+
+We claim that $f(n, k) = {n\choose k}2^{n - k}$, and we can prove this by induction. First, we know that $f(0, 0) = {0\choose 0}2^{0 - 0} = 1$, because a $0$-dimensional cube has one vertex. We also know that $f(1, 0) = {1\choose 0}2^{1 - 0} = 2$ because a one-dimensional cube has two vertices, and that $f(1, 1) = {1\choose 1}2^{1 - 1} = 1$ because a one-dimensional cube has one edge. 
+\newline
+
+Now, let's assume $f(n, k) = {n\choose k}2^{n - k}$ and that $f(n, k + 1) = {n\choose {k + 1}}2^{n - k - 1}$. Since $f(n, k) = f(n - 1, k - 1) + 2f(n - 1, k)$, we know that $f(n + 1, k + 1) = f(n, k) + 2f(n, k + 1) = {n\choose k}2^{n - k} + 2({n\choose {k + 1}}2^{n - k - 1}) = 2^{n - k}\left({n\choose k}{n\choose {k + 1}}\right) = {{n + 1}\choose {k + 1}}2^{n - k}$, which completes the inductive step.
+\newline
+
+Now, since we know that $f(n, k) = {n\choose k}2^{n - k}$, we need to sum over all $k$ to get the number of faces of an $n$-dimensional cube. This gives us $\sum_{k = 0}^n{n\choose k}2^{n - k}$. By the Binomial Theorem, this is equal to $(1 + 2)^n = 3^n$. However, we don't want to count the face that represents the cube itself, so we subtract $1$, giving us a final answer of $3^n - 1$.
+\newline
+
+\textbf{9a.} Consider the polynomial $f(x) = x^2 - x - 1$. One of its roots is $\alpha = \frac{1 + \sqrt{5}}{2}$ and the other is $\beta = \frac{1 - \sqrt{5}}{2}$. We know that $|\frac{1 + \sqrt{5}}{2}| > 1$ and $|\frac{1 - \sqrt{5}}{2}| < 1$, so $\frac{1 + \sqrt{5}}{2}$ is a Pisot number.
+\newline
+
+Now, consider the polynomial $f(x) = x^2 - 2x - 1$. Its roots are $\alpha = 1 + \sqrt{2}$ and $\beta = 1 - \sqrt{2}$. We know that $|1 + \sqrt{2}| > 1$ and $|1 - \sqrt{2}| < 1$, so $1 + \sqrt{2}$ is a Pisot number.
+\newline
+
+Finally, consider the polynomial $f(x) = x^2 - 3x - 1$. Its roots are $\alpha = \frac{3 + \sqrt{13}}{2}$ and $\beta = \frac{3 - \sqrt{13}}{2}$. We know that $|\alpha| > 1$ and $|\beta| < 1$, so $\frac{3 + \sqrt{13}}{2}$ is a Pisot number.
+\newline
+
+\textbf{9b.} Since $\alpha = a + b\sqrt{d}$ is a Pisot number, $|a + b\sqrt{d}| > 1$ and $|a - b\sqrt{d}| < 1$, since its conjugate must be another root of the polynomial. The problem asks to prove that $\displaystyle \lim_{n \rightarrow \infty} \alpha^n = k$ for some integer $k$. By the Binomial Theorem, $(a + b\sqrt{d})^n = \sum_{k = 0}^n {n\choose k}a^k(b\sqrt{d})^{n - k}$. So $$\lim_{n \rightarrow \infty} \alpha^n = \lim_{n \rightarrow \infty} \sum_{k = 0}^n {n\choose k}a^k(b\sqrt{d})^{n - k} = \sum_{k = 0}^\infty {n\choose k}a^k(b\sqrt{d})^{n - k}.$$ By the General Binomial Theorem, if $|a| < |b\sqrt{d}|$, then the sum converges.
+\newline
+
+I couldn't figure out how to prove that $|a| < |b\sqrt{d}|$, or how to prove that the sum converges to an integer instead of any real number.
+
+\end{document}

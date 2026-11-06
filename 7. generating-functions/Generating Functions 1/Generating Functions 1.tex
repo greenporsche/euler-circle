@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\title{Generating Functions 1}
+\author{Siddharth K}
+\date{September 2026}
+
+\newcommand{\mc}[1]{\mathcal{#1}}
+\newcommand{\mcA}{\mathcal{A}}
+\newcommand{\mcB}{\mathcal{B}}
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcZ}{\mathcal{Z}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+If $|\alpha|_\mc{B} = 2|\alpha|_\mc{A}$, the coefficients are the same but the exponents are doubled, so $B(z) = A(z^2)$.
+
+\section*{Problem 2}
+$$\mathrm{SEQ_{even}}(z) = 1 + B(z)^2 + B(z)^4 + \cdots = \frac{1}{1 - B(z)^2},$$
+$$\mathrm{SEQ_{odd}}(z) = B(z) + B(z)^3 + B(z)^5 + \cdots = \frac{B(z)}{1 - B(z)^2}.$$
+
+\section*{Problem 3}
+We need to form a bijection between multisets of $\mcC$ of size $n$ and multisets of $\mcC$ of size $2n$ along with a subset of $\mcC$. To do this, take any multiset of $\mcC$, and consider the multiplicity of each element. If it is odd, put the element into $P$ and subtract that $1$, so the remaining multiplicity is even. Then halve the remaining multiplicity and use that for $M$. The first action contributes $P(z)$ and the second contributes $M(z^2)$, since each copy in the second multiset represents a pair of copies of the element $c$, so it contributes $z^{2\cdot |c|}$. This is reversible, since from the subset and multiset, we can recover the original multiplicity by multiplying by $2$ and adding $1$ if the element is in the subset. Therefore, $M(z) = P(z)M(z^2)$.
+
+If we repeatedly iterate this, we get
+$$M(z) = P(z)M(z^2),$$
+$$M(z^2) = P(z^2)M(z^4) \implies M(z) = P(z)P(z^2)M(z^4)$$
+$$= P(z)P(z^2)P(z^4)M(z^8) = \cdots$$
+$$= \prod_{n = 0}^\infty P(z^{2^n}).$$
+
+\section*{Problem 4}
+Consider sequences of length $n$. There are $n$ different rotations we could perform on any sequence that correspond to the same cycle. By Burnside's lemma, the number of unique cycles is
+$$\frac{1}{n}\sum_{j = 0}^{n - 1} |\mathrm{Fix}(\text{rotate by } j)|.$$
+The generating function representing sequences of length $n$ that are fixed under rotation by $j$ is
+$$B(z^{n/\gcd(n, j)})^{\gcd(n, j)},$$
+since $\gcd(n, j)$ objects from $\mcB$ can be chosen to repeat $n/\gcd(n, j)$ times each. Plugging into Burnside's lemma gives us
+$$\frac{1}{n} \sum_{j = 0}^{n - 1}B(z^{n/\gcd(n, j)})^{\gcd(n, j)}.$$
+We can reindex this by summing over the divisors of $n$:
+$$\frac{1}{n} \sum_{d \mid n} \phi(n/d)B(z^{n/d})^d,$$
+since for each $d$, the number of $j$ such that $\gcd(n, j) = d$ is the same as the amount of numbers $< n/j$ relatively prime to $n/j$, which is $\phi(n/d)$. Finally, we sum over $n$ and simplify:
+\begin{align*}
+\mathrm{CYC}(\mcB)(z) &= \sum_{n \ge 1} \frac{1}{n} \sum_{d\mid n} \phi(n/d)B(z^{n/d})^d \\
+&= \sum_{n \ge 1} \sum_{d\mid n} \frac{1}{n} \phi(d)B(z^{d})^{n/d} \\
+&= \sum_{d \ge 1}\sum_{m \ge 1} \frac{1}{dm} \phi(d)B(z^d)^m \\
+&= \sum_{d \ge 1} \frac{\phi(d)}{d}\sum_{m \ge 1} \frac{B(z^d)^m}{m} \\
+&= \sum_{d \ge 1} \frac{\phi(d)}{d} \log \frac{1}{1 - B(z^d)}.
+\end{align*}
+
+\section*{Problem 6}
+Since $n$ is always at the peak, for each number from $n - 1$ to $1$ in order, we can choose either left or right to produce a unique unimodal permutation. So the count is $2^{n - 1}$, and the generating function is
+$$\sum_{n \ge 1} 2^{n - 1}z^n = \frac{z}{1 - 2z}.$$
+
+\section*{Problem 7}
+The generating function is
+$$C(z) = \frac{1}{1 - z - z^2}.$$
+Taking the partial fraction decomposition and and unsumming each term, we get that the $n$'th coefficient is
+$$C_n = \frac{1}{\sqrt 5} (\varphi^{n + 1} - \overline{\varphi}^{n + 1}),$$
+which is the $n + 1$'th Fibonacci number. This is because $\mathrm{SEQ}(\mcZ + \mcZ^2)$ can be represented by making a sequence of $1$s and $2$s, so an object of total size $n$ is a way of writing $n$ as an ordered sum of $1$s and $2$s, which satisfies the Fibonacci recurrence.
+
+\section*{Problem 9}
+$$\frac{A(z)}{1 - z} = A(z)\sum_{n = 0}^\infty z^n = \bigp{\sum_{n \ge 0} a_nz^n} \bigp{\sum_{n \ge 0} z^n} = \sum_{m \ge 0}\sum_{n \ge 0} a_m z^{m + n}$$
+$$= \sum_{n = 0}^\infty \bigp{\sum_{k = 0}^n a_k}z^n,$$
+so the coefficients are $\sum_{k = 0}^n a_k$. In terms of admissible constructions, we can think of $A(z) \cdot \frac{1}{1 - z}$ as the Cartesian product $\mcA \times \mathrm{SEQ}(\mcZ)$. If we choose an object from $\alpha \in \mcA$ with size $k$, there is exactly one object from $\mathrm{SEQ}(\mcZ)$ that can be paired with $\alpha$ so that the total size is $n$. So the number of objects of size $n$ in $\mcA \times \mathrm{SEQ}(\mcZ)$ is $\sum_{k = 0}^n a_k$.
+
+\section*{Problem 10}
+Given a valid string of length $n - 1$, we can get a valid string of length $n$ by appending a $0, 1,$ or $2$, but only a $2$ when the string doesn't end in $0$. If $a_n$ is the number of valid strings of length $n$, then $a_{n - 1}$ of them end in $0$, since you can take any valid $n - 1$ length string and append $0$. So we get the recurrence
+$$a_{n + 1} = 3a_n - a_{n - 1}.$$
+To turn this into a generating function, we multiply by $z^{n + 1}$ and sum over $n$:
+\begin{align*}
+\sum_{n \ge 1}a_{n + 1}z^{n + 1} &= 3\sum_{n \ge 1}a_nz^{n + 1} - \sum_{n \ge 1}a_{n - 1}z^{n + 1}, \\
+\sum_{n \ge 1}a_{n + 1}z^{n + 1} &= A(z) - a_0 - a_1z = A(z) - 1 - 3z, \\
+3\sum_{n \ge 1}a_nz^{n + 1} &= 3z(A(z) - 1), \\
+\sum_{n \ge 1}a_{n - 1}z^{n + 1} &= z^2A(z), \\
+A(z) - 1 - 3z &= 3z(A(z) - 1) - z^2A(z), \\
+A(z)(1 - 3z + z^2) &= 1, \\
+A(z) &= \frac{1}{1 - 3z + z^2}.
+\end{align*}
+
+\end{document}

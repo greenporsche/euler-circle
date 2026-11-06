@@ -1,0 +1,135 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eps}{\varepsilon}
+
+\title{Fundamentals 14}
+\author{Siddharth K}
+\date{February 2025}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1a.} Let $f(x) = 0$. We claim that this converges to $0$. Fix $\eps > 0$. Then for all $x \in \R$, $|f(x) - 0| = 0 < \eps$. \\
+
+Now, let $f(x) = x$. We claim that this does not converge. To prove this, we must show that for all $L$, there exists $\eps > 0$ such that for all $M$ there exists $x > M$ such that $|x - L| \ge \eps$. Fix $L$, and let $\eps = 1$. Then choose $x = \max(L + 1, M + 1)$. We have that $|x - L| \ge |L + 1 - L| = 1 \ge \eps$. \\
+
+\textbf{1b.} Define $f$ as
+$$f(x) = \begin{cases}
+      0 & \text{if } x \in \Z \\
+      x & \text{otherwise}.
+   \end{cases}$$
+
+Since $f(n) = 0$ for all integers, $f(n) \to 0$, but $f(x)$ does not converge. \\
+
+\textbf{1c.} We say that $f(x) \to \infty$ as $x \to x_0$ if for all $N$, there exists $\delta > 0$ such that if $|x - x_0| < \delta$ then $f(x) > N$. \\
+
+We say that $f(x) \to \infty$ as $x \to \infty$ if for all $N$, there exists $M$ such that if $x > M$ then $f(x) > N$. \\
+
+\textbf{2.} Define $f$ as
+$$f(x) = \begin{cases}
+      1 & \text{if } x = \frac{1}{n} \text{ for some } n \in \N \\
+      0 & \text{otherwise}.
+   \end{cases}$$
+We have that $f(1/n) = 1$ whenever $n \in \N$, so $\lim_{n \to \infty} f(1/n) = 1$. However, $\lim_{x \to 0} f(x)$ doesn't exist, since it is $0$ at all irrational points near $0$ and it is $1$ at many rational points near $0$. \\
+
+\textbf{3a.} Fix $\eps$. For all $x, y$, $|f(x) - f(y)| = |c - c| = 0 < \eps$. \\
+
+\textbf{3b.} Fix $\eps$ and let $\delta = \eps$. If $|x - y| < \delta$ then $|f(x) - f(y)| = |x - y| < \delta = \eps$. \\
+
+\textbf{3c.} We will prove this using induction on the degree of the polynomial. First, we have that $f(x) = c$ is continuous. Now, assume that all polynomials of degree $\le n$ are continuous. We wish to show that all polynomials of degree $n + 1$, given by
+$$f(x) = \sum_{k = 0}^{n + 1} a_k x^k,$$
+are continuous. We know that the polynomials
+$$p(x) = \sum_{k = 0}^n a_{k + 1} x^k,\, \text{ and } \, q(x) = a_0$$
+are continuous by the induction hypothesis. This means that
+$$\lim_{x \to y} p(x) = p(y),\, \text{ and } \, \lim_{x \to y} q(x) = q(y).$$
+Since $f(x) = xp(x) + q(x)$, we have that
+$$\lim_{x \to y} f(x) = \lim_{x \to y} (xp(x) + q(x)) = \left(\lim_{x \to y}x\right)\left(\lim_{x\to y} p(x)\right) + \left(\lim_{x\to y} q(x)\right)$$
+$$= yp(y) + q(y) = f(y).$$
+Therefore, $f$ is continuous. \\
+
+\textbf{3d.} Yes, $f(x) = \frac{1}{x}$ is continuous because it is continuous at all points in its domain, $\R \backslash \{0\}$. \\
+
+\textbf{4.} We wish to show that there exists $\eps$ such that for all $\delta > 0$ there exists $|x| < \delta$ such that $\left|\frac{1}{x} - r\right| \ge \eps$. Fix $\eps > 0$, fix $\delta > 0$, and choose $x$ such that $|x| \le \frac{1}{r + \eps}$. Then
+$$\left|\frac{1}{x} - r\right| \ge \left|\frac{1}{1/(r + \eps)} - r\right| = |r + \eps - r| = \eps.$$
+
+\textbf{5a.} Fix $\eps > 0$. There exists $\delta > 0$ such that $|x - x_0| < \delta \implies |f(x) - L| < \eps/c$. So if $|x - x_0| < \delta$, then
+$$|cf(x) - cL| = c|f(x) - L| < c\cdot\eps/c = \eps.$$
+
+\textbf{5b.} Fix $\eps > 0$. There exist $\delta_1, \delta_2 > 0$ such that $|x - x_0| < \delta_1 \implies |f(x) - L| < \eps/2$ and $|x - x_0| < \delta_2 \implies |g(x) - D| < \eps/2$. Let $\delta = \min(\delta_1, \delta_2)$. Then if $|x - x_0| < \delta$,
+$$|f(x) + g(x) - (L + D)| \le |f(x) - L| + |g(x) - D| < \eps/2 + \eps/2 = \eps.$$
+
+\textbf{5c.} Fix $\eps > 0$. Since $f$ converges as $x \to x_0$, $|f(x)|$ is bounded in some region $R$ around $x_0$. So let $M > \max|f(x)|$ and let $N > D$. There exist $\delta_1, \delta_2 > 0$ such that $|x - x_0| < \delta_1 \implies |f(x) - L| < \eps/2M$ and $|x - x_0| < \delta_2 \implies |g(x) - D| < \eps/2N$. We can update $\delta_1$ so that $(x_0 - \delta_1, x_0 + \delta_1) \subseteq R$. Now, let $\delta = \min(\delta_1, \delta_2).$ If $|x - x_0| < \delta$,
+$$|f(x)g(x) - LD| = |f(x)g(x) - f(x)D + f(x)D - LD| = |f(x)(g(x) - D) - D(f(x) - L)|$$
+$$\le |f(x)||g(x) - D| - |D||f(x) - L| < M\frac{e}{2M} + N\frac{\eps}{2N} = \eps.$$
+
+\textbf{5e.} Let $M > \max|g(x)|$ and fix $\eps > 0$. We know that there exists $\delta > 0$ such that if $|x - x_0| < \delta$ then $|f(x)| < \eps/M$. Then $|f(x)g(x)| < M|f(x)| < \eps/M$. \\
+
+\textbf{6.} We know that $\lim_{x \to x_0} f(x) = f(x_0)$, so we wish to show that $f(x_0) = L$. For contradiction, assume $L \neq f(x_0)$, and let $\eps < |L - f(x_0)|$. \\
+
+Since $f$ is continuous at $x_0$, there exists $\delta_1 > 0$ such that if $|x - x_0| < \delta_1$ then $|f(x) - f(x_0)| < \eps$. Also, we are given that there exists $\delta_2 > 0$ such that if $x$ is rational and $|x - x_0| < \delta_2$ then $|f(x) - L| < \eps$. Let $x$ be rational and $< \min(\delta_1, \delta_2)$. Then
+$$|f(x) - f(x_0)| < \eps, \quad |f(x) - L| < \eps.$$
+We also have that
+$$|L - f(x_0)| = |f(x) - f(x_0) - (f(x) - L)| \le |f(x) - f(x_0)| + |f(x) - L| < 2\eps.$$
+But $\eps < |L - f(x_0)|$, so this is a contradiction. Therefore, $f(x_0) = L$. \\
+
+\textbf{7.} Assume that for all continuous functions $g$, $g \circ f$ is continuous at $x$. Then if $g(x) = x$, $g\circ f = f$ is also continuous at $x$. \\
+
+Now, assume that $f$ is continuous at $x$. Let $g: \R \to \R$ be any continuous function. Since $g$ is continuous at $f(x)$, by Proposition 14.13, $g \circ f$ is continuous at $x$. \\
+
+\textbf{8.} I think it makes sense to let all such functions be continuous, since the idea behind continuity, that small changes in $x$ result in small changes of $f(x)$, is trivially satisfied when the domain consists of isolated points. Discontinuities should generally occur when the limit to a point $x$ doesn't match $f(x)$. But there are no limit points since the domain is discrete, and since points in the domain can't be arbitrarily close to other points. \\
+
+\textbf{9.} Define $g, h: (-\infty, 0) \to \R$ as
+$$g(x) = \begin{cases}
+      x + 5 & \text{if } x \le -5 \\
+      x^2 - 25 & \text{if } -5 < x < 0,
+   \end{cases}$$
+$$h(x) = \begin{cases}
+      x^2 - 25 & \text{if } x \le -5 \\
+      x + 5 & \text{if } -5 < x < 0.
+   \end{cases}$$
+If $x \le -5$, we have that $x + 5 \le x + 5$ and $x + 5 \ge x^2 - 25$, so $g(x) \le f(x)$. If $x > 5$, then $x^2 - 25 \le x^2 - 25$ and $x^2 - 25 < x + 5$, so $g(x) \le f(x)$. Therefore, $g(x) \le f(x)$ for all $x < 0$. Similarly, $h(x) \ge f(x)$. \\
+
+Since $g$ and $h$ are continuous ($x + 5$ and $x^2 - 25$ are continuous and they have the same limit at $x = -5$), $$\lim_{x \to -5} g(x) = g(-5) = 0,$$
+$$\lim_{x \to -5} h(x) = h(-5) = 0,$$
+so $\lim_{x \to -5} f(x) = 0$. \\
+
+\textbf{10.} We need to show that for all $L$, there exists $\eps$ such that for all $\delta > 0$ there exists $x$ with $|x| < \delta$ such that $|\sin(1/x) - L| \ge \eps$. Fix $L$ such that $|L| \le 1$ (otherwise the result is trivial, since $L$ is always a finite distance away from all values of $\sin(1/x)$), let $\eps = 1$, and fix $\delta > 0$. \\
+
+Let $y = L - 1$ if $L > 0$ or $L + 1$ if $L \le 0$. Now, find $z > 0$ such that $\sin(z) = y$ and $z > \frac{1}{\delta}$. We know this exists, since $\sin$ periodically reaches all points in $[-1, 1]$ infinitely many times. Then let $x = \frac{1}{z}$ so that $z = \frac{1}{x} > \frac{1}{\delta}$, and $|x| < \delta$. Then
+$$\left|\sin\left(\frac{1}{x}\right) - L\right| = |\sin(z) - L| = |y - L| \ge 1 = \eps,$$
+as desired. \\
+
+\textbf{11a.} We prove this by induction. When $n = 0$ the inequality holds, as $(1 + x)^0 = 1 \ge 1 + 0x = 1$. \\
+
+Now, assume that $(1 + x)^n \ge 1 + nx$. Then
+$$(1 + x)^{n + 1} \ge (1 + nx)(1 + x) = 1 + n(x + 1) + nx^2,$$
+So $(1 + x)^{n + 1} \ge 1 + n(x + 1)$. \\
+
+\textbf{11b.} We claim that $\frac{1}{n!} \le \frac{1}{2^{n - 1}}$ for all $n \ge 0$ and prove this by induction. We know that $\frac{1}{0!} \le \frac{1}{2^{-1}} = 2$, so the base case holds. Now, assume that $\frac{1}{n!} \le \frac{1}{2^{n - 1}}$. Then, since $n \ge 1$,
+$$\frac{1}{(n + 1)!} \le \frac{1}{2n!} \le \frac{1}{2\cdot 2^{n - 1}} = \frac{1}{2^n},$$
+as desired. \\
+
+Therefore, we have that
+$$\sum_{j = 0}^n \frac{1}{j!} \le \sum_{j = 0}^n \frac{1}{2^{j - 1}} = \frac{2}{1 - \frac{1}{2}} = 4,$$
+so the sum is bounded above. \\
+
+\textbf{11c.} We have that
+$$\left(1 + \frac{1}{n}\right)^n = \sum_{j = 0}^n \binom{n}{j}\left(\frac{1}{n}\right)^j.$$
+So it suffices to show that
+$$\binom{n}{j}\left(\frac{1}{n}\right)^j \le \frac{1}{j!}$$
+for all $j \ge 0$. Expanding the LHS and working backwards, we get
+$$\binom{n}{j}\left(\frac{1}{n}\right)^j = \frac{n!}{j!(n - j)!} \cdot \frac{1}{n^j} \le \frac{1}{j!},$$
+$$\frac{n!}{(n - j)!} \le n^j,$$
+$$n(n - 1)\cdots(n - j + 1) \le n^j,$$
+which is true, since the LHS multiplies $j$ terms that are each $\le n$ and the RHS multiplies $n$ $j$ times. So $x_n$ is bounded.
+
+\end{document}

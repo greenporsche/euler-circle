@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+
+\title{Fundamentals Chapter 3}
+\author{Siddharth K}
+\date{October 2024}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Consider the group $G = (\Z/p\Z)^\times$ under multiplication where $p$ is prime. The order of $G$ is $p - 1$. By Lagrange's theorem, the order of any subgroup of $G$ divides $|G|$. Now, consider $a \in G$ and the subgroup $\langle a \rangle \le G$ and let $|\langle a\rangle| = k$. We know that $a^k \equiv 1 \pmod{p}$, so
+$$a^{p - 1} \equiv (a^k)^{\frac{p - 1}{k}} \equiv 1 \pmod{p}$$
+as desired. Multiplying by $a$ gives us $a^p \equiv a \pmod{p}$. \\
+
+\textbf{2.} There is no group $G$ and subgroup $H \le G$ where $(aH)(bH) = abH$ for all $a, b \in G$. To see this, let $b = a^{-1}$. Then $(aH)(a^{-1}H) = \{ah_1a^{-1}h_2: h_1, h_2 \in H\}$. By the condition, this is equal to $H$, which means that $ah_1a^{-1} \in H$, which implies that $H$ is normal. \\
+
+\textbf{3.} Since $G$ is abelian, $ab = ba$ for all $a, b \in G$. So
+$$aH = \{ah: h \in H\} = \{ha: h \in H\} = Ha,$$
+which means $H$ is normal. \\
+
+\textbf{5.} Let $K = \ker(\phi)$. Then for all $k \in K$, $\phi(k) = e_G$. Also, since $\phi$ is a homomorphism,
+$$\phi(ak) = \phi(a)\phi(k) = \phi(a)e_G = \phi(a),$$
+$$\phi(ka) = \phi(k)\phi(a) = e_G\phi(a) = \phi(a)$$
+for all $a \in H$. So $\phi(ak) = \phi(ka)$. This implies that, for all $k_1 \in K$, there exists $k_2 \in K$ such that $ak_1 = k_2a$. Therefore, $aK = Ka$ and $K$ is a normal subgroup of $H$. \\
+
+\textbf{7.} From problem 5, if there's a group $H$ and a homomorphism $\phi: G\to H$ then $\ker(\phi)$ is normal. \\
+
+Assume $K \le G$ is normal. Now, define a map $\phi : G \to G/K$ by $\phi(g) = gK$ for all $g \in G$. This is a homomorphism because
+$$\phi(g_1g_2) = (g_1g_2)K = (g_1K)(g_2K) = \phi(g_1)\phi(g_2)$$
+for all $g_1, g_2 \in G$. \\
+
+The kernel of $\phi$ is
+$$\ker(\phi) = \{g \in G: \phi(g) = K\} = \{g \in G: gK = K\},$$
+which simplifies to
+$$\ker(\phi) = \{g \in G: g \in K\} = K,$$
+so $\ker(\phi) = K$. \\
+
+\textbf{9a.} We need to show that $g_1 \cdot (g_2 \cdot x) = (g_1g_2) \cdot x$ and $e \cdot x = x$ for all $g_1, g_2 \in G$ and $x \in G$. Looking at $g_1 \cdot (g_2 \cdot x)$, we get
+$$g_1 \cdot (g_2 \cdot x) = g_1 \cdot (g_2xg_2^{-1})$$
+$$= g_1(g_2xg_2^{-1})g_1^{-1}$$
+$$= g_1g_2xg_2^{-1}g_1^{-1}.$$
+Also, $e\cdot x = exe^{-1} = exe = x$, so $\cdot$ defines a group action. \\
+
+\textbf{9b.} Since $C(x) \subset G$, we need to show that $e \in C(x)$ and $g^{-1} \in C(x)$ for all $g \in C(x)$. Since $ge = eg$ for all $g \in G$, $e \in C(x)$. \\
+
+To show that $g^{-1} \in C(x)$, we need to prove that $g^{-1}x = xa^{-1}$. Since $a \in C(x)$, we know that $ax = xa$, so
+$$e = (xa)(xa)^{-1}$$
+$$= (ax)(xa)^{-1}$$
+$$= axa^{-1}x^{-1}.$$
+Multiplying both sides by $a^{-1}$ on the left and then $x$ on the right, we get
+$$a^{-1} = xa^{-1}x^{-1}$$
+$$a^{-1}x = xa^{-1},$$
+which means $a^{-1} \in C(x)$. \\
+
+\textbf{10a.} Consider the set:
+$$aZ(G) = a\{x \in G: gx = xg\}$$
+$$= \{ax \in G: gx = xg\}$$
+$$= \{xa \in G: gx = xg\}$$
+$$= Z(G)a,$$
+so $Z(G)$ is normal. \\
+
+\textbf{10b.} If $G/Z(G)$ is cyclic then there exists $gZ(G) \in G/Z(G)$ such that every coset in $G/Z(G)$ can be written as $(gZ(G))^k$ for some $k \in \Z$. So, for all $h \in G$,
+$$hZ(G) = (gZ(G))^k = g^kZ(G)$$
+for some $k \in \Z$. This means $h$ and $g^k$ are in the same coset of $Z(G)$ in $G$. This implies that $h(g^k)^{-1} \in Z(G)$ or $h = g^kx$ for some $x \in Z(G)$. \\
+
+Now, let $a, b \in G$ be
+$$a = g^{k_1}x_1, \quad b = g^{k_2}x_2.$$
+Then
+$$ab = g^{k_1}x_1g^{k_2}x_2$$
+$$= g^{k_1}g^{k_2}x_1x_2$$
+$$= g^{k_1 + k_2}x_1x_2$$
+$$ba = g^{k_2}x_2g^{k_1}x_1$$
+$$= g^{k_2}g^{k_1}x_2x_1$$
+$$= g^{k_1 + k_2}x_1x_2$$
+so $ab = ba$ for all $a, b \in G$ and $G$ is abelian. \\
+
+\textbf{11.} To show that $|aH| = |bH|$ for any $a, b \in G$, we need to establish a bijection from $aH$ to $bH$. We can map each $ah \in aH$ to $ba^{-1}ah = bh \in bH$. Since multiplication by $ba^{-1}$ is unique, this is a bijection. \\
+
+Now, we need to show that if $aH \neq bH$ then $aH \cap bH = \varnothing$. Assume that $aH \cap bH \neq \varnothing$. Then there exists $x \in G$ such that $x \in aH$ and $x \in bH$. This implies that $x = ah_1 = bh_2$, so $b^{-1}a = h_2h_1^{-1}$, so $b^{-1}a \in H$. This implies that $a \in bH$ and $aH = bH$, which is a contradiction. So $aH \cap bH = \varnothing$.
+
+\end{document}

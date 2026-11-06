@@ -1,0 +1,158 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+\title{Generating Functions 5}
+\author{Siddharth K}
+\date{October 2026}
+
+% my stuff
+\newcommand{\mcA}{\mathcal{A}}
+\newcommand{\mcB}{\mathcal{B}}
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcZ}{\mathcal{Z}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\P}{\mathbb{P}}
+
+\newcommand{\seq}{\mathrm{SEQ}}
+\newcommand{\set}{\mathrm{SET}}
+\newcommand{\cyc}{\mathrm{CYC}}
+
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\eps}{\varepsilon}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+First we choose the letters in $\binom{r}{k}$ ways. Then we count the number of words of length $n$ where all $k$ letters appear at least once, which is
+\[
+    k! \begin{Bmatrix} n \\ k \end{Bmatrix}.
+\]
+Finally, we find the probability by dividing by $r^n$, giving
+\[
+    \frac{1}{r^n} \cdot \binom{r}{k} \cdot k! \begin{Bmatrix} n \\ k \end{Bmatrix} = \frac{r!}{r^n (r - k)!} \begin{Bmatrix} n \\ k \end{Bmatrix}.
+\]
+
+\section*{Problem 2}
+The RHS is
+\[
+    \sum_{n \ge 0} \P(B > n) = \sum_{n \ge 0} \sum_{k > n} \P(B = k) = \sum_{k \ge 0} \sum_{n = 1}^k \P(B = k) = \sum_{n \ge 0} n \P(B = n),
+\]
+and the LHS is
+\[
+    \E(B) = \sum_{\omega \in \Omega} B(\omega) \P(\omega) = \sum_{n \ge 0} n \P(B = n),
+\]
+which are equal.
+
+\section*{Problem 3}
+We can generate an arrangement by choosing a set of unused elements and then a sequence of used elements. Taking a labeled product accounts for relabeling to make them unique, so the specification is
+\[
+    \set(\mcZ) \star \seq(\mcZ),
+\]
+and the EGF is
+\[
+    \frac{e^z}{1 - z}.
+\]
+
+\section*{Problem 4}
+First, we find an expression for $\P(B > n)$. This is the probability that among the first $n$ people, no birthday occurs $b$ times or more. This is equivalent to finding words of length $r$ where the number of occurrences of the most common letter in the world is at most $b - 1$. From the chapter, this probability is
+\[
+    n![z^n]\bigp{\sum_{a = 0}^{b - 1} \frac{(z/r)^a}{a!}}^r.
+\]
+So letting $a_n = \frac{\P(B > n)}{n!}$ and $f(z) = \sum_{n \ge 0} a_n z^n$,
+\[
+    \E(B) = \sum_{n \ge 0} \P(B > n) = \sum_{n = 0}^\infty a_n n! = \int_0^\infty e^{-t} f(t) dt,
+\]
+\[
+    f(z) = \sum_{n \ge 0} a_n z^n = \sum_{n \ge 0} [z^n] \bigp{\sum_{a = 0}^{b - 1} \frac{(z/r)^a}{a!}}^r z^n = \bigp{\sum_{a = 0}^{b - 1} \frac{(z/r)^a}{a!}}^r,
+\]
+\[
+    \E(B) = \int_0^\infty e^{-t} f(t) dt = \int_0^\infty e^{-t} \bigp{\sum_{a = 0}^{b - 1} \frac{(t/r)^a}{a!}}^r dt.
+\]
+Evaluating that integral at $r = 365$ and $b = 3$ gives
+\[
+    88.73891765.
+\]
+
+\section*{Problem 11}
+For $\sigma^m$ to be the identity permutation, taking $m$ steps in each cycle should return to the starting point. So the length of each cycle must divide $m$. Therefore, for each cycle, the generating function is
+\[
+    \sum_{d \mid m} \frac{z^d}{d},
+\]
+so the entire permutation (set of those cycles) has EGF
+\[
+    \exp\bigp{\sum_{d \mid m} \frac{z^d}{d}}.
+\]
+
+\section*{Problem 12}
+For permutations with cycles of even length, the specification is
+\[
+    \set(\cyc_\text{even}(\mcZ)),
+\]
+so the generating function is
+\[
+    \exp\bigp{\sum_{n \ge 0} \frac{z^{2n}}{2n}}.
+\]
+Since
+\[
+    \log \frac{1}{1 - z} = \sum_{n \ge 0} \frac{z^n}{n},
+\]
+we have that
+\[
+    \frac{1}{2} \bigp{\log \frac{1}{1 - z} + \log \frac{1}{1 + z}} = \frac{1}{2} \bigp{\sum_{n \ge 0} \frac{z^n}{n} + \sum_{n \ge 0} (-1)^n \frac{z^n}{n}} = \sum_{n \ge 0} \frac{z^{2n}}{2n}.
+\]
+So the generating function becomes
+\[
+    \exp\bigp{\frac{1}{2} \bigp{\log \frac{1}{1 - z} + \log \frac{1}{1 + z}}} = \exp\bigp{\log \frac{1}{1 - z^2}}^{1/2} = \sqrt{\frac{1}{1 - z^2}}.
+\]
+Similarly for odd numbers, the EGF is
+\[
+    \exp\bigp{\sum_{n \ge 0} \frac{z^{2n + 1}}{2n + 1}},
+\]
+which can be rewritten as
+\[
+    \exp\bigp{\frac{1}{2} \bigp{\log \frac{1}{1 - z} - \log \frac{1}{1 + z}}} = \exp\bigp{\log \frac{1 + z}{1 - z}}^{1/2} = \sqrt{\frac{1 + z}{1 - z}}.
+\]
+
+\section*{Problem 13}
+\subsection*{Part (a)}
+The prisoners should start at the drawer with their number on it, check the number on the card in that drawer, go to the drawer with that number, check the number on the card in that drawer, and continue until either they find their number or they have opened 50 drawers.
+
+The arrangement of cards can be thought of as a permutation of $[100]$, since it is a function from the number on the drawer to the number on the card in the drawer. So by following the above process, the prisoner traces out a cycle in the permutation. The final drawer in the cycle (the one prior to where they started) contains the card with the prisoner's number, since they started at the drawer with their number. Therefore, the prisoner succeeds iff the cycle that contains their number has length at most $50$, and all prisoners succeed iff every cycle has length at most $50$. If the permutation was chosen randomly, the probability of this happening is
+\[
+    1 - \sum_{n = 51}^{100} \frac{1}{n} = 0.31182782,
+\]
+which is much better than the $\frac{1}{2^{100}}$ we would expect by randomly guessing.
+
+\subsection*{Part (b)}
+In general, the probability that all $n$ prisoners go free is
+\[
+    1 - \sum_{k = n/2}^n \frac{1}{k}.
+\]
+The sum can be rewritten as
+\[
+    \sum_{k = n/2 + 1}^n \frac{1}{k} = \sum_{k = 1}^n \frac{1}{k} - \sum_{k = 1}^{n/2} \frac{1}{k}.
+\]
+Taking the limit to infinity gives
+\[
+    \lim_{n \to \infty} \sum_{k = n/2 + 1}^n \frac{1}{k} = (\gamma + \log n) - (\gamma + \log n/2) = \log \frac{n}{n/2} = \log 2.
+\]
+So the asymptotic probability is
+\[
+    1 - \log 2.
+\]
+
+\subsection*{Part (c)}
+A malicious warden can choose a permutation that has a cycle of length $> 50$. In this case, prisoners can agree on a random permutation $\pi$ of $[100]$, and use the previous strategy while treating $\pi(\text{drawer label})$ as the actual drawer label. This makes it so that the new permutation from $\pi(\text{drawer labels})$ to card labels has new randomized cycles, so it is no longer guaranteed to have length more than $50$.
+
+\end{document}

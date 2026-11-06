@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\summation}[1][0]{\sum_{n=#1}^\infty}
+\newcommand{\summationk}[1][0]{\sum_{k=#1}^\infty}
+\newcommand{\summationm}[1][0]{\sum_{m=#1}^\infty}
+
+\title{Infinite Series 9}
+\author{Siddharth K}
+\date{March 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 5}
+Let
+$$x = \sqrt[p]{k + \sqrt[p]{k + \sqrt[p]{k + \cdots}}}.$$
+Then
+$$x = \sqrt[p]{k + x},$$
+$$x^p - x - k = 0.$$
+So $x$ is the root of $x^p - x - k = 0$.
+
+Let $x_1 = \sqrt[p]{k}$, $x_{n + 1} = \sqrt[p]{k + x_n}$. Then the sequence $x_n$ converges because it's increasing and bounded. It's increasing because
+$x_1 = \sqrt[p]{k} < x$, and for any $x_n < x$,
+$$x^p - x - k < 0 \implies x^p < k + x \implies x < \sqrt[p]{k + x},$$
+so inductively, $x_n < x_{n + 1} = \sqrt[p]{k + x}$.
+
+The sequence is bounded because the function $f(x) = \sqrt[p]{k + x}$ is increasing and if $x_n \le x$ then
+$$x_{n + 1} = f(x_n) \le f(x) = x,$$
+and $x_1 < x$ so inductively, $x_n \le x$ for all $n$.
+
+\section*{Problem 6}
+Let
+$$x = \sqrt[n]{q + p\sqrt[n]{q + p\sqrt[n]{q + \cdots}}}.$$
+Then
+$$x = \sqrt[n]{q + px},$$
+$$x^n - px = q,$$
+as desired. Now, let
+$$y = \sqrt[m/n]{q - p\sqrt[m/n]{q - p\sqrt[m/n]{q - \cdots}}}.$$
+Then
+$$y^n = \sqrt[m]{q - py}, \quad y^{nm} - py = q.$$
+The desired nested radical is equal to $y^n$, so it satisfies
+$$x^m - px^{1/n} = q.$$
+
+\section*{Problem 9}
+Let
+$$f(x) = \sqrt{x + \sqrt{x + 1 + \cdots}}.$$
+Then
+$$f(x) = \sqrt{x + f(x + 1)},$$
+$$f(x)^2 = x + f(x + 1).$$
+So the nested radical is equal to $f(1)$ for some $f$ that satisfies the functional equation.
+
+\section*{Problem 10}
+Let
+$$f(x) = \sqrt[3]{6x - 2 + (2x - 1)^2 \sqrt[3]{(6x + 4) + \cdots}}.$$
+Then
+$$f(x)^3 = 6x - 2 + (2x - 1)^2f(x + 1).$$
+If $f$ is a polynomial, it must be linear with leading coefficient $2$, so we guess that $f(x) = 2x$. The functional equation holds, so the radical is $f(1) = 2$.
+
+\section*{Problem 13}
+Given a cycle of length $n$, $f^n(x_1) = x_1$, so $x_1$ is a fixed point of $f^n$. So stability should be determined using the derivative of $f^n$. Using the chain rule,
+$$(f^n)'(x_1) = f'(x_n)f'(x_{n - 1}) \cdots f'(x_1).$$
+So stability of a cycle can be defined as: if $|(f^n)'(x_1)| < 1$, the cycle is attracting. If it's $> 1$, the cycle is repelling. If it's $= 1$, the cycle is neutral.
+
+\section*{Problem 15}
+Let $L = x^{x^{\cdots}}$. Then $L = x^L$, or
+$$L = e^{L\log x}.$$
+Also,
+$$Le^{-L\log x} = 1,$$
+$$(-L\log x)e^{-L\log x} = -\log x.$$
+By definition of the Lambert $W$ function, $-L\log x = W(-\log x)$, so
+$$L = -\frac{W(-\log x)}{\log x}.$$
+
+\section*{Problem 16}
+The power tower converges whenever
+$$e^{-e} \le \frac{1}{x} \le e^{1/e},$$
+so
+$$e^{-1/e} \le x \le e^e.$$
+The value of the power tower is
+$$-\bigp{\frac{W(-\log (1/x))}{\log (1/x)}}^{-1} = \frac{\log x}{W(\log x)}.$$
+
+\section*{Problem 17}
+For each part, we test whether
+$$W(x)\exp(W(x)) = x.$$
+\subsection*{Part (a)}
+$$\frac{i\pi}{2}e^{i\pi/2} = \frac{i\pi}{2}\cdot i = -\frac{\pi}{2}.$$
+\subsection*{Part (b)}
+$$-1 \cdot e^{-1} = -\frac{1}{e}.$$
+\subsection*{Part (c)}
+$$\log 2 \cdot e^{\log 2} = 2\log 2.$$
+
+\end{document}

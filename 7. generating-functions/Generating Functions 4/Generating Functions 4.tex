@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+\title{Generating Functions 4}
+\author{Siddharth K}
+\date{October 2026}
+
+% my stuff
+\newcommand{\mcA}{\mathcal{A}}
+\newcommand{\mcB}{\mathcal{B}}
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcZ}{\mathcal{Z}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\seq}{\mathrm{SEQ}}
+\newcommand{\set}{\mathrm{SET}}
+\newcommand{\cyc}{\mathrm{CYC}}
+
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\eps}{\varepsilon}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+This can be thought of as a sequence of four sets of objects where the 3rd set has an odd number of objects and the 4th set has an even number of objects. So the specification is
+$$\set(\mcZ) \star \set(\mcZ) \star \set_{\text{even}}(\mcZ) \star \set_{\text{odd}}(\mcZ),$$
+and the generating function is
+$$e^{2z}(\sinh z)(\cosh z) = \frac{1}{2}e^{2z}\sinh(2z) = \frac{1}{4}(e^{4z} - 1).$$
+The count is then
+$$n![z^n]\frac{1}{4}(e^{4z} - 1) = 4^{n - 1}.$$
+
+\section*{Problem 3}
+We have that
+$$A'(z) = \frac{d}{dz}\sum_{n \ge 0}a_n \frac{z^n}{n!} = \frac{d}{dz} \sum_{n \ge 0} a_{n + 1} \frac{z^{n + 1}}{(n + 1)!} = \sum_{n \ge 0} a_{n + 1} \frac{z^n}{n!},$$
+which is the desired EGF, so the answer is $A'(z)$.
+
+\section*{Problem 4}
+Expanding the RHS, we get
+$$\int_0^\infty e^{-t}\widehat{A}(tz)dt = \int_0^\infty e^{-t} \sum_{n \ge 0} a_n \frac{(tz)^n}{n!} dt = \sum_{n \ge 0}\int_0^\infty e^{-t}a_n\frac{t^nz^n}{n!}dt$$
+$$= \sum_{n \ge 0} a_n\frac{z^n}{n!}\int_0^\infty e^{-t}t^n dt = \sum_{n \ge 0} a_n\frac{z^n}{n!}n! = \sum_{n \ge 0} a_nz^n = A(z),$$
+as desired.
+
+\section*{Problem 5}
+We can think of a ranking as a sequence of ranks (favorite to least favorite), where each rank has a set of objects. This is the same structure as a surjection, so the EGF is
+$$\frac{1}{2 - e^z}.$$
+
+\section*{Problem 6}
+The specification is
+$$\set(\set_{\ge 2}(z)),$$
+so the generating function is
+$$e^{e^z - 1 - z}.$$
+
+\section*{Problem 8}
+The specification is
+$$\set(\set_{\ge 2}(z)),$$
+so the generating function is
+$$\frac{1}{1 - (e^z - 1 - z)} = \frac{1}{2 - z - e^z}.$$
+
+\section*{Problem 12}
+These arrangements are equivalent to a cycle of atoms and a single atom, so the specification is
+$$\cyc(\mcZ) \star \mcZ,$$
+and the generating function is
+$$z \log \frac{1}{1 - z}.$$
+
+\section*{Problem 13}
+Since we're taking a set partition, then partitioning each of its blocks again, the result is an unordered set of blocks of a set partition. So the generating function is
+$$C(z) = e^{e^{e^z - 1} - 1}.$$
+
+\section*{Problem 14}
+The specification is
+$$\set(\cyc_{\text{divisible by }k}(\mcZ)).$$
+So the EGF is
+$$\exp\bigp{\sum_{j \ge 1} \frac{z^{kj}}{kj}} = \exp\bigp{\frac{1}{k}\log\bigp{\frac{1}{1 - z^k}}} = \frac{1}{(1 - z^k)^{1/k}}.$$
+So
+$$p_n = n![z^n](1 - z^k)^{-1/k}.$$
+To extract the $z^n$ coefficient, we use the generalized binomial theorem:
+$$(1 - z^k)^{-1/k} = \sum_{j \ge 0}\binom{-1/k}{j}(-1)^jz^{kj}.$$
+Simplifying the coefficient, we get
+$$(-1)^j \binom{-1/k}{j} = \frac{(-1)^j}{j!}\bigp{-\frac{1}{k}}\bigp{-\frac{1}{k} - 1}\cdots \bigp{-\frac{1}{k} - j + 1} = \frac{1}{j!}\prod_{i = 0}^{j - 1}\bigp{\frac{1}{k} + i}.$$
+Therefore, the EGF is
+$$\sum_{j \ge 0}\frac{z^{kj}}{j!}\prod_{i = 0}^{j - 1}\bigp{\frac{1}{k} + i},$$
+so
+$$p_n = \frac{n!}{(n/k)!}\prod_{i = 0}^{n/k - 1} \bigp{\frac{1}{k} + i},$$
+when $k \mid n$, and $0$ otherwise.
+
+\section*{Problem 16}
+A permutation has a square root if all its cycles of even length come in pairs of the same length. So we can make a valid permutation from a set of odd cycles along with sets (of even length) of cycles of even length. So the specification is
+$$\set(\cyc_{\mathrm{odd}}(\mcZ)) \star \prod_{k \text{ even}} \set_{\text{even}}(\cyc_k(\mcZ)).$$
+The odd part has generating function
+$$\exp\bigp{\sum_{j \ge 0} \frac{z^{2j + 1}}{2j + 1}}.$$
+For each even $k$, since $\set_{\text{even}}(z) = \cosh(z)$, the generating function for the even part is
+$$\prod_{j \ge 1} \cosh\bigp{\frac{z^{2j}}{2j}},$$
+so the final generating function is
+$$\exp\bigp{\sum_{j \ge 0} \frac{z^{2j + 1}}{2j + 1}}\prod_{j \ge 1} \cosh\bigp{\frac{z^{2j}}{2j}}.$$
+
+\end{document}

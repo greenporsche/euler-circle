@@ -1,0 +1,93 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+\title{Generating Functions 2}
+\author{Siddharth K}
+\date{October 2026}
+
+\newcommand{\mcA}{\mathcal{A}}
+\newcommand{\mcB}{\mathcal{B}}
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcZ}{\mathcal{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+We start by taking the log of $P(z)$ and differentiating:
+\begin{align*}
+P(z) &= \prod_{n = 1}^\infty \frac{1}{1 - z^n}, \\
+\log P(z) &= -\sum_{n = 1}^\infty \log (1 - z^n), \\
+\frac{d}{dz}\log P(z) &= \frac{P'(z)}{P(z)} \\
+&= -\sum_{n = 1}^\infty - \frac{nz^{n - 1}}{1 - z^n}, \\
+\frac{zP'(z)}{P(z)} &= \sum_{n = 1}^\infty \frac{nz^n}{1 - z^n} \\
+&= \sum_{n = 1}^\infty nz^n(1 + z^n + z^{2n} + \cdots) \\
+&= \sum_{n = 1}^\infty \sum_{k = 1}^\infty nz^{nk} \\
+&= \sum_{n = 1}^\infty \bigp{\sum_{j \mid n} j} z^n \\
+&= \sum_{n = 1}^\infty \sigma(n) z^n. \\
+zP'(z) &= P(z)\sum_{j = 1}^\infty \sigma(j) z^j \\
+&= \bigp{\sum_{m = 0}^\infty p_mz^m}\bigp{\sum_{j = 1}^\infty \sigma(j)z^j}.
+\end{align*}
+The coefficient of $z^n$ on the left is $np_n$, and on the right is
+$$\sum_{j = 1}^n \sigma(j) p_{n - j},$$
+as desired.
+
+\section*{Problem 2}
+We can think of $c_n^{\{1, 2\}}$ as counting the number of sequences of $1$s and $2$s with total sum $n$. To make a sequence of size $n$, we can add $1$ to a sequence of size $n - 1$ or $2$ to a sequence of size $n - 2$, so the number of compositions satisfies the Fibonacci recurrence. Also, $c_1 = 1$ and $c_2 = 2$, so the initial conditions are the same as $F_2$ and $F_3$, so $c_n^{\{1, 2\}} = F_{n + 1}$.
+
+\section*{Problem 4}
+The parts that are allowed are integers between $1$ and $r$, which is given by
+$$z + z^2 + \cdots + z^r = \frac{z(1 - z^r)}{1 - z}.$$
+Since we need $k$ parts, the generating function is
+$$C^{(k, r)}(z) = \bigp{\frac{z(1 - z^r)}{1 - z}}^k = z^k(1 - z^r)^k(1 - z)^{-k}.$$
+To find the closed formula, we can use the binomial theorem:
+$$(1 - z^r)^k = \sum_{j = 0}^k (-1)^j \binom{k}{j}z^{rj},$$
+$$(1 - z)^{-k} = \sum_{m \ge 0}\binom{k + m - 1}{k - 1}z^m,$$
+$$C^{(k, r)}(z) = z^k\bigp{\sum_{j = 0}^k (-1)^j \binom{k}{j}z^{rj}}\bigp{\sum_{m \ge 0}\binom{k + m - 1}{k - 1}z^m}.$$
+A term contributes to $z^n$ when
+$$k + rj + m = n,$$
+$$m = n - k - rj,$$
+so the corresponding binomial coefficient is
+$$\binom{k + m - 1}{k - 1} = \binom{n - rj - 1}{k - 1}.$$
+So
+$$c_n^{(k, r)} = \sum_{j = 0}^{\left\lfloor \frac{n - k}{r}\right\rfloor} (-1)^j \binom{k}{j}\binom{n - rj  -1}{k - 1}.$$
+
+\section*{Problem 7}
+By Euler's pentagonal theorem,
+$$P(z) = \prod_{n \ge 1} \frac{1}{1 - z^n} = \bigp{\prod_{n \ge 1} (1 - z^n)}^{-1} = \bigp{\sum_{k \in \Z}(-1)^kz^{k(3k + 1)/2}}^{-1},$$
+$$\bigp{\sum_{n \ge 0} p_n z^n} \bigp{\sum_{k \in \Z}(-1)^kz^{k(3k + 1)/2}} = 1.$$
+For all $n \ge 1$, the coefficient of $z^n$ on the right is $0$, and the coefficient on the left is
+$$p_n - p_{n - 1} - p_{n - 2} + p_{n - 5} + p_{n - 7} - \cdots,$$
+so it must be equal to $0$. Moving everything except $p_n$ to the right gives the recurrence
+$$p_n = p_{n - 1} + p_{n - 2} - p_{n - 5} - p_{n - 7} + \cdots.$$
+
+\section*{Problem 8}
+By Euler's pentagonal theorem,
+$$\prod_{n = 1}^\infty(1 - z^n) = \sum_{k = -\infty}^\infty (-1)^kz^{k(3k + 1)/2}.$$
+In our case, $z = 1/10$, so
+$$\varphi = \sum_{k = -\infty}^\infty (-1)^k10^{-k(3k + 1)/2}.$$
+The exponents are
+$$1, 2, 5, 7, 12, 15, 22, 26, 35, 40, \ldots,$$
+and the coefficients' signs come in pairs:
+$$\varphi = 1 - 10^{-1} - 10^{-2} + 10^{-5} + 10^{-7} - \cdots.$$
+This only allows the digits $0, 1, 8,$ and $9$, since adding a positive pair places $1$s far out in the decimal expansion (where it was previously $0$s), and adding a negative pair places $8$s and $9$s in far out positions.
+
+\section*{Problem 9}
+For a point $(x_1, \ldots, x_d) \in \Z^d$, the squared distance from the origin is $x_1^2 + \cdots + x_d^2$. For one coordinate $x$, the generating function is
+$$\sum_{x \in \Z}z^{x^2},$$
+so for all $d$ coordinates it is
+$$\bigp{\sum_{x \in \Z}z^{x^2}}^d.$$
+To allow all distances up to $n$, by Chapter 1 Problem 9, we can divide by $1 - z$:
+$$\sum_{n \ge 0} a_nz^n = \frac{1}{1 - z}\bigp{\sum_{x \in \Z}z^{x^2}}^d.$$
+
+\end{document}

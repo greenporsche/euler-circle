@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\summation}[1][0]{\sum_{n=#1}^\infty}
+\newcommand{\summationk}[1][0]{\sum_{k=#1}^\infty}
+\newcommand{\summationm}[1][0]{\sum_{m=#1}^\infty}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
+
+\title{p-adic Analysis 3}
+\author{Siddharth K}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+\subsection*{Part (a)}
+The sequence $n^n$ does not converge because, for any $p$ and any $\eps = p^{-k}$, we can find $n > k$ relatively prime to $p$, so that $v_p(n^n) = 0$.
+
+\subsection*{Part (b)}
+The $p$-adic valuation of $1/n!$ tends to $-\infty$, so the $p$-adic distance goes to $\infty$ and the sequence diverges.
+
+\subsection*{Part (c)}
+We claim that $(1 + p)^{p^n} \to 1$. Expanding gives us
+$$(1 + p)^{p^n} - 1 = \sum_{k = 1}^{p^n} \binom{p^n}{k}p^k.$$
+We have that
+$$\binom{p^n}{k} = \frac{p^n}{k}\binom{p^n - 1}{k - 1},$$
+$$v_p\bigp{\binom{p^n}{k}} = n - v_p(k) + v_p\bigp{\binom{p^n - 1}{k - 1}} \ge n - v_p(k),$$
+$$v_p\bigp{\binom{p^n}{k}p^k} \ge n - v_p(k) + k.$$
+For $k = 1$, the term $\binom{p^n}{1}p$ has valuation $n + 1$. For $k \ge 2$, since $v_p(k) \le k - 1$,
+$$n - v_p(k) + k \ge n + 1.$$
+So
+$$v_p((1 + p)^{p^n} - 1) = n + 1 \to \infty,$$
+and the sum converges.
+
+\subsection*{Part (d)}
+If $p$ is odd,
+$$p - 1 = -(1 - p),$$
+$$(p - 1)^{p^n} = -(1 - p)^{p^n} \to 1,$$
+by the same reasoning as part (c). Therefore,
+$$(p - 1)^{p^n} \to -1.$$
+If $p$ is even ($2$),
+$$(p - 1)^{p^n} = 1 \to 1.$$
+
+\section*{Problem 4}
+\subsection*{Part (a)}
+We find two subsequences converging to different limits.
+
+First, consider the sequence $\frac{1}{p^n - 1}$. We claim that it converges to $-1$. We have that
+$$v_p\bigp{\frac{1}{p^n - 1} + 1} = v_p\bigp{\frac{p^n}{p^n - 1}} = n \to \infty,$$
+so the sequence converges to $-1$.
+
+Now, consider any integer sequence $a_n$ satisfying
+$$2a_n \equiv -1 \pmod{p^n}.$$
+Assuming $p$ is odd, such a sequence always exists. Furthermore, $v_p(a_n) = 0 \pmod{p^n}$. So
+$$2a_n + 1 \equiv \frac{2a_n + 1}{a_n} = 2 + \frac{1}{a_n} \equiv 0 \pmod{p^n},$$
+which means that $\frac{1}{a_n} \to -2$.
+
+\subsection*{Part (b)}
+Fix $x \in \Q_p$. We can write $x = \frac{y}{p^k}$ for some integer $k$. Fix $N > 0$. We wish to find some $n$ such that
+$$v_p\bigp{\frac{y}{p^k} - \frac{1}{n}} > N.$$
+Choose $n$ such that
+$$y\cdot n \equiv p^k \pmod{p^N},$$
+which always exists because $\gcd(y, p^k) = 0$. Then we have that
+$$\frac{y\cdot n - p^k}{p^k\cdot n} \equiv 0 \pmod{p^N},$$
+so $v_p(x, 1/n) > N$.
+
+\section*{Problem 7}
+Let $a_n \to a$ in $\Q_p$. If $a = 0$, $|a_n|_p = |a_n - 0|_p \to 0$. If $a \neq 0$, then $|a|_p > 0$. Since $|a_n - a|_p \to 0$, there exists $N$ such that $n \ge N$ implies
+$$|a_n - a|_p < |a|_p.$$
+Now write $a_n = a + (a_n - a)$. For $n \ge N$,
+$$|a|_p > |a_n - a|_p,$$
+since $|a_n - a|_p \to 0$. By the ultrametric triangle inequality,
+$$|a_n|_p = |a + (a_n - a)|_p \le \max(|a|_p, |a_n - a|_p) = |a|_p.$$
+
+\section*{Problem 10}
+Choose a prime $q_n > n!^2$ and let $m_n$ be the nearest integer to $\frac{q_n\pi}{n!}$. Then define
+$$a_n = \frac{n! \cdot m_n}{q_n}.$$
+We claim that $a_n \to \pi$ under the usual metric. Since $m_n$ is the nearest integer to $q_n\pi/n!$,
+$$\bigabs{m_n - \frac{q_n\pi}{n!}} \le \frac{1}{2}.$$
+We have that
+$$|a_n - \pi| = \bigabs{\frac{n! \cdot m_n}{q_n} - \pi} = \frac{n!}{q_n}\bigabs{m_n - \frac{q_n\cdot \pi}{n!}} \le \frac{n!}{2q_n} < \frac{1}{2n!} \to 0,$$
+since $q_n > n!^2$.
+
+Now, fix a prime $p$. For sufficiently large $n$, all $q_n > p$ (since $q_n$ is prime), so $v_p(q_n) = 0$. So we have that
+$$v_p(a_n) = v_p(n!) + v_p(m_n) - v_p(q_n) \ge v_p(n!) \to \infty.$$
+Therefore, $|a_n|_p \to 0$.
+
+\end{document}

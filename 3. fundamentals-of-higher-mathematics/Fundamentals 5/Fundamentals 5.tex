@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+
+\title{Fundamentals Chapter 5}
+\author{Siddharth K}
+\date{October 2024}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bO}{\mathbf{0}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1a.} We have that $0\cdot \bv = (a - a)\cdot \bv = a\cdot \bv - a\cdot \bv = \bO$. \\
+
+\textbf{1b.} We see that $\bv + (-1)\bv = (1)\bv + (-1)\bv = (1 - 1)\bv = 0\bv = \bO$. So $(-1)\bv = -\bv$. \\
+
+\textbf{1c.} We have that $a\cdot 0 = a(\bv - \bv) = a\bv - a\bv = \bO$. \\
+
+\textbf{1d.} We get that $a\bv = a\bu - a\bu$, so $a(\bv - \bu) = -a\bu$. This is true if $a = 0$. If not, then $\bv - \bu = -\bu$, so $\bv = \bO$. \\
+
+\textbf{2.} We show that $\F$ is a vector space over $\F$ by showing all the axioms to be true:
+$$1\cdot a = a,$$
+$$a(bc) = (ab)c,$$
+$$a(b + c) = ab + ac,$$
+$$(a + b)c = a(b + c) = ab + ac.$$
+These properties follow from the axioms of a field. \\
+
+\textbf{3.} We have that,
+$$1\cdot \bv = (1\cdot \bv_1, \ldots, 1\cdot \bv_n) = \bv,$$
+$$a(b\bv) = (ab\bv_1, \ldots, a\bv_n) = (ab)\bv,$$
+$$a(\bu + \bv) = (a\bu_1 + a\bv_1, \ldots, a\bu_n + a\bv_n) = a\bu + a\bv,$$
+$$(a + b)\bv = (a\bv_1 + b\bv_1, \ldots, a\bv_n + b\bv_n) = a\bv + b\bv.$$
+This holds for all $a, b \in \R$ or $\Q$. \\
+
+\textbf{4.} A polynomial, $\bv$, of degree $k \le n$ can be written as
+$$\bv = \sum_{i=0}^n a_ix^i$$
+where each $a_i$ is the coefficient of the term of degree $i$, and $a_i = 0$ for all $i > k$. \\
+
+Now, let $a, b \in \F$ and $\bu, \bv \in \F[x]_{\le n}$. Define the scalar multiplication of a polynomial by $a \in \F$ by multiplying each coefficient by $a$. Then the following properties are true:
+$$1 \cdot \bv = \sum_{i=0}^n 1\cdot a_ix^i = \bv,$$
+$$a(b\bv) = a\sum_{i=0}^n b(a_i)x^i = \sum_{i=0}^n (ab)a_ix^i = (ab)\bv,$$
+$$a(\bu + \bv) = a\sum_{i=0}^n (a_i + b_i)x^i = \sum_{i=0}^n (a(a_i) + a(b_i))x^i = a\bu + a\bv,$$
+$$(a + b)\bv = \sum_{i=0}^n (a + b)a_ix^i = \sum_{i=0}^n a(a_i)x^i + \sum_{i=0}^n b(a_i)x^i = a\bv + b\bv.$$
+So $\F[x]_{\le n}$ is a vector space over $\F$. \\
+
+Also, $\F[x]_{=n}$ is not a vector space under the same operation because there are certain polynomials of degree $n$ that, when added together, do not produce another polynomial of degree $n$, so it doesn't satisfy closure. \\
+
+\textbf{5.} Since $\F[x] \subseteq \F[x, y]$, we can just prove it for $\F[x, y]$. We can denote a polynomial in $x, y$ as
+$$\bv = \sum_{i = 0}^\infty\sum_{j = 0}^\infty a_{ij}x^iy^j$$
+where $a_{ij} = 0$ if $i + j$ is greater than the degree of $\bv$. We see that
+$$1\cdot \bv = \sum_{i = 0}^\infty\sum_{j = 0}^\infty 1\cdot a_{ij}x^iy^j = \bv,$$
+$$a(b\bv) = a\sum_{i = 0}^\infty\sum_{j = 0}^\infty b\cdot a_{ij}x^iy^j = \sum_{i = 0}^\infty\sum_{j = 0}^\infty ab\cdot a_{ij}x^iy^j = (ab)\bv,$$
+$$a(\bu + \bv) = a\sum_{i = 0}^\infty\sum_{j = 0}^\infty (a_{ij} + b_{ij})x^iy^j = \sum_{i = 0}^\infty\sum_{j = 0}^\infty (a(a_{ij}) + a(b_{ij}))x^iy^j = a\bu + a\bv,$$
+$$(a + b)\bv = \sum_{i = 0}^\infty\sum_{j = 0}^\infty (a + b)a_{ij}x^iy^j = a\bv + b\bv.$$
+So $\F[x, y]$ and $\F[x]$ are vector spaces over $\F$. \\
+
+\textbf{6.} Define scalar multiplication of $c \in \F$ with a polynomial in $F[[x]]$ by
+$$c\cdot \sum_{k=0}^\infty a_kx^k = \sum_{k=0}^\infty (c\cdot a_k)x^k.$$
+Then $\F[[x]]$ is an abelian group over $\F$. \\
+
+\textbf{8a.} Let $\bv_1 = (1, 0)$ and $\bv_2 = (2, 0)$. Then $\{\bv_1, \bv_2\}$ is not linearly independent. \\
+
+\textbf{8b.} Let $\bv_1 = (1, 0)$ and $\bv_2 = (2, 0)$. Then $\{\bv_1, \bv_2\}$ doesn't span $\R^2$. \\
+
+\end{document}

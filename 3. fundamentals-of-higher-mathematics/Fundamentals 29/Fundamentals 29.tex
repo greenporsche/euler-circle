@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% <added stuff>
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\power}{\mathcal{P}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\mcO}{\mathcal{O}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nullset}{\varnothing}
+\newcommand{\lb}{\left(}
+\newcommand{\rb}{\right)}
+\newcommand{\minus}{\backslash}
+\newcommand{\supp}{\text{supp}}
+% </added stuff>
+
+\title{Fundamentals 29}
+\author{Siddharth K}
+\date{June 2025}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 29.1}
+\subsubsection*{Part (1)}
+The subset binary operation always forms a poset on any set.
+
+\subsubsection*{Part (2)}
+Let $B$ be a maximal element of $\power$. So for all $B' \in \power$, $B \supsetneq B'$. The largest possible size of $B'$ is $3$, so $B$ has $3$ linearly independent elements. Therefore, it is a basis.
+
+\subsubsection*{Part (3)} Assume $\power$ contains an upper bound $B$. Then for all $B' \in \power$, $B' \subseteq B$. But we can always choose a different linearly independent subset that doesn't share elements with $B$.
+
+\subsection*{Problem 29.2}
+\subsubsection*{Part (1)}
+No, it doesn't satisfy property (2). If $N(z) \le N(y)$ and $N(y) \le N(z)$ then $z$ and $y$ have the same magnitude but they aren't necessarily the same.
+
+\subsubsection*{Part (2)} It has no upper bound or maximal element.
+
+\subsubsection*{Part (3)}
+Yes, because:
+\begin{enumerate}
+    \item For all $x \in \C$, $z \not< z$.
+    \item If $N(x) < N(y)$ and $N(y) < N(z)$, then $N(x) < N(z)$ so $x < z$.
+    \item For all $x, y \in \C$, either $N(x) < N(y)$, $N(y) > N(x)$, or $N(x) = N(y)$, so either $x < y$, $y > x$, or $x = y$.
+\end{enumerate}
+
+\subsection*{Problem 29.3}
+Let $\{X_i : i \in \N\}$ be a countable set where each $X_i$ is countable, and let $X = \bigcup_{i \in \N} X_i$. Since each $X_i$ is countable, there are bijections $f_i: \N\to X_i$. Define $f: \N \to X$ as
+\begin{align*}
+    f(1) = f_1(1),\\
+    f(2) = f_2(1),\\
+    f(3) = f_1(2),\\
+    f(4) = f_1(3),\\
+    f(5) = f_2(2),\\
+    f(6) = f_3(1),\\
+    f(7) = f_4(1),
+\end{align*}
+and so on in a diagonal pattern. Then $f$ is a bijection because if $x \in X$ then $x \in X_i$ for some $i$, so $x = f_i(j)$ for some $j$. \\
+
+The fact that we can find bijections $f_i$ for all $i \in \N$ is implied by AC.
+
+\subsection*{Problem 29.5}
+Let
+$$\power = \{\G \subseteq \power(X): \G \text{ is a filter on } X \text{ and } \F \subseteq \G\}.$$
+Then $(\power, \subseteq)$ is a poset. Let $C$ be a chain. Define
+$$\G' = \bigcup_{\G \in C} \G.$$
+We claim that $\G'$ itself is a filter on $X$ containing $\F$, which therefore lies in $\power$ and is an upper bound for $C$.
+\begin{enumerate}
+    \item Since each $\G \in C$ is a proper filter, $\nullset \notin \G'$.
+    \item If $A, B \in \G'$, there exist $\G_1, \G_2 \in C$ with $A \in G_1$ and $B \in \G_2$. Since $C$ is a chain, one of $\G_1$, $\G_2$ is a superset of the other, say $\G_1$. Then $A, B \in \G_1$. Since $\G_1$ is a filter, $A \cap B \in \G_1 \subseteq \G'$.
+    \item If $A \in \G'$ and $A \subseteq B \subseteq X$ then $A \in \G$ for some $\G \in C$. Since $\G$ is a filter, $B \in \G \subseteq \G'$.
+\end{enumerate}
+By Zorn's Lemma, $\power$ has a maximal element, $\G \in \power$. Since the finest elements of filters are ultrafilters, $\G$ is an ultrafilter on $X$.
+
+\subsection*{Problem 29.7}
+\begin{enumerate}
+    \item We know that $(a, b) \le (a, b)$ since $a \le a$ and $b \le b$.
+    \item Let $(a, b) \le (c, d)$ and $(c, d) \le (a, b)$. Then $a \le c$, $b \le d$, $c \le a$, $d \le b$, so $(a, b) = (c, d)$.
+    \item Let $(a, b) \le (c, d)$ and $(c, d) \le (e, f)$. By transitivity of $\le$ on $\R$, $(a, b) \le (e, f)$.
+\end{enumerate}
+This poset doesn't create a linear order, since there are points in $\R^2$ that aren't comparable. For example, none of the following are true: $(0, 1) \ge (1, 0)$, $(1, 0) \le (0, 1)$, $(1, 0) = (0, 1)$.
+
+\subsection*{Problem 29.8}
+This is not a poset because antisymmetry fails. We have that $(0, 1) \le (1, 0)$ and $(1, 0) \le (0, 1)$ but $(0, 1) \neq (1, 0)$. This also doesn't create a linear ordering, since if we let $x = (2, 0)$, $y = (0, 1)$, $z = (1, -1)$, then $x < y$ and $y < z$ but $x \not< z$.
+
+\end{document}

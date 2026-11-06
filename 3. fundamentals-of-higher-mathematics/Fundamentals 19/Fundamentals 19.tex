@@ -1,0 +1,90 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eps}{\varepsilon}
+
+\title{Fundamentals 19}
+\author{Siddharth K}
+\date{March 2025}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} A necessary condition for the series to converge is that its terms go to $0$ as $n \to \infty$. But if $|x| \ge 1$ then $x^n$ diverges, so the series diverges. \\
+
+\textbf{2.} By the Cauchy condensation test, $\sum_{k = 2}^\infty \frac{1}{k\log(k)^\alpha}$ converges iff $\sum_{k = 2}^\infty \frac{2^k}{2^k\log(2^k)^\alpha}$ converges. We see that
+$$\sum_{k = 2}^\infty \frac{2^k}{2^k\log(2^k)^\alpha} = \sum_{k = 2}^\infty \frac{1}{\left(\frac{\log_2(2^k)}{\log_2(e)}\right)^\alpha} = \sum_{k = 2}^\infty \frac{\log_2(e)^\alpha}{\log_2(2^k)^\alpha} = \log_2(e)^\alpha\sum_{k = 2}^\infty k^{-\alpha}.$$
+This is a $p$-series, so it converges iff $\alpha > 1$. \\
+
+\textbf{3.} $n^{1/\log(n)} = e$. \\
+
+\textbf{4.} Define
+$$S_n = \sum_{k = 1}^n (-1)^k a_k.$$
+Since $a_n$ is decreasing, we know that
+$$S_{2n} \le S_{2n - 2} \le S_{2n - 4} \le \cdots \quad \text{and} \quad S_{2n-1} \ge S_{2n - 3} \ge S_{2n - 5} \ge \cdots,$$
+so the even indexed partial sums form a decreasing sequence and the odd indexed partial sums form an increasing sequence. Also,
+$$S_{2n} - S_{2n - 1} = \sum_{k = 1}^{2n} (-1)^ka_k - \sum_{k = 1}^{2n - 1} (-1)^ka_k = a_{2n}.$$
+Since $a_n \to 0$, the difference between the two partial sums converges to $0$, so they converge to the same thing. Since they are both monotonous, $S_n$ converges. \\
+
+\textbf{5.} Since $\lim_{n \to \infty} |a_n| = 0$, $\lim_{n\to \infty} -|a_n| = 0$. Also, since $-|a_n| \le a_n \le |a_n|$, we have that
+$$\lim_{n\to \infty} -|a_n| \le \lim_{n\to \infty} a_n \le \lim_{n\to \infty} |a_n|,$$
+so $\lim_{n\to \infty} a_n = 0$. \\
+
+\textbf{6.} We have that $\sum_{k = 1}^\infty a_k$ converges but $\sum_{k = 1}^\infty |a_k|$ doesn't. For contradiction, assume $\sum_{a_k \ge 0} a_k = L$ for some $L \in \R$. We have that
+$$\sum_{k = 1}^\infty a_k = \sum_{a_k \ge 0} a_k + \sum_{a_k < 0} a_k = L + \sum_{a_k < 0} a_k.$$
+But $\sum_{k = 1}^\infty a_k$ converges, so $\sum_{a_k < 0} a_k$ must also converge. But that would mean $\sum_{k = 1}^\infty |a_k|$ converges, which is a contradiction. So $\sum_{a_k \ge 0} a_k$ diverges, and all terms are positive, it must go to $\infty$. Similarly, $\sum_{a_k < 0} a_k \to -\infty$. \\
+
+\textbf{7.} I tried proving it this way: \\
+
+Assume $L \ge 0$ and define $\phi$ iteratively as:
+$$\phi(1) = \text{the first k such that } a_k \ge 0,$$
+$$\phi(n) = \begin{cases}
+    \text{the first } k \text{ such that } a_k \ge 0 \text{ and } k \ge \phi(n - 1) & \text{if } \sum_{k = 1}^{n - 1} a_{\phi(k)} \ge L, \\
+    \text{the first } k \text{ such that } a_k < 0 \text{ and } k \ge \phi(n - 1) & \text{if } \sum_{k = 1}^{n - 1} a_{\phi(k)} < L.
+\end{cases}$$
+This is well-defined by the previous problem. We wish to show that $\sum_{k = 1}^\infty a_{\phi(k)} = L$. \\
+
+Define indices $k_n$ as
+$$k_0 = 1,$$
+$$k_n = \text{the first } k > k_{n - 1} \text{ such that } a_{\phi(k)} \text{ and } a_{\phi(k_{n - 1})} \text{ have different parity}.$$
+Then, define the sequence
+$$b_n = \sum_{i = k_{n - 1}}^{k_n - 1} a_{\phi(i)}.$$
+By construction, $b_1 > L$, $b_1 + b_2 < L$, $b_1 + b_2 + b_3 > L$, and so on. Also, $b_{2n - 1} \ge 0$ and $b_{2n} < 0$ for all $n \in \N$. \\
+
+From here it would suffice to show that $|b_n|$ is decreasing and goes to $0$, since $\sum_{k = 1}^n b_k$ is an alternating series. I couldn't figure out how to do that though. \\
+
+\textbf{8.} We know that there exists a sequence $M_n$ such that $|f_n(x)| \le M_n$ for all $n$, and that $\sum_{k = 1}^\infty M_k$ converges. Now, define
+$$g_n(x) = \sum_{k = 1}^n f_k(x).$$
+By Weierstrass $M$-test, $g_n$ converges uniformly to $\sum_{k = 1}^\infty f_k$. Then, by the Uniform limit theorem, $\sum_{k = 1}^\infty f_k$ is uniformly continuous. \\
+
+\textbf{9.} We can show that $f_n(x)$ converges uniformly to $0$ on $[-10, 10]$. Fix $\eps > 0$ and let $N > \frac{10}{\eps}$. Since $x \in [-10, 10]$, $|x| \le 10$. So if $n > N$ then
+$$\left|\frac{x}{n}\right| \le \frac{10}{n} < \frac{10}{N} < \eps.$$
+
+\textbf{10.} Since $|x^n| \le 1$ for all $x \in (-1, 1)$ and $n \in \N$, we can let $M_n = 1$, and $\lim_{n\to\infty} M_n = 1$. By Weierstrass $M$-test, $\sum_{k = 1}^\infty x^k$ converges uniformly and absolutely on $X$. \\
+
+The interval $(-1, 1)$ is the largest interval the series converges uniformly on because for any $x$ with $|x| \ge 1$, $\sum_{k = 1}^\infty x^k$ diverges. \\
+
+\textbf{11.} Let $X \in \R$ be any compact set. For all $n \in \N$, define
+$$M_n = \sup\left(\left\{\left|\sum_{k = 0}^n \frac{x^k}{k!}\right| : x \in X\right\}\right),$$
+so that $\left|\sum_{k = 0}^n \frac{x^k}{k!}\right| \le M_n$. We have that
+$$\lim_{n\to \infty} M_n = \sup\left(\left\{\lim_{n\to\infty}\left|\sum_{k = 0}^n \frac{x^k}{k!}\right| : x \in X\right\}\right) = \sup(\{e^x : x \in X\}),$$
+which, by EVT, exists because $X$ is compact (closed and bounded). By Weierstrass $M$-test, the series converges absolutely and uniformly on $X$. \\
+
+\textbf{12.} The Taylor series of $\log(1 + x)$ around $0$ is
+$$\sum_{k = 1}^\infty \frac{(-1)^{n - 1}x^n}{n}.$$
+Because of the $x^n$ term, the series only converges if $x \in (-1, 1)$, so any compact subset of $(-1, 1)$ will work. But the series will not uniformly converge on a compact set that isn't a subset of $(-1, 1)$. \\
+
+\textbf{13.} We have that
+$$\sum_{k = 1}^\infty a_k\sin(kx) \le \sum_{k = 1}^\infty |a_k|.$$
+Since $\sum_{k = 1}^\infty |a_k|$ converges, there exists 
+a convergent sequence $M_k$ such that $|a_k\sin(kx)| \le |a_k| \le M_k$ for all $k$. So by Weierstrass $M$-test, $\sum_{k = 1}^\infty a_k\sin(kx)$ converges uniformly on $\R$.
+
+\end{document}

@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+\title{Generating Functions 3}
+\author{Siddharth K}
+\date{October 2026}
+
+\newcommand{\mcA}{\mathcal{A}}
+\newcommand{\mcB}{\mathcal{B}}
+\newcommand{\mcC}{\mathcal{C}}
+\newcommand{\mcZ}{\mathcal{Z}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\eps}{\varepsilon}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+Applying the technique from the textbook:
+$$\Omega = \{0, 1, 2\},$$
+$$M \cong \mcZ \times \mathrm{SEQ}_\Omega(M),$$
+$$M(z) = z(1 + M(z) + M(z)^2),$$
+$$z = \frac{M(z)}{1 + M(z) + M(z)^2},$$
+$$m_n = \frac{1}{n}[u^{n - 1}](1 + u + u^2)^n.$$
+The contributions to the exponent come from $u$ and $u^2$ terms, so we choose $k$ $u^2$ terms and $n - 2k - 1$ $u$ terms so that the sum is $n$:
+$$m_n = \frac{1}{n}\sum_{k = 0}^{\left\lfloor\frac{n - 1}{2}\right\rfloor} \binom{n}{k}\binom{n - k}{n - 2k - 1}.$$
+
+\section*{Problem 2}
+Let $\mcB$ be the combinatorial class of binary trees and $\mcC$ be the combinatorial class of one vertex along with a sequence of unary vertices. So
+$$\mcC = \mcZ \times \mathrm{SEQ}(\mcZ),$$
+$$C(z) = \frac{z}{1 - z}.$$
+Each vertex of the full binary tree can be replaced by one of these vertex + sequences, so
+$$M \cong B \circ C,$$
+$$M = B\bigp{\frac{z}{1 - z}}.$$
+Since
+$$B(z) = \frac{1 - \sqrt{1 - 4z^2}}{2z},$$
+we get
+$$M(z) = \frac{1 - z - \sqrt{1 - 2z - 3z^2}}{2z}.$$
+Unsumming should give the same answer as problem 1.
+
+\section*{Problem 12}
+To show that $B(z) = A'(z)$, consider the number of objects of $\mcB$ with size $n$. It must have come from an object of $\mcA$ with size $n + 1$, since one of the atoms got replaced with $\eps$, and there were $n + 1$ different atoms to point to, so $b_n = (n + 1)a_{n + 1}$. Multiplying by $z^n$ and summing over $n$ gives
+$$\sum_{n \ge 0} b_nz^n = \sum_{n \ge 0}(n + 1)a_{n + 1}z^n = \sum_{n \ge 0}\frac{d}{dz}a_{n + 1}z^{n + 1},$$
+$$B(z) = A'(z).$$
+
+To show the product rule, we form a bijection between $\mathbf{D}(\mcA \mcB)$ and $\mcA \times \mathbf{D}\mcB + \mathbf{D}\mcA \times \mcB$. Take an object from $\mathbf{D}(\mcA \mcB)$, which is an erase-pointed form of $(a, b)$ where $a \in \mcA$ and $b \in \mcB$ with sizes $n_1$ and $n_2$ respectively. Splitting into atoms, the object is of either of the two forms:
+$$(a_1, \ldots, \eps, \ldots, a_{n_1}, b_1, \ldots, b_{n_2}),$$
+$$(a_1, \ldots, a_{n_1}, b_1, \ldots, \eps, \ldots, b_{n_2}).$$
+If the erase-pointed atom was part of $a$, then we can split the object into an erase pointed object of $a$ and the original $b$, giving an object from $\mathbf{D}\mcA \times \mcB$. Otherwise, by similar reasoning, we get an object from $\mcA \times \mathbf{D}\mcB$.
+
+This works in reverse too: if we have either
+$$(a_1, \ldots, \eps, \ldots, a_{n_1}), \quad (b_1, \ldots, b_{n_2}),$$
+or
+$$(a_1, \ldots, a_{n_1}), \quad (b_1, \ldots, \eps, \ldots, b_{n_2}),$$
+we can combine them into one object $(a_1, \ldots, b_{n_2})$ with one of the atoms replaced by $\eps$, which gives an object from $\mathbf{D}(\mcA \mcB)$. Therefore,
+$$\mathbf{D}(\mcA \mcB) \cong \mcA \times \mathbf{D}\mcB + \mathbf{D}\mcA \times \mcB,$$
+$$(AB)'(z) = A(z)B'(z) + A'(z)B(z).$$
+
+\section*{Problem 13}
+We form a bijection between $\mathbf{D}(\mcA \circ \mcB)$ and $(\mathbf{D}\mcA \circ \mcB) \times \mathbf{D}\mcB$. On the left, we pair each atom of an object from $\mcA$ with an object from $\mcB$, and erase one of the atoms of the object from $\mcB$, so it comes in the form
+$$((a_1, \beta_1), \ldots, (a_i, (b_1, \ldots, \eps, \ldots, b_n)), \ldots, (a_k, \beta_k)).$$
+To form the right side, we pair each atom of an erase-pointed object from $\mcA$ with an object from $\mcB$, and take an erase-pointed object from $\mcB$. So it comes in the form
+$$((a_1, \beta_1), \ldots, \eps, \ldots, (a_k, \beta_k)), \quad (b_1, \ldots, \eps, \ldots, b_n).$$
+To go from the LHS to the RHS, we replace $(b_1, \ldots, \eps, \ldots, b_n)$ with $\eps$ and save it separately. To go from the RHS to the LHS, we replace the $\eps$ in the $(\mathbf{D}\mcA \circ \mcB)$ object with the $\mathbf{D}\mcB$ object, so
+$$\mathbf{D}(\mcA \circ \mcB) \cong (\mathbf{D}\mcA \circ \mcB) \times \mathbf{D}\mcB,$$
+$$(A(B(z))' = A'(B(z))B'(z).$$
+
+\section*{Problem 14}
+Define
+$$Q(z) = P(z) - 1 = \sum_{n \ge 1} n!z^n$$
+where $P(z)$ is the generating function for permutations, so that
+$$P(z) = 1 + Q(z),$$
+$$I(z) = 1 - \frac{1}{P(z)} = 1 - \frac{1}{1 + Q(z)}$$
+$$= 1 - \sum_{k \ge 0} (-1)^kQ(z)^k.$$
+Then we extract the coefficient of $z^n$:
+$$i_n = \sum_{k = 1}^n (-1)^{k - 1}[z^n]Q(z)^k,$$
+$$[z^n]Q(z)^k = [z^n]\bigp{\sum_{j \ge 1} j!z^j}^k = \sum_{\substack{\sum_{i = 1}^k n_i= n\\n_i \ge 1}} \prod_{i = 1}^k n_i!,$$
+$$i_n = \sum_{k = 1}^n (-1)^{k - 1}\sum_{\substack{\sum_{i = 1}^k n_i= n\\n_i \ge 1}} \prod_{i = 1}^k n_i!$$
+$$= n! - \sum_{\substack{n_1 + n_2 = n\\n_1, n_2 \ge 1}}n_1!n_2! + \sum_{\substack{n_1 + n_2 + n_3 = n\\n_1, n_2, n_3 \ge 1}}n_1!n_2!n_3! - \cdots.$$
+
+\section*{Problem 15}
+Define $\mathcal{R}$ as the combinatorial class of lattice paths in $\Z^2$ that return to the origin at the end, but also possibly anytime in between. We have that
+$$R(z) = \sum_{m \ge 0} \sum_{n \ge 0} \binom{2m + 2n}{2m} \binom{2m}{m} \binom{2n}{n},$$
+since out of all horizontal movements, we need to choose half to be right and half to be left, same for vertical movements, and out of $2m + 2n$ total movements we need to choose $2m$ of them to be horizontal. Then, we have that
+$$\mathcal{R} = \mathrm{SEQ}(\mathcal{L}),$$
+since any lattice path that ends at the origin but possibly crosses it in between can be broken into lattice paths that only cross the origin at the end. Isolating $L(z)$ gives
+$$L(z) = 1 - \bigp{\sum_{m \ge 0} \sum_{n \ge 0} \binom{2m + 2n}{2m} \binom{2m}{m} \binom{2n}{n}}^{-1}.$$
+
+\end{document}

@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\summation}[1][0]{\sum_{n=#1}^\infty}
+\newcommand{\summationk}[1][0]{\sum_{k=#1}^\infty}
+\newcommand{\summationm}[1][0]{\sum_{m=#1}^\infty}
+
+\title{Infinite Series 3}
+\author{Siddharth K}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 2}
+Rewriting $D_N(t)$ in terms of exponentials:
+$$D_N(t) = \frac{1}{2} + \sum_{n = 1}^N \cos(nt) = \frac{1}{2}\bigp{1 + \sum_{n = 1}^N (e^{int} + e^{-nt})}$$
+$$= \frac{1}{2}\sum_{n = -N}^N e^{int}.$$
+This is a geometric series:
+$$a = e^{-iNt}, \quad r = e^{it},$$
+$$a\sum_{n = 0}^{2N}r^n = \frac{a(r^{2N + 1} - 1)}{r - 1} = \frac{e^{-iNt}(e^{(2N + 1)t - 1})}{e^{it} - 1} = \frac{e^{i(N + 1)t} - e^{iNt}}{e^{it} - 1}.$$
+Multiplying the numerator and denominator by $e^{-it/2}$:
+$$= \frac{e^{i(N + 1/2)t} - e^{i(N + 1/2)t}}{e^{it/2} - e^{-it/2}} = \frac{2\sin((N + 1/2)t)}{2\sin(t/2)}.$$
+Finally, multiplying by $1/2$:
+$$D_N(t) = \frac{\sin((N + 1/2)t)}{2\sin(t/2)}.$$
+
+\section*{Problem 3}
+$$\int_0^\pi D_N(t)dt = \int_0^{\pi} \bigp{\frac{1}{2} + \sum_{n = 1}^N \cos(nt)}dt = \frac{\pi}{2} + \sum_{n = 1}^N \int_0^\pi \cos(nt)dt$$
+$$= \frac{\pi}{2} + \sum_{n = 1}^N -\frac{1}{n}\sin(\pi n) = \frac{\pi}{2}.$$
+
+\section*{Problem 5}
+Because $f$ is even, the Fourier series has only cosine terms:
+$$a_0 = \frac{1}{2\pi}\int_{-\pi}^\pi f(x)dx, \quad a_n = \frac{1}{\pi}\int_{-\pi}^\pi f(x)\cos(nx)dx.$$
+$$a_0 = \frac{1}{2\pi}\int_{-\pi}^\pi \cos(ax)dx = \frac{1}{2\pi}\bigb{\frac{\sin(ax)}{a}}_{-\pi}^\pi = \frac{1}{2\pi}\frac{2\sin(a\pi)}{a\pi}.$$
+To compute $a_n$, start with product-to-sum:
+$$\cos(ax)\cos(nx) = \frac{1}{2}(\cos((a - n)x) + \cos((a + n)x)).$$
+So
+$$a_n = \int_{-\pi}^\pi \cos(ax)\cos(nx)dx = \frac{1}{2\pi}\int_{-\pi}^\pi (\cos((a - n)x) + \cos((a + n)x))dx$$
+$$= \frac{1}{2\pi}\bigp{\frac{2\sin((a - n)\pi)}{a - n} + \frac{2\sin((a + n)\pi)}{a + n}} = \frac{1}{\pi}\bigp{\frac{\sin((a - n)\pi)}{a - n} + \frac{\sin((a + n)\pi)}{a + n}}.$$
+Now, simplifying the sines:
+$$\sin((a \pm n)\pi) = \sin(a\pi \pm n\pi) = \sin(a\pi)\cos(a\pi) \pm \cos(a\pi)\sin(a\pi) = \sin(a\pi)(-1)^n,$$
+$$a_n = \frac{1}{\pi}\bigp{\frac{\sin(a\pi)(-1)^n}{a - n} + \frac{\sin(a\pi)(-1)^n}{a + n}} = \frac{\sin(a\pi)(-1)^n}{\pi}\bigp{\frac{1}{a - n} + \frac{1}{a + n}}.$$
+$$= \frac{2a\sin(a\pi)(-1)^n}{\pi(a^2 - n^2)}.$$
+So the full Fourier series is
+$$\cos(ax) = \frac{\sin(a\pi)}{a\pi} + \summation[1]\bigp{\frac{2a\sin(a\pi)(-1)^n}{\pi(a^2 - n^2)}}\cos(nx).$$
+Since $f$ is defined on $[-\pi, \pi)$ and extended periodically, we have that
+$$f(\pi) = f(-\pi) = \cos(-a\pi) = \cos(a\pi).$$
+Therefore, the Fourier series at $\pi$ converges to $\cos(a\pi)$. At $x = \pi$, $\cos(n\pi) = (-1)^n$, so
+$$\cos(a\pi) = \frac{\sin(a\pi)}{a\pi} + \summation[1]\bigp{\frac{2a\sin(a\pi)(-1)^n}{\pi(a^2 - n^2)}}(-1)^n$$
+$$= \frac{\sin(a\pi)}{\pi}\bigp{\frac{1}{a} + \summation[1] \frac{2a}{a^2 - n^2}}.$$
+Since $a \notin \mathbb{Z}$, we can divide both sides by $\sin(a\pi)$:
+$$\pi\cot(a\pi) = \frac{1}{a} + \summation[1] \frac{2a}{a^2 - n^2},$$
+which is the cotangent sum identity.
+
+\section*{Problem 9}
+When the period is $p$, the frequency becomes $\frac{2\pi}{p}$, so the exponent becomes $e^{i2\pi x/p}$. Given any starting point $x_0$, we integrate over one period:
+$$c_n = \frac{1}{p}\int_{x_0}^{x_0 + p} f(x)e^{-i2\pi n x/p}\,dx.$$
+Similarly,
+$$a_n = \frac{2}{p}\int_{x_0}^{x_0 + p} f(x)\cos\bigp{\frac{2\pi nx}{p}}dx, \quad b_n = \frac{2}{p}\int_{x_0}^{x_0 + p} f(x)\sin\bigp{\frac{2\pi nx}{p}}dx.$$
+
+\section*{Problem 10}
+\subsection*{Part (b)}
+Let $u = \lambda t, dt = du/\lambda$:
+$$\widehat{g}(\xi) = \int e^{-2\pi\xi t}f(\lambda t)dt = \frac{1}{\lambda}\int e^{-2\pi i(\xi/\lambda)u}f(u) = \frac{1}{\lambda}\widehat{f}(\xi/\lambda).$$
+
+\subsection*{Part (c)}
+Take the Fourier transform:
+$$\widehat{f * g}(\xi) = \int e^{-2\pi i\zeta t}\bigp{\int f(x)g(t - x)dx}dt$$
+$$= \int f(x)\bigp{\int e^{-2\pi i\zeta t}g(t - x)dt}dx.$$
+Substitute $u = t - x$:
+$$= \int f(x)e^{-2\pi i\xi x}\bigp{\int e^{-2\pi\xi u}g(u)du}dx = \widehat{f * g}(\xi) = \widehat{f}(\xi)\widehat{g}(\xi).$$
+
+\subsection*{Part (d)}
+$$\widehat{f'}(\xi) = \int e^{-2\pi i\zeta t}f'(t)dt = \bigb{e^{-2\pi i\xi t}f(t)}_{-\infty}^\infty + \int (2\pi i\xi)e^{-2\pi i\xi t}f(t) dt.$$
+The boundary term vanishes because $f$ decays faster than any power, so
+$$\widehat{f'}(\xi) = \int (2\pi i\xi)e^{-2\pi i\xi t}f(t) dt = 2\pi i\xi \widehat{f}(\xi).$$
+
+\section*{Problem 11}
+Since $f$ is only nonzero on $(-\pi, \pi)$, the integral becomes
+$$\widehat{f}(\xi) = \int_{-\pi}^\pi e^{-2\pi i\xi x}dx = \bigb{\frac{e^{-2\pi i\xi x}}{-2\pi i\xi}}_{-\pi}^\pi = \frac{e^{-2\pi i\xi\pi} - e^{2\pi i\xi\pi}}{-2\pi i\xi} = \frac{\sin(2\pi^2\xi)}{\pi\xi}.$$
+
+\section*{Problem 12}
+$$\widehat{f}(\xi) = \int_{-\infty}^\infty e^{-2\pi i\xi x}e^{-\pi x^2}dx = \int_{-\infty}^\infty e^{-2\pi i\xi x -\pi x^2}dx.$$
+Completing the square:
+$$-2\pi i\xi x -\pi x^2 = -\pi(x^2 + 2i\xi x),$$
+$$x^2 + 2i\xi x = (x + i\xi)^2 - \xi^2,$$
+$$-\pi(x^2 + 2i\xi x) = -\pi(x + i\xi)^2 + \pi\xi^2.$$
+Therefore,
+$$\widehat{f}(\xi) = e^{-\pi\xi^2}\int_{-\infty}^\infty e^{-\pi(x + i\xi)^2}dx = e^{-\pi\xi^2}\int_{-\infty}^\infty e^{-\pi y^2}dy$$
+$$= e^{-\pi\xi^2}\int_{-\infty}^\infty e^{-(\sqrt\pi y)^2}dy = e^{-\pi\xi^2}\cdot \frac{1}{\sqrt{\pi}}\int_{-\infty}^\infty e^{-u^2}du = e^{-\pi\xi^2}.$$
+For $f_t(x) = e^{-\pi tx^2} = f(\sqrt{t}x)$, we can use the scaling property:
+$$g(x) = f(\lambda x) \implies \widehat{g}(\xi) = \frac{1}{\lambda}\widehat{f}(\xi/\lambda).$$
+We get
+$$\widehat{f_t}(\xi) = \frac{1}{\sqrt{t}}e^{-\pi\xi^2/t}.$$
+
+\end{document}

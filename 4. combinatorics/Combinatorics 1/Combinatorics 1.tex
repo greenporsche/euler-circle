@@ -1,0 +1,141 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{Combinatorics 1}
+\author{Siddharth K}
+\date{September 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+We can fill the board with rooks by placing one rook on each row. Starting at the top row, we have $n$ options. On the next row, we cannot place a rook on the same column as the one on the first row, so we have $n - 1$ options. Continuing in this way, there are $n!$ ways to fill the board.
+
+\section*{Problem 2}
+We can let $n = 1 + 1 + \cdots + 1$, and group the $1$s into $k$ buckets. To do this, we can represent $1$s as stars and boundaries between buckets as bars, giving us $n$ stars and $k - 1$ bars, so the number of ways is $\binom{n + k - 1}{k - 1}$.
+
+\section*{Problem 3}
+We can form a bijection between orderings of people in this line and Dyck paths. We can map a person with \$5 to a right step and a person with \$10 to an up step. So an ordering of $n$ of each type of person in a line corresponds to a path from $(0, 0)$ to $(n, n)$. Furthermore, for a \$10 person to be given change, the teller must have a \$5 bill to give. So the number of \$10 people before any point in the line cannot exceed the number of \$5 people, similar to how the number of up steps cannot exceed the number of right steps. So the answer is $C_n$.
+
+\section*{Problem 4}
+Since $\frac{2}{3}n < p$, we know that $3p > 2n$, so $p^3 \nmid (2n)!$. But, since $p \le 2n$, $p^2 \mid (2n)!$. So we can write $(2n)!$ as $p^2 \cdot a$ for some integer $a$, and $n! = p\cdot b$ for some integer $b$, with $p \nmid a$ and $p \nmid b$. We know that
+$$\binom{2n}{n} = \frac{(2n)!}{n!n!} = \frac{p^2\cdot a}{(p\cdot b)(p\cdot b)} = \frac{a}{b^2},$$
+so $p \nmid \binom{2n}{n}$.
+
+\section*{Problem 5}
+For $a \ge 0$, we can show by induction on $a$ that $a^p \equiv a \pmod{p}$. We have that $0^p \equiv 0 \pmod{p}$. Now, assuming $(a - 1)^p \equiv a - 1 \pmod{p}$, we have that
+$$a^p = (1 + (a - 1))^p = \sum_{k = 0}^p \binom{p}{k}(a - 1)^k.$$
+When $k \neq 0, p$, $p\mid\binom{p}{k}$, since $\binom{p}{k} = \frac{p!}{k!(p - k)!}$, and none of the factors in the denominator are relatively prime with $p$ in the numerator. So
+$$a^p = \sum_{k = 0}^p \binom{p}{k}(a - 1)^k \equiv (a - 1)^p + 1 \equiv a - 1 + 1 \equiv a \pmod{p}.$$
+For $a < 0$, if $p \neq 2$, we have that
+$$a^p = (-1)^p|a|^p = -|a|^p \equiv -|a| = a \pmod{p}.$$
+If $p = 2$, then
+$$a^2 = (-a)^2 \equiv -a \equiv -a + 2a \equiv a \pmod{2}.$$
+So, for all integers $a$, $a^p \equiv a \pmod{p}$.
+
+\section*{Problem 6}
+First, we can choose the common element in $n$ ways. Then, for each of $A$ and $B$, there are $2^{n - 1}$ ways to choose the remaining elements, so the result is $n \cdot (2^{n - 1})^2 = n \cdot 2^{2n - 2}$.
+
+\section*{Problem 8}
+\subsection*{Part (a)}
+Algebraic proof:
+$$\sum_{k = 0}^n k\binom{n}{k} = \sum_{k = 0}^n \frac{n!}{(k - 1)!(n - k)!} = n\sum_{k = 0}^n \frac{(n - 1)!}{(k - 1)!(n - k)!} = n\cdot 2^{n - 1}.$$
+Combinatorial proof:
+
+Given $n$ people, the number of ways to form a committee and pick one leader from them is $n \cdot 2^{n - 1}$, since we can pick a leader first and then choose among the remaining $n - 1$ people. \\
+
+We can also count this by fixing $k$ as the number of people in the committee. Then the number of ways to choose the committee is $k\binom{n}{k}$, since we choose $k$ people and then pick one of them to be a leader. So the total sum is $\sum_{k = 0}^n k\binom{n}{k}$. So the two quantities are equal.
+
+\subsection*{Part (b)}
+Algebraic proof (induction on $m$):
+
+If $m = r$:
+$$\sum_{n = r}^m \binom{n}{r} = \binom{r}{r} = 1,$$
+$$\binom{m + 1}{r + 1} = \binom{r + 1}{r + 1} = 1.$$
+Now, assume the identity holds for $m$. Then
+$$\sum_{n = r}^{m + 1} \binom{n}{r} = \sum_{n = r}^{m} \binom{n}{r} + \binom{m + 1}{r} = \binom{m + 1}{r + 1} + \binom{m + 1}{r} = \binom{m + 2}{r + 1},$$
+by Pascal's Identity. Therefore, by induction, the identity holds for all $m \ge r$. \\
+
+Combinatorial proof:
+
+The number of ways to choose $r + 1$ people from $m + 1$ total is $\binom{m + 1}{r + 1}$. To count it a different way, assign each person an ID (a number from $0$ to $m + 1$) and choose the ID, $n + 1$, that will be the largest ID of anyone in the committee (between $r + 1$ and $m + 1$). Then, among the people with lower IDs (between $0$ and $n$), choose $r$ of them to be the remaining committee members. This gives us $\binom{n}{r}$ ways where $r \le n \le m$, resulting in a total of $\sum_{n = r}^m \binom{n}{r}$.
+
+\subsection*{Part (d)}
+Algebraic proof:
+$$\binom{n}{k} = \frac{n!}{k!(n - k)!} = \frac{n}{k}\cdot \frac{(n - 1)!}{(k - 1)!(n - k)!} = \frac{n}{k}\binom{n - 1}{k - 1}.$$
+Combinatorial proof:
+
+Consider the number of ways to choose a committee of size $k$ from $n$ people. This is obviously $\binom{n}{k}$, but we can also count it by choosing one person first, then choosing the remaining $k - 1$ people in $\binom{n - 1}{k - 1}$ ways. But this overcounts by $k$, since any of the other $k - 1$ people could have been chosen first, producing the same outcome. So the overall count is $\frac{n}{k}\binom{n - 1}{k - 1}$.
+
+\section*{Problem 9}
+Let $p(n, k)$ be the number of ways to partition $n$ into $k$ positive integers where an integer $m$ can be colored in $m$ ways. Then $p$ satisfies the recurrence:
+$$p(n, 1) = n,$$
+$$p(n, k) = \sum_{i = 1}^{n - k + 1} i \cdot p(n - i, k - 1),$$
+since the first component, $i$, can be chosen between $1$ and $n - k + 1$ and colored in $i$ ways, and the number of ways to partition the rest can be found recursively. \\
+
+I couldn't figure out how to get a simpler solution, however.
+
+\section*{Problem 10}
+We can fill the first $n - 1$ rows and columns of the array with $0$s and $1$s arbitrarily, and the last row and column are forced due to the row and column constraints. This gives us $(2^{n - 1})^{n - 1} = 2^{(n - 1)^2}$ ways to fill the array, assuming this method always produces a valid result. \\
+
+Since the bottom-right entry is determined by both the row constraint and the column constraint, it remains to show that they are consistent. Consider the sum of all entries in the array. It can be obtained by summing all the row sums or summing the column sums, so they must be equal. One sum can't be even while the other is odd. If the last row's sum is even, the array's total sum must be even, so the last column's sum must be even as well.
+
+\section*{Problem 11}
+The number of partitions of $n$ that do include a $1$ is $p(n - 1)$, since for any partition of $p(n - 1)$, a $1$ can be included as a new part to produce a partition of $p(n)$, and for any partition of $p(n)$ with a $1$, a partition of $p(n - 1)$ can be produced by removing the $1$. So the number of partitions of $n$ without a $1$ is $p(n) - p(n - 1)$.
+
+\section*{Problem 12}
+Solution to the first part is Problem 8a. \\
+
+The sum $\sum_{k = 0}^n k^2\binom{n}{k}$ evaluates to $n(n - 1)\cdot 2^{n - 2} + n\cdot 2^{n - 1}$. \\
+
+Algebraic proof:
+$$k^2\binom{n}{k} = k^2 \frac{n!}{k!(n - k)!} = nk\frac{(n - 1)!}{(k - 1)!(n - k)!}$$
+$$= n\left((k - 1)\frac{(n - 1)!}{(k - 1)!(n - k)!} + \frac{(n - 1)!}{(k - 1)!(n - k)!}\right)$$
+$$= n\left((n - 1)\binom{n - 2}{k - 2} + \binom{n - 1}{k - 1}\right),$$
+$$\sum_{k = 0}^n k^2\binom{n}{k} = \sum_{k = 0}^n n\left((n - 1)\binom{n - 2}{k - 2} + \binom{n - 1}{k - 1}\right)$$
+$$= n(n - 1)\sum_{k = 0}^n \binom{n - 2}{k - 2} + n\sum_{k = 0}^n\binom{n - 1}{k - 1} = n(n - 1)\cdot 2^{n - 2} + n\cdot 2^{n - 1}.$$
+Combinatorial proof:
+
+Given $n$ people, consider the number of ways to form a committee and give two items to any of the members (with replacement). We can split this into two cases: the items are given to the same person, and the items are given to different people. If they are given to the same person, then we can choose that person in $n$ ways and choose a committee from the remaining people in $2^{n - 1}$ ways. If they are given to different people, we can choose them in $n(n - 1)$ ways and choose the remaining committee in $2^{n - 2}$ ways. \\
+
+Alternatively, we can consider the problem for a fixed-sized committee with $k$ people. We can choose the committee in $\binom{n}{k}$ ways and give the two items in $k^2$ ways, so the total number of ways is $\sum_{k = 0}^n k^2\binom{n}{k}$. So the two quantities are equal.
+
+\section*{Problem 15}
+
+To express $n$ as $\binom{a}{1} + \binom{b}{2} + \binom{c}{3}$, first choose the largest $c$ such that $n - \binom{c}{3} \ge 0$. Then, choose the largest $b$ such that $n - \binom{c}{3} - \binom{b}{2} \ge 0$. Finally, let $a = n - \binom{c}{3} - \binom{b}{2}$, so that $n = \binom{a}{1} + \binom{b}{2} + \binom{c}{3}$. First, we show that using this method, it's guaranteed that $0 \le a < b < c$. \\
+
+By choosing the largest $c$ such that $n - \binom{c}{3} \ge 0$ and the largest $b$ such that $n - \binom{c}{3} - \binom{b}{2} \ge 0$, we have that
+$$\binom{c}{3} \le n < \binom{c + 1}{3},$$
+$$0 \le n - \binom{c}{3} < \binom{c + 1}{3} - \binom{c}{3} = \binom{c}{2}, \quad \text{(Pascal's identity)}$$
+$$\binom{b}{2} \le n - \binom{c}{3} < \binom{c}{2} \implies b < c.$$
+Similarly, if we let $a = n - \binom{c}{3} - \binom{b}{2}$,
+$$\binom{b}{2} \le n - \binom{c}{3} < \binom{b + 1}{2},$$
+$$0 \le n - \binom{c}{3} - \binom{b}{2} < \binom{b + 1}{2} - \binom{b}{2} = \binom{b}{1} = b,$$
+$$0 \le a < b.$$
+So we have that $0 \le a < b < c$. \\
+
+Now, we show that the solution obtained this way is unique. Let $n = \binom{a}{1} + \binom{b}{2} + \binom{c}{3}$ where $0 \le a < b < c$. Assume, for contradiction, that $c$ is not chosen maximally. Then
+$$n > \binom{c + 1}{3},$$
+$$n - \binom{c}{3} > \binom{c + 1}{3} - \binom{c}{3} = \binom{c}{2}.$$
+Then, if $b$ is chosen maximally, since $\binom{c}{2} < n - \binom{c}{3}$, $b \ge c$, which is a contradiction. So $b$ cannot be chosen maximally, which means
+$$n - \binom{c}{3} > \binom{b + 1}{2},$$
+$$n - \binom{c}{3} - \binom{b}{2} > \binom{b + 1}{2} - \binom{b}{2} = \binom{b}{1} = b,$$
+$$a = n - \binom{c}{3} - \binom{b}{2} > b,$$
+which is a contradiction. Therefore, $c$ must be chosen maximally. \\
+
+Now, assume $c$ is chosen maximally but not $b$. Then we have that
+$$\binom{b + 1}{2} \le n - \binom{c}{3},$$
+$$\binom{b + 1}{2} - \binom{b}{2} \le n - \binom{c}{3} - \binom{b}{2},$$
+$$\binom{b}{1} = b \le n - \binom{c}{3} - \binom{b}{2} = a,$$
+$$b \le a,$$
+which is a contradiction. Therefore, $c$ and $b$ must be chosen maximally, making the solution $a, b, c$ identical to the one obtained earlier.
+
+\section*{Problem 17}
+Suppose there are $d$ types of animals and there are $n_1, n_2, \ldots, n_d$ of each kind. The number of ways to choose $r$ animals from them is $\binom{n_1 + \cdots + n_d}{r}$. Alternatively, if we want to choose $k_1, k_2, \ldots, k_d$ of each animal (where $k_1 + \cdots + k_d = r$, the number of ways to do so is $\binom{n_1}{k_1}\cdots\binom{n_d}{k_d}$. So the total number of ways is
+$$\sum_{k_1 + \cdots + k_d = r} \binom{n_1}{k_1}\cdots\binom{n_d}{k_d}.$$
+
+\end{document}

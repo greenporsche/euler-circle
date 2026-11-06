@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\bigp}[1]{\left(#1\right)}
+
+\title{Combinatorics 8}
+\author{Siddharth K}
+\date{November 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+\subsection*{Part (a)}
+Let $(a_i)$ be such a sequence. Then for each $a$, take a right step and for each $b$, take an up step. Since the number of $a$'s up to some point will always be at least the number of $b$'s, the number of right steps will be at least the number of up steps, so the path stays under the line $y = x$. \\
+
+Now, take a Dyck path, which can be notated as a sequence of $R$s and $U$s. Let $a_i = a$ if the corresponding step in the Dyck path is $R$ and $a_i = b$ otherwise. Then the number of $a$'s will always be greater than the number of $b$'s up to some point.
+
+\section*{Problem 2}
+Let $T_n$ be the number of binary trees with $n + 1$ leaves. We can form such a tree by taking a left subtree with $k + 1$ leaves and a right subtree with the remaining $n - k$ leaves. The number of such left binary trees is $T_k$ and right binary trees is $T_{n - k - 1}$. Since $k + 1$ can range from $1$ to $n$, the total sum is
+$$T_n = \sum_{k = 0}^{n - 1}T_kT_{n - k - 1},$$
+which is the Catalan recurrence.
+
+\section*{Problem 3}
+$$\sum_{m,n \ge 0} \binom{m + n}{m}x^my^n = \sum_{n \ge 0}y^n\sum_{m \ge 0}\binom{m + n}{n}x^m$$
+$$= \sum_{n \ge 0}y^n(1 - x)^{-n-1} = \frac{1}{1 - x}\sum_{n \ge 0} \bigp{\frac{y}{1 - x}}^n$$
+$$= \frac{1}{1 - x} \cdot \frac{1}{1 - \frac{y}{1 - x}} = \frac{1}{1 - x}\cdot \frac{1 - x}{1 - x - y} = \frac{1}{1 - x - y}.$$
+
+\section*{Problem 6}
+Let $a_n$ be the number of binary sequences of length $n$ without any two adjacent $1$'s. If the first element is $0$, then the remaining $n - 1$ elements form a valid sequence of length $n - 1$. If the first element is $1$, the next must be $0$, and the remaining $n - 2$ elements is valid. So $a_n = a_{n - 1} + a_{n - 2}$. We also have that $a_1 = 2$ and $a_2 = 3$, so $a_n = F_{n + 2}$.
+
+\section*{Problem 7}
+Let $a_n$ be the number of valid ternary sequences of length $n$, let $x_n$ be the number of these sequences that end with $0$, $y_n$ end in $1$, and $z_n$ end in $2$. From $0$, the next term can be $0, 1$, or $2$, but from $1$, the next term can only be $0$ or $2$, and from $2$, the next term can only be $0$ or $1$. So
+$$x_n + 1 = a_n,$$
+$$y_{n + 1} = x_n + z_n,$$
+$$z_{n + 1} = x_n + y_n.$$
+Also, $a_n = x_n + y_n + z_n$, so 
+\begin{align*}
+    a_{n + 1} &= x_{n + 1} + y_{n + 1} + z_{n + 1} \\
+    &= a_n + (x_n + a_n) \\
+    &= 2a_n + a_{n - 1}.
+\end{align*}
+So for $n \ge 1$, $a_{n + 1} = 2a_n + a_{n - 1}$. \\
+
+Now, let $A(x) = \sum_{n \ge 0} a_nx^n$. We have that
+$$\sum_{n \ge 0} a_{n + 1}x^n = 2\sum_{n \ge 0}a_nx^n + \sum_{n \ge 0}a_{n - 1}x^n,$$
+$$(1 - 2x - x^2)A(x) = a_0 + (a_1 - 2a_0)x = 1 + x,$$
+$$A(x) = \frac{1 + x}{1 - 2x - x^2}.$$
+The roots of the denominator are $1 \pm \sqrt{2}$, so the closed form for $a_n$ is of the form
+$$a_n = A(1 + \sqrt{2})^n + B(1 - \sqrt{2})^n.$$
+Plugging in $a_0 = 1$ and $a_1 = 3$ gives us
+$$A = \frac{1 + \sqrt{2}}{2},\quad B = \frac{1 - \sqrt{2}}{2},$$
+$$a_n = \frac{1}{2}((1 + \sqrt{2})^{n + 1} + (1 - \sqrt{2})^{n + 1}).$$
+
+\section*{Problem 14}
+\subsection*{Part (a)}
+$$A(0) = \sum_{n \ge 0}p_n0^n = p_0 = P(X = 0).$$
+$$A(1) = \sum_{n \ge 0}p_n = 1.$$
+
+\subsection*{Part (b)}
+$$P(X \text{ even}) = \sum_{n \ge 0} p_{2n},$$
+$$A(1) = \sum_{n \ge 0}p_n,$$
+$$\quad A(-1) = \sum_{n \ge 0}p_n(-1)^n = \sum_{n \ge 0}p_{2n} - \sum_{n \ge 0}p_{2n + 1},$$
+$$A(1) + A(-1) = 2\sum_{n \ge 0}p_{2n} = 2P(X \text{ even}),$$
+$$P(X \text{ even}) = \frac{A(1) + A(-1)}{2}.$$
+
+\subsection*{Part (c)}
+$$\mathbb{E}[X] = \sum_{n \ge 0}np_n = A'(1).$$
+$$\text{Var}(X) = \mathbb{E}[(X - \mathbb{E}[X])^2] = \mathbb{E}[X^2 - 2X\mathbb{E}[X] + \mathbb{E}[X]^2]$$
+$$= \mathbb{E}[X^2] - 2(\mathbb{E}[X])^2 + (\mathbb{E}[X])^2 = \mathbb{E}[X^2] - (\mathbb{E}[X])^2,$$
+$$\mathbb{E}[X^2] = \mathbb{E}[X(X - 1)] + \mathbb{E}[X] = A''(1) + A'(1),$$
+$$\text{Var}(X) = A''(1) + A'(1) - (A'(1))^2.$$
+
+\end{document}

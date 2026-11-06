@@ -1,0 +1,53 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\summation}[1][0]{\sum_{n=#1}^\infty}
+\newcommand{\summationk}[1][0]{\sum_{k=#1}^\infty}
+\newcommand{\summationm}[1][0]{\sum_{m=#1}^\infty}
+
+\title{Infinite Series 5}
+\author{Siddharth K}
+\date{February 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+Take any $\alpha = a + b\sqrt {-d}$ with $a, b \in \Q$. For $\alpha$ to be integral, $(x - \alpha)(x - \bar\alpha)$ must have integer coefficients. We have that
+$$(x - \alpha)(x + \alpha) = (x - (a + b\sqrt{-d}))(x - (a - b\sqrt{-d}))$$
+$$= x^2 - 2ax + a^2 + db^2,$$
+so $2a$ and $a^2 + db^2$ must be integers. Let $u = 2a$ and $v = 2b$. We have that $u$ must be an integer. Now, consider $4(a^2 + db^2)$:
+$$4(a^2 + db^2) = (2a)^2 + d(2b)^2 = u^2 + dv^2.$$
+That must be an integer, and since $u$ is an integer, $v = 2b$ must be an integer as well. So every integral element has the form
+$$\alpha = \frac{u + v\sqrt{-d}}{2},\quad u, v \in \Z.$$
+Now, we need to find which $u, v$ give integers. For $a^2 + db^2$ to be an integer,
+$$\frac{u^2 + dv^2}{4} \in \Z \iff u^2 \equiv -dv^2 \pmod{4}.$$
+If $v$ is even, then $v^2 \equiv 0 \pmod{4}$, so $u$ must be even. If $v$ is odd, then $v^2 \equiv 1 \pmod{4}$, so $u^2$ is not even and $u^2 \equiv 1 \pmod{4}$. So we need $-d \equiv 1 \pmod{4}$. If $-d \not\equiv 1 \pmod{4}$, no integral element can have $v$ odd, so $\alpha$ must lie in $\Z[\sqrt{-d}]$.
+
+\section*{Problem 5}
+Define multiplication on classes by $[a] \cdot [b] = [ab]$. \\
+We need to show that if $a \sim a'$ and $b \sim b'$ then $ab \sim a'b'$. Assume that $(c)a = (d)a'$ and $(e)b = (f)b'$ for some $c, d, e, f \in R$. Then
+$$(ce)(ab) = ((c)a)((e)b) = ((d)a')((f)b') = (df)(a'b').$$
+So $(ce)(ab) = (df)(a'b')$, so $ab \sim a'b'$.
+Next, we need to show associativity. We know that $(ab)c = a(bc)$, so
+$$([a] \cdot [b]) \cdot [c] = [ab] \cdot [c] = [(ab)c] = [a(bc)] = [a] \cdot [bc] = [a] \cdot ([b] \cdot [c]).$$
+
+\section*{Problem 8}
+Each term in the product is the sum of a geometric series:
+$$\prod_{p \text{ prime}} \frac{1}{1 - \frac{\chi(p)}{p^s}} = \prod_{p \text{ prime}} \summation \bigp{\frac{\chi(p)}{p^s}}^n.$$
+Expanding the product term-by-term, it sums over each unique prime factorization, which is just all natural numbers, and $\chi$ is multiplicative, so the product is
+$$\summation[1] \frac{\chi(n)}{n^s}.$$
+
+\end{document}

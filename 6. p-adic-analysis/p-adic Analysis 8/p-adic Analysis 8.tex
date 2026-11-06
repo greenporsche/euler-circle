@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
+
+\newcommand{\Zhat}{\widehat{\Z}}
+
+\title{p-adic Analysis 8}
+\author{Siddharth K}
+\date{May 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+No. Assume $x \in \Zhat$. Then for all $n$, $2x_{2n} \equiv 0 \pmod{2n}$. So $x_{2n}$ is either $0 \pmod{n}$ or $n \pmod{2n}$. That means $x_n \equiv 0 \pmod{n}$ in both cases, so $x = 0$. Therefore $2$ is not a zero divisor in $\Zhat$.
+
+\section*{Problem 5}
+We just need $x_p = x_p^2$ for all primes $p$, or $x_p(x_p - 1) = 0$. Since $x_p \in \Z_p$, this forces $x_p = 0$ or $1$ for all $p$. Therefore all $x = (x_2, x_3, x_5, \ldots) \in \Zhat$ with $x_i = 0$ or $1$ satisfy $x^2 = x$. The size of this set is $2^{\aleph_0}$.
+
+\section*{Problem 6}
+Since
+$$\Z_m = \prod_{p \mid m} \Z_p,$$
+the number of solutions to $x^3 = x$ is the product of the number of solutions in each $\Z_p$. Also, $x^3 = x$ iff $x(x - 1)(x + 1) = 0$. So if $p$ is odd, there are $3$ solutions $(0, 1, -1)$, and if $p = 2$ there are two solutions $(0, 1)$. So each odd prime factor of $m$ gives $3$ choices and a factor of $2$ gives $2$ choices.
+
+\section*{Problem 8}
+Let $s_N = \sum_{n = 0}^N a_n$, and assume $s_N$ is Cauchy. That means we have $|s_N - s_{N - 1}|_m \to 0$. But since $a_N = s_N - s_{N - 1}$, we get $|a_N|_m \to 0$.
+
+Now, let $|a_n|_m \to 0$. For all $N > M$, we have that
+$$s_N - s_M = a_{M + 1} + a_{M + 2} + \cdots + a_N.$$
+By the ultrametric triangle inequality,
+$$|s_N - s_M|_m \le \max_{M < k \le N} |a_k|_m.$$
+Since $|a_k|_m \to 0$, $|s_N - s_M|_m \to 0$, and therefore $s_N$ is Cauchy.
+
+\section*{Problem 10}
+From problem 1, $2$ is not a zero divisor. Also, it is not a unit because for there to be some $y$ where $2y = 1$, reducing mod $2$ gives us $0 \equiv 1 \pmod{2}$, which is impossible.
+
+\end{document}

@@ -1,0 +1,355 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usetheme{Boadilla}
+\usecolortheme{default}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\usepackage{amsmath, amssymb, booktabs}
+
+\newcommand{\Ztwo}{\mathbb{Z}_2}
+\newcommand{\Ftwo}{\mathbb{F}_2}
+
+\title[2-adic Numbers in Cryptography]{2-adic Numbers in Cryptography}
+\subtitle{From carries to stream ciphers}
+\author{Siddharth K}
+\date{May 2026}
+
+\begin{document}
+
+% 1
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% 2
+\begin{frame}{The main idea}
+\large
+A long bit string can be treated as one 2-adic number:
+\[
+  a_0,a_1,a_2,\ldots
+  \quad\longleftrightarrow\quad
+  \alpha = a_0+a_1 2+a_2 2^2+\cdots \in \Ztwo.
+\]
+
+\vspace{0.4cm}
+Today I will explain:
+\begin{enumerate}
+  \item why this is natural for cryptography,
+  \item what a feedback with carry shift register is,
+  \item why its output is a rational 2-adic number.
+\end{enumerate}
+\end{frame}
+
+% 3
+\begin{frame}{Why cryptography needs bit streams}
+Alice has the message written as bits:
+\[
+  P_0, P_1, P_2, \ldots, \quad P_i \in \{0, 1\}.
+\]
+
+A stream cipher uses a keystream:
+\[
+  K_0,K_1,K_2,\ldots
+\]
+
+Alice sends
+\[
+  C_i = P_i + K_i \pmod 2.
+\]
+
+Bob decrypts by doing the same operation:
+\[
+  P_i = C_i + K_i \pmod 2.
+\]
+
+\begin{block}{The problem}
+Alice and Bob need the same keystream, but Eve should not be able to predict it.
+\end{block}
+\end{frame}
+
+% 4
+\begin{frame}{2-adic integers}
+A 2-adic integer is an infinite binary sum
+\[
+  a_0+a_1 2+a_2 2^2+a_3 2^3+\cdots,
+  \qquad a_i\in\{0,1\}.
+\]
+
+\vspace{0.2cm}
+The key difference from real numbers:
+\[
+  2^n \to 0 \quad \text{in the 2-adic metric.}
+\]
+
+So infinite sums of powers of $2$ can converge in $\Ztwo$.
+\end{frame}
+
+% 5
+\begin{frame}{Two examples}
+
+\vspace{0.2cm}
+First example:
+\[
+  111111\cdots = 1+2+2^2+2^3+\cdots = -1 \quad \text{in }\Ztwo.
+\]
+
+Second example:
+\[
+  101010\cdots = 1+2^2+2^4+\cdots
+\]
+\[
+  = 1+4+4^2+\cdots
+  = \frac{1}{1-4}
+  = -\frac{1}{3}.
+\]
+
+\begin{block}{Takeaway}
+Repeating bit strings often become rational 2-adic numbers.
+\end{block}
+\end{frame}
+
+% 6
+\begin{frame}{Ordinary shift registers}
+A linear feedback shift register, or LFSR, creates new bits using a linear rule.
+
+Example:
+\[
+  a_{n+3}=a_{n+1}+a_n \pmod 2.
+\]
+
+\vspace{0.3cm}
+Why people like LFSRs:
+\begin{itemize}
+  \item they are fast,
+  \item they are simple,
+  \item they can make long periodic sequences.
+\end{itemize}
+
+\begin{alertblock}{Problem}
+They are linear over $\Ftwo$. With enough output, an attacker may recover the rule.
+\end{alertblock}
+\end{frame}
+
+% 7
+\begin{frame}{Feedback with carry shift registers}
+An FCSR is like an LFSR, but it remembers carries.
+
+Choose tap values $q_1,\ldots,q_r\in\{0,1\}$ and a memory value $m_{n-1}$.
+At step $n$, compute
+\[
+  \sigma_n=q_1a_{n-1}+q_2a_{n-2}+\cdots+q_ra_{n-r}+m_{n-1}.
+\]
+
+Then set
+\[
+  a_n \equiv \sigma_n \pmod 2,
+  \qquad
+  m_n=\frac{\sigma_n-a_n}{2}.
+\]
+
+\begin{block}{Simple picture}
+LFSR: $1+1=0$ mod $2$, and the extra $1$ disappears.\newline
+FCSR: $1+1=10_2$, so the output is $0$ and the carry is $1$.
+\end{block}
+\end{frame}
+
+% 8
+\begin{frame}{The connection integer}
+The taps define a number called the connection integer:
+\[
+  q=-1+q_1 2+q_2 2^2+\cdots+q_r2^r.
+\]
+
+Usually we take $q>0$, so $q$ is odd.
+
+\vspace{0.4cm}
+\begin{block}{Main theorem}
+Let
+\[
+  \alpha=a_0+a_1 2+a_2 2^2+\cdots
+\]
+be the 2-adic number made from the output of an FCSR with connection integer $q$.
+Then there is an integer $p$ such that
+\[
+  \alpha=\frac{p}{q} \quad \text{in }\Ztwo.
+\]
+\end{block}
+\end{frame}
+
+% 9
+\begin{frame}{Proof idea}
+Start with
+\[
+  \alpha=x+\sum_{n=r}^{\infty}a_n2^n,
+  \qquad
+  x=a_0+a_1 2+\cdots+a_{r-1}2^{r-1}.
+\]
+
+From the FCSR rule,
+\[
+  a_n=q_1a_{n-1}+\cdots+q_ra_{n-r}+m_{n-1}-2m_n.
+\]
+
+Substitute this into the tail:
+\[
+\alpha=x+
+\sum_{i=1}^r q_i\sum_{n=r}^{\infty}a_{n-i}2^n
++
+\sum_{n=r}^{\infty}m_{n-1}2^n
+-
+\sum_{n=r}^{\infty}m_n2^{n+1}.
+\]
+\end{frame}
+
+% 10
+\begin{frame}{Proof idea}
+For the bit sums, re-index:
+\[
+  \sum_{n=r}^{\infty}a_{n-i}2^n
+  =2^i\left(\alpha-X_i\right),
+\]
+where
+\[
+  X_i=\sum_{j=0}^{r-i-1}a_j2^j
+\]
+is just a finite starting piece.
+
+\vspace{0.2cm}
+For the memory sums, take finite sums first:
+\[
+  \sum_{n=r}^{N}m_{n-1}2^n-
+  \sum_{n=r}^{N}m_n2^{n+1}
+  =m_{r-1}2^r-m_N2^{N+1}.
+\]
+
+As $N\to\infty$, the last term goes to $0$ in $\Ztwo$.
+\end{frame}
+
+% 11
+\begin{frame}{Proof idea}
+Putting the pieces together gives
+\[
+  \alpha=x+(q+1)\alpha-
+  \sum_{i=1}^{r}q_i2^iX_i+2^rm_{r-1}.
+\]
+
+Move the $\alpha$ terms to one side:
+\[
+  q\alpha=-x+
+  \sum_{i=1}^{r}q_i2^iX_i-2^rm_{r-1}.
+\]
+
+The right side is an ordinary integer. Call it $p$.
+
+So
+\[
+  q\alpha=p,
+  \qquad \text{and therefore}\qquad
+  \alpha=\frac{p}{q}.
+\]
+
+\begin{block}{What happened?}
+The infinite tail collapsed to finite data: the starting bits and the carry.
+\end{block}
+\end{frame}
+
+% 12
+\begin{frame}{Example: connection integer $q=5$}
+If $q=5$, then
+\[
+  q+1=6=2+4,
+\]
+so the rule is
+\[
+  \sigma_n=a_{n-1}+a_{n-2}+m_{n-1}.
+\]
+
+Start with
+\[
+  a_0=1,\qquad a_1=1,\qquad m_1=0.
+\]
+
+\begin{center}
+\begin{tabular}{c|c|c|c}
+$n$ & $\sigma_n$ & new bit $a_n$ & new memory $m_n$ \\
+\hline
+2 & $1+1+0=2$ & $0$ & $1$ \\
+3 & $0+1+1=2$ & $0$ & $1$ \\
+4 & $0+0+1=1$ & $1$ & $0$ \\
+5 & $1+0+0=1$ & $1$ & $0$
+\end{tabular}
+\end{center}
+
+So the sequence starts
+\[
+  11001100\cdots.
+\]
+\end{frame}
+
+% 13
+\begin{frame}{Example: its 2-adic value}
+The sequence
+\[
+  11001100\cdots
+\]
+means
+\[
+  \alpha=1+2+2^4+2^5+2^8+2^9+\cdots.
+\]
+
+Group the repeating blocks:
+\[
+  \alpha=(1+2)(1+2^4+2^8+\cdots).
+\]
+
+Since $2^4=16$,
+\[
+  \alpha=3(1+16+16^2+\cdots)
+  =3\cdot \frac{1}{1-16}
+  =-\frac{1}{5}.
+\]
+
+This matches the theorem: the connection integer was $5$.
+\end{frame}
+
+% 14
+\begin{frame}{What this means for cryptography}
+FCSRs can generate keystreams, but they are not magic.
+
+\vspace{0.2cm}
+The theorem says the output has structure:
+\[
+  \alpha=\frac{p}{q}.
+\]
+
+If Eve sees the first $N$ bits, she knows
+\[
+  \alpha \pmod{2^N}.
+\]
+
+A 2-adic rational approximation attack asks:
+\[
+  \text{Can we find small }p,q\text{ with }\frac{p}{q}\equiv \alpha \pmod{2^N}?
+\]
+
+\begin{alertblock}{Security issue}
+The carry makes the generator less linear, but the 2-adic structure can still guide attacks.
+\end{alertblock}
+\end{frame}
+
+% 15
+\begin{frame}{Takeaways}
+\begin{enumerate}
+  \item A bit string can be viewed as a 2-adic integer.
+  \item FCSRs are shift registers that remember carries.
+  \item The output of an FCSR is a rational 2-adic number $p/q$.
+  \item This gives both a construction idea and an attack idea.
+\end{enumerate}
+
+\vfill
+\centering
+Thanks for listening!
+\end{frame}
+
+\end{document}

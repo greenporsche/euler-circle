@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{Combinatorics 4}
+\author{Siddharth K}
+\date{October 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+Assume $m \le n$. Then let $B = [m] \times [n] \subseteq [n] \times [n]$. We have that $r_k = 0$ if $k > m$, since at least two rooks would have to be on the same row. Otherwise, we can find an arrangement of rooks by choosing $k$ rows and $k$ columns, and permuting them. This gives us $r_k = k!\binom mk \binom nk$, so
+$$r_B(x) = \sum_{k = 0}^n k! \binom mk \binom nk x^k.$$
+
+\section*{Problem 2}
+Using Theorem 4.3, we let $t = 10$ since $s_t = c_t - t + 1 = 8 - t + 1 = 9 - t < 0$. We get
+$$(s_i) = (0, -1, -2, -3, -3, -4, -5, -5, -4, -1).$$
+Then, we have
+$$(a_i) = (2, 1, 2, 2, 2, 0, \ldots 0).$$
+Plugging into the product, we get
+$$\prod_{k \ge 1}\binom{a_k + a_{k + 1} - 1}{a_{k + 1}} = \binom{2 + 1 - 1}{1}\binom{1 + 2 - 1}{2}\binom{2 + 2 - 1}{2}\binom{2 + 2 - 1}{2}\binom{2 + 0 - 1}{0}$$
+$$= 2 \cdot 1 \cdot 3 \cdot 3 \cdot 1 = 18.$$
+So there are $18$ Ferrers boards with the same rook polynomial as $(1, 1, 2, 4, 8)$.
+
+\section*{Problem 3}
+We have that $r_B(1) = \sum_{k = 0}^n r_k$ which is the number of ways to place rooks on $B$ without attacking, or equivalently, the number of ways of choosing $k$ elements of $B$ where no two lie on the same row or column. \\
+
+Also, $N_B(1) = \sum_{j = 0}^n N_j$, which is the number of permutations $\pi$ of $[n]$ where $|B \cap G(\pi)| \in \{0, \ldots, n\}$, or more simply, the number of permutations of $[n]$.
+
+\section*{Problem 5}
+Pick exactly $x$ out of $p$ positions to put an $a$ card and $y$ of $q$ cards to put a $b$ card, with $x + y = k$. Then the remaining $p - x$ $a$ cards must go to the remaining $q - y$ $b$ cards and the remaining $q - y$ $b$ cards must go to the remaining $p - x$ $a$ cards. This forces that
+$$p - x = q - y \implies x = \frac{p - q + k}{2}.$$
+So the answer is
+$$\binom px \binom qy = \binom{p}{\frac{p - q + k}{2}} \binom{q}{\frac{q - p + k}{2}}.$$
+
+\section*{Problem 7}
+For any permutation $\pi$, the graph $G(\pi)$ has exactly $n$ points, and every point either lies on $B$ or $B^c$. So
+$$|G(\pi) \cap B^c| = n - |G(\pi) \cap B|.$$
+So the numbers satisfy
+$$N_{B^c, j} = N_{B, n - j}.$$
+Therefore,
+$$N_{B^c}(x) = \sum_{j = 0}^n N_{B^c, j}x^j = \sum_{j = 0}^nN_{B, n - j}x^j = \sum_{k = 0}^nN_{B, k}x^k = x^nN_{B}\left(\frac{1}{x}\right).$$
+
+\end{document}

@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\lb}{\left(}
+\newcommand{\rb}{\right)}
+
+\title{Fundamentals 20}
+\author{Siddharth K}
+\date{March 2025}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Since $f(x_n)$ is Cauchy, it converges to some $y \in \R$ by the completeness of $\R$. So $\lim_{n\to \infty} f(x_n) = y$, and since limits are unique when they exist, $y$ is unique. So defining $F$ as $F(x) = y$ when $x \not \in \Q$ guarantees uniqueness. \\
+
+\textbf{2.} Since $f$ is uniformly convergent, for all $\eps > 0$ there exists $\delta > 0$ such that, for all $x_n, x_m$, if $|x_n - x_m| < \delta$ then $|f(x_n) - f(x_m)| < \eps$. Also, since $x_n$ is Cauchy, given any $\delta$, there exists $N$ such that if $m, n > N$ then $|x_n - x_m| < \delta$. So if $m, n > N$ then $|x_n - x_m| < \delta$, so $|f(x_n) - f(x_m)| < \eps$. \\
+
+\textbf{3.} Let $(x_n)$ be any Cauchy sequence with terms in $(0, 1)$ converging to $0$. Since $f$ is uniformly continuous, $(f(x_n))$ is Cauchy, so $\lim_{n\to\infty} x_n = \lim_{x_n \to 0} f(x_n)$ exists. Since $x_n$ is arbitrary, $\lim_{x\to 0} f(x)$ exists. So we can define $f(0) = \lim_{x\to 0} f(x)$. By a similar argument, we can define $f(1) = \lim_{x\to 1} f(x)$. \\
+
+\textbf{4a.} Let $x \in \R$ and $\eps > 0$. Since $\Q$ is dense in $\R$, there's $y \in \Q \cap \lb \frac{x}{\pi + 1} - \frac{\eps}{\pi + 1}, \frac{x}{\pi + 1} + \frac{\eps}{\pi + 1} \rb$. So $\pi y \in \R \backslash \Q \cap (x - \eps, x + \eps)$. \\
+
+\textbf{4b.} Let $x \in \R$ and $\eps > 0$. Let $k > \log_2 \frac{1}{\eps} - 1$, so that $2^{k + 1}\eps > 1$. We have that
+$$2^k(x + \eps) - 2^k(x -  \eps) = 2^{k + 1}\eps > 1.$$
+Therefore, there is an integer $n$ between $2^k(x - \eps)$ and $2^k(x + \eps)$, so
+$$2^k(x - \eps) < n < 2^k(x + \eps),$$
+$$x - \eps < \frac{n}{2^k} < x + \eps,$$
+as desired. \\
+
+\textbf{4d.} Let $x \in \R$ and $\eps > 0$. Let $m > e^{1/\eps}$ be an integer, so that $\frac{1}{\log m} < \eps$. Then let $n$ be the least integer such that $\frac{\log n}{\log m} \ge x$, so that $\frac{\log (n/e)}{\log m} < x$. Then
+$$x \le \frac{\log n}{\log m} = \frac{\log (n/e) + \log e}{\log m} = \frac{\log (n/e)}{\log m} + \frac{1}{\log m} < x + \eps.$$
+So if we let $y = \frac{\log n}{\log m}$, then $y \in (x - \eps, x + \eps)$, as desired. \\
+
+\textbf{5.} Let $f_n(x) = x^n$. Then $\lim_{n\to \infty} f_n(x) = 0$ if $x \in [0, 1)$, but $\lim_{n\to\infty} f(1) = 1$. So $f$ is not continuous at $1$. \\
+
+\textbf{6.} $$-\sin\lb\sqrt{1 + \sin(e^x)}\rb\frac{1}{2\sqrt{1 + \sin(e^x)}}\cos(e^x)e^x.$$
+
+\textbf{7.} $$\lb\frac{f}{g}\rb'(x) = \lb f(x)\lb\frac{1}{g(x)}\rb\rb' = f'(x)\frac{1}{g(x)} + f(x)\lb\frac{1}{g(x)}\rb'$$
+$$= \frac{f'(x)}{g(x)} + f(x)\lb -\frac{1}{(g(x))^2}\rb g'(x) = \frac{f'(x)g(x) - f(x)g'(x)}{(g(x))^2}.$$
+
+\textbf{8.} We have that
+$$(s_1\cdots s_n)^{1/n} = \lb\prod_{k = 1}^n s_k\rb^{1/n} = \exp\lb\frac{1}{n}\sum_{k = 1}^n \log(s_k)\rb.$$
+By Proposition 20.10,
+$$\lim_{n\to \infty} \frac{1}{n}\sum_{k = 1}^n \log(s_k) = \lim_{n\to \infty} \log s_n = \log L.$$
+So
+$$\lim_{n\to \infty} \exp\lb\frac{1}{n}\sum_{k = 1}^n \log(s_k)\rb = \exp \lb \lim_{n\to\infty}\frac{1}{n}\sum_{k = 1}^n \log(s_k) \rb = \exp(\log L) = L.$$
+So the geometric mean converges to $L$. \\
+
+If we let $s_k = 0$ for any $k$ then the geometric mean converges while the arithmetic mean may not.
+
+
+\end{document}

@@ -1,0 +1,89 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eps}{\varepsilon}
+
+\title{Fundamentals Chapter 13}
+\author{Siddharth K}
+\date{February 2025}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Let $q \in \Q$ be any upper bound of $S = \{1, 1.4, 1.41, \ldots\}$. We wish to find $q' \in \Q$ such that $s \le q' < q$ for all $s \in S$. \\
+
+Since $\sqrt{2}$ is irrational, $q \neq \sqrt{2}$ and $q > s$ for all $s \in S$. From problem 4a, we know that there exists an integer $m > 0$ such that $\frac{1}{m} < q - \sqrt{2}$. Let $q' = \sqrt{2} + \frac{1}{m}$. Since $0 < \frac{1}{m} < q - \sqrt{2}$, we know that
+$$\sqrt{2} < \sqrt{2} + \frac{1}{m} = q' < \sqrt{2} + (q - \sqrt{2}) = q,$$
+or $\sqrt{2} < q' < q$. \\
+
+\textbf{2.} $\N$ and $\Z$ are not fields and $\C$ is not a totally ordered set. \\
+
+\textbf{3a.} We must show the existence of an identity, the existence of an inverse, and associativity. The identity would be the sequence 
+$(e_n)$ where $e_n = 0$ for all $n$, since $(x_n) + (e_n) = (x_n + e_n) = (0)$. The inverse of $(x_n)$ would be $y_n = -x_n$, since $(x_n) + (y_n) = (x_n - x_n) = (0)$. \\
+
+We have that for all $k \in \N$, $(a_k + b_k) + c_k = a_k + (b_k + c_k)$, so $((a_n) + (b_n)) + (c_n) = (a_n) + ((b_n) + (c_n))$, so associativity holds. \\
+
+\textbf{3b.} We need to show that $C/H = C/\sim$. We have that
+$$C/H = \{(a_n) + H : (a_n) \in C\} = \{\{(a_n) + (b_n) : (b_n) \to 0\} : (a_n) \in C\},$$
+$$C/\sim\, = \{\{(b_n) : (a_n) \sim (b_n)\} : (a_n) \in C\} = \{\{(b_n) : (a_n) - (b_n) \to 0\} : (a_n) \in C\}.$$
+So to show that $C/H = C/\sim$, we need to show that
+$$\{(a_n) + (b_n) : (b_n) \to 0\} = \{(b_n) : (a_n) - (b_n) \to 0\}$$
+given any $(a_n) \in C$. We have that $(a_n) - (b_n) \to 0$ iff $(b_n) - (a_n) \to 0$, so we can show that
+$$\{(a_n) + (b_n) : (b_n) \to 0\} = \{(b_n) : (b_n) - (a_n) \to 0\}.$$
+We can define $(c_n) = (b_n) - (a_n)$, so the RHS becomes
+$$\{(a_n) + (c_n) : (c_n) \to 0\},$$
+which is equal to the LHS. \\
+
+\textbf{4a.} We have that $x = [(x_n)]$ for some Cauchy sequence $(x_n)$. Since $(x_n) \not \to 0$, there exists $N$ such that if $n > N$ then $x_n \neq 0$. Define $(y_n)$ so that $y_n = \frac{1}{x_{n + N}}$. Since $(x_{n + N})$ is Cauchy and never touches $0$, $y_n$ is bounded. So choose an integer $m > \sup y_n$. Then $m > \frac{1}{x_{n + N}}$ for all $n \in \N$, so $x_{n + N} > \frac{1}{m}$, and therefore $x > \frac{1}{m}$. \\
+
+\textbf{4b.} Choose $m$ such that $\frac{1}{m} < \frac{y - x}{2}$. Then
+$$x + \frac{1}{m} < x + \frac{y - x}{2} = \frac{x + y}{2},$$
+$$y - \frac{1}{m} > y - \frac{y - x}{2} = y + \frac{x - y}{2} = \frac{x + y}{2}.$$
+So $x + \frac{1}{m} < \frac{x + y}{2} < y - \frac{1}{m}$. \\
+
+\textbf{4c.} Assume $x = 0$. Then clearly $|x| < \eps$ for all rational $\eps > 0$. \\
+
+Now assume $x < \eps$ for all rational $\eps > 0$, and that $x \neq 0$. Choose $\eps = \frac{1}{m} < |x|$ for some positive integer $m$. Then $|x| > \eps$, which is a contradiction, so $x = 0$. \\
+
+\textbf{5a.} The greatest lower bound of a set $S$ is the real number $L$ such that $L' \le L \le s$ for all $s \in S$ and all lower bounds $L'$ of $S$. \\
+
+\textbf{5b.} Since $b$ is the least upper bound of $S$, we have that $L \ge b \ge s$ for all $s \in S$ and upper bounds $L$ of $S$. This means $-L \le -b \le -s$ as well. We know that $-s \in -S$, so $-L$ is always a lower bound of $-S$. By the definition of greatest lower bound, $-b$ is the greatest lower bound of $-S$. \\
+
+\textbf{5c.} Take any subset $S$ of $C/\sim$. We know that $-S$ has a least upper bound, so $S$ has a greatest lower bound. \\
+
+\textbf{6.} We know that $a_1$ is not an upper bound for $S$. Also, since $a_{n + 1}$ is defined as $a_n$ if $c_1$ is an upper bound and $c_1$ otherwise, if $a_n$ is not an upper bound for $S$ then $a_{n + 1}$ is not. By induction, none of the terms of $(a_n)$ are upper bounds of $S$. So if $v$ is an upper bound then $a_n < v$ for all $n$, so $[(a_n)] \le v$. \\
+
+\textbf{7a.} Take any $m, n$ such that $m > n$. We have that $S_m \subseteq S_n$ so any element of $S_m$ is in $S_n$. This means the smallest element of $S_m$ is also in $S_n$, so $\inf S_m \ge \inf S_n$, so $(\inf S_m)$ is monotone increasing. \\
+
+Similarly, take $m, n$ such that $m > n$. We have that $S_m \subseteq S_n$, so the largest element of $S_m$ is also in $S_n$, meaning $\sup S_m \le \sup S_n$. Therefore, $(\sup S_m)$ is monotone decreasing. \\
+
+\textbf{7b.} We say that $x_n \to \infty$ if for all integers $M$ there exists $N$ such that $x_n > M$ whenever $n > N$ and $x_n \to -\infty$ if for all integers $M$ there exists $N$ such that $x_n < M$ whenever $n > N$. \\
+
+\textbf{7c.} If $\liminf x_n$ or $\limsup x_n$ is bounded, then since they are monotone, they converge to a real number. If they are not bounded, then they diverge to $\infty$ or $-\infty$. \\
+
+\textbf{7d.} Assume $\lim x_n$ exists and call it $L$. Given $\eps > 0$, there is $N$ such that for all $n > N$, $|x_n - L| < \eps$. So for all $m \ge N$, every $x_n$ with $n \ge m$ is within $\eps$ of $L$. So
+$$\inf\{x_n : n \ge m\} > L - \eps \quad \text{and} \quad \sup\{x_n : 
+ n \ge m\} < L + \eps.$$
+Taking $m \to \infty$, we see that
+$$\lim_{m \to \infty} \inf S_m \ge L - \eps, \quad \lim_{m \to \infty} \sup S_m \le L + \eps.$$
+Therefore, both limits are exactly $L$. \\
+
+Now, assume $\liminf x_n = \limsup x_n = L$. We know that for all $\eps > 0$ there is $N_1$ such that for all $m > N_1$, $\inf S_m > L - \eps$ and there is $N_2$ such that for all $m > N$, $\sup S_m < L + \eps$. So, if $n > N$ where $N = \max(N_1, N_2)$, we have that
+$$L - \eps < \inf S_m \le x_n \le \sup S_m < L + \eps,$$
+so $|x_n - L| < \eps$. Therefore, $x_n \to L$. \\
+
+\textbf{8.} $x_n = n(-1)^n$. \\
+
+\textbf{9.} Since $\inf S_m = -1$ and $\sup S_m = 1$ regardless of how large $m$ is, $\liminf x_n = -1$ and $\liminf x_n = 1$, so $x_n = (1, -1, 1, ...)$ doesn't converge. \\
+
+\textbf{10.} Define $x^y$ as $[(c_n)]$ where $c_n = a_n^{b_n}$ for all $n$.
+
+\end{document}

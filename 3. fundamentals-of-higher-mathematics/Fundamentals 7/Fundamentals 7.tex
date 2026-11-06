@@ -1,0 +1,326 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bO}{\mathbf{0}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+
+\title{Fundamentals Chapter 7}
+\author{Siddharth K}
+\date{November 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1a.} $$\begin{bmatrix}
+    0 & -1 \\
+    1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+    0 & -1 \\
+    1 & 0
+\end{bmatrix} = 
+\begin{bmatrix}
+    -1 & 0 \\
+    0 & -1
+\end{bmatrix}$$
+
+\textbf{1b.} $$\begin{bmatrix}
+    2 & 3 & 1 \\
+    0 & 4 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    2 & 2 \\
+    1 & 1 \\
+    1 & 0
+\end{bmatrix} = 
+\begin{bmatrix}
+    8 & 7 \\
+    5 & 4
+\end{bmatrix}$$
+
+\textbf{1c.} $$\begin{bmatrix}
+    1 & 2 & 0 \\
+    3 & 2 & 1 \\
+    2 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    1 & 3 & 2 \\
+    2 & 2 & 1 \\
+    0 & 1 & 1
+\end{bmatrix} = 
+\begin{bmatrix}
+    5 & 7 & 4 \\
+    7 & 14 & 9 \\
+    4 & 9 & 6
+\end{bmatrix}$$
+
+\textbf{1d.} First, we see that:
+$$\begin{bmatrix}
+    1 & 2 & 0 \\
+    3 & 2 & 1 \\
+    2 & 1 & 1
+\end{bmatrix}\left(
+\begin{bmatrix}
+    1 & 3 & 2 \\
+    2 & 2 & 1 \\
+    0 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    x \\
+    y \\
+    z
+\end{bmatrix}\right)$$
+$$= \begin{bmatrix}
+    1 & 2 & 0 \\
+    3 & 2 & 1 \\
+    2 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    x + 3y + 2z \\
+    2x + 2y + z \\
+    y + z
+\end{bmatrix}
+= \begin{bmatrix}
+    5x + 7y + 4z \\
+    7x + 14y + 9z \\
+    4x + 9y + 6z
+\end{bmatrix}.$$
+Then:
+$$\left(\begin{bmatrix}
+    1 & 2 & 0 \\
+    3 & 2 & 1 \\
+    2 & 1 & 1
+\end{bmatrix}
+\begin{bmatrix}
+    1 & 3 & 2 \\
+    2 & 2 & 1 \\
+    0 & 1 & 1
+\end{bmatrix}\right)
+\begin{bmatrix}
+    x \\
+    y \\
+    z
+\end{bmatrix}
+= \begin{bmatrix}
+    5 & 7 & 4 \\
+    7 & 14 & 9 \\
+    4 & 9 & 6
+\end{bmatrix}
+\begin{bmatrix}
+    x \\
+    y \\
+    z
+\end{bmatrix}$$
+$$= \begin{bmatrix}
+    5x + 7y + 4z \\
+    7x + 14y + 9z \\
+    4x + 9y + 6z
+\end{bmatrix},$$
+which matches the first one. \\
+
+\textbf{2.} The transformation represented by $R_\theta$ is a rotation counterclockwise by $\theta$ radians. This is because carrying out the multiplication
+$$\begin{bmatrix}
+    \cos\theta & -\sin\theta \\
+    \sin\theta & \cos\theta
+\end{bmatrix}
+\begin{bmatrix}
+    x \\
+    y
+\end{bmatrix}$$
+gives us
+$$\begin{bmatrix}
+    x\cos\theta - y\sin\theta \\
+    x\sin\theta + y\cos\theta
+\end{bmatrix}$$
+which is the formula for rotation of the point $(x, y)$ about the origin by $\theta$ radians. \\
+
+\textbf{3a.} We can uniquely write $\bv = a_1\bv_1 + \cdots + a_n\bv_n$. So thinking of $\bv$ as $(a_1, \ldots, a_n)$ means uniquely representing $\bv$ by its coordinates in $\F^n$ with respect to the given basis. \\
+
+\textbf{3b.} Assume that $(a_1, \ldots, a_n)_V = (b_1, \ldots, b_n)_W$ for all $a_i, b_i \in \F$. Then any vector $\bv \in \F^n$ has the same coordinates whether it's represented in the basis $B_V$ or $B_U$. Now, let $(a_1, \ldots, a_n) = (b_1, \ldots b_n) = (0, \ldots, 0, 1, 0 \ldots, 0)$ where $a_i = b_i = 1$. By the assumption, we have that $\bv_i = \bw_i$. Doing this for all $i$ gives us $\bv_i = \bw_i$ for all $i$. \\
+
+Now, assume that $\bv_i = \bw_i$. There is only one way to write a vector $\bv$ in terms of $\bv_i$, so $(a_1, \ldots, a_n)_V = (b_1, \ldots, b_n)_W$. \\
+
+\textbf{4.} Since $T(\bu_i) = \bw_i$, given any $\bw \in W$, we have that
+$$\bw = \sum a_i\bw_i = \sum a_iT(\bu_i) = T\left(\sum a_i\bu_i\right) = T(\bu)$$
+for some $\bu \in U$. So $T$ is invertible. \\
+
+\textbf{5a.} By the definition of matrix multiplication, $C = AB$ is defined as
+$$c_{ij} = \sum_{l = 1}^n a_{il}b_{lj}.$$
+Since $i$ and $j$ range from $1$ to $n$, there are $n$ values for $i$ and $j$ in $c_{ij}$, so $C$ is an $n\times n$ matrix. \\
+
+\textbf{5b.} We have that the entry at $(i, j)$ in $AI_n$ is the total sum of each entry in
+$\begin{bmatrix}
+    a_{i1} & \ldots & a_{in}
+\end{bmatrix}$
+multiplied by each entry in
+$\begin{bmatrix}
+    0 & \ldots & 1 & \ldots & 0
+\end{bmatrix}$ (where the $1$ is at position $j$), which is just $a_{ij}$. So $A = AI_n$. \\
+
+Also, we have that the entry at $(i, j)$ in $I_nA$ is the total sum of each entry in
+$\begin{bmatrix}
+    0 & \ldots & 1 & \ldots & 0
+\end{bmatrix}$
+multiplied by each entry in
+$\begin{bmatrix}
+    a_{1j} & \ldots & a_{nj}
+\end{bmatrix}$ (where the $1$ is at position $i$), which is just $a_{ij}$. So $A = I_nA$. \\
+
+\textbf{5c.} First, consider the product $A(BC)$. We have that $$A(BC)_{ij} = \sum_{k = 1}^p a_{ik}(BC)_{kj} = \sum_{k = 1}^p a_{ik}\left(\sum_{l = 1}^n b_{kl}c_{lj}\right)$$
+$$= \sum_{l = 1}^n\left(\sum_{k = 1}^p a_{ik}b_{kl})c_{lj}\right).$$
+Now, consider the product $(AB)C$. We have that
+$$(AB)C_{ij} = \sum_{l = 1}^n\left(\sum_{k = 1}^p a_{ik}b_{kl})c_{lj}\right),$$
+which matches the expression for $A(BC)_{ij}$. Since this is true for all $i, j$, we have that $A(BC) = (AB)C$.\\
+
+\textbf{5d.} Let $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$ and $B = \begin{bmatrix} e & f \\ g & h \end{bmatrix}$. The condition is that $(a, b)$ is not a scalar multiple of $(c, d)$. This is because we need the system of equations created by $AB = I_2$ to have a unique solution, which is only true when $(a, b)$ is not a scalar multiple of $(c, d)$. \\
+
+\textbf{5e.} Any matrix $A$ that isn't a scalar multiple of $I$ doesn't guarantee that $AB = BA$ for all $2\times 2$ matrices $B$. To see this, we can consider a few cases for $B$. Let $B$ equal
+$\begin{bmatrix}
+    1 & 0 \\
+    0 & 0
+\end{bmatrix}.$
+Then
+$$AB = \begin{bmatrix}
+    a & b \\
+    c & d
+\end{bmatrix}
+\begin{bmatrix}
+    1 & 0 \\
+    0 & 0
+\end{bmatrix}
+= \begin{bmatrix}
+    a & 0 \\
+    c & 0
+\end{bmatrix},$$
+and 
+$$BA = \begin{bmatrix}
+    1 & 0 \\
+    0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+    a & b \\
+    c & d
+\end{bmatrix}
+= \begin{bmatrix}
+    a & b \\
+    0 & 0
+\end{bmatrix},$$
+so we have that $b = c = 0$. This tells us that $A$ is of the form
+$\begin{bmatrix}
+    a & 0 \\
+    0 & d
+\end{bmatrix}.$
+Now, letting $B$ equal
+$\begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+\end{bmatrix}$
+gives us
+$$AB = \begin{bmatrix}
+    a & 0 \\
+    0 & d
+\end{bmatrix}
+\begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+\end{bmatrix}
+= \begin{bmatrix}
+    0 & a \\
+    0 & 0
+\end{bmatrix},$$
+and
+$$BA = \begin{bmatrix}
+    0 & 1 \\
+    0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+    a & 0 \\
+    0 & d
+\end{bmatrix}
+= \begin{bmatrix}
+    0 & d \\
+    0 & 0
+\end{bmatrix},$$
+so $a = d$. This tells us that $A$ is of the form
+$\begin{bmatrix}
+    a & 0 \\
+    0 & a
+\end{bmatrix}.$
+Furthermore, multiplying this by any $2\times 2$ matrix $B$ reveals that $AB = BA$. \\
+
+\textbf{6.} The system of equations can be written as
+$$A\bv = \begin{bmatrix}
+    3 & -5 & 2 \\
+    -1 & 2 & 2 \\
+    2 & -1 & -1
+\end{bmatrix}
+\begin{bmatrix}
+    x \\
+    y \\
+    z
+\end{bmatrix}
+= \begin{bmatrix}
+    1 \\
+    -1 \\
+    0
+\end{bmatrix}.$$
+If you know the inverse of $A$, you could multiply both sides by $A^{-1}$, and the result would be
+$$\begin{bmatrix}
+    x \\
+    y \\
+    z
+\end{bmatrix}
+= \begin{bmatrix}
+    3 & -5 & 2 \\
+    -1 & 2 & 2 \\
+    2 & -1 & -1
+\end{bmatrix}^{-1}
+\begin{bmatrix}
+    1 \\
+    -1 \\
+    0
+\end{bmatrix}.$$
+
+\textbf{7.} Lets say $U = \{\bu_i\}, W = \{\bw_i\}$ are bases for $V$. The matrix $P_U^W$ maps each $\bu_i$ to $\bw_i$, so its inverse maps each $\bw_i$ to $\bu_i$. But this is exactly $P_W^U$, so $(P_U^W)^{-1}$ and $P_W^U$ map each basis vector in $W$ to the same one in $U$, which means they are the same transformation. \\
+
+\textbf{8.} Reflexivity: $A = IAI$ so $A\sim A$. \\
+
+Symmetry: $A \sim B$ implies that $A = PBP^{-1}$ for some matrix $P$. Multiplying both sides on the left by $P^{-1}$ and on the right by $P$ gives us $B = P^{-1}AP$, so $B \sim A$. \\
+
+Transitivity: $A \sim B, B\sim C$ implies that $A = PBP^{-1}$ and $B = QCQ^{-1}$ for some matrices $P, Q$. Substituting the expression for $B$ into $A$, we get $A = PQCQ^{-1}P^{-1}$. Since $(PQ)^{-1} = Q^{-1}P^{-1}$, we have that $A \sim C$. \\
+
+\textbf{9.} Let $I_n = PAP^{-1}$. Multiplying both sides by $P^{-1}$ on the left and $P$ on the right gives us $A = P^{-1}P = I_n$. So $A = I_n$ is the only solution to $I_n = PAP^{-1}$. \\
+
+\textbf{10.} We have that
+$$\begin{bmatrix}
+    0 & 1/2 \\
+    2 & 0
+\end{bmatrix}^2
+= \begin{bmatrix}
+    1 & 0 \\
+    0 & 1
+\end{bmatrix} = I,$$
+so $A^{10} = I$. \\
+
+\textbf{11.} Consider $A\bv = \bw$ where the $k$'th column of $A$ is all zeroes. Expanding the product shows that the result $\bw$ is calculated in terms of every entry of $\bv$ except $v_k$. Which means, if we wanted to map $\bw$ to some unique $\bv$, we couldn't because $v_k$ can vary freely but $A\bv$ will still equal $\bw$. So $A$ is not invertible. \\
+
+Now, consider $A\bv = \bw$ where the $k$'th row of $A$ is all zeroes. Since the $k$'th entry of $\bw$ is the dot product of the $k$'th row and $\bv$, it will always be $0$. So any vector in $W$ with a $k$'th entry other than $0$ isn't reached by the linear transformation, and $A$ is not invertible. \\
+
+\textbf{12.} If $\ker(A)$ is nontrivial then $A$ is not invertible. This is because $0$ can then be reverse-mapped to more than one vector, which is a contradiction. \\
+
+Let's say $\bv_i$ is the basis that is being mapped to $\bw_i$ (the columns of $A$) by the linear transformation, which we can call $T$. Since $\{\bw_i\}$ is not linearly independent, there exist nonzero $a_i$ such that
+$$\sum a_i\bw_i = 0.$$
+Since $\bw_i = T(\bv_i)$,
+$$\sum a_i T(\bv_i) = T\left(\sum a_i \bv_i\right) = 0.$$
+Since $a_i \neq 0$ and $\bv_i$ are linearly independent, $\sum a_i \bv_i \neq 0$. So $T(0) = 0$ and $T\left(\sum a_i \bv_i\right) = 0$, which means the kernel is nontrivial and $A$ is not invertible.
+
+\end{document}

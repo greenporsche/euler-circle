@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% <added stuff>
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\power}{\mathcal{P}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\mcO}{\mathcal{O}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nullset}{\varnothing}
+\newcommand{\lb}{\left(}
+\newcommand{\rb}{\right)}
+\newcommand{\minus}{\backslash}
+% </added stuff>
+
+\title{Fundamentals 25}
+\author{Siddharth K}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 25.1}
+Since $\bar{A}$ is the intersection of all closed sets containing $A$ and $C$ is a closed set containing $A$, $\bar{A} \subseteq C$. \\
+
+Since $A^\circ$ is the union of all open subsets of $A$ and $O$ is an open subset of $A$, $O \subseteq A^\circ$.
+
+\subsection*{Problem 25.2}
+Since $\bar{A}$ is closed, it's the smallest closed set containing itself, so $\overline{(\bar{A})} = \bar{A}$. Since $A^\circ$ is open, it's the largest open set contained in itself, so $(A^\circ)^\circ = A^\circ$.
+
+\subsection*{Problem 25.3}
+Since $A$ is closed in $Y$, $Y\minus A$ is open. Also, we have that $X\minus A = (X \minus Y) \cup (Y \minus A)$. Since $Y$ is closed, $X \minus Y$ is open, so $X \minus A$ is a union of open sets, which is open, so $A$ is closed in $X$.
+
+\subsection*{Problem 25.5}
+Assume $f(X)$ is not connected in $Y$, then there are open sets $A, B \subseteq f(X)$ with $A \cup B = f(X)$. Now consider $f^{-1}(A \cap B)$. We know that
+$$f^{-1}(A) \cap f^{-1}(B) \subseteq f^{-1}(A\cap B) = \nullset.$$
+Since $f$ is continuous, $f^{-1}(A)$, $f^{-1}(B)$, and $f^{-1}(A \cap B)$ are open. Also,
+$$f^{-1}(A) \cup f^{-1}(B) \supseteq f^{-1}(A \cup B) = X.$$
+So we have split $X$ into two disjoint open sets, so it is disconnected. This is a contradiction, so $f(X)$ must be connected in $Y$.
+
+\subsection*{Problem 25.7}
+First assume $S \subseteq \R^2$ is horizontal-vertical path connected. So given any $a, b \in S$, there is a horizontal-vertical path $f: [0, 1] \to S$ connecting $a$ to $b$. Since it is made of piecewise continuous components, it is a path as well, so $S$ is path connected. \\
+
+Now assume $S \subseteq \R^2$ is path connected and open. Let $a, b \in S$ and let $f$ be a path connecting them. We construct the horizontal-vertical path $g$ as such:
+
+\begin{enumerate}
+    \item Let $x_0 = a$.
+    \item For all $i \ge 0$, let
+    $$\eps_i = \sup_\eps \{\eps > 0 : B_\eps(x_i) \subseteq S\}$$
+    (the maximal radius for an open ball centered at $x_i$ contained in $S$).
+    \item Let
+    $$x_{i + 1} \in (f([0, 1]) \cap \partial B_{\eps_i}(x_i)) \minus \{y \in B_{\eps_j}(x_j), j \le i\}$$
+    (the intersection of the path $f$ and the boundary of the ball $B_{\eps_i}(x_i)$ excluding points that were in any previous ball).
+    \item If $b \in B_{\eps_i}(x_i)$, let $x_{i + 1} = b$ instead and stop. Let $n = i + 1$ at this point.
+    \item For each $x_i = (x_i^{(0)}, x_i^{(1)})$, let
+    $$g\lb\frac{i}{n}\rb = x_i,\quad \text{and } g\lb\frac{i + 0.5}{n}\rb = (x_{i + 1}^{(0)}, x_i^{(1)})$$
+    (except when $i = n$, don't define $g\lb\frac{i + 0.5}{n}\rb$).
+    \item For all $x \in [0, 1)$, define
+    $$g(x) = (x - y)g(ny) + (y - x)g\lb\frac{2ny+1}{2}\rb$$
+    where $y = \frac{1}{2n}\lfloor 2nx\rfloor$ (we have that $g(1)$ is defined as $b$ already). This connects horizontal or vertical line segments between the points already defined.
+\end{enumerate}
+
+So we have found a continuous function $g: [0, 1] \to S$ which is composed of horizontal and vertical segments contained in $S$.
+
+\subsection*{Problem 25.8}
+Let $S = \R^4 \minus \{(x, y, 0, 0): x, y \in \R\}$ and $a, b \in S$ where $a = (a_1, a_2, a_3, a_4)$ and $b = (b_1, b_2, b_3, b_4)$. Define $f: [0, 1] \to S$ as follows:
+$$f(0) = a, \quad f(1) = b,$$
+$$f(0.5) = \begin{cases}
+    \frac{1}{2}(a + b) & \text{if } a_3 + b_3, a_4 + b_4 \neq 0,\\
+    (a_1, a_2, a_3 + 1, a_4) & \text{if } a_3 + b_3 = 0, a_4 + b_4 \neq 0,\\
+    (a_1, a_2, a_3, a_4 + 1) & \text{if } a_3 + b_3 \neq 0, a_4 + b_4 = 0,\\
+    (a_1, a_2, a_3 + 1, a_4 + 1) & \text{if } a_3 + b_3, a_4 + b_4 = 0.\\
+\end{cases}$$
+$$f(x) = 2xf(n) + (1 - 2x)f(n + 0.5),\quad \text{where } n \in \{0, 0.5\} \text{ and } x \in (n, n + 0.5).$$
+
+This function creates either a line segment between $a$ and $b$ or two connected line segments. So $f$ is continuous and by construction is contained in $S$, so $S$ is path connected.
+
+\subsection*{Problem 25.10}
+There is a bijection $f$ from $S^{n - 1}$ to an $(n - 1)$-dimensional hypercube, since we can convert any point in rectangular coordinates in $S^{n - 1}$ to hyperspherical coordinates (generalization of polar/spherical coordinates) and drop the radius term, leaving us with $n - 1$ elements in $[0, 2\pi)$, which is an $(n - 1)$-dimensional hypercube. \\
+
+Now, let $a, b \in S^{n - 1}$. Then define $g:[0, 1] \to S^{n - 1}$ as
+$$g(x) = f^{-1}(xf(a) + (1 - x)f(b)).$$
+So $S^{n - 1}$ is path connected if $f^{-1}$ is continuous. \\
+
+To show this, let $x = (x_1, \ldots, x_n) \in S^{n - 1}$ be equal to $f^{-1}(\theta)$ where $\theta = (\theta_1, \ldots, \theta_{n - 1}) \in [0, 2\pi)^{n - 1}$. By the formulas for hyperspherical coordinates, each $x_i$ is written as a product of sines and cosines of elements in $\theta$, and since sines and cosines are continuous, $f^{-1}$ is continuous.
+
+\end{document}

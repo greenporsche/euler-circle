@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Chapter 20 Problem Set}
+\author{Siddharth K}
+\date{March 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Let $S$ be the set of all prime factors of $N$. Finding a factorization of $N$ is the same as splitting $S$ into disjoint subsets. The number of ways to do this for $k$ subsets is $n\brace k$, so the total is $\sum_{k = 1}^n {n\brace k}$.
+\newline
+
+\textbf{2.} Given a set $[2n]$, you can arrange $n$ of those elements into $n$ different blocks. There are $n!$ ways of doing this. But something counted by ${{2n}\brace n}$ includes that and the other $n$ elements, so $n! < {{2n}\brace n}$.
+\newline
+
+The expression ${{2n}\brace n}$ counts partitions of $[2n]$ into $n$ subsets. If we rearrange those subsets and the elements in those subsets, we get something counted by $(2n)!$. Therefore, ${{2n}\brace n} < (2n)!$.
+\newline
+
+\textbf{3.} We can use complimentary counting for this. If we place $1$ in a block of size $1$, we just need to partition the rest. So we have to find the number of set partitions of $[n - 1]$, which is $\sum_{k = 1}^{n - 1} {{n - 1}\brace k}$. Subtracting that from the total number of partitions of $[n]$, we get $\sum_{k = 1}^{n} {n\brace k} - \sum_{k = 1}^{n - 1} {{n - 1}\brace k}$.
+\newline
+
+\textbf{4.} If $n$ is odd then the answer is $n\brace 2$ since every partition is valid.
+\newline
+
+If $n$ is even, the number of ways to do this so that the parts are of the same size is ${n\choose {n/2}}$ because we need to choose $\frac{n}{2}$ of the elements to be in one subset. So the answer would be ${n\brace 2} - {n\choose {n/2}}$.
+\newline
+
+\textbf{5.} We can count the number of ways to have $1$ and $2$ in different cycles and then subtract it from $\sum_{k = 1}^n {n\brack k}$. Let's consider a case where there are $a$ elements in the cycle with $1$ and $b$ different elements in the cycle with $2$. We can choose what the other $a - 1$ elements are in ${n\choose {a - 1}}$ ways and order them all in $(a - 1)!$ ways. That gives us $\frac{n!}{a!}$. From there, we can choose the $b - 1$ other elements in the cycle with $2$ in ${{n - a}\choose {b - 1}}$ ways and order them in $(b - 1)!$ ways. After that, the number of ways to make cycles with the remaining numbers is $\sum_{k = 1}^{n - a - b} {{n - a - b}\brack k}$. Summing over $a$ and $b$ and putting this all together, we get a final answer of $$\sum_{k = 1}^n {n\brack k} - \sum_{a = 1}^{n - 1}\sum_{b = 1}^{n - a - 1}\frac{n!(n - a)!}{a!b!}\sum_{k = 1}^{n - a - b}{{n - a - b}\brack k}.$$
+
+We can use a similar approach to find how many permutations have $1, 2$, and $3$ in the same cycle. Let there be $a$, $b$, and $c$ elements in the cycles with $1$, $2$, and $3$ respectively. As before, the number of ways to form the cycle with $1$ is $\frac{n!}{a!}$, the cycle with $2$ is $\frac{(n - a)!}{b!}$, and the cycle with $3$ is $\frac{(n - a - b)!}{c!}$. The number of ways to make cycles with the remaining numbers is $\sum_{k = 1}^{n - a - b - c}{{n - a - b - c}\brack k}$. Summing over $a$, $b$, and $c$ and putting it all together, we get $$\sum_{k = 1}^n{n\brack k} - \sum_{a = 1}^{n - 1}\sum_{b = 1}^{n - a - 1}\sum_{c = 1}^{n - a - b - 1}\frac{n!(n - a)!(n - a - b)!}{a!b!c!}\sum_{k = 1}^{n - a - b - c}{{n - a - b - c}\brack k}.$$
+
+I couldn't figure out how to do the last part of this problem.
+\newline
+
+\textbf{8.} The LHS is just the number of ways to split $[n + 1]$ into $m + 1$ subsets. The RHS represents the number of ways to choose $k$ elements out of $n$, split those elements into $m$ subsets, and sum across all $k$ from $0$ to $n$. For one part of the sum, we are taking $k$ of the $n$ elements and making $m$ subsets from it. The remaining elements can then form their own subset, leaving us with $m + 1$ total. To account for the case where $k = n$ and that subset is empty, we can add $n + 1$ to it. Therefore, the RHS gives us the number of ways to split $n + 1$ numbers into $m + 1$ subsets, which is equivalent to the LHS.
+
+\end{document}

@@ -1,0 +1,248 @@
+\documentclass[12pt]{amsart}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{construction}{Construction}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+\newtheorem{note}{Note}[section]
+
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\EE}{\mathbb{E}}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+\title{Dobinski's Formula}
+\author{Siddharth Krishna}
+
+\begin{document}
+
+\begin{abstract}
+Dobinski's formula expresses the Bell numbers, which count the number of partitions of a finite set, as an infinite series involving factorials. In this paper we prove Dobinski's formula using exponential generating functions and show how it can be interpreted probabilistically. In particular, we show that the Bell numbers arise as the moments of a Poisson random variable. Finally, we discuss how this interpretation illustrates a general computational principle used in modern statistics and machine learning: complicated infinite sums can often be expressed as expectations and approximated using random sampling.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+Counting the number of ways to partition a set is a fundamental problem in combinatorics. The number of partitions of an $n$-element set is given by the \emph{Bell number} $B_n$. Although Bell numbers arise from a simple combinatorial definition, their behavior is surprisingly rich and they appear in many areas of mathematics, including combinatorics, probability, and analysis.
+
+One particularly striking result about Bell numbers is \emph{Dobinski's formula}, discovered by G. Dobinski in 1877. This identity expresses $B_n$ as an infinite series:
+\[
+B_n = \frac{1}{e}\sum_{k=0}^{\infty}\frac{k^n}{k!}.
+\]
+At first glance, this formula is unexpected. The left-hand side counts discrete combinatorial objects, while the right-hand side involves an analytic expression containing factorials and the constant $e$. Nevertheless, the two quantities are exactly equal.
+
+Dobinski's formula reveals a deep connection between combinatorics and probability. In particular, the right-hand side can be interpreted as the $n$-th moment of a Poisson random variable with parameter $1$. Thus the Bell numbers are naturally the expectations of powers of a random variable. This provides a probabilistic perspective on a purely combinatorial quantity.
+
+In this paper we first introduce the necessary background on Bell numbers, the Poisson distribution, moments of random variables, and exponential generating functions. We then prove Dobinski's formula using the exponential generating function for the Bell numbers. Finally, we explain how the probabilistic interpretation of the formula leads to a useful computational viewpoint: infinite series can sometimes be written as expectations and approximated using random sampling. This is an important concept in modern statistical and machine learning methods.
+
+\section{Preliminaries}
+
+\subsection{Bell Numbers}
+A central object in this paper is the sequence of Bell numbers.
+
+\begin{definition}
+The \emph{Bell number} $B_n$ is defined as the number of ways to partition a set of $n$ elements into nonempty subsets.
+\end{definition}
+
+For example, if we consider the set $\{1, 2, 3\}$, its possible partitions are
+$$\{\{1, 2, 3\}\}, \quad \{\{1, 2\}, \{3\}\}, \quad \{\{1, 3\}, \{2\}\}, \quad \{\{2, 3\}, \{1\}\}, \quad \{\{1\}, \{2\}, \{3\}\},$$
+so $B_3 = 5$. The first few Bell numbers are
+$$B_0 = 1, \quad B_1 = 1, \quad B_2 = 2, \quad B_3 = 5, \quad B_4 = 15, \quad B_5 = 52.$$
+Bell numbers grow very rapidly and appear throughout combinatorics.
+
+\begin{definition}
+The Stirling number of the second kind $n \brace j$ is the number of ways to partition an $n$-element set into exactly $j$ nonempty subsets.
+\end{definition}
+
+Since the number of ways to partition a set of $n$ elements into nonempty subsets is the sum of the number of ways to partition it into exactly $j$ nonempty subsets, we have
+$$B_n = \sum_{j = 0}^n {n \brace j}.$$
+
+\subsection{The Poisson Distribution}
+We will also use a probability distribution that arises naturally in many contexts.
+
+\begin{definition}
+A discrete random variable $X$ has a \emph{Poisson distribution with parameter} $\lambda > 0$ if
+$$\PP(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}$$
+for integers $k \ge 0$.
+\end{definition}
+
+The probabilities sum to $1$ because
+$$\sum_{k = 0}^\infty \frac{e^{-\lambda}\lambda^k}{k!} = e^{-\lambda}\sum_{k = 0}^\infty \frac{\lambda^k}{k!} = e^{-\lambda}e^\lambda = 1.$$
+
+The Poisson distribution frequently models the number of events occurring in a fixed interval when those events occur independently and at a constant average rate.
+
+\subsection{Moments of Random Variables}
+
+\begin{definition}
+If $X$ is a nonnegative integer-valued random variable, its $n$\emph{-th moment} is defined as
+$$\EE[X^n] = \sum_{k = 0}^\infty k^n\PP(X = k).$$
+\end{definition}
+
+In the case where $X$ follows a Poisson distribution with parameter $1$, we obtain
+$$\EE[X^n] = \sum_{k = 0}^\infty k^n \frac{e^{-1}}{k!}.$$
+
+\subsection{Exponential Generating Functions}
+
+\begin{definition}
+Given a sequence $a_0, a_1, \ldots$, its \emph{exponential generating function (EGF)} is the power series
+$$A(x) = \sum_{n = 0}^\infty a_n \frac{x^n}{n!}.$$
+\end{definition}
+
+Exponential generating functions are particularly useful for counting labeled combinatorial objects, since the factorial in the denominator naturally compensates for the number of ways to label elements.
+
+\section{Dobinski's Formula}
+Now, we introduce the main result of the paper, which expresses the Bell numbers as an infinite series.
+
+\begin{theorem}[Dobinski's Formula]
+For every nonnegative integer $n$,
+$$B_n = \frac{1}{e}\sum_{k = 0}^\infty \frac{k^n}{k!}.$$
+\end{theorem}
+
+In other words, the number of partitions of an $n$-element set can be computed by evaluating the infinite series above.
+
+Although the right-hand side of Dobinski's formula is an infinite series involving real numbers, the result is always an integer.
+
+This identity provides a remarkable connection between combinatorics, infinite series, and probability.
+
+\subsection{Convergence of the series}
+
+Before proving the formula, we must verify that the series
+$$\sum_{k = 0}^\infty \frac{k^n}{k!}$$
+actually converges, which we can do using the ratio test.
+
+Let
+$$a_k = \frac{k^n}{k!}.$$
+Then
+$$\frac{a_{k + 1}}{a_k} = \frac{(k + 1)^n}{(k + 1)!} \cdot \frac{k!}{k^n} = \frac{(k + 1)^n}{(k + 1)k^n} = \frac{(1 + \frac{1}{k})^n}{k + 1}.$$
+As $k \to \infty$,
+$$\frac{a_{k + 1}}{a_k} \to 0.$$
+Since the limit is $< 1$, the series converges. So the infinite sum in Dobinski's formula is well-defined.
+
+\subsection{The Generating Function for Bell Numbers}
+To prove Dobinski's formula, we use a fundamental result in combinatorics, which states that the exponential generating function for the Bell numbers is
+$$\sum_{n = 0}^\infty B_n \frac{x^n}{n!} = e^{e^x - 1}$$
+(see \cite{Stanley}).
+
+We briefly explain why this formula holds.
+
+When forming partitions of a labeled set, we first choose blocks (subsets) of elements. Each block must contain at least one element. The exponential generating function for a nonempty set is
+$$e^x - 1.$$
+Since a partition is simply a collection of such blocks, and the blocks themselves are unlabeled but contain labeled elements, the exponential formula from combinatorics tells us that the generating function becomes
+$$\exp(e^x - 1).$$
+Thus
+$$\sum_{n = 0}^\infty B_n \frac{x^n}{n!} = e^{e^x - 1}.$$
+
+\subsection{Proof of Dobinski's Formula}
+
+\begin{proof}
+Consider the formula
+$$\sum_{n = 0}^\infty B_n\frac{x^n}{n!} = e^{e^x - 1}.$$
+We expand the right-hand side. First write
+$$e^{e^x - 1} = e^{-1}e^{e^x}.$$
+Now expand $e^{e^x}$ using the power series for the exponential function:
+$$e^{e^x} = \sum_{k = 0}^\infty \frac{(e^x)^k}{k!}.$$
+Thus
+$$e^{e^x - 1} = e^{-1}\sum_{k = 0}^\infty \frac{(e^x)^k}{k!} = e^{-1}\sum_{k = 0}^\infty \frac{e^{kx}}{k!}.$$
+Now we expand each exponential $e^{kx}$:
+\begin{align*}
+e^{kx} &= \sum_{n = 0}^\infty \frac{(kx)^n}{n!},\\
+e^{e^x - 1} &= e^{-1}\sum_{k = 0}^\infty \frac{1}{k!}\sum_{n = 0}^\infty \frac{k^nx^n}{n!}\\
+&= \sum_{n = 0}^\infty \left(\frac{1}{e} \sum_{k = 0}^\infty \frac{k^n}{k!}\right) \frac{x^n}{n!}
+\end{align*}
+(swapping sums is justified here because $\sum_{k, n}\frac{k^nx^n}{k!n!}$ converges absolutely for each fixed $x$).
+
+But we know that
+$$e^{e^x - 1} = \sum_{n = 0}^\infty B_n \frac{x^n}{n!}.$$
+Equating coefficients gives us
+$$B_n = \frac{1}{e} \sum_{k = 0}^\infty \frac{k^n}{k!}.$$
+\end{proof}
+
+\subsection{A Combinatorial Proof of Dobinski's Formula}
+
+We now give a second proof of Dobinski's formula, this time using a combinatorial argument involving the Stirling numbers of the second kind.
+
+\begin{proof}
+Recall that
+$$B_n = \sum_{j = 0}^n {n \brace j}.$$
+
+Now fix a nonnegative integer $k$. The quantity $k^n$ counts the number of functions from an $n$-element set to a $k$-element set. We may count these functions in another way.
+
+Given a function $f : \{1, 2, \dots, n\} \to \{1, 2, \dots, k\}$, the nonempty preimages $f^{-1}(1), f^{-1}(2), \dots, f^{-1}(k)$ form a partition of $\{1, 2, \dots, n\}$ into some number $j$ of nonempty blocks, where $0 \le j \le n$. Conversely, if we begin with a partition of $\{1, 2, \dots, n\}$ into $j$ nonempty blocks, then to construct a function whose nonempty preimages are exactly these blocks, we must assign distinct labels from $\{1, 2, \dots, k\}$ to the $j$ blocks. This can be done in
+$$k(k-1)(k-2)\cdots(k-j+1)$$
+ways.
+
+Therefore,
+$$k^n = \sum_{j=0}^n {n \brace j}\,k(k-1)\cdots(k-j+1).$$
+
+Substituting this into the right-hand side of Dobinski's formula gives
+$$\frac{1}{e}\sum_{k = 0}^\infty \frac{k^n}{k!} = \frac{1}{e}\sum_{k = 0}^\infty \frac{1}{k!}\sum_{j = 0}^n {n \brace j} k(k-1) \cdots (k-j+1).$$
+
+Since the sum over $j$ is finite, we can swap sums:
+$$\frac{1}{e}\sum_{k = 0}^\infty \frac{k^n}{k!} = \frac{1}{e}\sum_{j = 0}^n {n \brace j}\sum_{k = 0}^\infty \frac{k(k-1) \cdots (k - j + 1)}{k!}.$$
+
+For $k < j$, the product $k(k-1)\cdots(k-j+1)$ is zero, so
+$$\sum_{k = 0}^\infty \frac{k(k - 1)\cdots(k - j + 1)}{k!} = \sum_{k = j}^\infty \frac{k!}{(k - j)!}\cdot\frac{1}{k!} = \sum_{k = j}^\infty \frac{1}{(k - j)!}.$$
+
+Letting $m = k - j$, this becomes
+$$\sum_{m=0}^\infty \frac{1}{m!} = e.$$
+
+Hence
+$$\frac{1}{e}\sum_{k=0}^\infty \frac{k^n}{k!} = \frac{1}{e}\sum_{j=0}^n {n \brace j}\,e = \sum_{j=0}^n {n \brace j} = B_n.$$
+
+This proves Dobinski's formula.
+\end{proof}
+
+\section{A Probabilistic Interpretation}
+Dobinski’s formula becomes more intuitive when we rewrite it in probabilistic language.
+
+Recall that a random variable $X$ with Poisson distribution with parameter $\lambda = 1$ satisfies
+$$\PP(X = k) = \frac{e^{-1}}{k!}.$$
+If we compute the $n$-th moment of $X$, we obtain
+$$\EE[X^n] = \sum_{k = 0}^\infty k^n \PP(X = k) = \sum_{k = 0}^\infty k^n \frac{e^{-1}}{k!} = \frac{1}{e}\sum_{k = 0}^\infty \frac{k^n}{k!}.$$
+Comparing this with Dobinski's formula, we get
+$$B_n = \EE[X^n]$$
+where $X \sim \text{Poisson}(1)$.
+
+Thus, the Bell numbers arise as the moments of the Poisson distribution with parameter $1$.
+
+This interpretation shows that the combinatorial complexity of counting set partitions can be expressed through expectations of a simple probability distribution.
+
+\section{Connection to Modern Computational Methods}
+
+Using Dobinski's formula, we are able to write an infinite series in terms of the expected value of a distribution. This is an example of a general computation strategy widely used in statistics and machine learning: instead of evaluating a complicated infinite sum, one can estimate it using random samples drawn from a suitable distribution.
+
+Since
+$$B_n = \sum_{k = 0}^\infty k^n \PP(X = k) = \EE[X^n],$$
+the Bell numbers are the expected values of the function $f(X) = X^n$, when $X$ follows a Poisson distribution with parameter $1$.
+
+Instead of computing the infinite series in Dobinski's formula directly, we can approximate $B_n$ by taking $m$ independent samples
+$$X_1, X_2, \ldots, X_m,$$
+and take the average
+$$\widehat{B}_n = \frac{1}{m}\sum_{i = 1}^m X_i^n.$$
+This quantity is called an \emph{estimator} for $B_n$. A key property of this estimator is that it is unbiased, i.e. it is accurate on average and doesn't systematically over- or underestimate the value:
+$$\EE[\widehat{B}_n] = \EE\left[\frac{1}{m}\sum_{i = 1}^m X_i^n\right] = \frac{1}{m}\sum_{i = 1}^m \EE[X_i^n] = \EE[X^n] = B_n,$$
+by Dobinski's formula. This perspective provides an alternative way of computing the value of the series.
+
+\begin{thebibliography}{9}
+
+\bibitem{Stanley}
+R. P. Stanley,
+\textit{Enumerative Combinatorics, Vol. 1},
+2nd ed., Cambridge University Press, 2012.
+
+\end{thebibliography}
+
+\end{document}

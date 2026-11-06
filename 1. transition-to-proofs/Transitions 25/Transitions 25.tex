@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+
+\title{Chapter 25 Problem Set}
+\author{Siddharth K}
+\date{April 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1a.} The equivalence class $[1, 1]$ represents the number $0$. So $[1, 1] + [a, b] = [a, b]$ essentially means that adding $0$ to a number results in the same number.
+
+\textbf{1b.} Since $[1, 1]$ represents $0$, it says that $0$ times a number is $0$.
+
+\textbf{1c.} This statement says that addition is commutative.
+
+\textbf{1d.} This statement is equivalent to $x(y + z) = xy + xz$, which is the distributive property.
+\newline
+
+\textbf{2.} First, we need to prove that $(a, b) \equiv (a, b)$. This means that $ab = ab$, which is true. So $\equiv$ is reflexive. Now, we assume that $(a, b) \equiv (c, d)$, or $ad = bc$. That means $(c, d) \equiv (a, b)$ holds if $cb = da$, which we know is true. Finally, we assume that $(a, b) \equiv (c, d)$ and $(c, d) \equiv (e, f)$. This means that $ad = bc$ and $cf = de$. So $a = bc/d$ and $f = de/c$. Multiplying those equations, we get $af = bcde/cd = be$, which means $(a, b) \equiv (e, f)$, so $\equiv$ is transitive.
+\newline
+
+\textbf{3.} Since $a \le b$, there exists $x \in \mathbb{N}$ such that $a + x = b$. Also, since $c \le d$, there exists $y \in \mathbb{N}$ such that $c + y = d$. Adding the two equations, we get $a + c + (x + y) = b + d$. We know that $x + y \in \mathbb{N}$, so $a + c \le b + d$.
+\newline
+
+\textbf{4.} By the definition, $ab > 0$ if there doesn't exist $x \in \mathbb{N} \cup {0}$ such that $ab + x = 0$. Since $a, b < 0$, $ab = (-1c)(-1d) = cd$ for $c, d \in \mathbb{N}$. Therefore, if $x \in \mathbb{N} \cup {0}$ exists such that $ab + x = 0$, then $x = -1\cdot cd$, which is impossible. So $ab > 0$.
+\newline
+
+\textbf{5.} We know that $x + y = \langle x_1, x_2 \rangle + \langle y_1, y_2 \rangle = \langle 0, 1 \rangle$, so $\langle x_1, x_2 \rangle = \langle 0, 1 \rangle - \langle y_1, y_2 \rangle = \langle -y_1, y_2 \rangle = \langle -1, 1 \rangle \langle y_1, y_2 \rangle = -y$. Since we isolated $x$ using reversible steps, we know that $-y$ is the only value that works.
+\newline
+
+\textbf{6.} Let $x = \langle x_1, x_2 \rangle$ and $y = \langle y_1, y_2 \rangle$. Then $\langle x_1, x_2 \rangle \langle y_1, y_2 \rangle = \langle 1, 1 \rangle$, so $\langle x_1, x_2 \rangle = \langle 1, 1 \rangle / \langle y_1, y_2 \rangle = \langle y_2, y_1 \rangle$. So $x_1 = y_2$ and $x_2 = y_1$. This is the only solution because we isolated $x$ using reversible steps.
+\newline
+
+\textbf{7a.} For $a, b, c, d \in \mathbb{Z}$, let's say $(a, b) \sim (c, d)$ if and only if $a2^d = c2^b$.
+\newline
+
+We know $(a, b) \sim (a, b)$ iff $a2^b = a2^b$, which is true. So $\sim$ is reflexive.
+\newline
+
+If $(a, b) \sim (c, d)$, then $a2^d = c2^b$, or $c2^b = a2^d$, which means $(c, d) \sim (a, b)$. So $\sim$ is symmetric.
+\newline
+
+Finally, if $(a, b) \sim (c, d)$ and $(c, d) \sim (e, f)$, then $a2^d = c2^b$ and $c2^f = e2^d$. Reversing the second equation and dividing it from the first, we get $\frac{a}{e} = \frac{2^b}{2^f}$, or $(a, b) \sim (e, f)$. So $\sim$ is transitive.
+\newline
+
+\textbf{7b.} Let's say $(a, b) + (c, d) = (a2^d + c2^b, b + d)$.
+\newline
+
+To show that this is well-defined, we must prove, given $(a_1, b_1) = (a_2, b_2)$ and $(c_1, d_1) = (c_2, d_2)$, that $(a_1 + c_1, b_1 + d_1) = (a_2 + c_2, b_2 + d_2)$. This means we have to check that $(a_1 + c_1)2^{b_2 + d_2} = (a_2 + c_2)2^{b_1 + d_1}$ given $a_12^{b_2} = a_22^{b_1}$ and $c_12^{d_2} = c_22^{d_1}$.
+\newline
+
+First, we multiply both sides of $a_12^{b_2} = a_22^{b_1}$ by $2^{d_2}$ and multiply both sides of $c_12^{d_2} = c_22^{d_1}$ by $2^{b_2}$ to get $a_1^{b_2 + d_2} = a_22^{b_1 + d_1}$ and $c_1^{b_2 + d_2} = c_22^{b_1 + d_1}$. Now, adding the two equations, we get $a_12^{b_2 + d_2} + c_12^{b_1 + d_2} = a_22^{b_1 + d_2} + c_22^{b_1 + d_1}$. Rearranging terms, substituting, and simplifying, we get $(a_1 + c_1)2^{b_2 + d_2} = (a_2 + c_2)2^{b_1 + d_1}$, as desired.
+\newline
+
+Now, let's say $(a, b) - (c, d) = (a2^d - c2^b, b + d)$. Similar to before, we must prove that $(a_1 - c_1)2^{b_2 + d_2} = (a_2 - c_2)2^{b_1 + d_1}$ given $a_12^{b_2} = a_22^{b_1}$ and $c_12^{d_2} = c_22^{d_1}$.
+\newline
+
+First, multiply both sides of $a_12^{b_2} = a_22^{b_1}$ by $2^{d_2}$ and multiply both sides of $c_12^{d_2} = c_22^{d_1}$ by $2^{b_2}$ to get $a_1^{b_2 + d_2} = a_22^{b_1 + d_1}$ and $c_1^{b_2 + d_2} = c_22^{b_1 + d_1}$. Subtracting the two equations gives us $a_12^{b_2 + d_2} - c_12^{b_1 + d_1} = a_22^{b_1 + d_2} - c_22^{b_1 + d_1}$. Simplifying this gives us $(a_1 - c_1)2^{b_2 + d_2} = (a_2 - c_2)2^{b_1 + d_1}$, as desired.
+\newline
+
+Define $(a, b) \times (c, d) = (ac, b + d)$. Given $a_12^{b_2} = a_22^{b_1}$ and $c_12^{d_2} = c_22^{d_1}$, we must prove that $(a_1c_1)2^{b_2 + d_2} = (a_2c_2)2^{b_1 + d_1}$.
+\newline
+
+We can rewrite the given equations as $a_1 = a_22^{b_1 - b_2}$ and $c_1 = c_22^{d_1 - d_2}$. Multiplying the equations gives us $a_1c_1 = a_2c_22^{b_1 - b_2 + d_1 - d_2}$. Multiplying both sides by $2^{b_2 + d_2}$ gives $a_1c_12^{b_2 + d_2} = a_2c_22^{b_1 + d_1}$, as desired.
+\newline
+
+To define division, we might try $(a, b)/(c, d) = (a2^d, c\log_2 b)$. But logarithms don't consistently produce integers. If, instead, we try to define division as $(a, b)/(c, d) = (a/c, b - d)$ where $c \neq 0$, we run into a problem, since $\frac{a}{c}$ isn't consistently an integer. So it seems like we cannot define division of any two dyadic rationals straight from $\mathbb{Z}$.
+\newline
+
+\textbf{8.} Letting $a, b, c,$ and $d$ be rational in the construction of $\mathbb{Q}$ gives us $(a, b) \sim (c, d)$ if $ad = bc$, or $\frac{a}{b} = \frac{c}{d}$. Dividing two rationals gives us another rational, so this construction seems to just give us $\mathbb{Q}$ back.
+\newline
+
+\textbf{9.} Let $a, b, c,$ and $d$ be complex. Then $(a, b) \sim (c, d)$ if $ad = bc$, or $\frac{a}{b} = \frac{c}{d}$. If we let $a = a_1 + a_2i$ and $b = b_1 + b_2i$, then $\frac{a}{b} = \frac{a_1 + a_2i}{b_1 + b_2i} = \frac{a_1b_1 + a_2b_2}{b_1^2 + b_2^2} + \frac{a_2b_1 - a_1b_2}{b_1^2 + b_2^2}i$, which is essentially a complex number with rational real and imaginary parts. So the set described in the problem seems to represent the set of complex numbers with rational real and imaginary parts.
+
+\end{document}

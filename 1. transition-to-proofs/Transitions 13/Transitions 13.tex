@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Chapter 13 Problem Set}
+\author{Siddharth K}
+\date{January 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} An example of a bipartite graph with 12 vertices and 6 in each part with a perfect matching would be a graph with two rows of vertices and each vertex on the top connecting to two on the bottom.
+\newline
+
+\textbf{2.} Firstly, $1 < a \le 3$, because $\frac{1}{3} + \frac{1}{3} +\frac{1}{3} = 1$, and if $a = 1$ then $\frac{1}{b} + \frac{1}{c} = 0$, which is impossible. That means the only cases we have to consider are $a = 3$ (which we already took care of) and $a = 2$. In that case, $\frac{1}{b} + \frac{1}{c} = \frac{1}{2}$, which means $b = 3$ and $c = 6$.
+\newline
+
+\textbf{3.} Let's consider the set $N$ of all odd numbers up to $2n$. Each element of $S$ can be written in the form $2^m \times k$ where $k \in N$. These $n$ numbers will serve as the pigeonholes, and the $n + 1$ elements of $S$ are the pigeons. By the Pigeonhole Principle, at least two elements of $S$ must share the same $k$ value. Let these two elements be $a = 2^{m_1} \times k$ and $b = 2^{m_2} \times a$. Without loss of generality, assume $m_1 > m_2$. That means we can write $2^{m_1} \times a = 2^{m_1 - m_2}(2^{m_2} \times a)$, or $a = 2^{m_1 - m_2}b$. Therefore, $a$ is a multiple of $b$.
+\newline
+
+\textbf{4.} Let's assume $G$ has a cycle of odd length. For it to be bipartite, every edge must connect a point in $A \subset V$ and another point in $B \subset V$. Let's say each vertex in the cycle is $v_i$ where $1 \le i \le k$ where $k$ is odd.
+\newline
+
+Without loss of generality, let's assume $v_1 \in A$. That means $v_2 \in B$, $v_3 \in A$, and so on. We see that every odd index of $v$ corresponds to a vertex in $A$. Since $k$ is odd, $v_k \in A$. By the definition of a cycle, there's an edge connecting $v_1$ and $v_k$. However, for the graph to be bipartite, there cannot be an edge between two vertices in the same subset of $V$. Therefore, $G$ can only be bipartite when there are no cycles of odd length.
+\newline
+
+Reversing our steps above, we see that if $G$ is bipartite, there cannot be a cycle of odd length.
+\newline
+
+\textbf{5.} Since there are $n$ rows and we are choosing $n + 1$ points, by the Pigeonhole Principle, at least two of those points must be on the same row, which means they are connected by a red edge.
+\newline
+
+\textbf{7.} We can split the polygon into triangles, each connecting three points at vertices of the polygon. Each of these triangles needs at most one guard for its interior to be entirely guarded. Since there are $\lfloor \frac{n}{3} \rfloor$ triangles, that is the maximum amount of guards needed to guard the entire gallery.
+\newline
+
+\end{document}

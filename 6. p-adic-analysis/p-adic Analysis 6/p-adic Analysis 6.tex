@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
+
+\title{p-adic Analysis 6}
+\author{Siddharth K}
+\date{May 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 3}
+Let the slopes of the Newton polygon of $f$ be $s_1, \ldots, s_m$ with corresponding lengths $l_1, \ldots, l_m$. By Theorem 6.2, the segment of slope $s_i$ and length $l_i$ means that $f(x)$ has $l_i$ roots with valuation $-s_i$. For each root $\alpha$, since $1/\alpha$ is also a root, $v_p(\alpha) = -v_p(1/\alpha)$ and each slope/length is paired with a negative slope and same length. So the segments are symmetric about the center.
+
+\section*{Problem 4}
+We have that
+$$\binom{\sqrt 2}{p} = \frac{\sqrt{2}(\sqrt{2} - 1)\cdots (\sqrt{2} - p + 1)}{p!}.$$
+Since $v_p(1/p!) = -1$, $\binom{\sqrt2}{p} \in \Z_p[\sqrt2]$ if
+$$v_p(\sqrt{2}(\sqrt{2} - 1)\cdots (\sqrt{2} - p + 1)) \ge 1.$$
+Since each term in the product is equal to $\sqrt{2} - k$ for some $k \in \{0, 1, ..., p - 1\}$, we need
+$$\sqrt{2} - k \equiv 0 \pmod{p},$$
+or
+$$k^2 \equiv 2 \pmod{p},$$
+for some $k$. So $\binom{\sqrt 2}{p} \in \Z_p$ if such a $k$ exists.
+
+\section*{Problem 7}
+\subsection*{Part (a)}
+Consider $x^2 - 2$. Since $2$ is not a square modulo $5$, the polynomial is irreducible, so the degree is $2$ and the ramification index is $1$.
+
+\subsection*{Part (b)}
+Consider $x^2 - 5$. This polynomial is Eisenstein at $5$, so $x^2 - 5$ is irreducible is a totally ramified extension. So the degree is $2$ and $e = 2$.
+
+\end{document}

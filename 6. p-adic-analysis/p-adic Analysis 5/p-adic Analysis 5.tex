@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
+
+\title{p-adic Analysis 5}
+\author{Siddharth K}
+\date{May 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 2}
+Let $x = 9/16$ and $y = 9/4$. The $p$-adic logarithm is
+$$\log(1 + z) = \sum_{n = 1}^\infty (-1)^{n + 1} \frac{z^n}{n},$$
+so
+$$\sum_{n = 1}^\infty (-1)^n \frac{3^{2n}}{n4^{2n}} = \sum_{n = 1}^\infty (-1)^n \frac{x^n}{n} = -\log(1 + x).$$
+Since $x = 9/16$,
+$$1 + x = \frac{25}{16} = \bigp{\frac{5}{4}}^2,$$
+$$-\log(1 + x) = -\log\bigp{\bigp{\frac{5}{4}}^2}.$$
+Also,
+$$1 - y = -\frac 54,$$
+so
+$$(1 - y)^2 = \frac{25}{16} = 1 + x.$$
+Therefore,
+$$-\log(1 + x) = -\log((1 - y)^2) = -2\log(1 - y)$$
+$$= -2\sum_{n = 1}^\infty \frac{3^{2n}}{n4^n}.$$
+This highlights that $\log(-5/4) = \log(5/4)$ because $\log(-1) = 0$.
+
+\section*{Problem 4}
+For $n \ge 2$,
+$$v_p\bigp{\frac{p^n}{n!}} \ge n - v_p(n!) \ge 2,$$
+so
+$$e^p \equiv 1 + p \pmod{p^2}.$$
+For contradiction, assume that $x^p \equiv e^p \pmod{p^2}$ for some $x \in \Z_p$. Since
+$$e^p \equiv 1 + p \equiv 1 \pmod{p},$$
+we have that
+$$x^p \equiv 1 \pmod{p}.$$
+Also,
+$$x^p \equiv x \pmod{p},$$
+$$x \equiv 1 \pmod{p}.$$
+So we can write $x = 1 + pa$ with $a \in \Z_p$. So
+$$x^p = 1 + p(pa) + \binom{p}{2}p^2a^2 + \cdots \equiv 1 \pmod{p^2}.$$
+But we already found $e^p \equiv x^p \equiv 1 + p \pmod{p^2}$, which is a contradiction.
+
+\section*{Problem 5}
+Assume $x \equiv y \pmod{p^N}$, so that $x$ and $y$ have the same first $N$ digits. That means $f(x)$ and $f(y)$ have the same digit contributions in positions
+$$0^2, 1^2, \ldots, (N - 1)^2,$$
+so
+$$f(x) \equiv f(y) \pmod{p^{N^2}}.$$
+Therefore,
+$$|x - y|_p \le p^{-N} \implies |f(x) - f(y)|_p \le p^{-N^2},$$
+which proves continuity.
+
+For differentiability, let $h \in p^N\Z_p$. Then $x$ and $x + h$ have the same first $N$ digits. Therefore,
+$$f(x + h) - f(x) \in p^{N^2}\Z_p,$$
+so
+$$\bigabs{\frac{f(x + h) - f(x)}{h}}_p \le p^{-N^2 + N} \to 0,$$
+so $f'(x) = 0$.
+
+\section*{Problem 12}
+For any $x \in B$ and $m \ge 0$, we have that
+$$f(x + mk) = f(x).$$
+Now, fix $x \in B$. For all $r \ge 0$, we can take $m = p^r$, so that
+$$f(x + p^rk) = f(x),$$
+$$\frac{f(x + p^rk) - f(x)}{p^rk} = 0.$$
+As $r \to \infty$, $|p^rk|_p \to 0$, so $p^rk \to 0$. So the derivative of $f$ at $x$ can be written as
+$$f'(x) = \lim_{r \to \infty} = \lim_{r \to \infty} \frac{f(x + p^rk) - f(x)}{p^rk} = 0.$$
+So $f'(x) = 0$ for all $x \in B$. Since $f$ can be written as a power series, all coefficients of terms of degree $\ge 1$ must be $0$, and $f$ is constant.
+
+\section*{Problem 14}
+Take $B = \Z_p$ and $f(x) = x^2$. This $f$ is analytic on $B$. Now, choose $a = 0$, $b = 1$, $n = -1$. Then
+$$|f(a)|_p = 0, \quad |f(b)|_p = |1|_p = 1.$$
+So it is true that
+$$|f(a)|_p \le p^{-1} \le |f(b)|_b.$$
+IVT in $p$-adics would imply that there exists $c \in \Z_p$ where
+$$|f(c)|_p = p^{-1},$$
+but
+$$|f(c)|_p = |c^2|_p = |c|_p^2 \in \{0, 1, p^{-2}, p^{-4}, \ldots\},$$
+where none of the options are $p^{-1}$. So IVT fails, even for analytic functions.
+
+\section*{Problem 16}
+Take $B = \Z_p$ and $f(x) = x^p$, which is analytic. Choose $a = 0$, $b = 1$. So
+$$\frac{f(b) - f(a)}{b - a} = 1.$$
+Assuming MVT in $p$-adics would imply that there is $x \in \Z_p$ such that $f'(x) = 1$. But $f'(x) = px^{p - 1}$, so
+$$x^{p - 1} = \frac{1}{p}.$$
+Since $|x|_p \le 1$,
+$$|x^{p - 1}|_p = |x|_p^{p - 1} \le 1,$$
+but
+$$\bigabs{\frac{1}{p}}_p = p > 1.$$
+This is a contradiction, so no such $x$ exists and MVT is not true for $p$-adics.
+
+\end{document}

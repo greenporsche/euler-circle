@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Chapter 8 Problem Set}
+\author{Siddharth K}
+\date{November 2023}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} The statement in 8.1 was that $a^{p - 1} \equiv 1 \pmod{p}$ and 8.2 was $a^p \equiv a \pmod{p}$. We can deduce the second statement from the first one easily by multiplying both sides of the congruence by $a$.
+\newline
+
+We can deduce 8.1 from 8.2 by dividing both sides of the congruence by $a$. We can do this because $\gcd(a, p) = 1$ since $p$ is prime and $p \not \mid a$.
+\newline
+
+\textbf{2.} Base case:
+We know that $1^p \equiv 1 \pmod{p}$, so it holds true for $a = 1$.
+\newline
+
+Inductive Step:
+We can start by assuming that $a^p \equiv (a - 1)^p \equiv \cdots \equiv a \pmod{p}.$ Our goal is to prove that $(a + 1)^p \equiv a + 1 \pmod{p}$ Since $(x + 1)^p = 1 + px + \frac{p(p - 1)}{2!}x^2 + \cdots + x^p$, we know that $(a + 1)^p \equiv 1 + pa + \frac{p(p - 1)}{2!} + \cdots + pa^{p - 1} + x^p \pmod{p}$. We also know that, since $p$ is prime, $p \mid C(p, k)$. That means $(a + 1)^p \equiv 1 + a^p \equiv a + 1 \pmod{p}$.
+\newline
+
+\textbf{3.} By Fermat's Little Theorem, $a^{p_i} \equiv a \pmod{p_i}$. Since $d$ is a multiple of all $p_i$, $a^{d + 1} \equiv a \pmod{p_i}$. Since all $p_i$ are relatively prime to each other, by the Chinese Remainder Theorem, $a^{d + 1} \equiv a \pmod{p_1p_2\ldots p_k}$.
+\newline
+
+\textbf{4.} First of all, $\sum_{i = 1}^{p - 1} i = \frac{p(p - 1)}{2}$. Also, since $p$ is prime, $\frac{p - 1}{2}$ is an integer, and $\gcd(p, \frac{p - 1}{2}) = 1$. We already know, by Wilson's Theorem, that $(p - 1)! \equiv -1 \equiv (p - 1) \pmod{p}$. So, by the Chinese Remainder Theorem, if $(p - 1)! \equiv (p - 1) \pmod{\frac{p - 1}{2}}$, then the statement we want to prove holds true.
+\newline
+
+To prove that, we notice that $2(p - 1)! \equiv 0 \equiv 2(p - 1) \pmod{p - 1}$. And if $ac \equiv bc \pmod{n}$, then $b \equiv c \pmod{\frac{n}{\gcd(a, n)}}$. This means $(p - 1)! \equiv (p - 1) \pmod{\frac{p - 1}{2}}$, as desired.
+\newline
+
+\textbf{5.} If $(n - 1)! \equiv -1 \pmod{n}$, then $n$ is prime.
+
+For the sake of contradiction, let's assume that $n$ is composite. That means it can be written as $ab$ where $a$ and $b$ are positive integers greater than $1$ and less than $n$. By those constraints, $a$ and $b$ must be part of the product $(n - 1)!$. However, that means $ab$ divides $(n - 1)!$, and thus, $(n - 1)! \equiv 0 \pmod{n}$, which is a contradiction.
+\newline
+
+Now, we need to consider the case where $n$ is a perfect square. Let's say $n = a^2$. We know that $2a \le n$, and equality only holds when $n = 4$. However, when $n = 4$, $(4 - 1)! \equiv 2 \not \equiv -1 \pmod{4}$. Therefore, we can assume that $2a < n$. That means $a$ and $2a$ are part of the product $(n - 1)!$, so $(n - 1)!$ is divisible by $2a^2$, and thus, $(n - 1)! \equiv 0 \pmod{n}$, which is a contradiction.
+\newline
+
+\textbf{6.} By Wilson's Theorem, we know that $p$ divides $(p - 1)! + 1$. Also, $(p - 1)!$ is divisible by every prime smaller than $p$. That means when we add $1$, it is not a multiple of any prime smaller than $p$. Since $p$ divides $(p - 1)! + 1$ but no prime smaller does, $p$ is the smallest prime that divides $(p - 1)! + 1$.
+\newline
+
+\textbf{7.} Base case $(n = 1)$: This means $a^{(p - 1)p^0} \equiv a^{p - 1} \equiv 1 \pmod{p^1}$ by Fermat's Little Theorem.
+\newline
+
+Inductive step: Assume that $a^{(p - 1)p^{k - 1}} \equiv 1 \pmod{p^k}$. We need to prove that $a^{(p - 1)p^k} \equiv 1 \pmod{p^{k + 1}}$. We can rewrite $a^{(p - 1)p^k}$ as $(a^{(p - 1)p^{k - 1}})^p$. Since $a^{(p - 1)p^{k - 1}} \equiv 1 \pmod{p^k}$, we can say that $a^{(p - 1)p^{k - 1}} = 1 + mp^k$. That means $(1 + mp^k)^p = 1 + C(p, 1)mp^k + C(p, 2)m^2p^{2k} + \cdots + (mp^k)^p$. Each term $C(p, i)m^ip^{ik}$ for $i \ge 2$ is divisible by $p^{k + 1}$, so $(1 + mp^k)^p \equiv 1 \pmod{p^{k + 1}}$, which completes the inductive step.
+\newline
+
+\textbf{8.} Let $S = \{x_1, x_2, \ldots, x_{\phi(n)}\}$ be the set of positive integers less than $n$ that are relatively prime to $n$. Also, let $T$ be the set of numbers where each element is the corresponding element in $S$ multiplied by $a$. Since $\gcd(a, n) = 1$, the elements of $T$ modulo $n$ are just a permutation of those in $S$ modulo $n$.
+\newline
+
+Now, let's take the product of all elements in each set: $\prod_{i = 1}^{\phi(n)} x_i$ for set $S$ and $\prod_{i = 1}^{\phi(n)} ax_i$ for set $T$. We can rewrite the product for set $T$ as $a^{\phi(n)}\prod_{i = 1}^{\phi(n)} x_i$. Since $T$ is a permutation of $S$ modulo $n$, $a^{\phi(n)}\prod_{i = 1}^{\phi(n)} x_i \equiv \prod_{i = 1}^{\phi(n)} x_i \pmod{n}$. We know that $\gcd(\prod_{i = 1}^{\phi(n)} x_i, n) = 1$ because every term in the product is relatively prime to $n$. Therefore, $a^{\phi(n)} \equiv 1 \pmod{n}$.
+\newline
+
+\textbf{9.} We are given that $6k + 1$, $12k + 1$, and $18k + 1$ are prime. This means $a^{6k} \equiv 1 \pmod{6k + 1}$, $a^{12k} \equiv 1 \pmod{12k + 1}$, and $a^{18k} \equiv 1 \pmod{18k + 1}$. We can equivalently state that $a^{36k} \equiv 1 \pmod{6k + 1}$, $a^{36k} \equiv 1 \pmod{12k + 1}$, and $a^{36k} \equiv 1 \pmod{18k + 1}$. It follows from the Chinese Remainder Theorem that $a^{36k} \equiv 1 \pmod{(6k + 1)(12k + 1)(18k + 1)}$.
+\newline
+
+Evaluating $n - 1$, we get $(6k + 1)(12k + 1)(18k + 1) - 1 = 36k(36k^2 + 11k + 1)$. From earlier, we can say that $a^{36k} \equiv a^{36k(36k^2 + 11k + 1)} \equiv a^{n - 1} \equiv 1 \pmod{n}$. Since $n$ is composite and it satisfies $a^{n - 1} \equiv 1 \pmod{n}$, it is a Carmichael number.
+\newline
+\newline
+
+\textbf{10.} We can simplify $C(2p, p)$ as $\frac{(2p)!}{p!p!} = 2 \cdot \frac{(2p - 1)(2p - 2)\cdots(p + 1)}{(p - 1)(p - 2)\cdots(1)}$. We can rewrite that expression as $2 \cdot \frac{(p + (p - 1))(p + (p - 2))\cdots(p + 1)}{(p - 1)\cdots(1)}$. If we take that modulo $p^2$ and expand it, any term containing $p^2$ wouldn't contribute to the expression modulo $p^2$. Keeping that in mind, we can see that $C(2p, p) \equiv 2 \cdot \frac{(p - 1)(p - 2)\cdots(1)}{(p - 1)\cdots(1)} \equiv 2 \pmod{p^2}$.
+
+\end{document}

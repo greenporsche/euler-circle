@@ -1,0 +1,115 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bz}{\mathbf{0}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\title{Fundamentals Chapter 10}
+\author{Siddharth K}
+\date{December 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Eigenvalues of $T$ satisfy $T(\bv) = \lambda \bv$ for some $\bv$. Let $\bv = (v_1, v_2)^T$. We have that
+$$T(\bv) = \begin{bmatrix}
+    0 & 1 \\
+    -1 & 0
+\end{bmatrix}\bv = \begin{bmatrix}
+    v_2 \\
+    -v_1
+\end{bmatrix} = \lambda \bv = \begin{bmatrix}
+    \lambda v_1 \\
+    \lambda v_2
+\end{bmatrix}.$$
+Solving the system gives us $v_2 = -\lambda^2 v_2$, so $1 + \lambda^2 = 0$. Since the field is $\F_5$, we have that $1 + \lambda^2 \equiv 0 \pmod{5}$, so $\lambda = 2$ or $\lambda = 3$. \\
+
+\textbf{2.} By the same process as problem 1, we have that $1 + \lambda^2 \equiv 0 \pmod{p}$. So any $\lambda \in \F_p$ satisfying $\lambda^2 \equiv -1 \pmod{p}$ is an eigenvalue. \\
+
+\textbf{3.} Assume $\lambda = 0$. Then $A\bv = \bz$. Since $A$ is invertible, we have that $\bv = A^{-1}\bz = \bz$, but eigenvectors are nonzero. This is a contradiction, so $\lambda \neq 0$. \\
+
+\textbf{4.} We have that $A\bv = \lambda \bv$, and since $A$ is invertible, $\bv = A^{-1}\lambda \bv$, or $\lambda^{-1}\bv = A^{-1}\bv$, so $\lambda^{-1}$ is an eigenvalue of $A^{-1}$. \\
+
+\textbf{5.} By proposition 10.6, we know that the statement holds if $m = 1$. Now, assume it holds for $k$. That means, if
+$$p(x) = (x - r_1)\cdots(x - r_k)q(x)$$
+then
+$$p(A) = (A - r_1I_n)\cdots(A - r_kI_n)q(A).$$
+By proposition 10.6, if $q(x) = (x - r_{k + 1})q_1(x)$ then $q(A) = (A - r_{k + 1}I_n)q_1(A)$. So
+$$p(A) = (A - r_1I_n)\cdots(A - r_kI_n)(A - r_{k + 1}I_n)q_1(A).$$
+As long as $q(x)$ factors, which in this case is until $q(x)$ is constant, $q(A)$ can be factored as well. By induction, if $p(x) = (x - r_1)\cdots(x - r_m)$ then $p(A) = (A - r_1)\cdots(A - r_m)$. \\
+
+\textbf{6.} Let $$T = \begin{bmatrix}
+    1 & 0 \\
+    0 & 0
+\end{bmatrix}, \quad S = \begin{bmatrix}
+    0 & 0 \\
+    0 & 1
+\end{bmatrix}.$$
+We have that $ST = 0 = TS$. It seems that matrices that satisfy this property always have an eigenvalue of $0$, and sometimes $1$. \\
+
+\textbf{7.} We already know that $\lambda$ is an eigenvalue of $T$ if and only if $T - \lambda 1$ is not injective. \\
+
+By rank-nullity, if $T - \lambda 1$ is not injective, then $\dim(\text{null}(T - \lambda 1)) > 0$, so $\dim(\text{rank}(T - \lambda 1)) < \dim(V)$ (where $V$ is the vector space), so $T - \lambda 1$ is not surjective. Similarly, $T - \lambda 1$ is not surjective implies that $\dim(\text{null}(T - \lambda 1)) > 0$, and $T - \lambda 1$ is not injective. \\
+
+If $T - \lambda 1$ is not invertible, it's not injective, so $\lambda$ is an eigenvalue of $T$. Finally, if $\lambda$ is an eigenvalue of $T$, then $(T - \lambda 1)\bv = \bz$ for some nonzero $\bv$. If $T - \lambda 1$ was invertible, then $\bv = (T - \lambda 1)^{-1} \cdot \bz = \bz$, which is a contradiction. So $T - \lambda 1$ is not invertible. \\
+
+\textbf{9a.} $$\begin{bmatrix}
+    a & b \\
+    c & d
+\end{bmatrix}
+\begin{bmatrix}
+    x \\
+    y
+\end{bmatrix}
+= \begin{bmatrix}
+    x \\
+    y
+\end{bmatrix}'.$$
+
+\textbf{9b.} Consider the eigenvalues of $A$, $\lambda_1, \lambda_2$, and assume they are distinct. Let the corresponding eigenvectors be $\bv_1, \bv_2$. We can define a new variable $\bu$ by expressing $\bx$ in the basis of eigenvectors. Let $\bx = P\bu$ where
+$$P = \begin{bmatrix}
+    | & | \\
+    \bv_1 & \bv_2 \\
+    | & |
+\end{bmatrix}.$$
+Since $\bv_1$ and $\bv_2$ are distinct eigenvectors, they are not multiples of each other, so $P$ is invertible. If we substitute $\bx = P\bu$ into $\bx' = A\bx$, we have
+$$P\bu' = AP\bu, \text{ or } \bu = P^{-1}AP\bu.$$
+By construction, $P^{-1}AP = D$ where $D$ is a diagonal matrix of eigenvalues:
+$$D = \begin{bmatrix}
+    \lambda_1 & 0 \\
+    0 & \lambda_2
+\end{bmatrix},$$
+so the system becomes $\bu' = D\bu$. If we let $\bu = \begin{bmatrix}
+    w & z
+\end{bmatrix}^T$, we get the system
+$$\begin{bmatrix}
+    w' \\
+    z'
+\end{bmatrix}
+= \begin{bmatrix}
+    \lambda_1 & 0 \\
+    0 & \lambda_2
+\end{bmatrix}
+\begin{bmatrix}
+    w \\
+    z
+\end{bmatrix},$$
+which can be split into the two ODEs:
+$$w' = \lambda_1 w, \quad z' = \lambda_2 z.$$
+These can be solved independently and then reverted to the original basis to solve the original equation.
+
+\end{document}

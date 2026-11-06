@@ -1,0 +1,68 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\summation}[1][0]{\sum_{n=#1}^\infty}
+\newcommand{\summationk}[1][0]{\sum_{k=#1}^\infty}
+
+\title{Infinite Series 1}
+\author{Siddharth K}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+$$S = \summation[1] \frac{1}{(2n - 1)(2n + 1)}$$
+$$\frac{1}{(2n - 1)(2n + 1)} = \frac{1}{2}\bigp{\frac{1}{2n - 1} - \frac{1}{2n + 1}}$$
+$$2S = \summation[1] \frac{1}{2n - 1} - \summation[1] \frac{1}{2n + 1} = \summation[1] \frac{1}{2n - 1} - \summation[2] \frac{1}{2n - 1} = 1$$
+$$S = \frac{1}{2}$$
+
+\section*{Problem 2}
+$$S = \summation \frac{\cos n\theta}{2^n}$$
+$$\cos n\theta = \frac{1}{2}(e^{in\theta} + e^{-in\theta}) = \frac{1}{2}((e^{i\theta})^n + (e^{-i\theta})^n)$$
+$$2S = \summation \bigp{\frac{e^{i\theta}}{2}}^n + \summation \bigp{\frac{e^{-i\theta}}{2}}^n$$
+$$2S = \frac{2}{2 - e^{i\theta}} + \frac{2}{2 - e^{-i\theta}}$$
+$$S = \frac{1}{2 - e^{i\theta}} + \frac{1}{2 - e^{-i\theta}} = \frac{2 - e^{-i\theta} + 2 - e^{i\theta}}{(2 - e^{i\theta})(2 - e^{-i\theta})}$$
+$$= \frac{4 - 2\cos\theta}{4 - 2(e^{i\theta} + e^{-i\theta}) + 1} = \frac{4 - 2\cos\theta}{5 - 4\cos\theta}.$$
+
+\section*{Problem 3}
+Let $k = n + 1$.
+$$S = \summationk[1] \arctan\frac{2}{k^2} = \summationk[1] (\arctan(k + 1) - \arctan(k - 1))$$
+$$S_N = \sum_{k = 1}^N (\arctan(k + 1) - \arctan(k - 1)) = \arctan(N) + \arctan(N + 1) - \arctan(0) - \arctan(1)$$
+$$= \arctan(N) + \arctan(N + 1) - \pi/4$$
+$$S = \lim_{N \to \infty} S_N = 2 \cdot \frac{\pi}{2} - \frac{\pi}{4} = \frac{3\pi}{4}.$$
+
+\section*{Problem 4}
+$$S = \summation \frac{(n + 1)^3}{n!}$$
+$$\frac{(n + 1)^3}{n!} = \frac{n^3}{n!} + \frac{3n^2}{n!} + \frac{3n}{n!} + \frac{1}{n!}$$
+$$\summation \frac{1}{n!} = e$$
+$$\summation \frac{n}{n!} = \summation[1] \frac{1}{(n - 1)!} = e$$
+$$\summation \frac{n^2}{n!} = \summation[2] \frac{n(n - 1)}{n!} + \summation[1] \frac{n}{n!} = \summation[2] \frac{1}{(n- 2)!} + e = 2e$$
+$$\summation \frac{n^3}{n!} = \summation[3] \frac{1}{(n - 3)!} + 3\summation[2] \frac{1}{(n - 2)!} + \summation[1] \frac{1}{(n - 1)!} = e + 3e + e = 5e$$
+$$S = 5e + 3(2e) + 3e + e = 15e$$
+
+\section*{Problem 6}
+\subsection*{Part (a)}
+$$F_n = \frac{1}{\sqrt{5}}\bigp{\bigp{\frac{1 + \sqrt{5}}{2}}^n - \bigp{\frac{1 - \sqrt{5}}{2}}^n} \rightarrow \frac{\varphi^n}{\sqrt{5}}$$
+$$\lim_{n \to \infty} \sqrt[n]{|F_nx^n|} = \varphi|x|$$
+By root test, if $|x| < \frac{1}{\varphi}$, the sum converges.
+
+\subsection*{Part (b)}
+$$S(x) = \summation F_nx^n, \quad xS(x) = \summation[1] F_{n - 1}x^n, \quad x^2S(x) = \summation F_{n - 2}x^n$$
+Consider the coefficients of
+$$S(x) - xS(x) - x^2S(x).$$
+For $n \ge 2$, the coefficients cancel to $0$. $S(x)$ starts as $0 + 1\cdot x + \cdots$, $xS(x)$ has no constant term and its $x^1$ coefficient is $0$, and $x^2S(x)$ has no $x^0$ or $x^1$ term. So
+$$S(x) - xS(x) - x^2S(x) = x,$$
+and
+$$S(x) = \frac{x}{1 - x - x^2}.$$
+
+\subsection*{Part (c)}
+From part (b),
+$$S(1/10) = \frac{1/10}{1 - 1/10 - 1/100} = \frac{1}{8.9} = 0.1 \cdot \frac{1}{89},$$
+where the sum is the Fibonacci sequence shifted by a decimal.
+Similarly,
+$$S(1/100) = \frac{1}{9899}, \quad S(1/1000) = \frac{1}{998999}.$$
+
+\end{document}

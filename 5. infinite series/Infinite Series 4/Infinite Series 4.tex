@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\summation}[1][0]{\sum_{n=#1}^\infty}
+\newcommand{\summationk}[1][0]{\sum_{k=#1}^\infty}
+\newcommand{\summationm}[1][0]{\sum_{m=#1}^\infty}
+
+\title{Infinite Series 4}
+\author{Siddharth K}
+\date{February 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+
+The sum can be written as a binary expansion:
+$$\sum_{p \text{ prime}} \frac{1}{2^p} = 0.d_1d_2d_3\ldots,$$
+$$d_n = \begin{cases}
+    1 & n\text{ prime} \\
+    0 & \text{otherwise}.
+\end{cases}$$
+The sum is rational if the decimal expansion repeats. Assuming it does, consider a repeating block of length $k$:
+$$(d_N, d_{N + 1}, \ldots, d_{N + k - 1}).$$
+This block cannot be all $0$s (since that would mean there are finitely many primes), so there is at least one $1$, and the number of consecutive zeros between two $1$s is bounded by some $B < k$. This would imply that the gaps between primes are eventually bounded, which is false, so the sum is irrational.
+
+\section*{Problem 2}
+
+Let $x = \frac{\arccos(1/3)}{\pi}$ and assume $x$ is rational. So
+$$\frac{\arccos(1/3)}{\pi} = x,\quad \cos(x\pi) = \frac{1}{3}.$$
+The only rational multiples of $\pi$ that have a rational cosine are:
+\begin{align*}
+    \cos(0) &= 1,\\
+    \cos(\pi/3) &= 1/2 \\
+    \cos(\pi/2) &= 0,\\
+    \cos(2\pi/3) &= -1/2 \\
+    \cos(\pi) &= -1,
+\end{align*}
+none of which are $1/3$. So $x$ must be irrational.
+
+\section*{Problem 3}
+Use the binomial theorem:
+$$x^n(1 - x)^n = \sum_{k = 0}^n \binom{n}{k}(-1)^kx^{n + k}.$$
+Differentiate $n$ times:
+$$\frac{d^n}{dx^n}x^{n + k} = \frac{(n + k)!}{k!}x^k,$$
+$$\frac{d^n}{dx^n}(x^n(1 - x)^n) = \sum_{k = 0}^n \binom nk (-1)^k \frac{(n + k)!}{k!}x^k.$$
+Divide by $n!$:
+$$P_n(x) = \sum_{k = 0}^n \binom nk (-1)^k \frac{(n + k)!}{n!k!}x^k = \sum_{k = 0}^n (-1)^k\binom nk \binom{n + k}{k} x^k.$$
+Since $(-1)^k\binom nk \binom{n + k}{k}$ is an integer, every coefficient of $P_n(x)$ is an integer.
+
+\section*{Problem 8}
+
+Fix irrational $\alpha$ which is a root of an $n$-degree polynomial with integer coefficients. For any integers $p, q$ with $p/q$ sufficiently close to $\alpha$, $|f(p/q)| \ge \frac{1}{q^n}$, because each term is an integer divided by $q^n$, and the result is not $0$. \\
+
+Now factor $|f(r)|$ for any rational $r$:
+$$|f(r)| = |a_n|\prod_{i = 1}^n |r - \alpha_i| = |a_n||r - \alpha|\prod_{i = 2}^n |r - \alpha_i|.$$
+Our goal is to bound the product over $i \ge 2$. Fix
+$$B = 1 + \max\{|\alpha|, |\alpha_2|, \ldots, |\alpha_n|\}.$$
+Assuming $r = p/q$ is within $1$ of $\alpha$ (because otherwise the inequality holds for any $A \le 1$), we have
+$$|r - \alpha| < 1 \implies |r| \le |\alpha| + 1 \le B.$$
+Now we can bound each factor $|r - \alpha_i|$:
+$$|r - \alpha_i| \le |r| + |\alpha_i| \le B + \max_{2 \le i \le n} |\alpha_i|.$$
+Let
+$$C = \prod_{i = 2}^n (B + \max_{2 \le i \le n} |\alpha_i|).$$
+Then for all $r$ with $|r - \alpha| < 1$,
+$$|f(r)| \le |a_n|C|r - \alpha|.$$
+So we have that
+$$\frac{1}{q^n} \le |f(r)| \le |a_n|C|r - \alpha|,$$
+$$|r - \alpha| \ge \frac{1}{|a_n|Cq^n}.$$
+So if we let $A = \frac{1}{|a_n|C}$, the inequality holds.
+
+\section*{Problem 9}
+
+For contradiction, assume $\alpha$ is algebraic and irrational. By Liouville's theorem, there exists $A > 0$ such that, for all $p, q$,
+$$\bigabs{a - \frac{p}{q}} > \frac{A}{q^d},$$
+where $d$ is the degree of the polynomial of which $\alpha$ is a root. Now, choose any integer $n > d$. For large enough $q$, $1/q^n < A/q^d$. For those large $q$, the inequalities
+$$\bigabs{\alpha - \frac{p}{q}} > \frac{A}{q^d},\quad \bigabs{\alpha - \frac{p}{q}} < \frac{1}{q^n}$$
+contradict each other. Therefore, $\alpha$ is not algebraic, so it's transcendental.
+
+\end{document}

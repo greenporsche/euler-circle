@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Chapter 10 Problem Set}
+\author{Siddharth K}
+\date{December 2023}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Primes less than $100$ of the form $a^2 + ab + b^2$ are $3, 7, 13, 19, 31, 37, 43, 61, 67, 73, 79,$ and $97$. Based on this data, it seems like they are all of the form $6k + 1$ with $3$ as an exception.
+\newline
+
+\textbf{2.} We are given that $a^2 + b^2 = 104309$, so $29(a^2 + b^2) = 3024961 = 519^2 + 1660^2$. We know that $(a^2 + b^2)(c^2 + d^2) = (ac - bd)^2 + (ad + bc)^2$. Since $29 = 2^2 + 5^2$, we can say that $(2^2 + 5^2)(a^2 + b^2) = (2a - 5b)^2 + (2b + 5a)^2 = 519^2 + 1660^2$. Solving the system of equations $2a - 5b = 519$ and $5a + 2b = 1660$, we get $a = 322$ and $b = 25$.
+\newline
+
+\textbf{3.} Since $p \equiv 1 \pmod{4}$, we can write $a^2 + b^2 = p^2$ for integers $a$ and $b$. If $a$ and $b$ weren't relatively prime, then there would exist $d$ such that $a = dx$ and $b = dy$, so $d^2(a^2 + b^2) = p^2$. That is only possible when $d = 1$ or $d = p$. The first case means $a$ and $b$ are relatively prime, and the second case means that $a^2 + b^2 = 1$, which means either $a$ or $b$ is $1$ and the other is $0$, which we know is impossible. Therefore, $a$ and $b$ are relatively prime.
+\newline
+
+\textbf{4.} The pair $(6, 26)$ is a counterexample. We see that $6 = 1^2 + 1^2 + 2^2$ and $26 = 1^2 + 3^2 + 4^2$, and $6 \times 26 = 156$ cannot be written as the sum of three squares.
+\newline
+
+\textbf{5.} The list of numbers up to $100$ that can be written as a sum of three squares includes all numbers from $0$ to $100$ except: $$7, 15, 23, 28, 31, 39, 47, 55, 60, 63, 71, 79, 87, 91, 92, 95$$
+From these numbers, it appears that powers of $4$ are removed, numbers congruent to $-1 \pmod{8}$ are removed, and products of such numbers and powers of $4$ are removed.
+\newline
+
+\textbf{6.} We are given that $n = \left(\frac{a}{b}\right)^2 + \left(\frac{c}{d}\right)$. Clearing denominators, we get $b^2d^2n = a^2 + b^2$. Since $b^2d^2n$ is composite and can be written as the sum of two squares, all of its prime factors $p \equiv 3 \pmod{4}$ in the prime factorization have an even exponent.
+\newline
+
+Every prime number in the prime factorization of $n$ is congruent to either $1$, $2$, or $3 \pmod{4}$. We already know that the primes congruent to $1 \pmod{4}$ can be written as the sum of two squares. Also, the only prime congruent to $2 \pmod{4}$ is $2$, which is $1^2 + 1^2$. Finally, we just showed that all primes congruent to $3 \pmod{4}$ have an even power in its prime factorization. From that, we can deduce that it can be written as the sum of two squares. Since $n$ is a product of multiple sums of two squares, it too is a sum of two squares.
+\newline
+
+\textbf{7.} Since $p \equiv 1 \pmod{4}$, we can say that $p = 4k + 1$. Therefore, $(p - 1)! = (4k)! = (1 \cdot 2 \cdot \ldots \cdot 2k)((2k + 1)(2k + 2) \ldots (4k))$.
+\newline
+
+Let's say $a = \{1, 2, \ldots, 2k\}$. We see that $a_i(p - a_i) = a_ip - a_i^2 \equiv -a_i^2 \pmod{p}$ for all $i \in \{1, 2, \ldots, 2k\}$. By Wilson's Theorem, $(p - 1)! \equiv -1 \pmod{p}$, so $\prod_{i = 1}^{2k} a_i(p - a_i) \equiv -1 \pmod{p}$. Therefore, $\prod_{i = 1}^{2k} -a_i^2 \equiv \left(\prod_{i = 1}^{2k} a_i\right)^2 \equiv (2k)! \equiv \left(\frac{p - 1}{2}\right)! \equiv -1 \pmod{p}$. We can let $n = \left(\frac{p - 1}{2}\right)!$, and that would guarantee that $n^2 \equiv -1 \pmod{p}$.
+\newline
+
+\textbf{8.} Let's consider the set $S = \{1, 2, \ldots , p - 1\}$. We can split that set into subsets of the form $\{x, \overline{x}, -x, -\overline{x}, ix, -ix, i\overline{x}, -i\overline{x}\}$. For all $x \in S$, there exists $\overline{x}$ because $p$ is prime and all elements of $S$ are smaller than $p$.
+\newline
+
+Those sets would all have $8$ elements unless: $x = -x$, $x = \overline{x}$, $x = -\overline{x}$, $x = ix$, $x = -ix$, $x = i\overline{x}$, or $x = -i\overline{x}$. If $x = -x$, then $2x \equiv 0 \pmod{p}$. Since $p$ is prime, $x$ must be $0$, which is not an element of $S$. If $x = \overline{x}$, then $x^2 \equiv 1 \pmod{p}$, which means $x = 1$ or $x = p - 1$. In that case, the set would look like $\{x, -x, ix, -ix\}$, with four elements. If $x \equiv -\overline{x} \pmod{p}$, then $x^2 \equiv -1 \pmod{p}$. So the set would be $\{x, -x, ix, -ix\}$, which has four elements. If $x \equiv ix \pmod{p}$, then $x^2 \equiv -x^2 \pmod{p}$, or $2x^2 \equiv x^2 \equiv 0 \pmod{p}$, which cannot be possible given the elements of $S$. If $x \equiv -ix \pmod{p}$, the same result follows. If $x \equiv i\overline{x} \pmod{p}$, then $x^4 \equiv 1 \pmod{p}$. In this case, the subset would be $\{x, -x, \overline{x}, -\overline{x}\}$. The same follows when $x \equiv -i\overline{x} \pmod{p}$.
+\newline
+
+We know that the number of elements in $S$ is a multiple of $8$. Most subsets that we made have $8$ elements except one with $4$. Also, if $x^4 \equiv 1 \pmod{p}$, then there would be two subsets with four elements each. That means $x^2 + 1 \equiv 0 \pmod{p}$, so that the number of elements in $S$ becomes a multiple of $8$. Therefore, if $p \equiv 1 \pmod{8}$, then there exists $x$ such that $x^2 + 1$ is a multiple of $p$.
+\newline
+
+From there, I couldn't find a way to prove that $p = x^2 + 2y^2$.
+\newline
+
+\textbf{9.} Let's assume $p = a^2 + b^2 = c^2 + d^2$. We can factor that as $p = (a + bi)(a - bi) = (c + di)(c - di)$. We know that $|a + bi| = |c + di| = |a - bi| = |c - di|$ because $a^2 + b^2 = c^2 + d^2$. I don't know exactly how to proceed from there.
+
+\end{document}

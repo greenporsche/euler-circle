@@ -1,0 +1,109 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\summation}[1][0]{\sum_{n=#1}^\infty}
+\newcommand{\summationk}[1][0]{\sum_{k=#1}^\infty}
+\newcommand{\summationm}[1][0]{\sum_{m=#1}^\infty}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
+
+\title{p-adic Analysis 2}
+\author{Siddharth K}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+Repeatedly solving $7a_n \equiv 1 \pmod{3^n}$ gives us
+$$\frac{1}{7} = \ldots 01212010212011_3.$$
+
+\section*{Problem 2}
+Yes, since $5 \not\equiv 0 \pmod{11}$, there exists $5^{-1}$. Letting $x = 5^{-1} \cdot 3$, we have that $5x = 3$.
+
+\section*{Problem 3}
+We need $x^2 \equiv -1 \pmod{5}$, which is satisfied by any $x \equiv 2, 3 \pmod{5}$. Now, assume for some $n \ge 1$ we found $x_n$ where
+$$x_n^2 \equiv -1 \pmod{n}.$$
+We want $x_{n + 1} = x_n + a \cdot 5^n$ for some $a \in \{0, 1, 2, 3, 4\}$. So
+$$x_{n + 1}^2 = x_n^2 + 2x_na5^n + a^25^{2n}.$$
+Taking this $\bmod 5^{n + 1}$ gives us
+$$x_n^2 + 2x_na5^n \equiv -1 \pmod{5^{n + 1}}.$$
+Since $x_n^2 \equiv -1 \pmod{5^n}$, we can write $x_n^2 + 1 = c\cdot 5^n$ for some $c \in \Z$. Then we get
+$$c\cdot 5^n + 2x_na5^n \equiv 0 \pmod{5^{n + 1}},$$
+$$c + 2x_na \equiv 0 \pmod{5},$$
+which has a unique solution $a \pmod{5}$.
+
+The first 10 digits are $2121342303$.
+
+There is no solution in $\Z_7$ because all the squares $\bmod 7$ are
+$$0^2 \equiv 0, 1^2 \equiv 1, 2^2 \equiv 4, 3^2 \equiv 2, 4^2 \equiv 2, 5^2 \equiv 4, 6^2 \equiv 1,$$
+none of which are $6$.
+
+
+\section*{Problem 11}
+These are just the rational numbers that have nonnegative $p$-adic valuation, which are rationals of the form $a/b$ where $p \nmid b$.
+
+\section*{Problem 12}
+Let $x \in \Q_p^\times$. There is a unique $n \in \Z$ such that $x = p^ny$ with $y \in \Z_p^\times$. So the problem reduces to writing $y = ru$ with $r \in \{1, \ldots, p - 1\}$ and $u \in 1 + p\Z_p$.
+
+Since $y \in \Z_p^\times$, there is a unique $r \in \{1, \ldots, p - 1\}$ with
+$$y \equiv r \pmod{p}.$$
+Then $r$ is a p-adic unit as well, so $r^{-1} \in \Z_p$. Define
+$$u = r^{-1}y,$$
+so that $y = ru$ and $x = p^n ru$. Since $y \equiv r \pmod{p}$, we get
+$$u \equiv 1 \pmod{p},$$
+as desired. This is unique because both $n$ and $r$ were forced to be unique.
+
+\section*{Problem 15}
+The set $\Q$ is already complete with respect to the trivial absolute value because Cauchy sequences are eventually constant rational numbers, so they always converge to rational numbers.
+
+\section*{Problem 16}
+We have that
+$$\prod_p |x|_p = \prod_p p^{-v_p(x)} = \bigp{\prod_p p^{v_p(x)}}^{-1}.$$
+But by definition,
+$$\prod_p p^{v_p(x)} = |x|$$
+since it is the exact prime factorization of $|x|$. Since $|x| = |x|_\infty$,
+$$|x|_\infty \prod_p |x|_p = |x|_\infty \cdot |x|^{-1} = 1.$$
+
+\section*{Problem 17}
+Assume $x = r^2$ for some $r \in \Q$. Since $r \in \R$ and $r \in \Q_p$, $x = r^2$ is a perfect square in $\R$ and $\Q_p$.
+
+Now, assume $x$ is a square in $\Q_p$ for every $p$, and also a square in $\R$ (which forces it to be positive and finite).
+Fix a prime $p$. Since $x$ is a square in $\Q_p$, there exists $y_p \in \Q_p$ such that $x = y_p^2$, and therefore $v_p(x) = 2v_p(y)$. So $v_p(x)$ is even for all $p$. Now, write
+$$x = \prod_p p^{e_p}.$$
+Since each $e_p$ is even, we can let $f_p = e_p/2$ and write
+$$x = \bigp{\prod_p p^{f_p}}^2,$$
+so $x$ is a perfect square in $\Q$.
+
+\section*{Problem 18}
+\subsection*{Part (b)}
+Consider
+$$\R = \bigcup_{n = 1}^\infty (-n, n).$$
+Any finite subcover is of the form
+$$(-n_1, n_1)\cup \ldots\cup(-n_k, n_k) = (-N, N)$$
+where $N = \max_i(n_i)$, and this doesn't cover $\R$.
+
+\subsection*{Part (c)}
+First assume $A$ is compact. It has to be unbounded because otherwise,
+$$U_n = (-n, n), \quad n \ge 1$$
+would form an open cover of $A$ with no finite subcover. To show $A$ is closed, let $x \in \R \setminus A$. For each $a \in A$, set
+$$U_a = \left(a - \frac{1}{2}|x - a|,\; a + \frac{1}{2}|x - a|\right).$$
+Then $\{X_a\}_{a \in A}$. By compactness, only finitely many are required:
+$$A \subseteq U_{a_1} \cup \cdots \cup U_{a_n}.$$
+Let
+$$\eps = \min_i \frac{|x - a_i|}{2} > 0.$$
+Then $(x - \eps, x + e)$ doesn't intersect with any of the $U_{a_i}$, so it misses $A$. So $R \setminus A$ is open, and therefore $A$ is closed.
+
+\end{document}

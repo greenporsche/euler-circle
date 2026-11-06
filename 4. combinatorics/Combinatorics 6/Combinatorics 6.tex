@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{Combinatorics 5}
+\author{Siddharth K}
+\date{October 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+$$(f\delta)(x, y) = \sum_{x \le z \le y} f(x, z)\delta(z, y) = f(x, y),$$
+$$(\delta f)(x, y) = \sum_{x \le z \le y} \delta(x, z)f(z, y) = f(x, y).$$
+
+\section*{Problem 2}
+Let $P = \{a, b\}$ where $a \le b$. Define $f(x, y) = 1$ if $x = y = b$ and $0$ otherwise, and $g(x, y) = 1$ if $x = y = a$ and $0$ otherwise. The functions $f$ and $g$ correspond to the matrices $\begin{pmatrix} 1&0 \\ 0&0 \end{pmatrix}$ and $\begin{pmatrix} 0&0 \\ 0&1 \end{pmatrix}$, and $\begin{pmatrix} 1&0 \\ 0&0 \end{pmatrix}\begin{pmatrix} 0&0 \\ 0&1 \end{pmatrix} = \begin{pmatrix} 0&0 \\ 0&0 \end{pmatrix}$. So $f$, $g$ aren't zero, but $fg$ is.
+
+\section*{Problem 3}
+Let $P = \{a, b\}$ where $a \le b$ and define $f \in I(P)$ by $f(a, a) = 1$, $f(b, b) = 0$, $f(a, b) = 1$, and $f(x, y) = 0$ for all other $x, y$ with $x \le y$. Then $f$ corresponds to the matrix $\begin{pmatrix} 1&1 \\ 0&0 \end{pmatrix}$. We have that $\begin{pmatrix} 1&1 \\ 0&0 \end{pmatrix}\begin{pmatrix} 1&1 \\ 0&0 \end{pmatrix} = \begin{pmatrix} 1&1 \\ 0&0 \end{pmatrix}$, so $f$ is idempotent.
+
+\section*{Problem 4}
+\subsection*{Part (a)}
+$$\sum_{x\le y}\sum_{k\ge 0}(\zeta - \delta)^k(x, y) = \sum_{x \le y}(2\delta - \zeta)^{-1}(x, y).$$
+
+\subsection*{Part (b)}
+$$\sum_{x\le y}(\zeta - \delta)^2(x, y).$$
+
+\section*{Problem 7}
+Call the minimum and maximum elements $a$ and $b$ respectively. For each $y \in P$,
+$$\sum_{x \le y} \mu(x, y) = \sum_{a \le z \le y}\zeta(a, z)\mu(z, y) = (\zeta\mu)(a, y) = \delta(a, y).$$
+Summing over $y$ gives
+$$\sum_{y\in P}\sum_{x \le y}\mu(x, y) = \sum_{y\in P} \delta(a, y) = 1.$$
+
+\section*{Problem 8}
+Define the poset $Q$ as $(P, \le_1)$ where $x \le_1 y$ iff $y \le x$. Then
+$$g(y) = \sum_{x\ge y}f(x) = \sum_{x\le_1y}f(x).$$
+Applying theorem 4.1, we have
+$$f(y) = \sum_{x\le_1y} g(x)\mu_Q(x, y).$$
+Since the interval $[x, y]$ in $P$ is the same set as the interval $[y, x]$ in $Q$, it holds that
+$$\mu_Q(x, y) = \mu_P(x, y).$$
+So
+$$f(y) = \sum_{x\le_1y} g(x)\mu_Q(x, y) = \sum_{x\ge y} g(x)\mu(x, y).$$
+
+\end{document}

@@ -1,0 +1,95 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% <added stuff>
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\power}{\mathcal{P}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\mcO}{\mathcal{O}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nullset}{\varnothing}
+\newcommand{\lb}{\left(}
+\newcommand{\rb}{\right)}
+\newcommand{\minus}{\backslash}
+\newcommand{\supp}{\text{supp}}
+% </added stuff>
+
+\title{Fundamentals 27}
+\author{Siddharth K}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 27.1}
+(During the problem session it was clarified that the problem meant to prove the other direction of Urysohn's Lemma) \\
+
+Assume that for any two nonempty disjoint closed $A, B \subseteq X$, there is $f: X \to [0, 1]$ such that $f(A) = \{0\}$ and $f(B) = \{1\}$. We want to show that $\mathbf{T_4}$. Let $A, B$ be closed and disjoint. Then there exists continuous $f$ such that $f(A) = \{0\}$ and $f(B) = \{1\}$. Let
+$$C = f^{-1}\lb\left[0, \frac{1}{2}\right)\rb, \quad D = f^{-1}\lb\left(\frac{1}{2}, 1\right]\rb.$$
+We have that $A \subseteq C$, $B \subseteq D$ and since $[0, 1/2)$ and $(1/2, 1]$ are open in $[0, 1]$, $C, D$ are continuous and disjoint. Therefore $X$ is $\mathbf{T_4}$.
+
+\subsection*{Problem 27.2}
+Let $x \in \R$ and $A \subseteq X$ be closed and not containing $x$. Let
+$$y_1 = \sup\{y \in A: y < x\}, \text{ or } -\infty,$$
+$$y_2 = \inf\{y \in A: y > x\}, \text{ or } \infty.$$
+Since $A$ is closed, if $y_1, y_2 \neq -\infty, \infty$, then $y_1, y_2 \in A$ because closed sets contain their limit points. \\
+
+We can let
+$$f(y) = \max\lb0, 1 - \frac{|x - y|}{\min(|x - y_1|, |x - y_2|)}\rb$$
+whenever $y \in (y_1, y_2)$ (creating a spike around $x$ and within $(y_1, y_2)$) and $f(y) = 0$ everywhere else, so that $f$ is continuous, $f(A) = \{0\}$, and $f(x) = 1$.
+
+\subsection*{Problem 27.3}
+Let $A \subseteq Y$ be closed and pick $y_0 \in Y \minus A$. We know that $A$ is closed if there exists some closed $C \subseteq X$ with $A = C \cap Y$. Since $X$ is completely regular, there is a continuous $f: X \to [0, 1]$ with $f(y_0) = 1$ and $f(C) = \{0\}$. Restricting $f$ to $Y$, we see that $f|_Y(y_0) = 1$ and $f|_Y(A) = f(C \cap Y) = \{0\}$, so $Y$ is completely regular.
+
+\subsection*{Problem 27.4}
+\subsubsection*{Part (1)}
+Assume $x \in A$. Then one of the distances in $\{d(x, y): y \in A\}$ is $d(x, x) = 0$, so $\inf\{d(x, y): y \in A\} = 0$. \\
+
+Assume $\inf\{d(x, y): y \in A\} = 0$. For each integer $n \ge 1$, there is some $y_n \in A$ with $d(x, y_n) < \frac{1}{n}$. Therefore, the sequence $(y_n)$ satisfies $d(x, y_n) \to 0$, so $y_n \to x$. But $A$ is closed, so it contains its limit points, so $x \in A$.
+
+\subsubsection*{Part (2)}
+Let $A, B \subseteq X$ be disjoint and closed. By part (1),
+$$D(x, A) = 0 \iff x \in A, \quad D(x, B) = 0 \iff x \in B.$$
+Since $A$ and $B$ are disjoint, for all $x \in X$, at least one of $D(x, A), D(x, B)$ is positive, so
+$$D(x, A) + D(x, B) > 0$$
+for all $x \in X$. Therefore, the function
+$$f(x) = \frac{D(x, A)}{D(x, A) + D(x, B)}$$
+is well-defined and takes values in $[0, 1]$. \\
+
+If $x \in A$, then $D(x, A) = 0$ and $D(x, B) > 0$ so $f(x) = 0$. If $x \in B$, then $D(x, B) = 0$ and $D(x, A) > 0$, so $f(x) = \frac{D(x, A)}{D(x, A) + 0} = 1$. So it remains to show that $f$ is continuous. \\
+
+We claim that each map $D(x, A)$ and $D(x, B)$ is Lipschitz, and therefore continuous. For any $x, y \in X$ and $a \in A$,
+$$d(x, a) \le d(x, y) + d(y, a) \implies d(x, a) - d(y, a) \le d(x, y).$$
+Taking the infimum over $a \in A$, we get
+$$D(x, A) - D(y, A) \le d(x, y).$$
+By the same argument,
+$$D(y, A) - D(x, A) \le d(x, y).$$
+Therefore, $|D(x, A) - D(y, A)| \le d(x, y)$, so the function mapping $x$ to $D(x, A)$ is Lipschitz. Similarly, the function $D(x, B)$ is Lipschitz, so $g(x) = D(x, A) + D(x, B)$ is Lipschitz as well. \\
+
+Now, since $f(x) = D(x, A)/g(x)$ is the quotient of two continuous functions where the denominator is never $0$, $f$ is continuous.
+
+\subsection*{Problem 27.9}
+Let $\{f_i: X \to [0, 1]\}_{i \in I}$ be a partition of unity on $X$ subordinate to $\{U_i\}_{i \in I}$ and $\{g_i: X \to [0, 1]\}_{j \in J}$ be a partition of unity on $Y$ subordinate to $\{V_j\}_{j \in J}$. \\
+
+For each $(i, j) \in I\times J$ define
+$$h_{(i, j)}: X\times Y \to [0, 1], \quad h_{(i, j)}(x, y) = f_i(x)g_j(y).$$
+We have that
+$$\supp(h_{(i,j)}) = \overline{\{x: f_i(x) \neq 0\} \times \{y: g_j(y) \neq 0\}}$$
+$$= \overline{\{x: f_i(x) \neq 0\}} \times \overline{\{y: g_j(y) \neq 0\}} = \supp (f_i) \times \supp(g_j) \subseteq U_i \times V_j.$$
+Also, for every $(x, y) \in X\times Y$,
+$$\sum_{(i, j) \in I\times J}h_{(i, j)}(x, y) = \sum_{i \in I}\sum_{j \in J} f_i(x)g_j(y) = \lb\sum_{i\in I}f_i(x)\rb\lb\sum_{j\in J}g_i(y)\rb = 1\cdot 1 = 1.$$
+So $h_{(i, j)}$ is a partition of unity on $X\times Y$.
+
+\end{document}

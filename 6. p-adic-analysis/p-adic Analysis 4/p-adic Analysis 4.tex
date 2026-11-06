@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\summation}[1][0]{\sum_{n=#1}^\infty}
+\newcommand{\summationk}[1][0]{\sum_{k=#1}^\infty}
+\newcommand{\summationm}[1][0]{\sum_{m=#1}^\infty}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
+
+\title{p-adic Analysis 4}
+\author{Siddharth K}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+The first digit is $2$ since $2^2 = 4 \equiv -3 \pmod{7}$. Lifting to higher powers of $7$ gives us
+$$\sqrt{-3} \in \Q_7 = \ldots1256052.$$
+
+\section*{Problem 2}
+Assume $p \nmid n$ and $\alpha \equiv 1 \pmod{p}$. Consider
+$$f(x) = x^n - \alpha.$$
+Since $\alpha \equiv 1 \pmod{p}$,
+$$f(1) = 1 - \alpha \equiv 0 \pmod{p}.$$
+Also,
+$$f'(x) = nx^{n - 1},$$
+so $f'(1) = n$. Since $p \nmid n$,
+$$f'(1) \not\equiv 0 \pmod{p}.$$
+Therefore, by Hensel's lemma, there exists $x \in \Z_p$ such that
+$$x^n = \alpha.$$
+
+\section*{Problem 3}
+$a$ must be even. Using Hensel's lemma on
+$$f(x) = x^2 + x + a,$$
+we get
+$$f(x) \equiv x^2 + x + a \equiv 2x + a \equiv a.$$
+If $a$ is odd, then $f(x) \equiv 1 \pmod{2}$ for both $x = 0,1$. There is no root $\pmod{2}$, so no root in $\Z_2$ (and therefore $\Q_2$ by rational root theorem). If $a$ is even, $f(x) \equiv 0 \pmod{2}$ for both $x = 0$ and $x = 1$. Also,
+$$f'(x) = 2x + 1 \equiv 1 \pmod{2},$$
+so Hensel's lemma applies, and $x^2 + x + a$ has a root in $\Z_2$.
+
+\section*{Problem 4}
+Trying each $x \in \{0,1,2,3,4,5,6\}$, we have that $x \equiv 2,3,4,5 \pmod{7}$ satisfy $f(x) \equiv 0 \pmod{7}$. Also,
+$$f'(x) = 4x^3 + 2x,$$
+which is nonzero $\pmod{7}$ for all $x = 2,3,4,5$. By Hensel's lemma, each gives a root of $f(x)$, so there are $4$ roots.
+
+\section*{Problem 5}
+In $\R$, $x = \sqrt{2}$ is a root. But since $\sqrt{2}, \sqrt{17}, \sqrt{34}$ are all irrational, there are no roots in $\Q$.
+
+First, assume $p \neq 2, 17$. Then
+$$\frac{34}{p} = \frac{2}{p} \cdot \frac{17}{p} \equiv (-1)^2 = 1.$$
+So $34$ is a square $\pmod{p}$, and by Hensel's lemma, $34$ is a square in $\Q_p$.
+
+Now, assume $p = 2$. Since $17 \equiv 1 \pmod{2}$, $17$ is a square in $\Q_2$.
+
+Finally, assume $p = 17$. $2$ is a square, since $6^2 \equiv 36 \equiv 2 \pmod{17}$. The derivative of $x^2 - 2$ at $6$ is $12$, so by Hensel's lemma, $6$ lifts to a root of $x^2 - 2$ in $\Q_{17}$.
+
+\section*{Problem 6}
+For $\R$: take $x = 3$ and $y = \pm 4\sqrt{2}$.
+
+For $\Q_p$: let $p = 2$. Since $17 \equiv 1 \pmod{16}$, $17$ has a fourth root in $\Q_2$. So choose $x$ with $x^4 \equiv 17$ and take $y = 0$.
+
+Now, let $p = 17$. We can take $x = 1$ and $y = 3$, so that
+$$x^4 - 17 \equiv 1, \quad 2y^2 \equiv 1 \pmod{17}.$$
+Additionally,
+$$\frac{\partial}{\partial y}(x^4 - 17 - 2y^2) = -4y,$$
+which is $-12 \not\equiv 0 \pmod{17}$ at $y = 3$, so by Hensel's lemma, this lifts to a solution in $\Q_{17}$.
+
+I couldn't figure out the $p \neq 2, 17$ case.
+
+\section*{Problem 7}
+Assume
+$$f(x) = \sum_{n = 0}^\infty a_nx^n, \quad a_n \in \Z_p.$$
+Also assume $\alpha_0$ satisfies
+$$f(\alpha_0) \equiv 0 \pmod{p}, \quad f'(\alpha_0) \not\equiv 0 \pmod{p}.$$
+Pick any lift $x_1$ of $\alpha_0$ and assume $x_n$ is known. We wish to find
+$$x_{n + 1} = x_n + p^nt, \quad t \in [p].$$
+Using the taylor expansion,
+$$f(x_n + p^nt) = f(x_n) + p^ntf'(x_n) + p^{2n}(\cdots) + \cdots.$$
+The higher terms vanish mod $p^{n + 1}$, so
+$$f(x_{n + 1}) \equiv f(x_n) + p^ntf'(x_n) \pmod{p^{n + 1}}.$$
+Since $f(x_n) \equiv 0 \pmod{p^n}$, we have that $f(x_n) = p^nc$ for some $c$. So we need
+$$p^n(c + tf'(x_n)) \equiv 0 \pmod{p^{n + 1}},$$
+$$c + tf'(x_n) \equiv 0 \pmod{p},$$
+which is solvable for t, since $f'(x_n) \equiv f'(\alpha_0) \not\equiv 0 \pmod{p}$. Continuing to infinity, we get $x \in \Z_p$ where $f(x) = 0$.
+
+\end{document}

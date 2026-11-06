@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% <added stuff>
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\power}{\mathcal{P}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\B}{\mathcal{B}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nullset}{\varnothing}
+\newcommand{\lb}{\left(}
+\newcommand{\rb}{\right)}
+\newcommand{\minus}{\backslash}
+% </added stuff>
+
+\title{Fundamentals 23}
+\author{Siddharth K}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 23.1}
+\subsubsection*{Part 1)}
+Let $f: X_1\times X_2 \to X_2 \times X_1$ be defined as $f((a, b)) = (b, a)$. The inverse is $f$, so it is a homeomorphism.
+
+\subsubsection*{Part 2)}
+Define $X_1\times \cdots \times X_n = (X_1 \times \cdots \times X_{n - 1}) \times X_n$.
+
+\subsubsection*{Part 3)}
+Define $X_1\times \cdots \times X_n$ as the set of all $(x_1, \ldots, x_n)$ where $x_1, \ldots, x_n \in X_1, \ldots, X_n$.
+
+\subsection*{Problem 23.3}
+We need to show that $f^{-1}((x, x)) = x$ is continuous. Let $V = \{(x_\alpha, x_\alpha): \alpha \in A\}$ be open. Since $V \subseteq X \times X$ and $V$ is open, it is a union of several $U_\beta \times U_\beta$ where $U_\beta$ are open in $X$ for all $\beta \in B$. So $f^{-1}(V) = \{x_\alpha: \alpha \in A\}$ is open in $X$, so $f$ is continuous.
+
+\subsection*{Problem 23.4}
+Consider the interval $(a, b) \subseteq X$, and the mapping $f: (a, b) \to \R^2$ to a figure-eight.
+
+\subsection*{Problem 23.5}
+We can roll the square into a cylinder and connect one end to the inside of the other, creating a Klein bottle.
+
+\subsection*{Problem 23.6}
+Reflexivity: Clearly $x = x$ so $x \sim x$. \\
+Symmetry: If $x \sim y$ then either $x = y$, in which case $y = x$ so $y \sim x$, or $\{x, y\} = \{0, 1\}$ which is a symmetric condition. \\
+Transitivity: Suppose $x \sim y$ and $y \sim z$. If $x = y$ and $y = z$ then $x = z$ so $x \sim z$. If $x = y$ but $y \neq z$, then $\{y, z\} = \{0, 1\}$, so $\{x, z\} = \{y, z\} = \{0, 1\}$ so $x \sim z$. Similarly if $x \neq y$ but $y = z$ then $x \sim z$. Finally, if $x \neq y$ and $y \neq z$ then $\{x, y\} = \{y, z\} = \{0, 1\}$, and since $x \neq y$, $y$ is either $0$ or $1$ so $\{z\} = \{0, 1\} - \{y\} = \{x\}$, so $x \sim z$.
+
+\subsection*{Problem 23.9}
+Let $X = \{a, b, c\}$ and
+$$T_1 = \{\nullset, \{a\}, \{a, b\}, \{a, c\}, X\},$$
+$$T_2 = \{\nullset, \{a\}, \{b\}, \{a, b\}, X\}.$$
+We have that $|T_1| = |T_2| = 5$, but they are not homeomorphic.
+
+\end{document}

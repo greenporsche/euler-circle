@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Chapter 19 Problem Set}
+\author{Siddharth K}
+\date{February 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1a.} This is a linear recurrence who's characteristic polynomial is $P(x) = x^2 - 3x + 2$, and its roots are $-1, -2$. We know that there exist $s_1$ and $s_2$ such that $a_n = s_1(-1)^n + s_2(-2)^n$. Since $a_0 = 1$, $s_1 + s_2 = 1$, and since $a_1 = 3$, $-s_1 - 2s_2 = 3$. Solving this system, we get $s_1 = 5$ and $s_2 = -4$. Therefore, $a_n = 5(-1)^n - 4(-2)^n$.
+\newline
+
+\textbf{1b.} This recurrence's characteristic polynomial is $P(x) = x^2 - 4x + 1$, and its roots are $2 + \sqrt{3}, 2 - \sqrt{3}$. So there exist $s_1$ and $s_2$ such that $a_n = s_1(2 + \sqrt{3})^n + s_2(2 - \sqrt{3})^n$. This gives us $s_1 + s_2 = 2$ and $s_1(2 + \sqrt{3}) + s_2(2 - \sqrt{3}) = 3$. Solving that system, we get $s_1 = \frac{6 - \sqrt{3}}{6}$ and $s_2 = \frac{6 + \sqrt{3}}{6}$. Therefore, $a_n = \frac{6 - \sqrt{3}}{6}(2 + \sqrt{3})^n + \frac{6 + \sqrt{3}}{6}(2 - \sqrt{3})^n$.
+\newline
+
+\textbf{2.} Let $a_n$ represent the number of pairs of rabbits after $n$ months. For $n > 2$, each pair of rabbits that was alive in month $n - 1$ will still be alive, and each pair of rabbits from month $n - 2$ would have each produced one pair. Therefore, $a_n = a_{n - 1} + a_{n - 2}$. Since $a_0 = 1$ and $a_1 = 1$, this sequence is just the Fibonacci sequence, where $a_n = F_{n + 1}$ ($F_0 = 0$ and $F_1 = 1$). Therefore, $a_{12} = F_{13} = 233$.
+\newline
+
+\textbf{3.} Let's consider the ways to fill the rightmost part of the rectangle. If we choose a $1\times 1$ space, there are $5$ choices and $a_{n - 1}$ for the rest of the rectangle. If we choose a $1\times 2$ space, there are $4$ choices and $a_{n - 2}$ for the rest of the rectangle. Therefore, the recurrence relation is $a_n = 5a_{n - 1} + 4a_{n - 2}$. There is one way to fill a $1\times 0$ grid and $5$ ways to fill a $1\times 1$ grid, so $a_0 = 1$ and $a_1 = 5$.
+\newline
+
+Now, we have a linear recurrence relation and its initial conditions. Its characteristic polynomial is $P(x) = x^2 - 5x - 4$ and its roots are $\frac{5 \pm \sqrt{41}}{2}$. That means there exist $s_1$ and $s_2$ such that $a_n = s_1\left(\frac{5 + \sqrt{41}}{2}\right)^n + s_2\left(\frac{5 - \sqrt{41}}{2}\right)^n$. Using the initial conditions, we get the system of equations: $$s_1 + s_2 = 1,$$ $$s_1\left(\frac{5 + \sqrt{41}}{2}\right) + s_2\left(\frac{5 - \sqrt{41}}{2}\right) = 5.$$ Solving it, we get $s_1 = \frac{41 + 5\sqrt{41}}{84}$ and $s_2 = \frac{41 - 5\sqrt{41}}{84}$. Therefore, $a_n = \left(\frac{41 + 5\sqrt{41}}{84}\right)\left(\frac{5 + \sqrt{41}}{2}\right)^n + \left(\frac{41 - 5\sqrt{41}}{84}\right)\left(\frac{5 - \sqrt{41}}{2}\right)^n$.
+\newline
+
+\textbf{4.} The recurrence's solution is $a_n = \lfloor\log_2(n)\rfloor + 7$, and we can prove this using induction. When $n = 1$, $a_n = 7 = \lfloor\log_2(1)\rfloor + 7$.
+\newline
+
+Now, let's assume $a_n = \lfloor\log_2(n)\rfloor + 7$. By the given recurrence, we see that $$a_{2n} = a_n + 1 = \lfloor\log_2(n)\rfloor + 8 = \lfloor\log_2(2n/2)\rfloor + 8$$$$ = \lfloor\log_2(2n) - \log_2(1/2)\rfloor + 8 = \lfloor\log_2(2n) - 1\rfloor + 8 = \lfloor\log_2(2n)\rfloor + 7,$$ as desired.
+\newline
+
+\textbf{5.} Let's consider the position of element $1$ in a derangement of $[n]$. That element must move to the position of element $k$ where $2 \le k \le n$. Let's assume $k$ doesn't move to the first spot. Then, we need to find a derangement of the remaining $n - 1$ elements. Since there are $n - 1$ ways to choose $k$, there are $(n - 1)d(n - 1)$ ways to create a derangement this way.
+\newline
+
+Now, let's assume $1$ and $k$ switch spots. Then we are left with $n - 2$ elements to find a derangement of, so the total number of ways to form a derangement of $[n]$ this way is $(n - 1)d(n - 2)$. Adding both cases, we get $d(n) = (n - 1)(d(n - 1) + d(n - 2))$.
+\newline
+
+\textbf{7.} In the process of flipping coins, Bob's score must have been either $n - 2$ or $n - 1$. If it was $n - 1$, the probability that his score becomes $n$ is $\frac{1}{2}$. If his score was $n - 2$, the probability that his score becomes $n$ without reaching $n - 1$ is $\frac{1}{2}$ (if it does reach $n - 1$ then it counts as the earlier case). So $p_n = \frac{1}{2}p_{n - 1} + \frac{1}{2}p_{n - 2}$. Also, $p_0 = 1$ since the score is always $0$ at the start, and $p_1 = \frac{1}{2}$ since, after the first flip, his score either reaches $1$ or $2$ with equal probability.
+\newline
+
+Now, we have a linear recurrence and two initial conditions. The recurrence's characteristic polynomial is $P(x) = x^2 - \frac{1}{2}x - \frac{1}{2}$, and its roots are $\frac{1}{2}$ and $1$. That means there exist $s_1$ and $s_2$ such that $p_n = s_1(\frac{1}{2})^n + s_2(1)^n = \frac{s_1}{2^n} + s_2$. We know that $p_0 = 1$, so $s_1 + s_2 = 1$. Also, $p_1 = \frac{1}{2}$, so $\frac{s_1}{2} + s_2 = \frac{1}{2}$. Solving the system, we get $s_1 = 1$ and $s_2 = 0$. Therefore, $p_n = \frac{1}{2^n}$.
+\newline
+
+\textbf{8.} If $a_n + b_n\sqrt{3} = (2 + \sqrt{3})^{2n - 1}$, then $$a_{n + 1} + b_{n + 1}\sqrt{3} = (2 + \sqrt{3})^{2n + 1} = (2 + \sqrt{3})^2(a_n + b_n\sqrt{3}) = (7 + 4\sqrt{3})(a_n + b_n\sqrt{3})$$ $$= (7a_n + 12b_n) + (4a_n + 6b_n)\sqrt{3}.$$ This gives us $a_{n + 1} = 7a_n + 12b_n$. Since $a_n + b_n\sqrt{3} = (2 + \sqrt{3})^{2n - 1}$, we know that $b_n = \frac{\sqrt{3}}{3}((2 + \sqrt{3})^{2n - 1} - a_n)$. Substituting that into the equation, we get $a_{n + 1} = (7 - 4\sqrt{3})a_n + 4\sqrt{3}(2 + \sqrt{3})^{2n - 1}$. Also, $a_1 = 2$. I tried proving that $a_n - 1$ is a perfect square by induction, but it didn't work.
+\newline
+
+\textbf{9.} The closed formula for the Josephus problem is $J(n) = 2(n - 2^{\lfloor\log_2n\rfloor}) + 1$. The recurrence is $J(2n) = 2J(n) - 1$ and $J(2n + 1) = 2J(n) + 1$, and the initial condition is $J(1) = 1$. That matches the closed form because $J(1) = 2(1 - 2^0) + 1 = 1$.
+\newline
+
+Let's assume that $J(n) = 2(n - 2^{\lfloor\log_2n\rfloor}) + 1$. We need to prove that $J(2n) = 2(2n - 2^{\lfloor\log_2(2n)\rfloor}) + 1$. By the recurrence, $$J(2n) = 2J(n) - 1 = 2(2(n - 2^{\lfloor\log_2n\rfloor}) + 1) - 1 = 2(2n - 2^{\lfloor\log_2n\rfloor + 1}) + 1.$$ Also, we have $\lfloor\log_2n\rfloor + 1 = \lfloor\log_2n + 1\rfloor = \lfloor\log_2n + \log_22\rfloor = \lfloor\log_2(2n)\rfloor$. Therefore, $J(2n) = 2(2n - 2^{\lfloor\log_2(2n)\rfloor}) + 1$, as desired.
+\newline
+
+Now, we need to prove that $J(2n + 1) = 2((2n + 1) - 2^{\lfloor\log_2(2n + 1)\rfloor}) + 1$. By the recurrence, $$J(2n + 1) = 2J(n) + 1 = 2(2n - 2^{\lfloor\log_2(2n)\rfloor} + 1) + 1 = 2((2n + 1) - 2^{\lfloor\log_2(2n)\rfloor}).$$ Also, $\lfloor\log_2(2n)\rfloor \neq \lfloor\log_2(2n + 1)\rfloor$ if and only if $2n$ is one less than a power of $2$, which is impossible since it is even. Therefore, $\lfloor\log_2(2n)\rfloor = \lfloor\log_2(2n + 1)\rfloor$ and $J(2n + 1) = 2((2n + 1) - 2^{\lfloor\log_2(2n + 1)\rfloor})$, as desired.
+\newline
+
+\end{document}

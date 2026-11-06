@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\OO}{\mathcal{O}}
+
+\title{Fundamentals 16}
+\author{Siddharth K}
+\date{February 2025}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1a.} Define $f: \R \to \R$ as
+$$f(x) = \begin{cases}
+    1 & x \ge 0, \\
+    0 & x < 0.
+\end{cases}$$
+Regardless of the choice of $K \subseteq \R$, $f(K) \subseteq \{0, 1\}$, which is closed and bounded. So $f$ is a compact map, but not continuous. \\
+
+\textbf{2.} Since $x, y \in [-1, 1]$, the maximum value of $|x + y|$ is $2$. Fix $\eps$ and let $\delta < \eps/2$. If $|x - y| < \delta$, then
+$$|x^2 - y^2| = |x - y||x + y| < \delta |x + y| \le 2\delta < \eps,$$
+so $f$ is uniformly continuous. \\
+
+To show that $f: \R \to \R$ defined by $f(x) = x^2$ is not uniformly continuous, we need to show that there exists $\eps > 0$ such that for all $\delta > 0$ there exist $x, y \in \R$ such that if $|x - y| < \delta$ then $|x^2 - y^2| \ge \eps$. \\
+
+Fix $\eps$ and $\delta$, and choose $x, y$ such that $|x + y| \ge \eps/\delta$ and $|x - y| < \delta$. Then we have that
+$$|x^2 - y^2| = |x - y||x + y| \ge |x - y|\frac{\eps}{\delta} > \eps,$$
+so $f$ is not uniformly continuous. \\
+
+\textbf{3a.} Fix $\eps > 0$ and let $\delta = \eps a^2$. If $x, y \in [a, \infty]$ then the maximum value of $|xy|$ is $a^2$. If $|x - y| < \delta$, then
+$$\left|\frac{1}{x} - \frac{1}{y}\right| = \left|\frac{y - x}{xy}\right| < \frac{\delta}{|xy|} \le \frac{\delta}{a^2} = \eps,$$
+so $f$ is continuous. \\
+
+\textbf{3b.} We need to show that there exists $\eps > 0$ such that for all $\delta > 0$ there exist $x, y \in (0, \infty)$ such that if $|x - y| < \delta$ then $\left|\frac{1}{x} - \frac{1}{y}\right| \ge \eps$. \\
+
+Fix $\eps > 0$ and $\delta > 0$ and choose $x, y$ such that $|xy| < \delta/\eps$ and $|x - y| < \delta$. Then
+$$\left|\frac{1}{x} - \frac{1}{y}\right| = \left|\frac{y - x}{xy}\right| \ge |y - x|\frac{\eps}{\delta} > \eps,$$
+so $f$ is not uniformly continuous. \\
+
+\textbf{4.} Consider the restriction of $f$ to $[0, 1]$. Since $[0, 1]$ is compact and $f$ is continuous, $f: [0, 1] \to \R$ is uniformly continuous by Proposition 16.9. Now, we consider $f$ restricted to $(1, \infty)$. We see that, if $x, y \in (1, \infty)$ then $|\sqrt{x} + \sqrt{y}| > 2$. Fix $\eps > 0$ and choose $\delta = 2\eps$. If $|x - y| < \delta$ then
+$$|\sqrt{x} - \sqrt{y}| = \frac{|\sqrt{x} + \sqrt{y}||\sqrt{x} - \sqrt{y}|}{|\sqrt{x} + \sqrt{y}|} = \frac{|x - y|}{|\sqrt{x} + \sqrt{y}|} < \frac{\delta}{2} = \eps,$$
+so $f$ is uniformly continuous in $(1, \infty)$ as well. \\
+
+\textbf{5.} Since $f$ is Lipschitz, there exists $K$ such that
+$$\rho(f(x), f(y)) \le Kd(x, y)$$
+for all $x, y \in X$. Now fix $\eps$ and let $\delta = \eps/K$. Then if $d(x, y) < \delta$,
+$$\rho(f(x), f(y)) \le Kd(x, y) < K\delta = K\frac{\eps}{K} = \eps,$$
+so $f$ is uniformly continuous. \\
+
+An example of a function that is uniformly continuous but not Lipschitz is $f: [0, \infty) \to \R$ defined by $f(x) = \sqrt{x}$. We know it is uniformly continuous, but it is not Lipschitz because the rate of change near $0$ is unbounded. \\
+
+\textbf{6.} Since $f$ is nonconstant, $f([a, b])$ has at least $2$ elements. For contradiction, assume $f([a, b]) = \{u, v\}$ with $u < v$. Then let
+$$A = \{x \in [a, b]: f(x) = u\},$$
+$$B = \{x \in [a, b]: f(x) = v\}.$$
+Take two points $x_0 \in A$ and $y_0 \in B$. WLOG, $x_0 < y_0$. Define
+$$c = \inf\{x \in [x_0, y_0]: f(x) = v\}.$$
+The set is nonempty because $y_0 \in [x_0, y_0]$ and $f(y_0) = v$, and $c \in [x_0, y_0]$ because it is closed. \\
+
+Consider the case where $f(c) = u$. Let $\eps = \frac{v - u}{2}$. Since $f$ is continuous, there exists $\delta > 0$ such that
+$$|x - c| < \delta \implies |f(x) - f(c)| = |f(x) - u| < \eps = \frac{v - u}{2}.$$
+But if $|x - c| < \delta$ and $x > c$, then by the definition of $c$, $f(x) = v$ and $|v - u| = |f(x) - f(c)| > \frac{v - u}{2} = \eps$, which is a contradiction. \\
+
+By a similar argument, if $f(c) = v$, then there exists $x < c$ arbitrarily close to $c$ where $f(x) = u$, contradicting continuity of $f$. Therefore, $f([a, b]) \neq \{u, v\}$, so it contains more than two values. \\
+
+\textbf{7.} Define $f: \Q \to \Q$ as
+$$f(x) = \begin{cases}
+    0 \quad \text{if } x < \sqrt{2}, \\
+    1 \quad \text{if } x > \sqrt{2}.
+\end{cases}$$
+To show that this is continuous, consider any $x_0 \in \Q$. Given any $\eps$ we can let $\delta = |x_0 - \sqrt{2}|$, so that if $|x - x_0| < \delta$ then $f(x) = f(x_0)$. \\
+
+But this doesn't satisfy the intermediate value property because, if we let $y = \frac{1}{2}$ there is no $x \in \Q$ such that $f(x) = y$. \\
+
+\textbf{8a.} Because $\sin(x)$ and $\frac{1}{x}$ are continuous whenever $x \neq 0$, $\sin\left(\frac{1}{x}\right)$ is continuous too. So if $0 \notin [a, b]$ then by IVT, the intermediate value property is satisfied. \\
+
+Assume that $0 \in [a, b]$. If we need a value $y \in [-1, 1]$, let $t_0 = \arcsin(y)$. Then for infinitely many integers $n$, $t_n = t_0 + 2\pi n$ also satisfies $\sin(t_n) = y$. Now set $x_n = 1/t_n$, so that $x_n \to 0$ as $n \to \infty$. So, arbitrarily close to $0$, $f$ takes the value $y$. Therefore, since $0 \in [a, b]$, given any $y$, we can find some $x \in [a, b]$ such that $f(x) = y$. \\
+
+\textbf{8b.} Since $\sin(1/x)$ is noncontinuous but satisfies the intermediate value property for all intervals $[a, b]$, the converse of IVT is false. \\
+
+\textbf{9.} Consider the last point at which the success rate is $< \frac{4}{5}$, and say there were $a$ successes and $b$ total trials at that point. Then $\frac{a}{b} < \frac{4}{5}$ and $\frac{a + 1}{b + 1} \ge \frac{4}{5}$. Simplifying this inequality, we get
+$$\frac{a + 1}{b + 1} \ge \frac{4}{5}, \quad 5(a + 1) \ge 4(b + 1), \quad 4b - 1 \le 5a.$$
+Since $\frac{a}{b} < \frac{4}{5}$, we also have that $5a < 4b$, so
+$$4b - 1 \le 5a < 4b, \quad -1 \le 5a - 4b < 0.$$
+Since $a$ and $b$ are integers, $5a - 4b$ is an integer, so $5a - 4b = -1$. So we have that
+$$5a - 4b = -1, \quad 5(a + 1) - 4(b + 1) - 5 + 4 = -1,$$
+$$5(a + 1) = 4(b + 1), \quad \frac{a + 1}{b + 1} = \frac{4}{5}.$$
+So the success rate is exactly $80\%$ at this point.
+
+\end{document}

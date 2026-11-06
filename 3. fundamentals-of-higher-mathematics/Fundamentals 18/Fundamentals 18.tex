@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\eps}{\varepsilon}
+
+\title{Fundamentals 18}
+\author{Siddharth K}
+\date{March 2025}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Consider
+$$h(x) = f(x) - \frac{f(b) - f(a)}{g(b) - g(a)}(g(x) - g(a)).$$
+We have that $h(a) = f(a)$ and $h(b) = f(b) - (f(b) - f(a)) = f(a)$. Since $h$ is differentiable on $(a, b)$, by Rolle's Theorem, there exists $c \in (a, b)$ where $h'(c) = 0$. This gives us
+$$h'(c) = f'(c) - \frac{f(b)-  f(a)}{g(b) - g(a)}g'(c) = 0,$$
+$$f'(c) = \frac{f(b)-  f(a)}{g(b) - g(a)}g'(c),\quad f'(c)(g(b) - g(a)) = g'(c)(f(b)-  f(a)),$$
+as desired. \\
+
+\textbf{2.} The proof claims that, for all $k \in [n]$ (where $[n] = \{1, 2, \ldots, n\}$), there is $x_k \in (a, x_{k - 1})$ such that $h^{(k)}(x_k) = 0$ because $h^{(k-1)}(a) = h^{(k-1)}(x_{k-1}) = 0$ and $h^{(k - 1)}$ is differentiable. But this assumes that $h^{(k-1)}$ is defined at $a$, which means that $f^{(k - 1)}$ is defined at $a$ for all $k \in [n]$. So it is necessary that $f^{(k-1)}: (a, b) \to \R$ should be extendable to continuous functions on at least $[a, b)$, which is implied by $f \in C^{(n - 1)}[a, b]$. \\
+
+\textbf{3.} Let $f(a) = \lim_{x\to a} f(x)$ and $f(b) = \lim_{x\to b}f(x)$. Since limits can have at most one value, $f(a)$ and $f(b)$ can each have at most one value, so $f$ as at most one continuous extension to $[a, b]$. \\
+
+\textbf{4.} We have that
+$$\lim_{x \to c}\frac{f(x) - P_n(x)}{(x - c)^n} = 0, \quad \lim_{x \to c}\frac{f(x) - Q_n(x)}{(x - c)^n} = 0.$$
+Subtracting the first limit from the second yields
+$$\lim_{x \to c}\frac{(f(x) - Q_n(x)) - (f(x) - P_n(x))}{(x - c)^n} = \lim_{x \to c}\frac{P_n(x) - Q_n(x)}{(x - c)^n} = 0.$$
+Now, let $P(x) = P_n(x + c) - Q_n(x + c)$ so that
+$$\lim_{x \to c}\frac{P_n(x) - Q_n(x)}{(x - c)^n} = \lim_{x\to 0} \frac{P(x)}{x^n} = 0.$$
+Since $P_n$ and $Q_n$ have a degree of $n$, $P$ has a degree of at most $n$, so we can write
+$$P(x) = \sum_{k = 0}^n a_kx^k,$$
+so
+$$\lim_{x\to 0} \frac{P(x)}{x^n} = \lim_{x\to 0} \sum_{k = 0}^n a_kx^{k - n} = \lim_{x\to 0} \left(\frac{a_0}{x^n} + \cdots + \frac{a_n}{x^0}\right) = 0.$$
+If $a_k \neq 0$ for any $k$ from $0$ to $n-1$ then the term $\frac{a_k}{x^{n - k}}$ would become unbounded as $x \to 0$, and if $a_n \neq 0$ then the term $\frac{a_n}{x^0}$ would be $\neq 0$, so $\lim_{x \to 0} \frac{P(x)}{x^n} \neq 0$. So we must have that $a_k = 0$ for all $k$, meaning $P(x) = 0$ for all $x$. So we have that $P_n(x) - Q_n(x) = P(x - c) = 0$ for all $x$, so $P_n(x) = Q_n(x)$, so the Taylor polynomial of $f$ is unique. \\
+
+\textbf{5.} The first four derivatives of $\sin$ are
+$$\sin^{(0)}(x) = \sin(x), \quad \sin^{(1)}(x) = \cos(x), \quad \sin^{(2)}(x) = -\sin(x), \quad \sin^{(3)}(x) = -\cos(x),$$
+before they start looping. So
+$$\sum_{n = 0}^5 \frac{f^{(n)}(0)}{n!}x^n = \frac{\sin 0}{0!}x^0 + \frac{\cos 0}{1!}x^1 + \frac{-\sin 0}{2!}x^2 + \frac{-\cos 0}{3!}x^3 + \frac{\sin 0}{4!}x^4 + \frac{\cos 0}{5!}x^5$$
+$$= x - \frac{x^3}{6} + \frac{x^5}{120}.$$
+
+\textbf{6.} The first four derivatives of $\cos$ are
+$$\cos^{(0)}(x) = \cos(x), \quad \cos^{(1)}(x) = -\sin(x), \quad \cos^{(2)}(x) = -\cos(x), \quad \cos^{(3)}(x) = \sin(x),$$
+before they start looping. So
+$$\sum_{n = 0}^5 \frac{f^{(n)}(0)}{n!}x^n = \frac{\cos 0}{0!}x^0 + \frac{-\sin 0}{1!}x^1 + \frac{-\cos 0}{2!}x^2 + \frac{\sin 0}{3!}x^3 + \frac{\cos 0}{4!}x^4 + \frac{-\sin 0}{5!}x^5$$
+$$= 1 - \frac{x^2}{2} + \frac{x^4}{24}.$$
+
+\textbf{7.} We have that $P(x) = \sum_{i = 0}^n a_ix^i$, and $f^{(i)}(0) = i!\cdot a_i$ for all $i$, so
+$$P_k(x) = \sum_{i = 0}^k \frac{f^{(i)}(0)}{i!}x^i = \sum_{i = 0}^k \frac{i!\cdot a_i}{i!}x^i = \sum_{i = 0}^k a_ix^i.$$
+So the remainder is
+$$R_k(x) = P(x) - P_k(x) = \sum_{i = k+1}^n a_ix^i.$$
+This gives us
+$$\lim_{x\to 0} \frac{R_k(x)}{x^k} = \lim_{x\to 0} \sum_{i = k+1}^n a_ix^{i - k} = \lim_{x\to 0} (a_{k + 1}x + \cdots + a_nx^{n - k}) = 0.$$
+
+\textbf{9a.} We claim that $f^{(n)}(x) = P_n\left(\frac{1}{x}\right)e^{-\frac{1}{x^2}}$ for all $n \in \N$ and $x > 0$ where $P_n(x)$ is a polynomial depending on $n$. \\
+
+We see that $f^{(0)}(x) = e^{-\frac{1}{x^2}}$ for $x > 0$, so we can let $P_0(x) = 1$. Now, assume that $f^{(n)} = P_n\left(\frac{1}{x}\right)e^{-\frac{1}{x^2}}$ for $x > 0$. We have that
+$$f^{(n + 1)}(x) = \left(P_n\left(\frac{1}{x}\right)e^{-\frac{1}{x^2}}\right)' = \left(P_n\left(\frac{1}{x}\right)\right)'e^{-\frac{1}{x^2}} + P_n\left(\frac{1}{x}\right)\left(e^{-\frac{1}{x^2}}\right)'$$
+$$= P'_n\left(\frac{1}{x}\right)\left(\frac{1}{x}\right)'e^{-\frac{1}{x^2}} + P_n\left(\frac{1}{x}\right)\left(e^{-\frac{1}{x^2}}\right)\left(-\frac{1}{x^2}\right)'$$
+$$\left(-\frac{1}{x^2}\right)P'_n\left(\frac{1}{x}\right)e^{-\frac{1}{x^2}} + \left(\frac{2}{x^3}\right)P_n\left(\frac{1}{x}\right)e^{-\frac{1}{x^2}}$$
+$$= \left(-\left(\frac{1}{x}\right)^2P'_n\left(\frac{1}{x}\right) + 2\left(\frac{1}{x}\right)^3P_n\left(\frac{1}{x}\right)\right)e^{-\frac{1}{x^2}}.$$
+So we can let $P_{n + 1}(x) = -x^2P'_n(x) + 2x^3P_n(x)$. \\
+
+Now, we have that
+$$\lim_{x\to 0^+}f^{(n)}(x) = \lim_{x\to 0^+} P_n\left(\frac{1}{x}\right)e^{-\frac{1}{x^2}} = \lim_{x\to 0^+} \frac{P_n\left(\frac{1}{x}\right)}{e^{\frac{1}{x^2}}} = \lim_{x\to \infty}\frac{P_n(x)}{e^{x^2}}.$$
+Since the exponential term in the denominator grows faster than any polynomial, the limit is equal to $0$. Since $f^{(n)}(x) = 0$ for $x \le 0$,
+$$\lim_{x\to 0}f^{(n)}(x) = 0 = f^{(n)}(0),$$
+so $f^{(n)}(x)$ is continuous at $0$ for all $n$. Also, the function $e^{-\frac{1}{x^2}}$ is $C^\infty$ because it is a composition of functions in $C^\infty$, and $0$ is $C^\infty$ as well. This means $f \in C^\infty(\R)$. \\
+
+\textbf{9b.} We have that
+$$\sum_{k = 0}^n \frac{f^{(n)}(0)}{k!}x^k = \sum_{k = 0}^n \frac{0}{k!}x^k = 0,$$
+So $R_n(x) = f(x) - 0 = f(x)$. So the remainder doesn't approach $0$ for any $x > 0$.
+
+\end{document}

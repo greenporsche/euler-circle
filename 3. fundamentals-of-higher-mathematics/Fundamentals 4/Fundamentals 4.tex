@@ -1,0 +1,88 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+
+\title{Fundamentals Chapter 4}
+\author{Siddharth K}
+\date{October 2024}
+
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\sub}{\trianglelefteq}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Since $G$ contains an element of order $m$, there exists $g \in G$ such that $g^m = e$. Now, for any $d$ that divides $m$, let $g' = g^{m/d}$. Then $(g')^d = (g^{m/d})^d = g^m = e$, so $|g'| = d$. \\
+
+\textbf{2.} For the sake of contradiction, assume that $G \neq \la g\ra$ for all $g \in G$ (where $g > 1$). Then there exists $h \in G$ with $\la g\ra \cap \la h\ra = \{e\}$ and $h > 1$ so that $h \neq g^k$ for any $k \in \Z$. \\
+
+Now, consider $\la g, h\ra \le G$. There exists a bijection from $\la g, h\ra$ to $\la g\ra \times \la h\ra$. Each $(g_1, h_1) \in \la g\ra \times \la h\ra$ can be uniquely mapped to $g_1h_1 \in \la g, h\ra$. \\
+
+Also, each $a \in \la g, h\ra$ can be decomposed uniquely as $a = g_1h_1$ for some $(g_1, h_1) \in \la g\ra \times \la h\ra$. This is because, if $a = g_1h_1 = g_2h_2$ then $g_1 = g_2h_2h_1^{-1}$, which implies that $h_2h_1^{-1} = e$ so $h_1 = h_2$. Similarly, $g_1 = g_2$. \\
+
+So there is a bijection from $\la g, h\ra$ to $\la g\ra \times \la h\ra$. This means $|\la g, h\ra| = |\la g\ra \times \la h\ra| = |g||h|$. Also, since $\la g, h\ra \le G$, by Lagrange, $|\la g, h\ra| \mid p$, so $|g||h| \mid p$, which means either $|g|$ or $|h|$ is $1$, which is a contradiction. \\
+
+Finally, if there is a subgroup $K \le G$, by Lagrange, $|K| \mid |G| = p$, so $|K| = 1$ or $p$, which implies that $K$ is trivial. This means $G \cong \Z/p\Z$. \\
+
+\textbf{3.} The direct product $A \times B$ is the group $\{(a, b): a \in A, b \in B\}$ under the operation
+$$(a_1, b_1) \star (a_2, b_2) = (a_1 \star_1 a_2, b_1 \star_2 b_2).$$
+We need to show that it satisfies closure, existence of identity element, existence of inverse, and associativity. For closure, we see that
+$$(a_1, b_1) \star (a_2, b_2) = (a_1 \star_1 a_2, b_1 \star_2 b_2) = (a, b) \in A \times B$$
+for some $a \in A$ and $b \in B$ because $A$ and $B$ satisfy closure. The identity element is $(e_A, e_B)$ because
+$$(a, b) \star (e_A, e_B) = (a\star_1 e_A, b\star_2 e_B) = (a, b).$$
+For all $(a, b) \in A\times B$, the inverse is $(a^{-1}, b^{-1})$ because
+$$(a, b) \star (a^{-1}, b^{-1}) = (a\star_1 a^{-1}, b\star b^{-1}) = (e_A, e_B).$$
+Finally, it satisfies associativity because
+$$((a_1, b_1) \star (a_2, b_2)) \star (a_3, b_3) = (a_1\star_1 a_2, b_1\star_2 b_2) \star (a_3), b_3$$
+$$= ((a_1\star_1 a_2)\star_1 a_3, (b_1\star_2 b_2)\star_2 b_3$$
+$$= (a_1\star_1 (a_2\star_1 a_3), b_1\star_2 (b_2\star_2 b_3)$$
+$$= (a_1, b_1)\star (a_2\star_1 a_3, b_2\star_2 b_3)$$
+$$= (a_1, b_1)\star ((a_2, b_2)\star (a_3, b_3)).$$
+
+\textbf{4.} Below are the generators for each group: \\
+$(\Z/2\Z)^\times: 1$ \\
+$(\Z/3\Z)^\times: 2$ \\
+$(\Z/5\Z)^\times: 2$ \\
+$(\Z/7\Z)^\times: 3$ \\
+$(\Z/11\Z)^\times: 7$ \\
+$(\Z/8\Z)^\times:$ none of the elements of $\{1, 2, \ldots, 7\}$ generate all of $(\Z/8\Z)^\times$. \\
+
+\textbf{5.} The group with just one element would be represented by an empty product of groups. \\
+
+\textbf{9.} To prove the corollary, we use induction on $n$. If $n = 2$, then $G = A + B$ so $G \cong A \times B$. \\
+
+Now, assume that there is an isomorphism $f: G \to A_1 \times \cdots \times A_n$ where $G = A_1 + \cdots + A_n$ and $A_i \cap A_j = \{0\}$. We need to show that there's
+$$\phi: G + A_{n + 1} \to A_1 \times \cdots \times A_{n + 1}.$$
+Let $B = A_1 \times \cdots \times A_n$. We know that $G + A_{n + 1} \cong B + A_{n + 1}$, so we need to find an isomorphism $\phi: G + A_{n + 1} \to B + A_{n + 1}$. Every $h \in G + A_{n + 1}$ can be written as $h = g + a$ for $g \in G, a \in A_{n + 1}$. So define $\phi$ as
+$$\phi(h) = \phi(g + a) = f(g) + a.$$
+Then
+$$\phi(h_1 + h_2) = \phi(g_1 + a_1 + g_2 + a_2)$$
+$$= \phi(g_1 + g_2 + a_1 + a_2)$$
+$$= f(g_1 + g_2) + a_1 + a_2$$
+$$f(g_1) + a_1 + f(g_2) + a_2$$
+$$= \phi(h_1) + \phi(h_2),$$
+so $\phi: A_1 + \cdots + A_{n + 1} \to (A_1 \times \cdots \times A_n) + A_{n + 1}$ is a homomorphism. Furthermore, since $A_i \cap A_j = \{0\}$,
+$$|G| = |(A_1 + \cdots + A_n) + A_{n + 1}| = |A_1 + \cdots + A_n||A_{n + 1}|$$
+$$= |A_1\times \cdots \times A_n||A_{n + 1}| = |A_1\times \cdots \times A_{n + 1}|.$$
+So $G \cong (A_1\times \cdots \times A_n) + A_{n + 1} \cong A_1\times \cdots \times A_{n + 1}$. \\
+
+\textbf{10.} Assume $\gcd(x_1, \ldots, x_n) \neq 1$. Then there exists some prime $p$ that divides all $x_i$. Since the only possible prime factors of any $x_i$ are $p_1, \ldots, p_n$, $p = p_k$ for some $k$. But $p_k$ doesn't divide $x_k$ because $x_k$'s prime factors are all of $p_1, \ldots, p_n$ except $p_k$, which is a contradiction. So $\gcd(x_1, \ldots, x_n) = 1$. \\
+
+\textbf{12a.} We see that
+$$\phi(a + b) = ((a + b)\bmod{n_1}, \ldots, (a + b)\bmod{n_k})$$
+$$= (a\bmod{n_1}, \ldots, a\bmod{n_k}) + (b\bmod{n_1}, \ldots, b\bmod{n_k})$$
+$$= \phi(a) + \phi(b),$$
+so $\phi$ is a homomorphism. \\
+
+Also, $|\Z/N\Z| = N$ and
+$$|\Z/n_1\Z \times \cdots \times \Z/n_k\Z| = n_1\cdots n_k = N$$
+so $\phi$ is an isomorphism. \\
+
+\textbf{12b.} We'll show that there are $n$ consecutive composite numbers for any integer $n$. Consider the numbers $(n + 1)! + 2, (n + 1)! + 3, \ldots, (n + 1)! + (n + 1)$. There are $n$ of these and they can all be factored, since $(n + 1)!$ is divisible by all numbers from $2$ to $n + 1$. So there are $n$ consecutive composite numbers. \\
+
+\textbf{12c.} The set $(\Z/n\Z)^\times$ is the set of all integers between $1$ and $n$ that are relatively prime to $n$.
+
+\end{document}

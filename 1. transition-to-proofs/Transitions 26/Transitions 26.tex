@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+
+\title{Chapter 26 Problem Set}
+\author{Siddharth K}
+\date{April 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} If $B$ has a minimum element then $\alpha$ is rational. Otherwise, it's irrational.
+\newline
+
+\textbf{2.} Assume there does exist a smallest positive real number, which we can call $\alpha$. We know that $\alpha$ is less than or equal to all positive rational numbers, so if we wrote it as a Dedekind cut, $(A, B)$, $B$ is the set of all positive rationals, which means the maximum element of $A$ is $0$, since it's less than $\alpha$ and it's rational. But $A$ can't have a maximum element, so such an $\alpha$ doesn't exist.
+\newline
+
+\textbf{3.} Let $\alpha = (A_\alpha, B_\alpha)$ and $\beta = (A_\beta, B_\beta)$. Since $\alpha < \beta$, $A_\alpha \subseteq A_\beta$. This means there exists $r \in A_\beta$ such that $r \not \in A_\alpha$. By the definition of a Dedekind cut, $r$ is rational, less than $\beta$, and greater than $\alpha$.
+\newline
+
+\textbf{4.} Given $\alpha$ and $\beta$, we know that we can find $c \in \mathbb{Q}$ such that $\alpha < c < \beta$. We can also find $d \in \mathbb{Q}$ such that $c < d < \beta$. Now, let $s = c + \frac{d - c}{\sqrt{2}}$. Since $d > c$, $s > c$. Also, since $\frac{d - c}{\sqrt{2}} < d - c$, we know that $s < d$. We have found a number between $c$ and $d$, and therefore $\alpha$ and $\beta$, so we are left to prove that $s$ is irrational.
+\newline
+
+We see that $s$ is irrational if and only if $\frac{d - c}{\sqrt{2}}$ is irrational. Let $x = d - c$. This gives us $\frac{x}{\sqrt{2}} = \frac{x}{2}\sqrt{2}$. Since $\frac{x}{2}$ is rational, the product of $\frac{x}{2}$ and $\sqrt{2}$ must be irrational, so $s$ is irrational.
+\newline
+
+\textbf{5.} Let the countable set be $\mathbb{Q}$. Then let a subset contain all the rationals between $-\infty$ and some real number $\alpha$. If $\alpha = (A, B)$ which is a Dedekind cut, then the subset is essentially just $A$. If we were to do this for all possible values of $\alpha$, we would get an uncountable number of subsets. They are nested because, if we choose any two different subsets $A_\alpha$ and $A_\beta$, if $\alpha < \beta$ then $A_\alpha \subseteq A_\beta$, and $A_\beta \subseteq A_\alpha$ otherwise.
+\newline
+
+\textbf{6.} I couldn't find out what was wrong with this definition.
+\newline
+
+\textbf{7.} Let $A$ be the set of rational numbers less than $x = \sqrt{2}$ and $B$ the set of rationals greater than $x$. To show that $(A, B)$ is a Dedekind cut, we need to verify the conditions:
+\newline
+
+$A$ and $B$ are nonempty: Since $1$ is rational, $1 \times 1 = \langle 1, 1 \rangle \times \langle 1, 1 \rangle = \langle 1, 1 \rangle = 1$. Similarly, $2 \times 2 = 4$. Since $2$ is between $1^2$ and $2^2$, $1 \in A$ and $2 \in B$.
+\newline
+
+$A\cup B = \mathbb{Q}$: Given $r \in \mathbb{Q}$, we can find $r\times r$ and compare it to $2$. If it is less, it belongs to $A$. Otherwise, it belongs to $B$.
+\newline
+
+$a \in A, b \in B$ implies $a < b$: $A$ consists of all rationals whose square is less than $2$ (and all the negative rationals, but this case implies that $a < b$ because all elements of $B$ are positive), and $B$ consists of rationals whose square is greater than or equal to $2$. So $a^2 < 2 < b^2$. Since the function $f(x) = x^2$ is increasing for $x > 0$, we get that $a < b$.
+\newline
+
+$A$ contains no greatest element: Given $r \in A$, we need to show that there exists $r' \in A$ such that $r'^2 > r^2$. To do this, let $r' = r + \epsilon$ for $\epsilon > 0$. We need to choose rational $\epsilon$ such that $(r + \epsilon)^2 < 2$. Expanding and rearranging, we get $2r\epsilon + \epsilon^2 < 2 - r^2$. It would suffice for both $2r\epsilon$ and $\epsilon^2$ to be less than $\frac{2 - r^2}{2}$.
+\newline
+
+If $2r\epsilon < \frac{2 - r^2}{2}$, then $\epsilon < \frac{2 - r^2}{4r}$. And we need $\epsilon^2 < \frac{2 - r^2}{2}$ to be true as well. If we assume the first statement to be true, then $\epsilon^2 < \frac{4 + r^2 - 4r^4}{16r^2}$. Comparing that with $\frac{2 - r^2}{2}$ and simplifying the inequality, we see that $\frac{4 + r^2 - 4r^4}{16r^2} < \frac{2 - r^2}{2}$ if $r \in \left(\sqrt{\frac{15-\sqrt{161}}{8}}, \sqrt{\frac{15+\sqrt{161}}{8}}\right)$. Since $\frac{15-\sqrt{161}}{8} < 2$ and $\frac{15+\sqrt{161}}{8} > 2$, $r$ is in this range. This means, if we have $r \in A$ sufficiently close to $x$, then we can choose $\epsilon > 0$ such that $(r + \epsilon)^2 < 2$.
+\newline
+
+\textbf{8.} By the definition of a Dedekind cut, all elements of $A$ are less than $x$.
+\newline
+
+Consider a real number $y < x$. If $y$ is rational, then by definition it is an element of $A$, and not an upper bound. If it's irrational, then we can find a rational number between $y$ and $x$. If we consider the decimal expansions of $x$ and $y$ and see where they differ, we could create a rational number by copying the digits of $y$ up to that point and then terminating the number there. So $y$ is less than some elements of $A$, and therefore not an upper bound.
+\newline
+
+\textbf{9.} Define the set $T: \{-s: s \in S\}$. By the least upper bound property, $T$ has a least upper bound, $\sup(T)$. Since $\sup(T) \ge -s$ for all $s \in S$, we get $-\sup(T) \le s$. Therefore, $-\sup(T)$ is a lower bound for $S$. Assume $S$ has a lower bound, $x$, greater than $-\sup(T)$. Then $-\sup(T) < x < s$, so $-s < -x < \sup(T)$. This means $-x$ is an upper bound of $T$ and it is less than the least upper bound of $T$, which is clearly impossible. Therefore, $-\sup(T)$ is the greatest upper bound of $S$.
+
+\end{document}

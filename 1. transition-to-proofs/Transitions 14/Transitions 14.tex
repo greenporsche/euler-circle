@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+
+\title{Chapter 14 Problem Set}
+\author{Siddharth K}
+\date{January 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} $\begin{pmatrix}1&1&0&1&0 \\ 0&0&1&0&0 \\ 1&0&1&0&1 \\ 0&1&0&1&0 \\ 0&0&1&0&0\end{pmatrix}$
+\newline
+
+\textbf{2.} A matrix with $k$ ones in each row and column is the incidence matrix of a bipartite $k$-regular graph. If there are $k$ ones in a row, that vertex connects to $k$ other vertices. If there are $k$ ones in a column, that vertex connects to $k$ other vertices (in the first subset of vertices). Therefore, if the matrix has $k$ ones in each row and column, every vertex connects to $k$ others.
+\newline
+
+\textbf{3.} To do this, we can use double counting on the number of vertices of $P$. Since every vertex is part of three different edges and each edge connects $2$ vertices, there are $6E$ vertices in $P$. Also, since every vertex is part of three different faces and each face consists of $3$ vertices, there are $9F$ vertices in $P$. Our two  results must be equal, so $6E = 9F$, or $2E = 3F$.
+\newline
+
+\textbf{4.} Let's consider the LHS: $\sum_{v\in V} d(v)^2$. This can be interpreted as adding $d(v)$ for each vertex $v$ is connected to, and then summing across all $v \in V$. Now, let's consider the RHS: $\sum_{e=\{v, w\} \in E} (d(v) + d(w))$. Since this sums over all edges, the degree of each vertex is added $d(v)$ times. Therefore, this can be interpreted as adding $d(v)$ for each edge $v$ connects to, and then summing across all $v \in V$. Since both sides count the same thing, they are equal.
+\newline
+
+\textbf{5.} We can interpret this problem as a bipartite graph where one set of vertices are the members and the other set is the subcommittees. If a member is part of a subcommittee then there is an edge drawn between them. In this case, every vertex connects to three other vertices. If all the vertices of a bipartite graph have the same degree, then it has a perfect matching. Since a perfect matching of a bipartite graph consists of edges that connect one vertex in the first group to another in the second group, the two groups must be of equal size, so the number of members is equal to the number of subcommittees.
+\newline
+
+\textbf{6.} Assume that $|X| > |Y|$ for the sake of contradiction. Since every vertex has degree $\ge 1$, each $x \in X$ connects to at least one $y \in Y$. However, since $|X| > |Y|$, at least one vertex in $Y$ connects to at least two vertices in $X$. That makes $d(y) > d(x)$ for at least one ${x, y} \in E$. Since that contradicts $d(x) \ge d(y)$, the original assumption is false, and $|X| \le |Y|$.
+\newline
+
+\textbf{7.} First of all, there are $n!$ ways to order the $n$ elements of $[n]$, so there are $n!$ permutations. Now, let's find $p_k(n)$ in terms of $n$ and $k$. There are $n\choose k$ ways to choose $k$ fixed points from $[n]$, and there are $(n - k)!$ ways to permute the non-fixed points. Therefore, $p_k(n) = $$n\choose k$$(n - k)! = \frac{n!(n - k)!}{k!(n - k!)} = \frac{n!}{k!}$.
+\newline
+
+I got stuck after plugging that into $\sum_{k = 0}^nkp_k(n)$, since I got the sum $n! + \frac{n!}{1!} + \frac{n!}{2!} + ... + \frac{n!}{n - 1!}$, which is definitely greater than $n!$.
+\newline
+
+\textbf{8.} We can choose two points in $\frac{n(n - 1)}{2}$ ways. Let's consider one of those pairs. To form a triangle with an area of $1$, we need to choose a point on either of the two lines parallel to that segment at a certain distance. Since no three points are collinear, the maximum number of triangles with area $1$ with that segment as a base is $4$. In an optimal case, every set of $3$ points can have four different triangles with an area of $1$. Therefore, the maximum is $\frac{4}{3}(\frac{n(n - 1)}{2}) = \frac{2}{3}(n^2 - n)$.
+
+\end{document}

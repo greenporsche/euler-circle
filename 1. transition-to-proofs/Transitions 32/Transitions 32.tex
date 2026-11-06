@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Chapter 32 Problem Set}
+\author{Siddharth K}
+\date{June 2024}
+
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} The partial sum $s_n$ is $1$ if $n$ is odd and $0$ if $n$ is even. So if $\epsilon = 0.5$, no values of $m$ or $n$ satisfy $|s_n - s_m| < \epsilon$. Therefore, the sum diverges.
+\newline
+
+\textbf{2.} Since $\frac{\log n}{n} \ge \frac{1}{n}$ for $n > e$ and $\sum_{n = 1}^\infty \frac{1}{n}$ diverges, $\sum_{n = 1}^\infty \frac{\log n}{n}$ diverges too.
+\newline
+
+\textbf{4.} Since $\frac{\sqrt{n}}{2^n} \le \frac{\sqrt{n}}{n^{5/2}} = \frac{1}{n^2}$ and $\sum_{n = 1}^\infty \frac{1}{n^2}$ converges, $\sum_{n = 1}^\infty \frac{\sqrt{n}}{2^n}$ converges too.
+\newline
+
+\textbf{5a.} Let's say the sum is $s$. We know that $s_{n + 1} = s_n + (-1)^na_{n + 1}$. Since $a_n$ is decreasing, $a_{n + 1} \le a_n$. If $n$ is even, $s_n > s$ and $s_{n + 1} < s$. So $s_{n + 1} < s < s_n$. If $n$ is odd, then $s_n < s < s_{n + 1}$. In both cases, $|s_n - s| \le a_{n + 1}$. Also, since $\lim_{n \to \infty} a_n = 0$ and $a_n$ is positive, for all $\epsilon > 0$ there exists $N$ such that if $n > N$ then $a_n < \epsilon$. This means, given $\epsilon > 0$, there exists $N$ such that if $n > N$ then $|s_n - s| \le a_{n + 1} < \epsilon$.
+\newline
+
+\textbf{5b.} Let $a_n = \frac{1}{\sqrt{n}}$. We know that $a_i > a_{i + 1}$ for all $i \ge 1$ and that $\lim_{n \to \infty} a_n = 0$. By the result of 5a, $\sum_{n = 1}^\infty \frac{(-1)^{n - 1}}{\sqrt{n}}$ converges.
+\newline
+
+\textbf{5c.} Since $|s_n - s| \le a_{n + 1}$, if we want 3 digits of accuracy, we want $n$ to be large enough such that $\frac{1}{\sqrt{n + 1}} < \frac{1}{1000}$. Isolating $n$, we get that $n > 999999$, so calculating $s_{1000000}$ should suffice. Doing this, we get 0.6043986435466318.
+\newline
+
+\textbf{7a.} We see that $\frac{n^n}{5^n + 3} \ge \frac{n^n}{8^n} \ge \frac{n}{8}$. Let's say we're given $\epsilon > 0$. If $n > 8\epsilon$, $\frac{n}{8} > \epsilon$, so $\lim_{n\to \infty}\frac{n}{8} \neq 0$ which means $\sum_{n = 1}^\infty \frac{n}{8}$ diverges, and thus so does $\frac{n^n}{5^n + 3}$.
+\newline
+
+\textbf{7b.} We see that $\frac{n^n}{5^{n^2}} = \frac{n^n}{(5^n)^n} = \left(\frac{n}{5^n}\right)^n < \left(\frac{n}{n^2}\right)^n = \frac{1}{n^n} \le \frac{1}{n^2}$. Since $\sum_{n = 1}^\infty \frac{1}{n^2}$ converges, $\sum_{n = 0}^\infty\frac{n^n}{5^{n^2}}$ does too.
+\newline
+
+\textbf{7c.} We see that $\left(\frac{3n^2 + 6n + 1}{5n^2 + 1}\right)^n < \left(\frac{3n^2 + \frac{3}{5}}{5n^2 + 1}\right)^n = \left(\frac{3\left(n^2 + \frac{1}{5}\right)}{5\left(n^2 + \frac{1}{5}\right)}\right)^n = \left(\frac{3}{5}\right)^n$. Since $\sum_{n = 0}^\infty \left(\frac{3}{5}\right)^n$ converges, $\sum_{n = 1}^\infty \left(\frac{3n^2 + 6n + 1}{5n^2 + 1}\right)^n$ does too.
+\newline
+
+\textbf{8.} Let $a_n = \frac{(-1)^n}{\sqrt{n}}$. Then $\sum_{n = 1}^\infty a_n$ converges but $\sum_{n = 1}^\infty a_n^2$ doesn't.
+\newline
+
+Since $\sum_{n = 1}^\infty a_n$ converges, $\lim_{n \to \infty} a_n = 0$. This implies that there exists N such that for all $n > N$, $a_n < 1$. Multiplying both sides by $a_n$ (we can do this because $a_n > 0$), we have $a_n^2 < a_n$. Therefore, since $\sum_{n = N + 1}^\infty a_n$ converges, $\sum_{n = N + 1}^\infty a_n^2$ converges. Also, since $\sum_{n = 1}^N a_n^2$ is finite, $\sum_{n = 1}^\infty a_n^2$ also converges.
+
+\end{document}

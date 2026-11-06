@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+
+\title{Chapter 31 Problem Set}
+\author{Siddharth K}
+\date{May 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Consider the function $f(x) = x - \cos x$. We see that $f(0) = -1$ and $f(\pi) = \pi + 1$. Since $f(0) < 0$ and $f(\pi) > 0$, by IVT there exists $c \in (0, \pi)$ such that $f(c) = 0$, which implies that $\cos c = c$.
+\newline
+
+\textbf{2.} Consider the function $h(x) = f(x) - g(x)$. We see that $h(0) = f(0) - g(0) < 0$ and $h(1) = f(1) - g(1) > 0$. By IVT, there exists $c \in (0, 1)$ such that $h(c) = 0$, so $f(c) = g(c)$.
+\newline
+
+\textbf{3.} Consider the function $g(x) = f(x + \frac{1}{2}) - f(x)$. We see that $g(0) = f(\frac{1}{2}) - f(0)$ and $g(\frac{1}{2}) = f(1) - f(\frac{1}{2}) = f(0) - f(\frac{1}{2})$. This gives us $g(\frac{1}{2}) = -g(0)$. Since they have opposite signs, by IVT, there exists $c \in (0, \frac{1}{2})$ such that $g(c) = 0$.
+\newline
+
+\textbf{4.} Consider the function $g(x) = f(x) - x$. If $g(a) = 0$ then let $c = a$, and if $g(b) = 0$ then let $c = b$. Otherwise, either $g(a) < 0$ or $g(a) > 0$. However, if $g(a) < 0$, then $f(a) < a$, which is impossible. So $g(a) > 0$. Similarly, $g(b) < 0$. By IVT, there exists $c$ such that $g(c) = 0$.
+\newline
+
+\textbf{5.} Assume $f(x) > 0$ for all $x \in [a, b]$. Then by EVT, $f$ has a minimum at some point $c \in [a, b]$. But if $x = c$, there doesn't exist $y$ such that $|f(y)| \le \frac{1}{2}|f(x)|$, which is a contradiction, so it is impossible for $f(x)$ to be $> 0$ for all $x \in [a, b]$. Similarly, it is impossible for $f(x)$ to be $< 0$ for all $x \in [a, b]$. Therefore, $f(x)$ is negative at some $m \in [a, b]$ and positive at some $n \in [a, b]$. By IVT, there exists $k \in [\min(m, n), \max(m, n)]$ such that $f(k) = 0$.
+\newline
+
+\textbf{6.} If $[S] = 0$ then $S$ is a one-dimensional curve so any line that passes through the midpoint would work.
+\newline
+
+If $[S] > 0$, then given $\theta$, there exists a line $l_\theta$ that splits $S$ into two halves of equal area and meets with the $x$-axis at an angle of $\theta$ radians. This line is unique. To prove that, consider a line parallel to $l_\theta$ that passes through $S$ and call it $l_\theta '$. Since it is not the same as $l_\theta$, there is some area between those lines, which we can call $A$. Since $[A \cap S] > 0$, the area to the left of $l_\theta '$ is not equal to the area to the right, so $l_\theta$ is unique.
+\newline
+
+Consider the function $f: [0, 2\pi) \to \mathbb{R}$ that gives the difference between the perimeter of $S$ to the left of $l_\theta$ and the perimeter of $S$ to the right of $l_\theta$. We claim that $f$ is continuous. To do this, we can split the curve into $n$ arcs, $S_1, S_2, \ldots, S_n$ of lengths $A_1, A_2, \ldots A_n$. The line $l_\theta$ passes through two of those arcs, say $S_i$ and $S_j$. Now, consider another angle, $\theta'$. Since $A_i, A_j > 0$, we can choose $\delta$ such that if $|\theta - \theta'| < \delta$ then $l_{\theta'}$ passes through $S_i$ and $S_j$. That means $|f(\theta) - f(\theta')| \le A_i + A_j$. Since $n$ can be made arbitrarily large, $A_i + A_j$ can be made arbitrarily small, or less than $\epsilon$ for all $\epsilon > 0$. So if we are given $\epsilon > 0$, we can make $n$ large enough so that $A_i + A_j < \epsilon$, and we know there exists $\delta$ such that if $|\theta - \theta'| < \delta$ then $|f(\theta) - f(\theta')| \le A_i + A_j < \epsilon$. Therefore, $f$ is continuous.
+\newline
+
+Since $S$ is bounded, there exists $\theta_1$ such that all of $S$ lies to the right of $l_{\theta_1}$, which gives $f(\theta_1) < 0$. Similarly, there exists $\theta_2$ such that all of $S$ lies to the left of $l_{\theta_2}$, which gives $f(\theta_2) > 0$. Since $f$ is continuous, by IVT, there is some $\theta$ such that $f(\theta) = 0$, so the perimeter on each side is equal. Since this works for any starting line, by the Avocado Sandwich Theorem, we can adjust it to split the area in half as well.
+\newline
+
+\textbf{7.} By EVT, $f$ has a minimum and maximum in $[a, b]$, say $c$ and $d$ respectively. Then if $x \in [a, b]$, $f(x) \in [c, d]$. Since $f$ is continuous, by IVT, for all $y \in [c, d]$ there exists $x \in [a, b]$ such that $f(x) = y$. If $c = d$ then it is a single number. If not, then $[c, d]$ is a finite closed interval.
+\newline
+
+\textbf{8.} The image could be: \newline
+An infinite open interval: $f(x) = x$, $x \in \mathbb{R}$ \newline
+A finite open interval: $f(x) = x$, $x \in (0, 1)$ \newline
+A finite closed interval: $f(x) = \sin x$, $x \in (0, 2\pi)$ \newline
+An interval open on one side and closed on the other: $f(x) = x^2$, $x \in (-1, 1)$ \newline
+A single number: $f(x) = 0$, $x \in (0, 1)$
+
+\end{document}

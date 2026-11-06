@@ -1,0 +1,98 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% <added stuff>
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\power}{\mathcal{P}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\mcO}{\mathcal{O}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nullset}{\varnothing}
+\newcommand{\lb}{\left(}
+\newcommand{\rb}{\right)}
+\newcommand{\minus}{\backslash}
+\newcommand{\supp}{\text{supp}}
+% </added stuff>
+
+\title{Fundamentals 30}
+\author{Siddharth K}
+\date{June 2025}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 30.1}
+\subsubsection*{Part (1)}
+Define
+$$f_n(x) = \max(0, 1 - |x - n|).$$
+Then this satisfies the constraints.
+
+\subsubsection*{Part (2)}
+Let $x \in \R$ and $N > x + 1$. If $n \ge N$, then $f_n(x) = 0$ since $|x - n| = n - x \ge N - x > 1$. So $f_n(x) \to 0$ for all $x$.
+
+\subsubsection*{Part (3)}
+Let $\eps < 1$. Then, since $\sup\{d(f(x), g(x)): x \in X\} \ge 1$, $\rho(f, g)$ will never be $< \eps$. So $f_n$ doesn't converge in the uniform topology.
+
+\subsubsection*{Part (4)}
+Since $(f_n)$ converges pointwise but not uniformly, the uniform and pointwise topologies aren't equivalent.
+
+\subsubsection*{Part (5)}
+Yes, $f_n$ converges in the CC topology. To show this, let $C \subseteq \R$ and $N > \sup(C) + 1$. Then by similar logic as before, if $x \in C$ then $|x - n| > 1$, so $f_n(x) = 0$, and therefore $f_n \to 0$ in the CC topology.
+
+\subsection*{Problem 30.2}
+We prove the axioms of a topological basis:
+\begin{enumerate}
+    \item Let $f \in Y^X$. Choose any $C \subseteq X$ and $\eps > 0$. Then $\rho(f, f) = 0 < \eps$, so $f \in B_C(f, \eps)$.
+    \item Let $B_1 = B_{C_1}(f_1, \eps_1)$ and $B_2 = B_{C_2}(f_2, \eps_2)$, and $g \in B_1 \cap B_2$. Let $\delta_1 = \rho(f_1, g) < \eps_1$ and $\delta_2 = \rho(f_2, g) < \eps_2$. Then let $C_3 = C_1 \cup C_2$ (which is compact), $f_3 = g$, and $\eps_3 = \min(\eps_1 - \delta_1, \eps_2 - \delta_2) > 0$. If $h \in B_{C_3}(g, \eps_3)$ then, for each $i = 1, 2$ and $x \in C_i$,
+    $$d(f_i(x), h(x)) \le d(f_i(x) + g(x)) + d(g(x), h(x)) < \delta_i + \eps_3 \le \eps_i.$$
+    So, for each $i = 1,2$, $h \in B_{C_i}(f_i, \eps_i)$.
+\end{enumerate}
+
+\subsection*{Problem 30.3}
+First, assume $f_n \to f$ in the CC topology. For every $B_C(f, \eps)$, there is $N$ such that for all $n \ge N$, if $f_n \in B_C(f, \eps)$ then $\rho(f_n, f) < \eps$. This is exactly the same statement as $(f_n)$ converges uniformly to $f$ on $C$. \\
+
+Now, assume that for every $C \subseteq X$, $\rho(f_n, f) \to 0$. Then, given any $B_C(f, \eps)$, by uniform convergence, there is $N$ such that for all $n \ge N$, $\rho(f_n, f) < \eps$, so $f_n \in B_C(f, \eps)$. So $f_n \to f$ in the CC topology.
+
+\subsection*{Problem 30.4}
+We have that
+$$(f|_C)^{-1}(V) = \{x \in C: f|_C(x) \in V\} = \{x \in C: f(x) \in V\},$$
+and
+$$f^{-1}(V) \cap C = \{x \in X: f(x) \in V \text{ and }x \in C\} = \{x \in C: f(x) \in V\}.$$
+Therefore, the two sets are equal.
+
+\subsection*{Problem 30.7}
+Let $x_n \to x$ in $X$ where $(x_n)$ is a sequence in $C$. Since $C$ is closed, $U = X \minus C$ is open. For contradiction, assume $x \notin C$, so that $x \in U$. Since $U$ is open, $U$ is a neighborhood of $x$. But since $x_n \to x$, there exists $N$ such that for all $n \ge N$, $x_n \in U$. This contradicts the fact that all $x_n$ are in $C$, so $x \in C$.
+
+\subsection*{Problem 30.8}
+Let $\eps > 0$. Then for any $n$, if $x \ge n\eps$, $f_n(x) \ge \eps$, so it doesn't converge uniformly. Now, let $C \subseteq \R$ be closed and bounded and $\eps > 0$. If we let $N > \frac{\sup(C)}{\eps}$, then if $n \ge N$, then for all $x \in C$,
+$$f_n(x) = \frac{x}{n} \le \frac{x}{N} < \frac{x \eps}{\sup(C)} < \eps$$
+since $x < \sup(C)$. So $(f_n)$ converges in the CC topology but not uniformly.
+
+\subsection*{Problem 30.9}
+The sequence $(f_n)$ converges to $\frac{x}{(1 - x)^2}$ on $(-1, 1)$ in the CC topology but not the uniform topology. \\
+
+Let $C \subseteq (-1, 1)$ be compact. Then there exists $r < 1$ such that $C \subseteq [-r, r]$. For any $x \in C$,
+$$|f(x) - f_n(x)| = \left|\sum_{k = n + 1}^\infty kx^k\right| \le \sum_{k = n + 1}^\infty k|x|^k \le \sum_{k = n + 1}^\infty kr^k.$$
+Since $|r| < 1$, this sum converges to $0$ as $n \to \infty$. So the sum converges for all $x \in C$. \\
+
+We have that
+$$\lim_{n \to 1} f(x) - f_n(x) = \lim_{n \to \infty} \sum_{k = n + 1}^\infty kx^k = \infty,$$
+and
+$$\sup\{f(x) - f_n(x)\} \ge \lim_{n \to 1} f(x) - f_n(x),$$
+so $(f_n)$ is not uniformly convergent.
+
+\end{document}

@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+
+\title{Chapter 15 Problem Set}
+\author{Siddharth K}
+\date{February 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1a.} Consider the number of ways to count the number of subsets of $[n]$ and a leader for each subset. There are $n$ ways to choose the leader and $2^{n - 1}$ subsets of the rest of $[n]$, so the answer would be $n \cdot 2^{n - 1}$.
+\newline
+
+We can also count this by counting it for a subset with a length of $k$ and summing across all $0 \le k \le n$. There are $n\choose k$ ways to form a subset of length $k$, and then $k$ ways to choose the leader among them. So the total sum would be $\sum_{k = 0}^n k$$n\choose k$. Since $n \cdot 2^{n - 1}$ and $\sum_{k = 0}^n k$$n\choose k$ both count the same thing, they are equal.
+\newline
+
+\textbf{1b.} The number of ways to choose $r + 1$ elements from a set of $m + 1$ elements is ${m + 1}\choose {r + 1}$. We can also count this based on the highest element chosen. If the highest element is $r$, one element is already chosen, so we have $r\choose r$ ways to choose $r + 1$ elements where the greatest of them is $r$. If the highest element is $r + 1$, then there are ${r + 1}\choose r$ ways, and so on until $n = m$. Totally, the answer would be $\sum_{n = r}^m$$n\choose r$. Since both answers counted the same thing, they are equal.
+\newline
+
+\textbf{1c.} There are $n\choose k$ ways to choose $k$ elements from a set of $n$ elements. We can count the same thing by first selecting one specific item out of the $n$ elements. There are $n$ ways to do this. After that, we need to choose $k - 1$ elements from $n - 1$, so we have $n$${n - 1}\choose {k - 1}$. However, if the first number we chose was any of the other $k - 1$ elements, we would have the same combination, so we must divide by $k$ to correct for this overcounting. Therefore, we have $n\choose k$$= \frac{n}{k}$${n - 1}\choose {k - 1}$.
+\newline
+
+\textbf{1d.} Let's count the number of ways to choose $m$ items from a set of size $n$ via an intermediate set of set $k$. First, there are $n\choose k$ ways to choose $k$ elements from $n$, and then $k\choose m$ ways to choose $m$ elements from $k$. So the total sum is $n\choose k$$k\choose m$. This attempt to count $n\choose m$ overcounts since different subsets of length $k$ could result in the same subset of length $m$. To compensate for this, we need to count the number of possible sets with $k$ elements that could result in the same subset with $m$ elements. Given $m$ elements, we need to choose $k - m$ items from $n - m$, so we get ${n - k}\choose {k - m}$. Dividing $n\choose k$$k\choose m$ by that gives us $n\choose m$, so $n\choose k$$k\choose m$$=$$n\choose k$${n - k}\choose {k - m}$.
+\newline
+
+\textbf{1e.} Looking at Pascal's Triangle, we see that starting at any one of the rightmost points in a row $n$ and moving left and diagonally upward until we run out of numbers and adding the numbers we get at each stop gives us the $n^{\text{th}}$ Fibonacci number.
+\newline
+
+This is true because every number in Pascal's triangle is the sum of the two above it, which are each on the previous two diagonals. Therefore, adding every number on one diagonal is equivalent to adding all the numbers on the previous two diagonals. If $f(n)$ denotes the sum of the entries on the $n^{\text{th}}$ diagonal, we see that $f(n) = f(n - 1) + f(n - 2)$, which is the same recursion the Fibonacci sequence follows. We also see that $f(0) = 1$, which is $F_1$. Therefore, $f(n) = F_{n + 1}$.
+\newline
+
+Now, we need to find an expression for $f(n)$. In a diagonal the rightmost part is $n\choose 0$. The next one is ${n - 1}\choose 1$, and then ${n - 2}\choose 2$, and so on. This keeps going until it reaches row $\lfloor \frac{n}{2} \rfloor$. Therefore, $f(n) = \sum_{k = 0}^{\lfloor n/2 \rfloor} {{n - k}\choose k} = F_{n + 1}$.
+\newline
+
+\textbf{2.} If $a_1 + a_2 + \cdots + a_k \le n$, then there exists nonnegative $a_{k + 1}$ such that $a_1 + \cdots + a_k + a_{k + 1} = n$. By stars and bars, the number of ways to choose these $k + 1$ integers that add up to $n$ is ${{n + k}\choose k} = \frac{(n + k)!}{n!k!}$.
+\newline
+
+\textbf{3a.} We can approach this problem by first placing the $k$ people in $k$ chairs and then placing the other $n - k$ chairs between them. Firstly, there are $k!$ ways to place the people in a row of chairs. We know that there must be at least one empty chair between each person, so that takes up $k - 1$ chairs. Then, we have $n - k - (k - 1) = n - 2k + 1$ chairs to freely place next to the $k$ people. We can use stars and bars for this. There are $k$ bars and $n - 2k + 1$ stars, so there are $\frac{(n - k + 1)!}{(n - 2k + 1)!k!}$ ways to place the empty chairs. Multiplying that by $k!$, we get $\frac{(n - k + 1)!}{(n - 2k + 1)!}$.
+\newline
+
+\textbf{3b.} First, we'll place the $k$ people in a circle. The number of ways to do that is $k!$, but we must account for identical rotations by dividing by $k$, so we get $(k - 1)!$. Since there are $k$ gaps between them, we need to place $k$ empty chairs between each person. That leaves us with $n - 2k$ chairs to place in $k$ buckets. Using stars and bars, we see that there are $k - 1$ bars and $n - 2k$ stars. Therefore, we get $\frac{(n - k - 1)!}{(n - 2k)!(k - 1)!}$. Multiplying by $(k - 1)!$, we have $\frac{(n - k - 1)!}{(n - 2k)!}$.
+\newline
+
+\textbf{4.} Consider $d$ disjoint sets, $n_1, n_2, \ldots n_d$. The number of ways to choose $r$ items from all those sets without regard for which ones they come from is ${n_1 + \ldots + n_d}\choose {r}$.
+\newline
+
+We can count the same quantity by finding a composition $k_1 + \ldots + k_d = r$ and choosing $k_i$ items from $n_i$ for all $1 \le i \le d$. If we allow $k_i$ to be $0$, then summing across all such compositions makes it equivalent to the previous expression. Therefore, $$\displaystyle \sum_{k_1 + k_2 + \ldots + k_d = r}\left(\prod_{i = 1}^d{n_i\choose k_i}\right) = {{n_1 + \ldots + n_d}\choose r}.$$
+\newline
+
+\textbf{6.} We can prove this via induction. We know that $\frac{1}{n(k - 1) + 1}{{kn}\choose n} = \frac{kn(kn - 1)\cdots(kn - k + 2)}{n!}$. First, ${{0k}\choose 0} = 1$, which is divisible by $0(k - 1) + 1 = 1$. Now, let's assume that $\frac{kn(kn - 1)\cdots(kn - k + 2)}{n!}$ is an integer. If we multiply that by $\frac{k(n + 1)}{n + 1}$ (which is an integer), we get $\frac{k(n + 1)(kn)\cdots(kn - k + 2)}{(n + 1)!}$ is an integer, which completes the inductive step. Therefore, ${kn}\choose n$ is divisible by $n(k - 1) + 1$.
+\newline
+
+\textbf{7.} We can use stars and bars for this. We can interpret this as sorting $n$ stars between $k - 1$ bars. However, since there must be at least $r$ stars in one bucket, we are left with $n - kr$ stars and $k - 1$ bars. So we get $\frac{(n - kr + k - 1)!}{(k - 1)!(n - kr)!}$.
+
+\end{document}

@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+
+\title{Fundamentals Chapter 2}
+\author{Siddharth K}
+\date{October 2024}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1a.} Assume $m$ and $n$ are positive. Then $g^{nm}$ is $g\cdot g \cdots g$ where $g$ is multiplied $nm$ times. Also, $(g^n)^m = (g\cdot g\cdots g)\cdots (g\cdot g\cdots g)$ where $g$ is multiplied $n$ times and then the result is multiplied $m$ times. There are totally $nm$ $g$s being multiplied, so by associativity, it is the same as $g\cdot g\cdots g = g^{nm}$. \\
+
+If $m = -1$, then $g^{nm} = g^{-n}$. Since $g\cdot g^{-1} = 1$, $g^n\cdot (g^{-1})^n = 1$. Since $g^n\cdot (g^n)^{-1} = 1$, we have that $(g^{-1})^n = g^{-n} = (g^{n})^{-1}$. Similarly, if $n = -1$, $g^{nm} = g^{-m} = (g^{-1})^m$. \\
+
+If $m$ is negative, then $g^{nm} = g^{-n(-m)} = (g^{n(-m)})^{-1} = ((g^n)^{-m})^{-1} = (g^n)^m$. \\
+
+\textbf{1b.} Assume $H$ is closed under multiplication and inverses. Then for all $g, h \in H$, $h^{-1} \in H$ and $gh^{-1} \in H$. \\
+
+Now, assume $gh^{-1} \in H$ for all $g, h \in H$. Since $h^{-1}$ is defined for all $h \in H$, it is closed under inverses. Since multiplication of $g$ by $h^{-1}$ is defined for all $g, h \in H$, it is closed under multiplication. \\
+
+\textbf{3.} Let $\cdot$ be the operation for $H$ and $\star$ be for $G$. Since $f$ is a homomorphism, $f(h_1\cdot h_2) = f(h_1)\star f(h_2)$ for all $h_1, h_2 \in H$. Let $h \in H$. Then $f(h\cdot e_H) = f(h)\star f(e_H)$. This gives us $f(h) = f(h)\star f(e_H)$, so $f(e_H) = e_G$. \\
+
+Also, $f(h\cdot h^{-1}) = f(h)\star f(h^{-1})$, so $f(e_H) = e_G = f(h)\star f(h^{-1})$. This means $f(h)^{-1} = f(h^{-1})$. \\
+
+\textbf{4.} Let the operation for $G$ be $\cdot$ and $G'$ be $\star$. Assume there exists a homomorphism $f: G \to G'$. Let $g \in G$ map to $g' \in G'$. Then $f(g\cdot g) = g'\star g'$, or $f(g^2) = g'^2$. Similarly, $f(g^n) = g'^n$ \\
+
+Let the order of $g$ be $n$. Then $g\cdot g^{n - 1} = e_G$. But, if $g' \neq e_{G'}$, then $g' \star g'^{n - 1} = g'^n$, and $f(e_G) \neq g'^n$, which is a contradiction. So the only possibility is where $g' = e_{G'}$, so every element in $G$ is mapped to $e_{G'}$. \\
+
+\textbf{5.} Let $g_1 = (x_1, y_1)$ and $g_2 = (x_2, y_2)$ so that $g_1, g_2 \in G$. Define $\cdot$ as $g_1\cdot g_2 = (x_1 + x_2, y_1 + y_2)$. Also, let $h_1, h_2 \in H$. Define $\star$ as $h_1\star h_2 = h_1 + h_2$. Then $(G, \cdot) \cong (H, \star)$. Since $|\R^2\backslash \{(0, 0)\}| = |\C \backslash \{0\}|$, all that remains to show is that there exists $f$ such that $f(g_1\cdot g_2) = f(g_1)\star f(g_2)$ for all $g_1, g_2 \in G$. \\
+
+Define $f: G\to H$ so that $f((x, y)) = x + iy$. Then
+$$f(g_1\cdot g_2) = f((x_1 + x_2, y_1 + y_2)) = (x_1 + x_2) + i(y_1 + y_2)$$
+$$= (x_1 + iy_1) + (x_2 + iy_2) = f(g_1) + f(g_2),$$
+as desired. \\
+
+\textbf{7.} The inverse of $ab$ is $b^{-1}a^{-1}$ because $abb^{-1}a^{-1} = aa^{-1} = e$. \\
+
+The inverse of $a_1\cdots a_n$ is $a_n^{-1}\cdots a_1^{-1}$ because
+$$a_1\cdots a_na_n^{-1}\cdots a_1^{-1} = a_1\cdots a_{n - 1}a_{n - 1}^{-1}\cdots a_1^{-1} = \cdots = e.$$
+
+\textbf{8.} Reflexivity: let $(G, \cdot)$ be a group. To create a homomorphism from $G\to G$, let $f$ map each element in $G$ to itself. Then, for $g_1, g_2 \in G$, $f(g_1\cdot g_2) = g_1\cdot g_2 = f(g_1)\cdot f(g_2)$. This along with the fact that $|G| = |G|$ means that $G\cong G$ and $\cong$ is reflexive. \\
+
+Symmetry: let $(H, \cdot), (G, \star)$ be groups. Assume there is an isomorphism from $H\to G$ and let the homomorphism be $f$. Since $f$ is a bijection, it has an inverse $f^{-1}$. Let $\cdot$ be the binary operation for $H$ and $\star$ be for $G$. For all 
+$h_1, h_2 \in H$, we know that
+$$f(h_1\cdot h_2) = f(h_1)\star f(h_2),$$
+$$f^{-1}(f(h_1\cdot h_2)) = f^{-1}(f(h_1)\star f(h_2)),$$
+$$h_1\cdot h_2 = f^{-1}(f(h_1)\star f(h_2)).$$
+Let $g_1 = f(h_1)$ and $g_2 = f(h_2)$. Simplifying the equation gives us
+$$f^{-1}(g_1)\cdot f^{-1}(g_2) = f^{-1}(g_1\star g_2).$$
+So $f^{-1}$ is a homomorphism $G\to H$. Since $|G| = |H|$, $G\cong H$. So $H\cong G$ implies $G\cong H$ and $\cong$ is symmetric. \\
+
+Transitivity: let $(G, \cdot), (H, \times), (K, \star)$ be groups. Assume $G\cong H$ and $H\cong K$ and let the homomorphism from $G\to H$ be $f$ and from $H\to K$ be $g$. Since $f, g$ are bijections, define $h: K\to G$ so that $h = (f\circ g)^{-1}$. We know the following properties to be true for all $g_1, g_2 \in G$ and $h_1, h_2 \in H$:
+$$f(g_1\cdot g_2) = f(g_1)\times f(g_2),$$
+$$g(h_1\times h_2) = g(h_1)\star g(h_2)$$
+Our goal is to show that $$h(k_1\star k_2) = h(k_1)\cdot h(k_2)$$ for all $k_1, k_2 \in K$.
+Let $h_1 = f(g_1)$, $h_2 = f(g_2)$, $k_1 = g(h_1)$, $k_2 = g(h_2)$. Then $g_1 = h(k_1)$ and $g_2 = h(k_2)$. Substituting these into an earlier equation gives us
+$$g(f(g_1)\times f(g_2)) = g(f(g_1))\star g(f(g_2)).$$
+We can simplify the right-hand side to $k_1\star k_2$. Taking $h$ of both sides gives us
+$$f^{-1}(g^{-1}(g(f(g_1)\times f(g_2)))) = h(k_1\star k_2),$$
+$$f^{-1}(f(g_1)\times f(g_2)) = h(k_1\star k_2).$$
+From earlier, we know that $f(g_1)\times f(g_2) = f(g_1\cdot g_2)$, so the left-hand side becomes
+$$f^{-1}(f(g_1\cdot g_2)) = g_1\cdot g_2 = h(k_1)\cdot h(k_2).$$
+Therefore, we have
+$$h(k_1)\cdot h(k_2) = h(k_1\star k_2),$$
+as desired. \\
+
+\textbf{9.} Since there exists $C \in \N$ such that if $n < -C$ or $n > C$ then $f(n) = 0$, $\sum_{n = -\infty}^\infty f(n)g(x - n) = \sum_{n = -C}^C f(n)g(x - n)$ so it is a finite sum. \\
+
+To show that $(S, *)$ satisfies all the properties of a group except the existence of inverses, we must show closure of $*$, the existence of an identity element, and associativity. \\
+
+To show closure of $*$, we must show that if $f, g \in S$ then $f * g \in S$. We know that $f(x) = 0$ when $x > |C_f|$ and $g(x) = 0$ when $x > |C_g|$ for some $C_f, C_G \in \N$. So for $(f * g)(x)$ to be nonzero, both $f(n)$ and $g(x - n)$ must be nonzero for some $n$. So
+$$|n| \le C_f,\quad |x - n| \le C_g.$$
+Combining these inequalities gives us
+$$|x| < |n| + |x - n| \le C_f + C_g.$$
+Therefore, $f(n)g(x - n) = 0$ for all $n$ when $|x| > C_f + C_g$, so $(f * g)(x) = 0$ when $|x| > C_f + C_g$. This means $f * g \in S$. \\
+
+Define $e: \Z \to \R$ by $e(x) = 1$ if $x = 0$ and $e(x) = 0$ otherwise. The function $e$ clearly belongs to $S$ since it is non-zero only at $k = 0$. We know that
+$$(f * e)(x) = \sum_{n = -\infty}^\infty f(n)e(x - n).$$
+Since $e(x - n) = 0$ unless $x - n = 0$ (or $x = n$), the sum simplifies to
+$$(f * e)(x) = f(x)\cdot e(0) = f(x)$$
+so $e$ acts as an identity element in $S$. \\
+
+To show associativity, we need to show that $(f * g) * h = f * (g * h)$ for all $f, g, h \in S$. Consider the left-hand side:
+$$((f * g) * h)(x) = \sum_{m = -\infty}^\infty (f * g)(m)h(x - m) = \sum_{m = -\infty}^\infty \left(\sum_{n = -\infty}^\infty f(n)g(m - n)\right)h(x - m).$$
+Swapping the sums, we get
+$$\sum_{n = -\infty}^\infty f(n)\left(\sum_{m = -\infty}^\infty g(m - n)h(x - m)\right).$$
+Letting $k = m - n$,
+$$= \sum_{n = -\infty}^\infty f(n)\left(\sum_{k = -\infty}^\infty g(k)h(x - n - k)\right).$$
+Now, consider the right-hand side:
+$$(f * (g * h))(x) = \sum_{n = -\infty}^\infty f(n)(g * h)(x - n) = \sum_{n = -\infty}^\infty f(n)\left(\sum_{k = -\infty}^\infty g(k)h(x - n - n)\right)$$
+which is identical to the left-hand side. \\
+
+\textbf{10.} We need to show that $f(a + b) = f(a) + f(b)$ implies that $f$ maps $x$ to $nx$ for some constant $n$. Let $b = a$. Then we have $f(2a) = 2f(a)$. Now assume that $f(ka) = kf(a)$ for all $k \in \Z$. From the equation above, we have
+$$f((k + 1)a) = f(ka + a) = f(ka) + f(a) = (k + 1)f(a),$$
+so by induction, $f(ka) = kf(a)$ for all $k \in \Z$. \\
+
+Letting $a = 1$, we have $f(k) = kf(1)$, and since $f(1)$ is constant, we can let $n = f(1)$. So for any $x$, $f(x) = nx$. \\
+
+\textbf{11.} A $9\times 9$ Rubik's cube can be treated as a $3\times 3$ by rotating either the top three, middle three, or bottom three layers at once. So for any movement of a $3\times 3$ Rubik's cube, we can do the same movement on three layers at a time in a $9\times 9$ Rubik's cube. \\
+
+\textbf{13.} Assume that $f$ is injective. Then if $f(h_1) = f(h_2)$ then $h_1 = h_2$. So the only element that gets mapped to $e_G$ is $e_H$, so $\ker(f) = \{e_H\}$. \\
+
+Now, assume that $\ker(f) = \{e_H\}$. Then the only element in $H$ that gets mapped to $e_G$ is $e_H$. Assume that $f(a) = f(b)$ for some $a, b \in H$. We need to show that $a = b$. \\
+
+Multiplying both sides by $f(b)^{-1}$ (on the left), we get $f(b)^{-1}f(a) = f(b^{-1}a) = e_G$. This implies that $b^{-1}a \in \ker(f)$, so $b^{-1}a = e_H$. Multiplying both sides by $b$ on the left, we get $a = b$. Therefore, $f$ is injective.
+
+\end{document}

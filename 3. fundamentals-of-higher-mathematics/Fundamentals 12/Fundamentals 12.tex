@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\eps}{\varepsilon}
+% \newcommand{\la}{\langle}
+% \newcommand{\ra}{\rangle}
+
+\title{Fundamentals Chapter 12}
+\author{Siddharth K}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Fix $\eps > 0$. We know that there exists $N_1, N_2$ such that if $n > N_1$ then $|x_n| < \eps/2$ and if $n > N_2$ then $|y_n| < \eps/2$. Let $n > \max(N_1, N_2)$. Then
+$$|x_n + y_n| \le |x_n| + |y_n| < \frac{\eps}{2} + \frac{\eps}{2} = \eps.$$
+Furthermore, we know there exists $N_1, N_2$ such that if $n > N_1$ then $|x_n| < \sqrt{\eps}$ and if $n > N_2$ then $|y_n| < \sqrt{\eps}$. So if $n > \max(N_1, N_2)$, then
+$$|x_ny_n| = |x_n||y_n| < \sqrt{\eps}\sqrt{\eps} = \eps.$$
+So $x_n + y_n$ and $x_ny_n$ converge to $0$. \\
+
+\textbf{2a.} Since $x_n$ is Cauchy, it is bounded, and let $M > |x_n|$ for all $n$. Now, fix $\eps > 0$. We know that there exists $N$ such that $|y_n| < \eps/M$, so if $n > N$ then
+$$|x_ny_n| = |x_n||y_n| < |x_n|\frac{\eps}{M} < M\frac{\eps}{M} = \eps.$$
+
+\textbf{2b.} Assume $x_n \to 0$. Then, given $\eps > 0$, there exists $N$ such that if $n > N$ then $|x_n| < \eps$. Since $|x_n| = ||x_n||$, $||x_n|| < \eps$ as well, so $|x_n| \to 0$. \\
+
+Now, assume $|x_n| \to 0$. Then given $\eps > 0$, there exists $N$ such that if $n > N$ then $||x_n|| < \eps$, which means $|x_n| < \eps$ as well. \\
+
+\textbf{3.} Since $x_n$ is Cauchy, given $\eps > 0$, there exists $N$ such that if $n, m > N$ then $|x_n - x_m| < \eps$. Let $m = k_n$, so that $n, k_n > N$ (since $k_n \ge n$ by definition of a subsequence). Then we have that $|x_n - x_{k_n}| < \eps$, so $(x_n - x_{k_n}) \to 0$. \\
+
+\textbf{4a.} To prove this, we show that if $x_n \not \to x$ then there exists a subsequence that has no subsequences converging to $x$. \\
+
+If $x_n \not \to x$, then there exists $\eps$ such that, for all $N$, there exists $n > N$ such that $|x_n - x| \ge \eps$. To construct a subsequence $x_{k_n}$ with no subsequences converging to $x$, find the first $n$ where $|x_n - x| \ge \eps$, and let $k_1 = n$. To continue the process infinitely, let $N = k_i$, and find the next $n > N$ so that $|x - x_n| \ge \eps$, and let $k_{i + 1} = n$. This can be continued infinitely because $x_n \not \to x$. \\
+
+Since there exists some $\eps$ such that every element of this subsequence is at least $\eps$ away from $x$, it has no subsequences that converge to $x$. \\
+
+\textbf{4b.} Let $x_n = (-1)^n$. Any subsequence of $x_n$ has infinitely many $1$s or $-1$s (or both). So we can make a further subsequence by choosing only $1$s or only $-1$s, and it will converge. \\
+
+\textbf{5a.} We need to show that if $y > x$ then $\frac{y}{1 + y} - \frac{x}{1 + x} > 0$. Simplifying this, we get
+$$\frac{y}{1 + y} - \frac{x}{1 + x} = \frac{y(1 + x) - x(1 + y)}{(1 + y)(1 + x)} = \frac{y - x}{(1 + y)(1 + x)} > 0.$$
+So $f(x) = \frac{x}{1 + x}$ is increasing. \\
+
+\textbf{5b.} If $x = y$ then $d^*(x, y) = \frac{0}{1 + 0} = 0$. If $d^*(x, y) = 0$, then $\frac{d(x, y)}{1 + d(x, y)} = 0$ so $d(x, y) = 0$ and $x = y$. \\
+
+Now, we prove the triangle inequality. Let $a = d(x, y), b = d(x, z), c = d(y, z)$. Given $a \le b + c$, we wish to show that $\frac{a}{1 + a} \le \frac{b}{1 + b} + \frac{c}{1 + c}$. Simplifying this, we get
+$$\frac{a}{1 + a} \le \frac{b}{1 + b} + \frac{c}{1 + c},$$
+$$a(1 + b)(1 + c) \le b(1 + a)(1 + c) + c(1 + a)(1 + b),$$
+$$abc + ab + ac + a \le abc + ab + bc + b + abc + ac + bc + c,$$
+$$a \le abc + 2bc + b + c.$$
+Since $a \le b + c$, we know this is true, so the original inequality is true as well. \\
+
+\textbf{5c.} Assume that $x_n$ is Cauchy with respect to $d$. Then, given $\eps > 0$, there exists $N$ such that if $n, m > N$ then $d(x_n, x_m) < \eps$. We know that $\frac{d(x_n, x_m)}{1 + d(x_n, x_m)} < d(x_n, x_m) < \eps$, so $x_n$ is Cauchy with respect to $d^*$ as well. \\
+
+Now, assume $x_n$ is Cauchy with respect to $d^*$. Fix $\eps > 0$. Then there exists $N$ such that if $n, m > N$ then $d^*(x_n, x_m) < \frac{\eps}{1 + \eps}$. Then we have that
+$$d^*(x_n, x_m) = \frac{d(x_n, x_m)}{1 + d(x_n, x_m)} < \frac{\eps}{1 + \eps},$$
+$$d(x_n, x_m)(1 + \eps) < \eps(1 + d(x_n, x_m)),$$
+$$d(x_n, x_m) + \eps d(x_n, x_m) < \eps + \eps d(x_n, x_m),$$
+$$d(x_n, x_m) < \eps.$$
+So $x_n$ is Cauchy with respect to $d^*$. \\
+
+\textbf{6a.} First we show that $x = y$ iff $(d_1 + d_2)(x, y) = 0$. If $x = y$ then $d_1(x, y) + d_2(x, y) = 0 + 0 = 0$. If $(d_1 + d_2)(x, y) = 0$, then since $d_1, d_2 \ge 0$, we have that $d_1(x, y) = d_2(x, y) = 0$ so $x = y$. \\
+
+Now, we show the triangle inequality. We know that
+$$d_1(x, y) \le d_1(x, z) + d_1(y, z),$$
+$$d_2(x, y) \le d_2(x, z) + d_2(y, z).$$
+Adding the two inequalities gives us
+$$(d_1 + d_2)(x, y) \le (d_1 + d_2)(x, z) + (d_1 + d_2)(y, z),$$
+as desired. \\
+
+\textbf{6b.} First, we show that $x = y$ iff $\left|\frac{1}{x} - \frac{1}{y}\right| = 0$. If $x = y$ then $|1/x - 1/y| = 0$. If $|1/x - 1/y| = 0$ then $\frac{1}{x} = \frac{1}{y}$, so $x = y$. \\
+
+Now, we show that
+$$\left|\frac{1}{x} - \frac{1}{y}\right| \le \left|\frac{1}{x} - \frac{1}{z}\right| + \left|\frac{1}{y} - \frac{1}{z}\right|.$$
+If we let $a = \frac{1}{x} - \frac{1}{z}$ and $b = \frac{1}{z} - \frac{1}{y}$, the inequality simplifies to $|a + b| \le |a| + |b|$, which we know is true, so the original inequality holds. \\
+
+\textbf{8a.} Assume $|x| < \eps$. Consider the case where $x \ge 0$. Then $|x| = x < \eps$, so $0 \le x < \eps$ and the condition $-\eps < x < \eps$ is satisfied. Now, consider the case where $x < 0$. Then $|x| = -x < \eps$, so $x > -\eps$ and $-\eps < x < 0$, so in either case $-\eps < x < \eps$ is satisfied. \\
+
+Now, assume $-\eps < x < \eps$. If $x \ge 0$, $|x| = x < \eps$ so $0 \le |x| < \eps$. If $x < 0$, $|x| = -x$, and since $x > -\eps$, we know that $-x < \eps$, so $|x| < \eps$. So in both cases, $|x| < \eps$ is satisfied. \\
+
+\textbf{8b.} Squaring both sides gives us
+$$(|x| - |y|)^2 \le (x - y)^2,$$
+$$x^2 + y^2 - 2|xy| \le x^2 + y^2 - 2xy,$$
+$$xy \le |xy|,$$
+which is true. Equality holds when $xy = |xy|$, or $x$ and $y$ have the same sign. \\
+
+\textbf{8c.} Given $\eps > 0$, there exists $N$ such that if $n > N$, $|x_n - x| < \eps$. By the reverse triangle inequality, $||x_n| - |x|| \le |x_n - x| < \eps$, so $|x_n| \to |x|$. \\
+
+The converse does not hold. For example, take $x_n = (-1)^n$. We have that $|x_n| = 1$ converges to $1$ but $x_n$ does not converge. \\
+
+\textbf{10.} For contradiction, assume $x > y$ and let $\eps = x - y$. We know that there exists $N$ such that if $n > N$ then $|x_n - x| < \eps = x - y$. If $x_n \ge x$ then $x_n > y$, which is a contradiction, so $x_n < x$. That means $|x_n - x| = x - x_n$, so we have that $x - x_n < x - y$, or $y < x_n$, which is a contradiction. So $x \le y$. \\
+
+To show that it is possible that $x = y$, let $x_n = 1 - \frac{1}{2^n}$, so that $x = 1$. We also have that $x_n < 1$ for all $n$, so we can let $y = 1$, so $x = y$. \\
+
+\textbf{11.} Since $x_n$ doesn't converge to $0$, there exists $\eps > 0$ such that for all $N$, there is some $n \ge N$ with $|x_n| \ge \eps$. This means there exists a subsequence $x_{m_k}$ such that $|x_{m_k}| \ge \eps$ for all $k$. \\
+
+Now, assume $x_n$ has infinitely many zeroes, so that there is an increasing sequence, $n_k$, such that $x_{n_k} = 0$ for all $k$. Because $x_n$ is Cauchy, there exists $N$ such that for all $n, m \ge N$, $|x_m - x_n| < \eps/2$. From the subsequence $x_{m_k}$, choose $m_k > N$, and from the subsequence $x_{n_k}$, choose $n_k > N$. Then $|x_{n_k} - x_{m_k}| = |x_{m_k}| \ge \eps$. But from earlier, it must be $< \eps/2$. This is a contradiction, so $x_n$ cannot have infinitely many $0$s. \\
+
+\textbf{12.} Let $x_n = e^{-n}$ and $y_n = \frac{\sin n}{n}$. They are both Cauchy, but $x_n^{y_n} = e^{-\sin n}$ isn't.
+
+\end{document}

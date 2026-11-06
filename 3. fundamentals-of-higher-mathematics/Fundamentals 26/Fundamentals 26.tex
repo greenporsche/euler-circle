@@ -1,0 +1,85 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% <added stuff>
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\power}{\mathcal{P}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\mcO}{\mathcal{O}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nullset}{\varnothing}
+\newcommand{\lb}{\left(}
+\newcommand{\rb}{\right)}
+\newcommand{\minus}{\backslash}
+% </added stuff>
+
+\title{Fundamentals 26}
+\author{Siddharth K}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 26.1}
+Let $x \in X$; we wish to find countable $\U$ of neighborhoods of $x$ where each neighborhood contains some $U \in \U$. Every open set is a union of elements of a countable basis $\B$, so every neighborhood of $x$ contains an element of $\B$. So we can let $\U = \{B \in \B : x \in B\}$.
+
+\subsection*{Problem 26.2}
+We wish to prove that $\bar{\Q} = \R$. Let $\Q \subseteq C$ where $C \subseteq \R$ is closed. It suffices to show that $C = \R$, so that $\bar{\Q} = C = \R$. Since $\Q \subseteq C$, $(\R \minus C) \cap \Q = \nullset$, so $\R \minus C$ has no rational numbers. But every open set (except $\nullset$) has a rational number, so $\R \minus C = \nullset$, or $C = \R$.
+
+\subsection*{Problem 26.4}
+Let
+$$\B = \{(a, b): a < b, a, b \in \Q\}.$$
+This is a countable basis for $\R$. Let $\{U_\alpha : \alpha \in A\}$ be an open cover of $\R$. Consider the collection
+$$B' = \{B \in \B: \exists\,\alpha \in A \text{ where } B \subseteq U_\alpha\}.$$
+Given any $x \in \R$, we can pick some $\alpha$ where $x \in U_\alpha$. Since $\B$ is a basis, there is $B \in \B$ where $x \in B \subseteq U_\alpha$, so $B \in B'$. Therefore $\B'$ still covers $\R$, and it's countable (since $\B$ is countable). So given any open cover of $\R$, we can extract a countable subcover.
+
+\subsection*{Problem 26.5}
+\subsubsection*{Part (1)}
+Assume $X$ is normal, which means singletons are closed and for each pair of closed disjoint $C, D \subseteq X$, there's $U \supseteq C$ and $V \supseteq D$ such that $U \cap V = \nullset$. \\
+
+First, we show that $X$ is $\mathbf{T_0}$: let $a, b \in X$. Then $\{a\}, \{b\}$ are closed, so there are open $U \supseteq \{a\}$ and $V \supseteq \{b\}$ where $U \cap V = \nullset$. So $a \in U$ but $b \not\in U$, as desired. \\
+
+Now, we show that $X$ is $\mathbf{T_3}$. Let $x \in X$ and $C \subseteq X$ be closed with $x \not\in C$. Since $\{x\}$ is closed, there are open $U \supseteq \{x\}$ and $V \supseteq C$ where $U \cap V = \nullset$, as desired.
+
+\subsubsection*{Part (2)}
+Assume $X$ is regular, so that for all $a, b \in X$, there's $U$ where $a \in U$ and $b \not \in U$ or $b \in U$ and $a \not \in U$, and for all $x$ and closed $C \not\ni x$, there are open $U \supseteq \{x\}$ and $V \supseteq C$ where $U \cap V = \nullset$. \\
+
+To show that $X$ is Hausdorff, let $x_1, x_2 \in X$. There's open $U$ where $x_1 \in U$ but $x_2 \not\in U$. Also, there's $U_1 \supseteq U$ and $U_2 \supseteq \{x_2\}$ where $U_1 \cap U_2 = \nullset$, so $x_1 \in U_1$ and $x_2 \in U_2$ where $U_1 \cap U_2 = \nullset$, as desired.
+
+\subsubsection*{Part (3)}
+We wish to show that if $X$ is Hausdorff then singleton sets are closed. Let $x \in X$. Then for all $y \in X \minus \{x\}$, there are $U^{(1)}_y, U^{(2)}_y$ where $U^{(1)}_y \cap U^{(2)}_y = \nullset$. Let $U = \bigcup_{y \neq x} U^{(2)}_y$. Then $x \not\in U$ but all $y \neq x$ is in $U$. Also, all $U^{(2)}_y$ are open, so $U$ is open, and $U = X \minus \{x\}$. So $\{x\}$ is closed.
+
+\subsubsection*{Part (4)}
+Let $a, b \in X$ and assume singleton sets are closed. We have that $X \minus \{a\}, X \minus \{b\}$ are open. Let $U = X \minus \{a\}$; then $U$ is open and $b \in U$ but $a \not\in U$.
+
+\subsection*{Problem 26.6}
+Assume $X$ is $\mathbf{T_4}$. Let $A \subseteq U$ where $A$ is closed and $U$ is open and set $B = X \minus U$. Then $B$ is closed and $A \cap B = \nullset$. By $\mathbf{T_4}$, there are disjoint open neighborhoods $V$, $W$ where $A \subseteq V$, $B \subseteq W$, and $V \cap W = \nullset$. Since $W$ is an open neighborhood of $B = X \minus U$, its complement is a closed set containing $V$. But $X \minus W \subseteq U$, since $W \supseteq B = X \minus U$. So, since $X \minus W$ is closed, $\bar{V} \subseteq X \minus W \subseteq U$. \\
+
+Now assume that for all closed $A \subseteq X$ and open $U \supseteq A$, there exists open $V$ with $A \subseteq V \subseteq \bar{V} \subseteq U$. Let $A, B$ be disjoint closed subsets of $X$. Then $U = X \minus B$ is an open neighborhood of $A$. We know there is an open $V$ with $A \subseteq V \subseteq \bar{V} \subseteq U = X \minus B$. Let $W = X \minus \bar{V}$. Then $W$ is open, $B \subseteq W$, and $V \cap W = V \cap (X \minus \bar{V}) = \nullset$. So $X$ is $\mathbf{T_4}$.
+
+\subsection*{Problem 26.7}
+Let $(x_1, y_1), (x_2, y_2) \in X\times Y$. Then there are open $U_1, U_2, V_1, V_2$ where $x_1 \in U_1, x_2 \in U_2, y_1 \in V_1, y_2 \in V_2$ where $U_1 \cap V_1 = U_2 \cap V_2 = \nullset$. By the product topology, $U_1 \times V_1, U_2 \times V_2$ are both open in $X \times Y$ and $x_1, y_1 \in U_1 \times V_1$ and $(x_2, y_2) \in U_2 \times V_2$, so $X\times Y$ is Hausdorff.
+
+\subsection*{Problem 26.10}
+Let $X$ be $\mathbf{T_{2.5}}$ and $x, y \in X$. There are closed neighborhoods $C \ni x, D \ni y$ with $C \cap D = \nullset$. Let $U = C^\circ$, $V = D^\circ$; we know that $U, V$ are open. Since $C, D$ are closed neighborhoods of $x, y$, $x \in U$ and $y \in V$. Therefore, $X$ is Hausdorff.
+
+\subsection*{Problem 26.11}
+First, if $X$ is $\mathbf{T_1}$, singletons are open so $X$ is $\mathbf{T_{0.5}}$. \\
+
+Now, assume $X$ is $\mathbf{T_{0.5}}$. Let $a, b \in X$. If one of $\{a\}, \{b\}$ are open (call the open one $\{c\}$), then let $U = \{c\}$. We have that $c \in U$ and $(\{a, b\} \minus \{c\}) \cap U = \nullset$, so $X$ is $\mathbf{T_0}$. If both $\{a\}, \{b\}$ are closed, let $U = X \minus \{b\}$. Then $a \in U$ but $b \not\in U$, so $X$ is $\mathbf{T_0}$. \\
+
+Let $X = \{a, b, c\}$ and $\T = \{\nullset, \{a, b\}, \{a\}, \{b\}, \{a, b, c\}\}$. Then $(X, \T)$ is $\mathbf{T_{0.5}}$ but not $\mathbf{T_{1}}$, since $\{c\}$ is closed but not open.
+
+\end{document}

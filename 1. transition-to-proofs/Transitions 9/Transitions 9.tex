@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Chapter 9 Problem Set}
+\author{Siddharth K}
+\date{November 2023}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Given two positive integers $a$ and $b$ such that $b = a + 2$, the expression $\frac{1}{a} + \frac{1}{b}$ can be used to generate a Pythagorean triple. Specifically, the numerator is the first term of a Pythagorean triple, and the denominator is the second term.
+\newline
+
+Simplifying $\frac{1}{a} + \frac{1}{a + 2}$, we get $\frac{2a + 2}{a^2 + 2a}$. And substituting $m = a + 1$ and $n = 1$ into the parameterization of Pythagorean triples, we get $(a^2 + 2a, 2a + 2, a^2 + 2a + 2)$. The fraction's numerator is the middle term of the Pythagorean triple, and the denominator is the first term.
+\newline
+
+\textbf{2.} Using the parameterization of Pythagorean triples, we see that $2(c - a) = 2(n^2 + m^2 - n^2 + m^2) = 2(2m^2) = 4m^2 = (2m)^2$.
+\newline
+
+\textbf{3.} The parameterization for $a^2 + 2b^2 = c^2$ is $(m^2 - 2n^2, 4mn, m^2 + 2n^2)$ with relatively prime integers $m$ and $n$. First, let's prove that all solutions of that equation can be parameterized this way.
+\newline
+
+The second term in the parameterization is $4mn$, so $b$ must be even. Therefore, we can write $b = 2d$. We know that $b^2 = c^2 - a^2$, so $4d^2 = (c - a)(c + a)$, or $d^2 = \left(\frac{c - a}{2}\right)\left(\frac{c + a}{2}\right)$. Since $\frac{c - a}{2}$ and $\frac{c + a}{2}$ are relatively prime, both of them are perfect squares. Since we have $d^2 = \frac{b^2}{4} = mn$, we can set $m = \sqrt{\frac{c - a}{2}}$ and $n = \sqrt{\frac{c + a}{2}}$, and both are integers because the radicands are perfect squares. Therefore, we have found values for $m$ and $n$ that satisfy the condition.
+\newline
+
+Now, we need to prove that all possible pairs $(m, n)$ where $m$ and $n$ are relatively prime result in relatively prime values of $a$, $b$, and $c$ that satisfy $a^2 + 2b^2 = c^2$. We can easily verify that $(m^2 - 2n^2)^2 + (4mn)^2 = (m^2 + 2n^2)^2$, so showing that $\gcd(m^2 - 2n^2, m^2 + 2n^2) = 1$ will suffice.
+\newline
+
+Let's say a prime $p$ divides $m^2 - 2n^2$ and $m^2 + 2n^2$. That means $m^2 - 2n^2 = pk$ and $m^2 + 2n^2 = pl$. Subtracting both equations, we get $4n^2 = p(l - k)$. That means either $p$ and $l - k$ are both perfect squares or $p = l - k$. The first is impossible because $p$ is prime, and the second is also impossible because $p(l - k) = (2n)^2$, so $p = 2n$, which can't be true because $p$ is prime. Therefore, no such prime $p$ exists, so the gcd of the first and third terms is $1$.
+\newline
+
+\textbf{4.} We can factorize $x^3 + y^3$ as $p^n = (x + y)(x^2 - xy + y^2)$. That means both factors are powers of $p$. That means $x + y = p^k$, so $p^n = p^k((x + y)^2 - 3xy) = p^k(p^{2k} - 3xy)$, so $p^{n - k} = p^{2k} - 3xy$. That means $3xy \equiv 0 \pmod{p}$. So either $p = 3$, $p = x$, or $y = p$. These cases guarantee that there exist integers $x$, $y$, and $n$ such that $p^n = x^3 + y^3$.
+\newline
+
+\textbf{5.} When $c = 65$, there are the triples: $(16, 63, 65)$ and $(33, 56, 65)$.
+
+When $c = 85$, there are the triples: $(13, 84, 85)$ and $(36, 77, 85)$.
+
+When $c = 145$, there are the triples: $(17, 144, 145)$ and $(24, 143, 145)$.
+\newline
+
+\textbf{6.} There are at least $4$ different primitive Pythagorean triples when $c = 1105$: $$(47, 1104, 1105), (744, 817, 1105), (576, 943, 1105), (264, 1073, 1105).$$
+
+\textbf{8.} Let's assume that $(x, y, z)$ is the smallest possible solution to $x^4 - y^4 = z^2$. We can factor that equation as $(x^2 + y^2)(x^2 - y^2) = z^2$. Since $x^2 + y^2$ and $x^2 - y^2$ are relatively prime, each of them is a perfect square, so we have $x^2 + y^2 = a^2$ and $x^2 - y^2 = b^2$. That means there exist integers $m$ and $n$ such that $x = m^2 - n^2$, $y = 2mn$, and $a = m^2 + n^2$. I didn't know how to continue from there.
+\newline
+
+\textbf{9.} Since $f$ takes in natural numbers and returns natural numbers, to follow the criteria, it can never decrease. Also, $f$ can only involve addition, multiplication, and exponentiation with $n$ because otherwise, it could return values that aren't integers. If $f(n) =  n + k$ where $k$ is an integer greater than or equal to $1$, that means $f(n + 1) = n + k + 1 \not > n + 2k = f(n + k) = f(f(n))$. If $f(n) = kn$, then $f(n + 1) = kn + n \not > k^2n = f(kn) = f(f(n))$. And finally, if $f(n) = n^k$, then $f(n + 1) = (n + 1)^k \not > n^{k^2}= f(n^k) = f(f(n))$. Since you can't add, multiply, or exponentiate anything to $n$ and it can't decrease, $f(n) = n$.
+\newline
+
+\textbf{10.} It suffices to prove that $\sum_{i = 1}^n a_i^3 \neq b^3$ for any positive integer $n$ and different integers $a_i$, since if the volumes of the smaller cubes don't add up to the largest one, they won't fit inside it.
+\newline
+
+To prove this, we can rewrite $\sum_{i = 1}^n a_i^3$ as $\left(\frac{n(n + 1)}{2}\right)^2$. That expression needs to be a perfect cube. For that to be true, either one of $n$ or $n + 1$ must be a perfect cube and the other must be twice a perfect cube. The only possible remainders when a perfect cube is divided by $7$ are $0$, $1$, and $6$, and when divided by $9$, they are $0$, $1$, and $8$.
+\newline
+
+If $k$ is a perfect cube, then $k \equiv 0, 1, 6 \pmod{7}$, so $k + 1 \equiv 1, 2, 0 \pmod{7}$ respectively. The only case that works is when $k \equiv 6 \pmod{7}$. Considering $k \pmod{9}$ as well shows that $6$ cannot be a remainder, because then $k + 1 \equiv 7 \pmod{9}$, which can't be twice a perfect cube. Therefore, it is impossible for $k$ to be a perfect cube and for $k + 1$ to be twice a perfect cube.
+\newline
+
+If $k + 1$ is a perfect cube, then $k \equiv 0, 5, 6 \pmod{7}$. Since $k$ is twice a perfect cube, $k \equiv 0 \pmod{7}$ is the only possibility. From there, I couldn't figure out what to do to complete the proof.
+
+\end{document}

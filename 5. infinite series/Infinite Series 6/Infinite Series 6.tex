@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\summation}[1][0]{\sum_{n=#1}^\infty}
+\newcommand{\summationk}[1][0]{\sum_{k=#1}^\infty}
+\newcommand{\summationm}[1][0]{\sum_{m=#1}^\infty}
+
+\title{Infinite Series 6}
+\author{Siddharth K}
+\date{February 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+$$\prod_{n=2}^\infty \frac{n^2 - 1}{n^2} = \prod_{n = 2}^\infty \frac{n - 1}{n}\prod_{n=2}^\infty\frac{n + 1}{n} = 1 \cdot \frac 12 = \frac 12.$$
+
+\section*{Problem 2}
+Let $a_0 = -1$ and $a_n = 1/2^n$ for $n > 0$. The product is $0$, which (technically...) diverges while the sum is $-1 + 1 = 0$, which converges.
+
+\section*{Problem 3}
+Consider the sequence where $a_{2n - 2} = \frac{1}{\sqrt{n}}$ and $a_{2n - 1} = -\frac{1}{\sqrt{n} + 1}$. The sum diverges because
+$$\summation[1] \bigp{\frac{1}{\sqrt{n}} - \frac{1}{\sqrt{n} + 1}} = \summation[1] \frac{1}{\sqrt{n}(\sqrt{n} + 1)} \le \summation[1] \frac{1}{n} = \infty,$$
+and the product converges because
+$$\bigp{1 + \frac{1}{\sqrt{n}}}\bigp{1 - \frac{1}{\sqrt{n} + 1}} = 1 + \frac{1}{\sqrt{n}} - \frac{1}{\sqrt{n} + 1} - \frac{1}{\sqrt{n}(\sqrt{n} + 1)} = 1,$$
+which means all terms of the product are equal to $1$.
+
+\section*{Problem 5}
+Let $x_n$ and $y_n$ be the width and height of the total rectangle when the $2n - 1$'st and $2n$'th blocks are added respectively. We can create a recurrence. Given a rectangle made of $2n - 3$ blocks, we add a rectangle to the top which makes the new area $2n - 2$, so
+$$y_n = \frac{2n - 2}{x_{n - 1}}.$$
+Similarly, adding a rectangle to the side makes the new area $2n - 1$
+$$x_n = \frac{2n - 1}{y_n} = \frac{2n - 1}{2n - 2}x_{n - 1},$$
+so
+$$y_n = \frac{2n - 2}{2n - 3}y_{n - 1}.$$
+So the ratio of side lengths, $r_n = y_n/x_n$ is
+$$r_n = \frac{2n - 2}{2n - 3}\cdot \frac{2n - 2}{2n - 1}r_{n - 1},$$
+$$r = r_1\cdot \prod_{n = 2}^\infty \frac{(2n - 2)^2}{(2n - 1)(2n - 3)}.$$
+From the chapter, the product is equal to $\pi/2$, so for an initial rectangle with a height-to-width ratio of $r_1$, the limiting ratio of side lengths is
+$$\frac{\pi r_1}{2}.$$
+
+\section*{Problem 6}
+Consider the partial product:
+$$P = \prod_{n = 1}^\infty \frac{3^{2^{-n}} + 5^{2^{-n}}}{2} = \lim_{N \to \infty} \prod_{n = 1}^N \frac{3^{2^{-n}} + 5^{2^{-n}}}{2} = \bigp{\frac{3^{2^{-1}} + 5^{2^{-1}}}{2}}\cdots\bigp{\frac{3^{2^{-N}} + 5^{2^{-N}}}{2}}.$$
+Expanding the product by summing over all partitions of $[N] = \{1, 2, \cdots, N\}$ gives us
+$$P(N) = \sum_{A \subseteq [N]} \bigp{\prod_{n \in A} \frac{3^{2^{-n}}}{2}}\bigp{\prod_{n \in A^c} \frac{5^{2^{-n}}}{2}}.$$
+Each smaller product is equal to
+$$\prod_{n \in A} \frac{3^{2^{-n}}}{2} = 2^{-|A|}\cdot 3^{\sum_{n \in A} 2^{-n}}, \quad \prod_{n \in A^c} \frac{5^{2^{-n}}}{2} = 2^{-(N - |A|)}\cdot 5^{\sum_{n \in A^c} 2^{-n}},$$
+so
+$$P(N) = \sum_{A \subseteq [N]}2^{-N} \cdot 3^{\sum_{n \in A} 2^{-n}} \cdot 5^{\sum_{n \in A^c} 2^{-n}}.$$
+Define $x_A = \sum_{n \in A} 2^{-n}$, so that
+$$P(N) = \sum_{A \subseteq [N]} 2^{-N}\cdot 3^{x_A}\cdot 5^{1 - x_A}.$$
+The numbers $x_A$ for all $A \subseteq [N]$ are all binary numbers with $N$ digits from $0$ to $1$, so they are evenly spaced by $2^{-N}$. We can therefore rewrite the sum as
+$$P(N) = \sum_{k = 0}^{2^N}2^{-N} \cdot 3^{k/2^N}\cdot 5^{1 - k/2^N}.$$
+By the definition of a Riemann integral,
+$$P = \lim_{N \to \infty} P(N) = \int_0^1 3^x 5^{1 - x} dx.$$
+Evaluating this integral, we get
+$$\int_0^1 3^x 5^{1 - x} dx = 5\int_0^1 \bigp{\frac 35}^x dx = -\frac{2}{\log(3/5)}.$$
+
+\section*{Problem 9}
+This product can be written as
+$$\prod_{n = 0}^\infty \frac{(8n + 2)(8n + 4)^2(8n + 6)}{(8n + 1)(8n + 3)(8n + 5)(8n + 9)} = \prod_{n = 0}^\infty \frac{(n + \frac{1}{4})(n + \frac{1}{2})^2(n + \frac{3}{4})}{(n + \frac{1}{8})(n + \frac 38)(n + \frac 58) (n + \frac 78)}$$
+$$= \frac{64}{35}\prod_{n = 1}^\infty \frac{(n + \frac{1}{4})(n + \frac{1}{2})^2(n + \frac{3}{4})}{(n + \frac{1}{8})(n + \frac 38)(n + \frac 58) (n + \frac 78)}.$$
+Since $\frac 14 + 2 \cdot \frac 12 + \frac 34 = \frac 18 + \frac 38 + \frac 58 + \frac 78$, Theorem 4.5 applies, so the product is equal to
+$$\frac{64}{35}\cdot \frac{\Gamma(1 + \frac 18)\Gamma(1 + \frac 38)\Gamma(1 + \frac 58)\Gamma(1 + \frac 78)}{\Gamma(1 + \frac 14)\Gamma(1 + \frac 12)^2\Gamma(1 + \frac 34)}.$$
+Using the recurrence $\Gamma(z + 1) = z\Gamma(z)$, the product is
+$$\frac{64}{35} \cdot \frac{\frac 18 \cdot \frac 38 \cdot \frac 58 \cdot \frac 78}{\frac 14 \cdot \frac 14 \cdot \frac 34} \cdot \frac{\Gamma(\frac 18)\Gamma(\frac 38)\Gamma(\frac 58)\Gamma(\frac 78)}{\Gamma(\frac 14)\Gamma(\frac 12)^2\Gamma(\frac 34)}.$$
+Using the reflection formula,
+$$\Gamma\bigp{\frac 18}\Gamma\bigp{\frac 78} = \frac{\pi}{\sin(\frac\pi 8)}, \quad \Gamma\bigp{\frac 38}\Gamma\bigp{\frac 58} = \frac{\pi}{\sin(\frac{3\pi}{8})},$$
+$$\Gamma\bigp{\frac 14}\Gamma\bigp{\frac 34} = \frac{\pi}{\sin(\frac\pi 4)}, \quad \Gamma\bigp{\frac 12}^2 = \frac{\pi}{\sin(\frac{\pi}{2})},$$
+so the product becomes
+$$\frac{64}{35} \cdot \frac{35}{64} \cdot \frac{\sin(\frac {\pi}{4})\sin(\frac {\pi}{2})}{\sin(\frac {\pi}{8})\sin(\frac {3\pi}{8})} = \frac{\sqrt{2}/2}{\frac{\sqrt{2 - \sqrt{2}}}{2} \cdot \frac{\sqrt{2 + \sqrt{2}}}{2}} = 2.$$
+
+\section*{Problem 15}
+First, we change variables: let $u = xy$ and $v = x$. Then $x = v$ and $y = u/v$, so $(x, y) \in (0, 1)^2$ maps to $0 < u < v < 1$. The Jacobian is
+$$\bigabs{\frac{\partial(x, y)}{\partial(u, v)}} = \frac{1}{v}.$$
+So the integral becomes
+$$\int_0^1\int_0^v \frac{1 - v}{(1 - u)\log u} du\, dv = \int_0^1 \frac{1}{(1 - u)\log u} \bigp{\int_u^1 \frac{1 - v}{v}dv}du.$$
+The inner integral is
+$$\int_u^1 \bigp{\frac{1}{v} - 1}dv = [\log v - v]_u^1 = -1 - \log u + u.$$
+So the whole integral is
+$$\int_0^1 \frac{-1 - \ln u + u}{(1 - u)\ln u} du.$$
+The numerator can be rewritten as $-(1 - u) - \ln u$, so the integral becomes
+$$\int_0^1 \bigp{-\frac{1}{\ln u} - \frac{1}{1 - u}}du.$$
+It remains to show that
+$$\gamma = \int_0^1 \bigp{\frac{1}{\ln u} + \frac{1}{1 - u}}du,$$
+but I couldn't figure out how to do this.
+
+\end{document}

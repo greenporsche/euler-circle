@@ -1,0 +1,49 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+
+\title{Chapter 18 Problem Set}
+\author{Siddharth K}
+\date{February 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Let $A$ be the set of people taking yoga, $B$ be bridge, and $C$ be painting. By PIE, $|A\cup B\cup C| = |A| + |B| + |C| - |A\cap B| - |A\cap C| - |B\cap C| + |A\cap B\cap C|$. We can rewrite this as $|A| + |B| + |C| - (|A\cap B| + |A\cap C| + |B\cap C| - 2|A\cap B\cap C|) - |A\cap B\cap C|$. Substituting for values we know, we get $20 = 10 + 13 + 9 - 9 - |A\cap B\cap C|$, so $|A\cap B\cap C| = 3$.
+\newline
+
+\textbf{2.} The number of functions with at least $k$ fixed points is ${n\choose k}n^{n - k}$, since we need to choose $k$ numbers to be fixed and the rest have $n$ options. By the Principle of Inclusion-Exclusion, we get the answer of $\sum_{k = 0}^n (-1)^k{n\choose k}n^{n - k}$.
+\newline
+
+Another solution to this is $(n - 1)^n$, since every number in the domain can map to any number besides itself, and output values are allowed to repeat. Evaluating $(n - 1)^n$ using the Binomial Theorem, we see that it is indeed equal to $\sum_{k = 0}^n (-1)^k{n\choose k}n^{n - k}$.
+\newline
+
+\textbf{3.} The number of ways to choose a hand of no $k$ jacks, queens, kings, or aces is ${4\choose k}{{52 - 4k}\choose {13}}$. Using the Principle of Inclusion-Exclusion, we get that the number of ways to choose no jacks, queens, kings, or aces is $\sum_{k = 1}^4 (-1)^{k - 1}{4\choose k}{{52 - 4k}\choose {13}}$. Subtracting that from ${{52}\choose {13}}$, we get $\sum_{k = 0}^4 (-1)^k{4\choose k}{{52 - 4k}\choose {13}}$.
+\newline
+
+\textbf{4.} First, let's consider the integers divisible by $4$ and $5$ but not $6$ or $7$. By PIE, this is just $\lfloor 10000/20\rfloor - \lfloor 10000/60\rfloor - \lfloor 10000/140\rfloor + \lfloor 10000/420\rfloor = 286$.
+
+For the ones divisible by $4$ and $6$ but not $5$ or $7$, this is $\lfloor 10000/12 \rfloor - \lfloor 10000/60 \rfloor - \lfloor 10000/84 \rfloor + \lfloor 10000/420 \rfloor = 571$.
+
+For the ones divisible by $4$ and $7$ but not $5$ or $6$, we get $\lfloor 10000/28 \rfloor - \lfloor 10000/140 \rfloor - \lfloor 10000/84 \rfloor + \lfloor 10000/420 \rfloor = 190$.
+
+For the ones divisible by $5$ and $6$ but not $4$ or $7$, we have $\lfloor 10000/30 \rfloor - \lfloor 10000/60 \rfloor - \lfloor 10000/210 \rfloor + \lfloor 10000/420 \rfloor = 143$.
+
+For the ones divisible by $5$ and $7$ but not $4$ or $6$, this is $\lfloor 10000/35 \rfloor - \lfloor 10000/140 \rfloor - \lfloor 10000/210 \rfloor + \lfloor 10000/420 \rfloor = 190$.
+
+Finally, for the ones divisible by $6$ and $7$ but not $4$ or $5$, this is $\lfloor 10000/42 \rfloor - \lfloor 10000/84 \rfloor - \lfloor 10000/210 \rfloor + \lfloor 10000/420 \rfloor = 95$.
+\newline
+
+Adding all these up, we get $1475$.
+\newline
+
+\textbf{5.} Such an excedance set either has $n - 1$ or $n$ in the $(n - 2)$'th position or $n$ in the $(n - 1)$'th position. Let's assume either $n - 1$ or $n$ is in the $(n - 2)$'th spot. Then, there are $(n - 1)!$ ways to order the rest. We get the same answer when we assume $n$ is in the $(n - 1)$'th spot. Now, let's assume that both statements are true. Then there are $(n - 2)!$ ways to order the rest. Therefore, the answer is $2(n - 1)! - (n - 2)!$.
+\newline
+
+\textbf{6.} Let $A_n$ be the set of perfect $n$'th powers less than 100000. If $n > 16$, $|A_n| = 0$ because $2^{17} > 100000$. Therefore, we only need to consider $2 \le n \le 16$. Also, $|A_n| = \lfloor 100000^{\frac{1}{n}} \rfloor - 1$. By the Principle of Inclusion-Exclusion, we get $$\left|\bigcup_{i = 2}^{16}A_i\right| = \sum_{i = 2}^{16} |A_i| - \sum_{2 \le i \le j \le 16} |A_i \cap A_j| + \cdots - \left|\bigcap_{i = 2}^{16} A_i\right|.$$ We can simplify this to $$\sum_{i = 2}^{16}(\lfloor 100000^{1/i}\rfloor - 1) - \sum_{2\le i\le j\le 16}(\lfloor 100000^{1/\text{lcm}(i, j)}\rfloor - 1) + \cdots - (\lfloor 100000^{1/\text{lcm}(2, 3, \ldots, 16)}\rfloor - 1).$$ That looks extremely hard to simplify further.
+\newline
+
+\textbf{8.} The expression $\sum_{i = 0}^n {n\choose i}d(i)$ could represent the number of ways to choose $i$ elements of $[n]$ and make a derangement of them. Summing over all $i$ from $0$ to $n$ gives us all possible permutations of $[n]$, so the sum is equal to $n!$.
+
+\end{document}

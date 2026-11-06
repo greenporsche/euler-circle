@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\be}{\mathbf{e}}
+\newcommand{\bO}{\mathbf{0}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\title{Fundamentals Chapter 9}
+\author{Siddharth K}
+\date{November 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1a.} $\overline{\overline{a + bi}} = \overline{a - bi} = a + bi$. \\
+
+\textbf{1b.} $\overline{a + bi + c + di} = \overline{(a + c) + (b + d)i} = a - bi + c + di = \overline{a + bi} + \overline{c + di}$. \\
+
+\textbf{1c.} $\overline{(a + bi)(c + di)} = \overline{(ac - bd) + (ad + bc)i} = (ac - bd) - (ad + bc)i = a(c - di) - bi(c - di) = (\overline{a + bi})(\overline{c + di})$. \\
+
+\textbf{1d.} $|a - bi| = a^2 + b^2 = |a + bi|$. \\
+
+\textbf{1e.} $\overline{z^n} = \overline{z} \cdot \overline{z^{n - 1}} = \cdots = \overline{z}^n$. \\
+
+\textbf{1f.} If $f$ is a polynomial, then
+$$f(\overline{z}) = \sum_{i = 0}^n a_i\overline{z}^i = \overline{\sum_{i = 0}^n a_iz^i} = \overline{f(z)}.$$
+We could also extend this to include power series, which would include functions like $\sin$ or $\cos$ that have a Taylor series. \\
+
+\textbf{2.} $\{(1, 0, 0), (0, 2, 0), (0, 0, 3)\}$ \\
+$\{(4, 0, 0), (0, 5, 0), (0, 0, 6)\}$ \\
+$\{(7, 0, 0), (0, 8, 0), (0, 0, 9)\}$ \\
+
+\textbf{3a.} Let $\sum a_i\bw_i = 0$ for some constants $a_i$. If we take the inner product on both sides with $\bw_j$ for some $1 \le j \le k$, we have
+$$\left\la \bw_j, \sum a_i\bw_i \right\ra = \la \bw_j, 0 \ra = 0.$$
+Since $S$ is a set of orthonormal vectors, we have that $\la \bw_i, \bw_j \ra = 0$ for all $i \neq j$ and $\la \bw_i, \bw_i \ra = 1$. So
+$$\left\la \bw_i, \sum a_i\bw_i \right\ra = a_j \la \bw_j, \bw_j \ra = a_j = 0.$$
+Since $j$ is arbitrary, all $a_i = 0$ where $1 \le i \le k$. \\
+
+\textbf{3b.} Assume that $S$ does not span $V$ for contradiction. Then there exists $\bv \in V$ that cannot be expressed as a linear combination of $\bw_i$. \\
+
+Consider the set $S' = S \cup \{\bv\}$. Since $\bv$ is not in the span of $S$, $S'$ is still linearly independent. But $V$ is an $n$-dimensional vector space, so the maximum number of linearly independent vectors in $V$ is $n$. \\
+
+Since $S'$ has $n + 1$ elements, this is a contradiction, so there exists no $\bv$ that cannot be expressed as a linear combination of $\bw_i$. Therefore, since $S$ is a spanning set and is linearly independent, $S$ forms a basis for $V$. \\
+
+\textbf{4a.} By the definition of an inner product, $\la \bu, \bu, \ra > 0$ for nonzero $\bu$, so $\|\bu\| > 0$. If $\bu = 0$, then we see that $\la \bv, 0 \ra + \la -\bv, 0 \ra = \la \bv - \bv, 0 \ra = \la 0, 0 \ra$, but also $\la \bv, 0 \ra + \la -\bv, 0 \ra = \la \bv, 0 \ra - \la \bv, 0 \ra = 0$, so $\la 0, 0 \ra = 0$ and $\|\bO\| = 0$. \\
+
+\textbf{4b.} This follows from part c: $\left\|\frac{\bv}{\|\bv\|}\right\| = \frac{1}{\|\bv\|}\|\bv\| = 1$. \\
+
+\textbf{4c.} $\|\alpha\bv\| = \sqrt{\la \alpha \bv, \alpha \bv \ra} = \sqrt{\alpha \overline{\alpha} \la \bv, \bv \ra} = |\alpha| \sqrt{\la \bv, \bv \ra} = |\alpha| \|\bv\|$. \\
+
+\textbf{6.} Since $A = (\bv_1, \ldots, \bv_m)$, we see that
+$$\bv_i = (a_{i1}, \ldots, a_{im}).$$
+Similarly,
+$$\bw_j = (b_{1j}, \ldots, b_{mj}).$$
+Taking the inner product of $\bv_i$ and $\overline{\bw_j}$, we get
+$$\la \bv_i, \bw_j \ra = \sum_{\ell = 1}^m a_{i\ell}\overline{\overline{b_{\ell j}}} = \sum_{\ell = 1}^m a_{i\ell}b_{\ell j},$$
+which is the same expression that defines $c_{ij}$. So $c_{ij} = \la \bv_i, \overline{\bw_j} \ra$. \\
+
+\textbf{7.}
+$$\bv_1 = (1, 1, 0), \quad \bv_2 = (0, 1, 1)$$
+$$\bu_1 = (1, 1, 0), \quad \bu_2 = \bv_2 - \text{proj}_{\bu_1}\bv_2$$
+$$\text{proj}_{\bu_1}\bv_2 = \frac{\la \bv_2, \bu_1 \ra}{\la \bu_1, \bu_1 \ra}\bu_1 = \frac{1}{2}(1, 1, 0) = \left(\frac{1}{2}, \frac{1}{2}, 0\right)$$
+$$\bu_2 = (0, 1, 1) - \left(\frac{1}{2}, \frac{1}{2}, 0\right) = \left(-\frac{1}{2}, \frac{1}{2}, 1\right)$$
+$$\be_1 = \frac{1}{\sqrt{2}}(1, 1, 0) = \left(\frac{\sqrt{2}}{2}, \frac{\sqrt{2}}{2}, 0\right)$$
+$$\be_2 = \frac{1}{\sqrt{3/2}}\left(-\frac{1}{2}, \frac{1}{2}, 1\right) = \left(-\frac{\sqrt{6}}{6}, \frac{\sqrt{6}}{6}, \frac{\sqrt{6}}{3}\right).$$
+
+\textbf{8.} We have that $\be_1 = (1, 0), \be_2 = (0, 1), \be_1 + \be_2 = (1, 1)$. Let $\bv = (v_1, v_2)$. We see that
+$$\frac{\sum |\la \bv, \bw \ra|^2}{\la \bv, \bv \ra} = \frac{v_1^2 + v_2^2 + (v_1 + v_2)^2}{v_1^2 + v_2^2} = \frac{2v_1^2 + 2v_2^2 + 2v_1v_2}{v_1^2 + v_2^2} = 2 + \frac{2v_1v_2}{v_1^2 + v_2^2}.$$
+Our goal is to find $0 < A \le B$ such that
+$$A \le 2 + \frac{2v_1v_2}{v_1^2 + v_2^2} \le B$$
+for all $v_1, v_2 \in \R$. \\
+
+We know that $(v_1 + v_2)^2 \ge 0$. Rearranging this gives us $\frac{2v_1v_2}{v_1^2 + v_2^2} \ge -1$, so $2 + \frac{2v_1v_2}{v_1^2 + v_2^2} \ge 1$. This means we can let $A = 1$. \\
+
+Also, we know that $(v_1 - v_2)^2 \ge 0$. Rearranging gives us $\frac{2v_1v_2}{v_1^2 + v_2^2} \le 1$, so we can let $B = 3$. \\
+
+\textbf{9a.} We want to show that for all $\bv \in \C^2$,
+$$A\la \bv, \bv \ra \le \sum |\la \bv, \bw \ra|^2 \le B\la \bv, \bv \ra.$$
+Let $\bv = (c_1, c_2)$ We see that
+$$\sum |\la \bv, \bw \ra|^2 = 2|\la \bv, \be_1 \ra|^2 + |\la \bv, \be_2 \ra|^2 = 2|c_1|^2 + |c_2|^2.$$
+Also, we see that $\la \bv, \bv \ra = c_1\overline{c_1} + c_2\overline{c_2} = |c_1|^2 + |c_2|^2$. So our goal is to find $0 < A \le B$ such that
+$$A \le \frac{2|c_1|^2 + |c_2|^2}{|c_1|^2 + |c_2|^2} \le B.$$
+Since $\frac{2|c_1|^2 + |c_2|^2}{|c_1|^2 + |c_2|^2} = 1 + \frac{|c_1|^2}{|c_1|^2 + |c_2|^2}$ and $0 \le \frac{|c_1|^2}{|c_1|^2 + |c_2|^2} \le 1$, we can let $A = 1$ and $B = 2$. \\
+
+\textbf{9b.} Let $\bv = (c_1, c_2)$ where $c_1 = a + bi$ and $c_2 = c + di$. Then we have
+$$\frac{1}{\la \bv, \bv \ra}\sum |\la \bv, \bw \ra|^2 = \frac{|c_1|^2 + |c_2|^2 + |c_1 + c_2|^2 + |c_1 - c_2|^2}{|c_1|^2 + |c_2|^2}$$
+$$= 1 + \frac{|c_1 + c_2|^2 + |c_1 - c_2|^2}{|c_1|^2 + |c_2|^2} = 1 + \frac{(a + c)^2 + (b + d)^2 + (a - c)^2 + (b - d)^2}{a^2 + b^2 + c^2 + d^2}$$
+$$= 1 + \frac{2a^2 + 2b^2 + 2c^2 + 2d^2}{a^2 + b^2 + c^2 + d^2} = 3.$$
+So we can let $A = B = 3$.
+
+\end{document}

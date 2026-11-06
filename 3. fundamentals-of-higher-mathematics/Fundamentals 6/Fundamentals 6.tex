@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\bu}{\mathbf{u}}
+\newcommand{\bO}{\mathbf{0}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+
+\title{Fundamentals Chapter 6}
+\author{Siddharth K}
+\date{October 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Assuming additivity and homogeneity, we see that $L(c\bu + \bv) = L(c\bu) + L(\bv) = cL(\bu) + L(\bv)$. Now, we assume that $L(c\bu + \bv) = cL(\bu) + L(\bv)$. Let $c = 1$, then $L(\bu + \bv) = L(\bu) + L(\bv)$. Let $\bv = 0$, then $L(c\bu) = cL(\bu)$. \\
+
+\textbf{2.} If $L(V) = \{\bO\}$ then $L(B) = \{\bO\}$, so $L(B)$ spans $L(V)$. Furthermore, $\{\bO\}$ is a basis for $\{\bO\}$, so $L(B)$ is a basis for $L(V)$. \\
+
+\textbf{3.} Since all vector spaces are isomorphic to $\R^n$ for some $n$, we can solve this problem for $\R^n$. A basis for $\R^n$ would be a list of $n - 1$ zeroes and a $1$ in some order. If we take any two of these, say $\bu$ and $\bv$, it is never the case that $c\bu + \bv = \bO$ because they are linearly independent. \\
+
+Define the map $L: \R^n \to \R^n$ as $L(\bu) = \bu$ for all $\bu \neq \bO$ and $L(\bO) \neq \bO$. Then for all $\bu, \bv$ in the basis mentioned earlier, $c\bu + \bv \neq \bO$ so
+$$L(c\bu + \bv) = c\bu + \bv = cL(\bu) + L(\bv).$$
+Now, let $\bu = (1, \ldots, 1)$ and $\bv = (-1, \ldots, -1)$. Then
+$$L(1\cdot \bu + \bv) = L(\bO) \neq \bO = 1\cdot L(\bu) + L(\bv).$$
+
+\textbf{4.} Let $\bu, \bv \in V$ be vectors. We know that $\bu = \sum_{i = 1}^n a_iv_i$ and $\bv = \sum_{i = 1}^n b_iv_i$ for some constants $a_1, \ldots, a_n$ and $b_1, \ldots, b_n$. So we have that
+$$L(c\bu + \bv) = L\left(\sum_{i = 1}^n ca_i\bv_i + \sum_{i = 1}^n b_i\bv_i\right) = L\left(\sum_{i = 1}^n (ca_i + b_i)\bv_i\right)$$
+$$= \sum_{i = 1}^n (ca_i + b_i)L(\bv_i) = \sum_{i = 1}^n cL(a_i\bv_i) + L(b_i\bv_i) = cL(\bu) + L(\bv),$$
+which means $L$ is a linear map. \\
+
+\textbf{5.} Let $V_1 = \{\bv_1, \ldots, \bv_n\}$ so that $\bv_1 + \cdots + \bv_n \neq 0$. Then $L(\bv_1 + \cdots + \bv_n) \neq L(0) = 0$, and also $L(\bv_1 + \cdots + \bv_n) = L(\bv_1) + \cdots + L(\bv_n) \neq 0$. So $\{L(\bv_1), \ldots L(\bv_n)\} = L(V_1)$ is also linearly independent. \\
+
+\textbf{6.} Consider two fields and an isomorphism $\phi: \F_1 \to \F_2$. Let $K = \ker(\F_1)$, so that $\phi(k) = 0$ for all $k \in K$. Now, assume 
+$K$ is a subfield of $\F_1$. Then $1$ is an element in $K$. so $\phi(1) = 0$. But we see that $1\cdot \phi(x) = \phi(1\cdot x) = \phi(1)\phi(x)$, so $\phi(1) = 1$. This is a contradiction, so the kernel is not a subfield of $\F_1$. This means we cannot take the quotient of $\F_1$ and $K$, so there is no field equivalent of the first isomorphism theorem. \\
+
+\textbf{8.} We see that $\Q(\sqrt{2}) = \{a + b\sqrt{2}: a, b \in \Q\}$ and $\Q(\sqrt{3}) = \{a + b\sqrt{3}: a, b \in \Q\}$. We can write any element of $\Q(\sqrt{2})$ or $\Q(\sqrt{3})$ uniquely as the ordered pair $(a, b)$. This gives us an isomorphism. \\
+
+Assume there is an isomorphism $\phi: \Q(\sqrt{2}) \to \Q(\sqrt{3})$. We know that $\phi(1) = 1$, which means $\phi(q) = q$ for all $q \in \Q$. \\
+
+Now, consider a polynomial $p(x) = \sum_{i = 0}^n a_ix^n$. We see that $$\phi(p(x)) = \phi\left(\sum_{i = 0}^n a_ix^n\right) = \sum_{i = 0}^n a_i(\phi(x))^n = p(\phi(x)).$$
+Now, assume $p(r) = 0$. This means $\phi(p(r)) = \phi(0) = 0$, so $p(\phi(r)) = 0$. This means if $r$ is a root of $p(x)$ then $\phi(r)$ is too. So $\phi$ permutes the roots of $p(x)$. \\
+
+Applying this to $\Q(\sqrt{2})$, we see that $\sqrt{2}$ is a root of the polynomial $x^2 - 2 = 0$. So $\phi(\sqrt{2})$ is also a root of $x^2 - 2 = 0$, so it is $\sqrt{2}$ or $-\sqrt{2}$. \\
+
+We know that $\sqrt{3}$ must get mapped to by some element of $\Q(\sqrt{2})$, say $a + b\sqrt{2}$. We see that $\phi(a + b\sqrt{2}) = \phi(a) + \phi(b\sqrt{2}) = a + b\phi(\sqrt{2})$. We have that $\phi(\sqrt{2}) = \pm \sqrt{2}$, so $\phi(a + b\sqrt{2}) = a \pm b\sqrt{2}$ where $a, b \in \Q$, which cannot be equal to $\sqrt{3}$. This is a contradiction, so there doesn't exist a field isomorphism from $\Q(\sqrt{2})$ to $\Q(\sqrt{3})$. \\
+
+\textbf{9.} To show that homogeneity implies additivity, we see that
+$$L(x + y) = L\left(x\left(1 + \frac{y}{x}\right)\right) = \left(1 + \frac{y}{x}\right)L(x) = L(x) + \frac{y}{x}L(x)$$
+$$= L(x) + \frac{y}{x}(xL(1)) = L(x) + yL(1) = L(x) + L(y).$$
+Additivity does not imply homogeneity. To see this, consider a function $L$ where $L(1) = 1$ and $L(\sqrt{2}) = \sqrt{3}$. Then $L(\sqrt{2} + 1) = L(\sqrt{2}) + L(1) = \sqrt{3} + 1$. But
+$$\frac{\sqrt{2} + 1}{\sqrt{2}}L(\sqrt{2}) = \sqrt{3}\left(\frac{\sqrt{2} + 1}{\sqrt{2}}\right) \neq \sqrt{3} + 1,$$
+so we see that
+$$L(\sqrt{2} + 1) \neq \frac{\sqrt{2} + 1}{\sqrt{2}}L(\sqrt{2})$$
+which is a counterexample to homogeneity. \\
+
+\textbf{11.} I'm guessing that the infinite dimensional version is that $$|V| = |\ker(L) \cup L(V)|.$$ I couldn't figure out how to prove this though.
+
+\end{document}

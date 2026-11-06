@@ -1,0 +1,137 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\bigp}[1]{\left(#1\right)}
+
+\title{Combinatorics 9}
+\author{Siddharth K}
+\date{November 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+We have that
+$$\bigp{\sum_{n = 0}^\infty \frac{x^n}{n!}}\bigp{\sum_{m = 0}^\infty \frac{y^m}{m!}} = \sum_{n = 0}^\infty \sum_{m = 0}^\infty \frac{x^n y^m}{n!\,m!}.$$
+Relabeling indices as $n := n + m$ and $k := n$, the sum equals
+$$\sum_{n = 0}^\infty \sum_{k = 0}^n \frac{x^ky^{n - k}}{k!(n - k)!} = \sum_{n = 0}^\infty \frac{1}{n!}\sum_{k = 0}^n \frac{n!}{k!(n - k)!}x^k y^{n - k} = \sum_{n = 0}^\infty \frac{1}{n!}\sum_{k = 0}^n \binom{n}{k}x^ky^{n - k}$$
+$$= \sum_{n = 0}^\infty\frac{1}{n!}(x + y)^n,$$
+as desired. \\
+
+Now, assume we know that $e^xe^y = e^{x + y}$. Expanding each side as a power series, the LHS becomes
+$$\bigp{\sum_{n = 0}^\infty \frac{x^n}{n!}}\bigp{\sum_{m = 0}^\infty \frac{y^m}{m!}} = \sum_{n = 0}^\infty \sum_{k = 0}^n \frac{x^ky^{n - k}}{k!(n - k)!},$$
+and the RHS becomes
+$$\sum_{n = 0}^\infty\frac{(x + y)^n}{n!}.$$
+Since the two sides are equal, the power series must agree term by term. So fix $n \ge 0$. Equating the coefficient of $x^k y^{n - k}$ on both sides gives us
+$$\frac{1}{k!(n - k)!} = \frac{1}{n!}(\text{coefficient of } x^ky^{n - k} \text{ in } (x + y)^n).$$
+Therefore, the coefficient is
+$$\frac{n!}{k!(n - k)!} = \binom nk.$$
+So for every $n \ge 0$,
+$$(x + y)^n = \sum_{k = 0}^n \binom nk x^ky^{n - k},$$
+which is the binomial theorem.
+
+\section*{Problem 2}
+We have that
+\begin{align*}
+A'(x) &= \sum_{n \ge 0} a_n\frac{x^{n - 1}}{(n-1)!} = \sum_{n \ge -1}a_{n + 1}\frac{x^n}{n!} \\
+= \sum_{n \ge -1}a_{n + 1}\frac{x^n}{n!} &= \sum_{n \ge 0}a_{n + 1}\frac{x^n}{n!} - a_0\frac{x^{-1}}{(-1)!} = \sum_{n \ge 0}a_{n + 1}\frac{x^n}{n!},
+\end{align*}
+so
+$$\sum_{n \ge 0}a_{n + 1}\frac{x^n}{n!} = A'(x).$$
+
+\section*{Problem 3}
+$$\zeta(s)^k = \sum_{n = 1}^\infty \frac{d_k(n)}{n^s}$$
+where $d_k(n)$ is the number of ordered $k$-tuples with elements multiplying to $n$. We can prove this by induction. \\
+
+If $k = 1$ then $\zeta(s) = \sum_{n = 1}^\infty \frac{1}{n^s}$, which always has coefficient $1$, which counts the number of single numbers whose product is $n$ (which is $(n)$). Now assume for some $k \ge 1$ that
+$$\zeta(s)^k = \sum_{n = 1}^\infty \frac{d_k(n)}{n^s}.$$
+Then
+$$\zeta(s)^{k + 1} = \zeta(s)^k\zeta(s) = \bigp{\sum_{a = 1}^\infty \frac{d_k(a)}{a^s}}\bigp{\sum_{b = 1}^\infty \frac{1}{b^s}}$$
+$$= \sum_{n = 1}^\infty \bigp{\sum_{a \mid n}d_k(a)}\frac{1}{n^s}.$$
+So the coefficient of $1/n^s$ is
+$$\sum_{a \mid n} d_k(a).$$
+This is equal to $d_{k + 1}(n)$ because it sets $a$ as one of the $k + 1$ divisors and counts the $k$ remaining ones using $d_k(a)$, and finally sums over $a$.
+
+\section*{Problem 5}
+Define
+$$B(s) = \sum_{n = 1}^\infty \frac{b_n}{n^s}.$$
+We have that $B(s) = A(s)\zeta(s)$, since
+$$A(s)\zeta(s) = \bigp{\sum_{n = 1}^\infty \frac{a_n}{n^s}}\bigp{\sum_{m = 1}^\infty \frac{1}{m^s}} = \sum_{n = 1}^\infty \bigp{\sum_{d \mid m}a_d}\frac{1}{n^s}$$
+$$= \sum_{n = 1}^\infty \frac{b_n}{n^s} = B(s).$$
+
+\section*{Problem 6}
+Define
+$$F(x) = \sum_{n = 0}^\infty F_n \frac{x^n}{n!}.$$
+Then we have that
+$$F'(x) = \sum_{n = 0}^\infty F_{n + 1} \frac{x^n}{n!}, \quad F''(x) = \sum_{n = 0}^\infty F_{n + 2} \frac{x^n}{n!}.$$
+Using the Fibonacci recurrence,
+\begin{align*}
+F_{n + 2} &= F_{n + 1} + F_n, \\
+\sum_{n = 0}^\infty F_{n + 2} \frac{x^n}{n!} &= \sum_{n = 0}^\infty F_{n + 1} \frac{x^n}{n!} + \sum_{n = 0}^\infty F_n \frac{x^n}{n!}, \\
+F''(x) &= F'(x) + F(x), \\
+F''(x) &- F'(x) - F(x) = 0.
+\end{align*}
+Solving the ODE with initial conditions $F(0) = F_0 = 0$ and $F'(0) = F_1 = 1$, we get
+$$\alpha,\, \beta = \frac{1 \pm \sqrt{5}}{2},$$
+$$F(x) = C_1e^{\alpha x} + C_2e^{\beta x}.$$
+From $F(0) = 0$, we get that $C_2 = -C_1$. From $F'(0) = 1$, we have that
+$$C_1\alpha + C_2\beta = 1,$$
+$$C_1 = \frac{1}{\alpha - \beta} = \frac{1}{\sqrt5}, \quad C_2 = -\frac{1}{\sqrt5}.$$
+So
+$$F(x) = \frac{1}{\sqrt5}(e^{\alpha x} - e^{\beta x}).$$
+Expanding this as a power series, we get
+$$\sum_{n = 0}^\infty F_n \frac{x^n}{n!} = \frac{1}{\sqrt 5}\bigp{\sum_{n = 0}^\infty \alpha^n \frac{x^n}{n!} - \sum_{n = 0}^\infty \beta^n \frac{x^n}{n!}} = \sum_{n = 0}^\infty \frac{1}{\sqrt 5}(\alpha^n - \beta^n) \frac{x^n}{n!},$$
+$$F_n = \frac{1}{\sqrt 5}(\alpha^n - \beta^n).$$
+
+\section*{Problem 8}
+A permutation can be expressed as a set of cycles, so a derangement is a set of cycles of length $\ge 2$. The number of cycles of length $k$ is $(k - 1)!$, so the term in an exponential generating function would be $(k - 1)! \frac{x^k}{k!} = \frac{x^k}{k}$. So the exponential generating function encoding the number of cycles of length $\ge 2$ is
+$$\sum_{k = 2}^\infty \frac{x^k}{k} = \bigp{\sum_{k = 1}^\infty \frac{x^k}{k}} - x = -\log(1 - x) - x.$$
+A derangement is a set of such cycles, so its exponential generating function is
+$$D(x) = e^{-\log(1 - x) - x} = e^{-x}(1 - x)^{-1} = \frac{e^{-x}}{1 - x}.$$
+To extract the number of derangements, $D_n$, we can unsum each factor:
+$$e^{-x} = \sum_{j = 0}^\infty \frac{(-1)^jx^j}{j!}, \quad \frac{1}{1 - x} = \sum_{k = 0}^\infty x^k$$
+$$\frac{e^{-x}}{1 - x} = \bigp{\sum_{j = 0}^\infty \frac{(-1)^jx^j}{j!}}\bigp{\sum_{k = 0}^\infty x^k} = \sum_{n = 0}^\infty \bigp{\sum_{j = 0}^n \frac{(-1)^j}{j!}}x^n.$$
+But we also have that
+$$D(x) = \sum_{n = 0}^\infty D_n\frac{x^n}{n!},$$
+so
+$$\frac{D_n}{n!} = \sum_{j = 0}^n \frac{(-1)^j}{j!},$$
+$$D_n = n!\sum_{j = 0}^n \frac{(-1)^j}{j!}.$$
+
+\section*{Problem 10}
+We have that
+$$E(tx) = \sum_{n = 0}^\infty a_n \frac{t^nx^n}{n!}.$$
+Substituting into the integral, we get
+$$\int_0^\infty e^{-x}\bigp{\sum_{n = 0}^\infty a_n \frac{t^nx^n}{n!}} = \sum_{n = 0}^\infty \bigp{a_n \frac{t^n}{n!}\int_0^\infty e^{-x}x^n dx}.$$
+By repeating integration by parts, we have that
+$$\int_0^\infty e^{-x}x^n dx = n!,$$
+so the sum becomes
+$$\sum_{n = 0}^\infty a_n t^n = A(t).$$
+
+\section*{Problem 16}
+First, we find a recurrence relation for $a_n$. Consider an alternating permutation $\pi$ of $[n + 1]$. The value $n + 1$ must be at an even position because it's the greatest value. If we split the permutation at the position of $n + 1$, we have
+$$\pi = (\text{left block})\, (n + 1)\, (\text{right block}).$$
+The left and right blocks are each an alternating permutation starting with $<$, because $n + 1$ is greater than the first element in the right block. \\
+
+To form $\pi$, we can choose a subset of $[n]$ of size $k$ in $\binom nk$ ways, form one block in $a_k$ ways, and then form the other block in $a_{n - k}$ ways. For each pair of blocks, we get two alternating permutations of $[n + 1]$ since each one can be a left block or right block. So we have that
+$$a_{n + 1} = \frac{1}{2}\sum_{k = 0}^n \binom nk a_ka_{n - k},$$
+for $n \ge 1$ with $a_0 = 1$ and $a_1 = 1$. \\
+
+Now, we have that
+$$A'(x) = \sum_{n = 0}^\infty a_{n + 1}\frac{x^n}{n!} = a_1 + \sum_{n = 1}^\infty a_{n + 1}\frac{x^n}{n!}$$
+$$= a_1 + \frac{1}{2}\sum_{n = 1}^\infty\sum_{k = 0}^n \binom nk a_ka_{n - k} \frac{x^n}{n!} = a_1 + \frac{1}{2}\bigp{\sum_{n = 0}^\infty\sum_{k = 0}^n \binom nk a_ka_{n - k} \frac{x^n}{n!} - \sum_{k = 0}^0 \binom 0k a_0a_1}$$
+$$= 1 + \frac{1}{2}\bigp{\sum_{k = 0}^\infty a_k \frac{x^k}{k!}}\bigp{\sum_{m = 0}^\infty a_m \frac{x^m}{m!}} - \frac{1}{2} = \frac{1}{2}(A(x)^2 + 1),$$
+$$A'(x) = \frac{1}{2}(A(x)^2 + 1).$$
+Solving this differential equation, we get
+$$\frac{2}{A^2 + 1}\frac{dA}{dx} = 1, \quad \int \frac{2}{A^2 + 1}\frac{dA}{dx}dx = \int dx,$$
+$$2\arctan A = x + C.$$
+From $A(0) = a_0 = 1$,
+$$2\arctan 1 = 0 + C, \quad C = \frac{\pi}{2}.$$
+So
+$$A(x) = \tan\bigp{\frac{x}{2} + \frac{\pi}{4}},$$
+which, according to Desmos, appears to be equal to $\sec x + \tan x$.
+
+\end{document}

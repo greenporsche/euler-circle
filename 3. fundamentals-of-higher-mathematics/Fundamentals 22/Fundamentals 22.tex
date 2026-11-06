@@ -1,0 +1,112 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% <added stuff>
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\power}{\mathcal{P}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\B}{\mathcal{B}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nullset}{\varnothing}
+\newcommand{\lb}{\left(}
+\newcommand{\rb}{\right)}
+\newcommand{\minus}{\backslash}
+% </added stuff>
+
+\title{Fundamentals 22}
+\author{Siddharth K}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 22.1}
+Let
+$$f(x) = \begin{cases}
+    1 & \text{if } x = 1, \\
+    2 & \text{otherwise},
+\end{cases}$$
+$$A = \{1, 2\}, \quad B = \{1, 3\}.$$
+Then
+$$f(A\cap B) = f(\{1\}) = \{1\}$$
+but
+$$f(A) \cap f(B) = \{1, 2\} \cap \{1, 2\} = \{1, 2\}.$$
+
+\subsection*{Problem 22.2}
+\subsubsection*{Part (1)}
+Let $y \in f(f^{-1}(V))$. This means that there is some $x \in f^{-1}(V)$ such that $f(x) = y$. Since $x \in f^{-1}(V)$, $f(x) \in V$. But $y = f(x)$, so $y \in V$. So $f(f^{-1}(V)) \subseteq V$.
+
+\subsubsection*{Part (2)}
+Let $x \in U$. Then $f(x) \in f(U)$. Let $y = f(x)$. Since $y \in f(U)$, all $x'$ such that $f(x') = y$ is in $f^{-1}(f(U))$. Since $f(x) = y$, $x \in f^{-1}(f(U))$. So $U \subseteq f^{-1}(f(U))$.
+
+\subsection*{Problem 22.3}
+First, we show that $f^{-1}(V \minus B) = A \minus f^{-1}(V)$. Assume $x \in A \minus f^{-1}(V)$. Then $x \not\in f^{-1}(V)$, so $f(x) \not\in V$. Then, if $f(x) \not\in V$, $x \not\in f^{-1}(V)$. So $x \in A \minus f^{-1}(V)$, and therefore, $f(x) \not \in V$ iff $x \in A \minus f^{-1}(V)$. \\
+
+Assume $x \in f^{-1}(B \minus V)$. Then $f(x) \in B \minus V$ so $f(x) \not\in V$. If $f(x) \not\in V$, then $f(x) \in B \minus V$ so $x \in f^{-1}(B \minus V)$. So $f(x) \not\in V$ iff $x \in f^{-1}(B \minus V)$. \\
+
+Since $f(x) \not\in V$ iff $x \in A \minus f^{-1}(V)$ and iff $x \in f^{-1}(B \minus V)$, $A \minus f^{-1}(V) = f^{-1}(B \minus V)$. \\
+
+Now assume $f: A\to B$ is continuous and let $V \subseteq B$ be closed. Then $B \minus V$ is open. Let $V' = B \minus V$; since $f$ is continuous, $f^{-1}(V')$ is open. Therefore,
+$$A \minus f^{-1}(V') = A \minus f^{-1}(B \minus V) = A \minus (A \minus f^{-1}(V)) = f^{-1}(V)$$
+is closed. \\
+
+Now assume that $f^{-1}(V)$ is closed in $A$ if $V$ is closed in $B$. Let $V \subseteq B$ and $V' = B \minus V$. We have that $f^{-1}(B \minus V')$ is closed if $B \minus V'$ is closed, so $A \minus f^{-1}(B \minus V')$ is open if $V'$ is open. Since $A \minus f^{-1}(B \minus V') = f^{-1}(V')$, we have that $f^{-1}(V')$ is open if $V'$ is open, so $f$ is continuous.
+
+\subsection*{Problem 22.4}
+Let $f: X\to Y$ be continuous. Fix $x$ and a neighborhood $V$ where $f(x) \in V$, and let $U = f^{-1}(V)$. Since $V$ is open, $U$ is open, so $f(U) = f(f^{-1}(V)) \subseteq V$. \\
+
+Now, assume that for all $x$ and each neighborhood $V$ of $f(x)$ there is $U$ such that $U$ is open and $x \in U$ such that $f(U) \subseteq V$. Let $V \subseteq Y$ be open. For each $x_\alpha \in f^{-1}(V)$, $U_\alpha$ is open with $x \in U_\alpha$ and $f(U_\alpha) \subseteq V$. Let $U = \bigcup_{\alpha \in A} U_\alpha$. We claim that $U = f^{-1}(V)$. \\
+
+If $x_\alpha \in f^{-1}(V)$ then $x_\alpha \in U$, so $f^{-1}(V) \subseteq U$. If $x \in U$, then $x \in U_\alpha$ for some $\alpha \in A$ and $f(U_\alpha) \subseteq V$, so for all $x \in U_\alpha$, $f(x) \in V$, so $x \in f^{-1}(V)$. So $f^{-1}(V) = U$. Since $U$ is a union of open intervals, it is open, so $f^{-1}(V)$ is open, and $f$ is continuous.
+
+\subsection*{Problem 22.5}
+Let $V$ be open. Then $f^{-1}(V)$ is open since $f$ is continuous. Then, since $g$ is continuous, $g^{-1}(f^{-1}(V))$ is also open.
+
+\subsection*{Problem 22.7}
+\subsubsection*{Part (1)}
+\begin{enumerate}
+    \item We have that $\nullset \in T$ and $\nullset$ is finite, so $\R \minus \nullset = \R \in \T$.
+    
+    \item Let $\{X_\alpha : \alpha \in A\}$ be a subset of $\T$. Then $\R \minus X_\alpha$ is finite. We have that
+    $$\R \minus \bigcup_{\alpha \in A} X_\alpha = \bigcap_{\alpha \in A} \left(\R \minus X_\alpha\right),$$
+    which is finite, so $\bigcup_{\alpha \in A} X_\alpha \in \T$.
+    
+    \item Let $Y, Z \in \T$, so $\R \minus Y$ and $\R \minus Z$ are finite. Then $\R \minus (Y \cap Z) = (R \minus Y) \cup (\R \minus Z)$ which is finite, so $Y \cap Z \in \T$.
+\end{enumerate}
+
+\subsubsection*{Part (2)}
+Let
+$$f(x) = \begin{cases}
+    x & \text{if } x\in \Q, \\
+    -x & \text{otherwise}.
+\end{cases}$$
+Let $V$ be open, so that $\R \minus V$ is finite. Then $f$ has an inverse: $f^{-1}(x) = -f(x)$, so $|\R \minus f^{-1}(V)| = |\R \minus V|$ which is finite, so $f^{-1}(V)$ is open. This function is interesting because it's not continuous under the standard topology on $\R$.
+
+\subsubsection*{Part (3)}
+Let $f(x) = \sin(x)$. This is discontinuous, since we can let $V = \R \minus \{0\} \in \T$, and we have that $f^{-1}(V) = \R \minus \{\pi k : k \in \Z\} \not\in \T$. This function is interesting because it's continuous under the standard topology on $\R$.
+
+\subsection*{Problem 22.8}
+Let $U \subseteq \R$ be open. We want to show that
+$$U = \bigcup_{\alpha \in A} U_\alpha$$
+for some countable set $A$ and open intervals $U_\alpha$. \\
+
+For all $x \in U$, define
+$$a = \inf\{y \in \R : y < x \text{ and } [x, y] \subseteq U\},$$
+$$b = \sup\{y \in \R : y > x \text{ and } [x, y] \subseteq U\},$$
+where possibly $a = -\infty$ or $b = \infty$. \\
+
+Then the set $U_x = (a, b)$ is the largest open interval with $x \in U_x \subseteq U$. Let $\{U_\alpha : \alpha \in A\}$ contain every unique $U_x$ for all $x \in U$. Then for any $x \in U$ there is $\alpha \in A$ such that $x \in U_\alpha$. So $U = \bigcup_{\alpha \in A} U_\alpha$. Also, all elements of $U_\alpha$ are disjoint by construction. \\
+
+Every nonempty open interval contains a rational number, so we can define a function $f : \{U_\alpha : \alpha \in A\} \to \Q$ by picking for each $U_\alpha$ a rational $q \in U_\alpha$. Because the $U_\alpha$ are disjoint, the function is injective: if $U_\alpha \neq U_\beta$ then $q_\alpha \neq q_\beta$. Since $\Q$ is countable and $f$ is an injection, $\{U_\alpha : \alpha \in A\}$ is either finite or countable.
+
+\end{document}

@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
+
+\newcommand{\Zhat}{\widehat{\Z}}
+\renewcommand{\vec}[2]{\begin{pmatrix}#1\\#2\end{pmatrix}}
+\newcommand{\mat}[4]{\begin{pmatrix}#1&#2\\#3&#4\end{pmatrix}}
+
+\title{p-adic Analysis 9}
+\author{Siddharth K}
+\date{May 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+We can define
+$$a_n = (n - 1)(n - 5)b_n$$
+where
+$$b_n = \begin{cases}1, & n \equiv 0, 1 \pmod{4},\\0, & n \equiv 2, 3 \pmod{4}.\end{cases}$$
+This sequence satisfies
+$$a_{n + 12} = 3a_{n + 8} - 3a_{n + 4} + a_n$$
+and the first $12$ terms are
+$$5, 0, 0, 0, -3, 0, 0, 0, 21, 32 ,0, 0.$$
+
+\section*{Problem 2}
+\subsection*{Part (a)}
+If $y = 0$ then the only solution is $(0, 0)$, so we can set $t = \frac{x}{y} \in \Q$. Dividing the equation by $y^2$ gives us
+$$t^2 - 6t - 6 = 0.$$
+Completing the square gives us
+$$(t - 3)^2 = 15,$$
+but $\sqrt{15} \notin \Q$, so $f$ has no nontrivial roots over $\Q$.
+
+\subsection*{Part (b)}
+By the same argument as before, for $f$ to have a nontrivial root over $\Q_p$, $15$ must be a square in $\Q_p$. For $p = 3$ or $p = 5$, $v_3(15) = 1$ and $v_5(15) = 1$. Since it does not have even valuation, $15$ is not a square in $\Q_3$ or $\Q_5$.
+
+\section*{Problem 4}
+First, we can rule out odd $n$. Taking the recurrence mod 3 gives
+$$a_n \equiv -5a_{n - 2} \equiv a_{n - 2} \pmod{3}.$$
+Since $a_0 \equiv 1$ and $a_1 \equiv 2$, we get
+$$a_{2r} \equiv 1 \pmod{3}, \quad a_{2r + 1} \equiv 2 \pmod{3}.$$
+So if $a_n = 1$, then $n$ must be even, so we can write $n = 2r$. Now consider the function $f(r) = a_{2r}$.
+
+We can let
+$$M = \mat{0}{1}{-5}{3}, \quad \vec{a_n}{a_{n + 1}} = M^n\vec{1}{2},$$
+$$M \equiv \mat{0}{1}{1}{0} \pmod{3}.$$
+$$M^2 = \mat{-5}{3}{-15}{4} = I + 3B, \quad B = \mat{-2}{1}{-5}{1}.$$
+For $z \in \Z_3$, define
+$$F(z) = \text{first coordinate of } (I + 3B)^2\vec{1}{2}.$$
+Using the binomial expansion,
+$$(I + 3B)^2 = \sum_{d = 0}^\infty \binom{z}{d}3^dB^d,$$
+which converges on $\Z_3$. For $r \ge 0$, this gives us
+$$F(r) = a_{2r}.$$
+So we need to solve $F(z) - 1 = 0$. Expanding this, we get
+$$F(z) - 1 = -27\binom z2 + 81\binom z3 + 486\binom z4 + \cdots.$$
+Define $G(z) = \frac{1}{27}(F(z) - 1)$, so that
+$$G(z) = -\binom z2 + 3\binom z3 + 18\binom z4 + \cdots,$$
+$$G(z) = \frac{z(z - 1)(z - 3)}{2} + 3R(z),$$
+for some $R(z)$. Since the largest $3$-adic absolute value happens no later than degree $3$, $G$ has at most $3$ zeros in $\Z_3$. Trying values, we get that there are zeros at $0, 1, 3$, so these are the only zeros. So $r = 0, 1, 3$ and therefore $n = 2r = \{0, 2, 6\}$.
+
+\section*{Problem 9}
+The proof fails for $p = 2$ because the derivative is $2a_1x_1'$ which is actually $\equiv 0 \pmod{2}$, so Hensel's Lemma doesn't apply.
+
+\section*{Problem 11}
+For a fixed prime $p$, we want neither $n$ nor $n + 2$ to be divisible by $p$. For this to happen, we need $n \not\equiv  0, -2 \pmod{p}$. In the case of $p \neq 2$, we just need $n$ to be even, so it contributes a probability of $1/2$. For $p > 2$, the probability that $n$ and $n + 2$ are not divisible by $p$ is naively $1 - \frac{2}{p}$. Checking through all primes $\le \sqrt{x}$ gives us a final result of
+$$x \cdot \frac{1}{2} \cdot \prod_{2 < p \le \sqrt{x}} \bigp{1 - \frac{2}{p}}.$$
+
+\end{document}

@@ -1,0 +1,100 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\summation}[1][0]{\sum_{n=#1}^\infty}
+\newcommand{\summationk}[1][0]{\sum_{k=#1}^\infty}
+\newcommand{\summationm}[1][0]{\sum_{m=#1}^\infty}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
+
+\title{p-adic Analysis 1}
+\author{Siddharth K}
+\date{April 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 2}
+Let $x, y, z \in \R^n$. We wish to show that
+$$\|x - z\| \le \|x - y\| + \|y - z\|.$$
+If we redefine $u = x - y$ and $v = z - y$, this is equivalent to
+$$\|u + v\| \le \|u\| + \|v\|.$$
+Squaring the inequality gives us
+$$\|u + v\|^2 \le \|u\|^2 + \|v\|^2 + 2\|u\|\|v\|.$$
+We have that
+$$\|u + v\|^2 = (u + v)\cdot (u + v) = \|u\|^2 + \|v^2\| + 2(u \cdot v),$$
+and by the Cauchy-Schwarz inequality,
+$$u \cdot v \le \|u\|\|v\|,$$
+$$\|u + v\|^2 = \|u\|^2 + \|v^2\| + 2(u \cdot v) \le \|u\|^2 + \|v^2\| + 2\|u\|\|v\|,$$
+as desired.
+
+\section*{Problem 3}
+In $\R$, let
+$$S_n = (-1/n, 1 + 1/n).$$
+Then
+$$\bigcap_{n \in \N} S_n = [0, 1],$$
+which is closed.
+
+\section*{Problem 6}
+Let $x, y, z \in \R$. We want prove the triangle inequality:
+$$|e^x - e^y| + |e^y - e^z| \le |e^x - e^z|.$$
+Letting $a, b, c = e^x, e^y, e^z$, this is equivalent to the regular triangle inequality on the standard metric on $\R$.
+This metric space is not complete. Take $x_n = -n$. This is Cauchy since $e^{-n} \to 0$, but there is no $x \in \R$ such that $e^x = 0$. The completion would be $[0, \infty]$, adding $0$ as the only limit of the Cauchy sequences that don't converge.
+
+\section*{Problem 7}
+Let $\eps > 0$. There exists $N$ such that if $i > N$ then
+$$d(a_i, b_i) < \eps/2, \quad d(b_i, c_i) < \eps/2.$$
+By triangle inequality,
+$$d(a_i, c_i) \le d(a_i, b_i) + d(b_i, c_i) < 2 \cdot \eps/2 = \eps,$$
+so $a$ is equivalent to $c$.
+
+\section*{Problem 8}
+Since
+$$\lim_{p \to \infty} d_p(x, y) = \lim_{p \to \infty} \bigp{\sum (y_i - x_i)^p}^{1/p} = \max_i(y_i - x_i),$$
+$d_\infty(x, y)$ is the maximum difference between any two individual coordinates of $x, y$.
+
+\section*{Problem 9}
+Let $x, y \in X$ and $d = \|y - x\|$. Let $U = B_{d/2}(x), V = B_{d/2}(y)$. Then $U \cap V = \emptyset$ because, if a point $z$ is $< d/2$ away from $x$, by triangle inequality, it must be $> d/2$ away from $y$.
+
+\section*{Problem 12}
+Assume a Cauchy sequence $a_n$ converges to $x$ and $y$ with $x \neq y$. Let $0 < \eps < d(x, y) / 2$. We have that $B_\eps(x) \cap B_\eps(y) = \emptyset$, but since $a_n$ converges to $x$ and $y$, there exists $N$ such that if $n > N$, $a_n \in$ $B_\eps(x)$ and $B_\eps(y)$, which is a contradiction. So $x = y$.
+
+\section*{Problem 13}
+Consider the sequence
+$$x_n = \sum_{k = 0}^n p^k.$$
+If $m > n$ then
+$$x_m - x_n = p^{n + 1}(1 + p + \cdots + p^{m - n - 1},$$
+so
+$$d_p(x_m - x_n) = p^{-(n + 1)} \to 0 \text{ as } n \to \infty.$$
+So $x_n$ is Cauchy in $\Q$, but there is no $x = \sum_{k = 0}^\infty p^k$ in $\Q$, so the metric space is not complete.
+
+\section*{Problem 16}
+Assume $f: (X, d_X) \to (Y, d_Y)$ satisfies the $\eps$-$\delta$ definition. Take any open $U \subseteq Y$. We want to show that $f^{-1}(U)$ is open in $X$.
+
+Pick any $x_0 \in f^{-1}(U)$, so that $f(x_0) \in U$. Since $U$ is open, there exists $\eps > 0$ such that
+$$B_Y(f(x_0), \eps) \subseteq U.$$
+Since $f$ is continuous at $x_0$, there exists $\delta > 0$ such that
+$$d_X(x_0, x) < \delta \implies d_Y(f(x_0), f(x)) < \eps.$$
+So if $x \in B_X(x_0, \delta)$, then $f(x) \in B_Y(f(x_0), \eps) \subseteq U$, so $x \in f^{-1}(U)$. Therefore, $B_x(x_0, \delta) \in f^{-1}(U)$, and $f^{-1}(U)$ is open.
+
+Now assume that for every open $U \subseteq Y$, $f^{-1}(U)$ is open in $X$. Fix $x_0 \in X$ and $\eps > 0$. Let
+$$U = B_Y(f(x_0), \eps).$$
+Since $U$ is open, $f^{-1}(U)$ is open in $X$, and also $x_0 \in f^{-1}(U)$. So there exists $\delta > 0$ such that
+$$B_X(x_0, \delta) \subseteq f^{-1}(U).$$
+Therefore, whenever $d_X(x_0, x) < \delta$, $x \in f^{-1}(U)$, so
+$$f(x) \in U = B_Y(f(x_0), \eps)$$
+so $d_Y(f(x_0), f(x)) < \eps$.
+
+\end{document}

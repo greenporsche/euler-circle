@@ -1,0 +1,65 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\title{Chapter 16 Problem Set}
+\author{Siddharth K}
+\date{February 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} For someone who comes with a $\$10$ bill to be given change, the one collecting money must already have at least one $\$5$ bill. Therefore, at any point in time, the number of people with a $\$10$ bill who have bought a ticket must be less than or equal to the number of people with a $\$5$ bill who have bought a ticket. This is equivalent to counting Dyck paths if we interpret everyone with $\$5$ as a right step and everyone with $\$10$ as an up step. Therefore, the answer is $\frac{1}{n + 1}{{2n}\choose n}$.
+\newline
+
+\textbf{2.} For this problem, we can count the number of ways to do this starting with a right step and double it at the end. Once we have taken a right step, we can follow any Dyck path from $(1, 0)$ to $(n, n - 1)$ and then take an up step. Substituting $n - 1$ into the formula for the number of Dyck paths and then multiplying by $2$ gives us $\frac{2}{n}{{2n - 2}\choose {n - 1}}$.
+\newline
+
+\textbf{3.} There are $a + b + c$ total steps of which we need to choose $a$ of them to be right steps and $b$ to be forward steps; the rest are up steps. This gives us ${{a + b + c}\choose a}{{b + c}\choose b}$.
+\newline
+
+\textbf{4.} In total, $m + n$ steps will be taken. Therefore, the probability that one specific path will be taken is $\left(\frac{1}{2}\right)^{m + n}$. Since there are ${m + n}\choose m$ paths that would reach $(m, n)$, the probability is ${{m + n}\choose m}\left(\frac{1}{2}\right)^{m + n}$.
+\newline
+
+\textbf{5a.} In a sequence of $a$'s and $b$'s, we can interpret each $a$ as a right step and each $b$ as an up step. We are given that the number of right steps is always greater than or equal to the number of up steps, which means the result would be a Dyck path.
+\newline
+
+Now, if we were given a Dyck path, we could just make a sequence of $a$'s and $b$'s where every R corresponds to an $a$ and every U corresponds to a $b$.
+\newline
+
+\textbf{5b.} If we have a triangulation of a regular $(n + 2)$-gon, we can consider that the first point in a binary tree. Now, we can take a random diagonal formed by the triangulation. That diagonal essentially splits the polygon into two smaller polygons. Those two smaller polygons can be represented as two vertices which are children of the first vertex in the binary tree. Continuing this pattern, we see that we can turn any triangulation of a regular polygon into a unique binary tree.
+\newline
+
+Now, let's say we are given a binary tree. We can interpret each leaf as a triangle that is part of the triangulation. When two vertices are connected, we can combine those two triangles. We can work our way up from there to get the full triangulation.
+\newline
+
+\textbf{5c.} In the grid, if a number is in the top row, we can interpret it as an R, and if it is in the bottom, we can interpret it as a U. We start with $1$. Since it must always be at the top left, the first step taken will be an R. Then, if $2$ is at the top, we take an R again. If it is in the bottom row, we take a U. Continuing this pattern until we reach $2n$ gives us a path from $(0, 0)$ to $(n, n)$. If this wasn't a Dyck path, then at some point, the number of U steps must be greater than the number of R steps. This means more numbers from the bottom row were chosen than the top row. However, this is impossible, because the numbers below are greater than the ones above them, so the ones on top would have come first. Therefore, that process gives us a Dyck path.
+\newline
+
+Now, let's say we are given a Dyck path. Let's consider the $i$'th step on the path. If it is an R, we place $i$ on the leftmost available spot on the top row of the grid, and bottom row if it is a U. Since we are going in order from left to right and the number of U steps is never greater than the number of R steps, the grid we get from this process has rows that increase from left to right and columns that increase from top to bottom.
+\newline
+
+\textbf{5d.} Given a selection $a_i \le i$, let $i$ represent one more than the numbered step in a Dyck path and $a_i$ represent one more than the y-value of the point on a grid. So if $a_i = 3$ and $i = 4$, the fifth step takes us to a point where the y-value is $4$. Since $a_i \le a_{i + 1}$, the path never goes down. And since $a_i \le i$, the path always stays at or below the line $y = x$. Therefore, every such sequence results in a single Dyck path.
+\newline
+
+To turn a Dyck path into a sequence, simply make each $a_i$ one more than the y-value on the $i + 1$'th step. In this way, each Dyck path gives us a unique sequence.
+\newline
+
+\textbf{5e.} Let's form a bijection between sequences $1 \le a_i \le \cdots \le a_n$ such that $a_i \le i$ and the sequences $a_1 < \cdots < a_{n - 1}$ such that $1 \le a_i \le 2i$. We can go from the first sequence to the second by turning each $a_i$ into $a_i + i$. That creates one new sequence that satisfies the conditions.
+\newline
+
+To go from the second sequence to the first, we can make each number in the new sequence equal to $\lfloor \frac{a_i}{2} \rfloor$. This produces a new sequence that satisfies the conditions of the first one.
+\newline
+
+\textbf{6.} We know from earlier that Catalan numbers satisfy this recurrence. Therefore, showing that the initial values of $D_n$ are the same as those of $C_n$ should suffice. Since $D_0 = 1$, $D_1 = (D_0)(D_0) = 1$, and $D_2 = (D_0)(D_1) + (D_1)(D_0) = 2$, and so on. Also, $C_0 = \frac{1}{0 + 1}{{2\cdot 0}\choose 0} = 1$, $C_1 = \frac{1}{1 + 1}{{2\cdot 1}\choose 1} = 1$, etc. Since $D_0 = C_0$ and $D_1 = C_1$ and both sequences have the same recurrence, $D_n = C_n$ for all $n$.
+\newline
+
+\textbf{7.} We can split a binary tree into two sub-trees by removing the root. If one of the trees has $k$ leaves, the other has $n - k + 1$ leaves. Let $D_n$ be the number of ways to have a binary tree with $n$ leaves. That means the number of ways to have a tree with $k$ leaves is $D_k$, and $n - k + 1$ leaves is $D_{n - k + 1}$. Doing this for all possible sub-trees will give us $D_{n + 1}$. Therefore, $D_{n + 1} = \sum_{k = 0}^{n + 1} D_kD_{n - k + 1}$, which satisfies the Catalan recurrence.
+\newline
+
+\textbf{8.} Consider a lattice path from $(0, 0)$ to $(a, b)$. If at any point it crosses the line, we turn all the future right steps to up steps and vice versa. The resulting path will end at $(a - 1, b + 1)$. Every path that crosses the line gives us one of these unique paths after the transformation. Therefore, the number of paths that don't cross the line is ${{a + b}\choose a} - {{a + b}\choose {a - 1}}$. Through computation, we can verify that ${{a + b}\choose a} - {{a + b}\choose {a - 1}} = \frac{b - a + 1}{b}{{a + b}\choose a}$.
+\newline
+
+\textbf{9.} The number of lattice paths from $(0, 0)$ to $(a, b)$ is ${a + b}\choose a$. Given one of those paths, we can create another by making the $i$'th step the $i + 1$'th step and the last step the first step in a new path. If we do this $a + b$ times, we get $a + b$ different paths. This is because the fact that $\gcd(a, b) = 1$ ensures that there isn't a pattern that repeats itself throughout the lattice path, because otherwise, both $a$ and $b$ would be divisible by the number of times the pattern occurs. So we can group these "rotations" of lattice paths together. Each group has $a + b$ paths, and there are ${a + b}\choose a$ total paths, so $a + b$ divides ${a + b}\choose a$.
+
+\end{document}

@@ -1,0 +1,42 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+
+\title{Chapter 30 Problem Set}
+\author{Siddharth K}
+\date{May 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1.} Let's say we have $y \in \mathbb{R}$. We need to show that $\displaystyle\lim_{x \to y} x^2 = y^2$. By the limit laws, we know that equals $\displaystyle(\lim_{x \to y} x)^2$. We claim that $\displaystyle\lim_{x \to y} x = y$. If $\delta = \epsilon$, then $|y - x| < \delta$ implies $|y - x| < \epsilon$. So $\displaystyle\lim_{x \to y} x^2 = y^2$.
+\newline
+
+\textbf{2.} Let's say we have $y \in \mathbb{R}$. Let $\delta = \frac{\epsilon}{2}$. Then $|(y + 1) - (x + 1)| = |y - x| < \frac{\epsilon}{2} < \epsilon$ and $|(2y + 1) - (2x + 1)| = 2|y - x| < 2\frac{\epsilon}{2} = \epsilon$. In both cases, $|f(y) - f(x)| < \epsilon$.
+\newline
+
+\textbf{3.} Let's say we have $y \in \mathbb{R}$. Since both $f(x)$ and $g(x)$ are continuous, there exists $\delta_1$ such that for all $\epsilon > 0$ and $x < 0$, if $|y - x| < \delta_1$ then $|f(y) - f(x)| < \epsilon$, and there exists $\delta_2$ such that, for $x \ge 0$, if $|y - x| < \delta_2$ then $|g(y) - g(x)| < \epsilon$. Let $\delta = \min(\delta_1, \delta_2)$. Given that $|y - x| < \delta$, we can conclude that $|h(y) - h(x)| < \epsilon$ for any $\epsilon > 0$ and $x \in \mathbb{R} \backslash \{0\}$.
+\newline
+
+Now, it remains to show that $\displaystyle\lim_{x \to 0} h(x) = h(0) = 0$. If we are given that $|x| < \delta = \min(\delta_1, \delta_2)$, then when $x < 0$, $|h(x)| = |f(x)| < \delta$, and when $x \ge 0$, $|h(x)| = |g(x)| < \delta$. In either case, $|h(x)| < \delta$.
+\newline
+
+\textbf{4.} The limit does not exist. Let $\epsilon = \frac{1}{2}$. We see that the function is $1$ for $x > 3$ and $-1$ for $x < 3$. So if we are given that $|x - 3| < \delta$, there exists no $s$ such that $|\frac{|x - 3|}{x - 3} - s| < \frac{1}{2}$ because if $s$ is within $\frac{1}{2}$ of $1$ then it is not within $\frac{1}{2}$ of $-1$, which means that $|\frac{|x - 3|}{x - 3} - s| < \frac{1}{2}$ isn't guaranteed.
+\newline
+
+\textbf{5.} We need to show that there exists $N$ such that, if $n, m > N$, then $|f(a_n) - f(a_m)| < \epsilon$ for all $\epsilon > 0$. We are given that $|a_n - a_m| < \epsilon$ for all $\epsilon > 0$. Also, since $f$ is continuous, there exists $\delta > 0$ such that if $|x - y| < \delta$ then $|f(x) - f(y)| < \epsilon$. Combining both facts, we see that there exists $\delta > 0$ such that $|a_n - a_m| < \delta$, which implies that $|f(a_n) - f(a_m)| < \epsilon$. So that statement is guaranteed if $N < \min(m, n)$.
+\newline
+
+\textbf{6.} Using the limit laws, we see that $\displaystyle\lim_{x \to 0} xf(x) = (\lim_{x \to 0}x)(\lim_{x \to 0} f(x)) \le B\lim_{x \to 0}x = 0$. Since $|\sin\left(\frac{1}{x}\right)| \le 1$, we get that $\displaystyle\lim_{x\to 0} x\sin\left(\frac{1}{x}\right) = 0$.
+\newline
+
+\textbf{7.} The function $f$ is continuous only at $x = 0$. Consider the limit as $x$ approaches $a$. Both rational and irrational values exist that are arbitrarily close to $a$, so for the limit to exist, the limit when considering only rationals and only irrationals must agree. Looking at only rational values, $f(x) = x$ so $\displaystyle\lim_{x \to a} f(x) = a$. Looking at irrational values, $f(x) = 0$ so $\displaystyle\lim_{x \to a}f(x) = 0$. These two limits only the same when $a = 0$, so the function is only continuous at $x = 0$.
+\newline
+
+\textbf{8.} First, let's assume $f$ is continuous at $a$. This means that for every $\epsilon > 0$, there exists $\delta > 0$ such that if $|x - a| < \delta$ then $|f(x) - f(a)| < \epsilon$. Now, consider any sequence $x_1, x_2, \ldots$ with $\displaystyle\lim_{n \to \infty} x_n = a$. This means that for every $\delta > 0$, there exists $N$ such that if $n > N$ then $|x_n - a| < \delta$. Combining these facts, we get that for $n > N$, we have $|x_n - a| < \delta$ which implies that $|f(x_n) - f(a)| < \epsilon$. So if we let $b = f(a)$, we have $\displaystyle\lim_{n\to \infty} f(x_n) = b$.
+\newline
+
+Now, let's assume that for every sequence $x_1, x_2, \ldots$ with $\displaystyle\lim_{n\to \infty} x_n = a$ we have $\displaystyle\lim_{n\to \infty} f(x_n) = b$. This means that if $n > N$ implies $|x_n - a| < \delta$ then it also implies that $|f(x_n) - f(a)| < \epsilon$.  Therefore, $|x_n - a| < \delta$ implies that $|f(x_n) - f(a)| < \epsilon$. Since this is true for all sequences in $\mathbb{R}$ converging to $a$, it is true for any $x \in \mathbb{R}$. That means that if $|x - a| < \delta$ then $|f(x) - f(a)| < \epsilon$, so $f$ is continuous at $a$.
+
+\end{document}

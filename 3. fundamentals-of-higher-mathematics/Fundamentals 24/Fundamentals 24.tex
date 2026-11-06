@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% <added stuff>
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\power}{\mathcal{P}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\mcO}{\mathcal{O}}
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\nullset}{\varnothing}
+\newcommand{\lb}{\left(}
+\newcommand{\rb}{\right)}
+\newcommand{\minus}{\backslash}
+% </added stuff>
+
+\title{Fundamentals 24}
+\author{Siddharth K}
+\date{April 2025}
+
+\begin{document}
+
+\maketitle
+
+\subsection*{Problem 24.1}
+Let $(X, \T)$ be a topological space where $X$ is finite, and consider any open cover $\mcO$ of $X$. Since $\mcO \subseteq \power(X)$ and $X$ is finite, $\power(X)$ is finite so $\O$ is finite. So it is its own finite subcover, so $X$ is compact.
+
+\subsection*{Problem 24.2}
+Call this basis $\B$. We show the two axioms of a basis:
+
+\begin{enumerate}
+    \item Let $x \in \R$. Then $x \in [x, x + 1) \in \B$.
+    \item Let $x \in A, B \in \B$. Then we can write $A = [a, b)$ and $B = [c, d)$ for $a, b, c, d \in \R$. WLOG assume $a < c$. If $b \ge d$ then $A \cap B = A \in \B$. Otherwise, if $b < c$ then $A \cap B = \nullset = [0, 0) \in \B$, and if $b \ge c$ then $A \cap B = [a, d) \in \B$. So in every case, $x \in A \cap B \in \B$.
+\end{enumerate}
+
+\subsection*{Problem 24.4}
+Let $\mcO$ be any open cover of $A$. Consider $\mcO \cup (X\minus A)$. Since $A$ is closed, $X \minus A$ is open so $\mcO' = \mcO \cup (X\minus A)$ is an open cover of $A$. It is also an open cover of $X$ because if $x \in A$ then $x \in S \in \mcO$ for some $S$, and otherwise $x \in (X\minus A) \in O'$. Since $X$ is compact, $O'$ has a finite subcover, $F$. We have that $F \minus (X \minus A)$ is finite and covers $A$, so $A$ is compact.
+
+\subsection*{Problem 24.5}
+Assume $A$ is closed and $x$ is a limit point of $A$. We first show that $x \in A$. For contradiction, assume $x \not\in A$. Then $x \in X \minus A$, which is open. So $X \minus A$ is an open neighborhood of $x$. But since $x$ is a limit point of $A$, $(X \minus A) \cap A$ must be nonempty, which is false. So $A$ contains all its limit points. \\
+
+Now, assume $A$ contains all its limit points. We must show that $X \minus A$ is open. Let $x \in X \minus A$. Then there is some $U \ni x$ where $(U \cap A) \minus \{x\} = \nullset$. But since $x \not\in A$, it must be the case that $U \cap A = \nullset$, so $U \subseteq X \minus A$. So every point of $X \minus A$ has a neighborhood contained in $X \minus A$, meaning $X \minus A$ is open so $A$ is closed.
+
+\subsection*{Problem 24.6}
+Let $X$ be compact and $S \subseteq X$ be infinite; we must show that there exists a limit point. Suppose that a limit point doesn't exist, so that, for all $x \in X$, there is $U_x \subseteq X$ where $(U_x \cap S) \minus \{x\} = \nullset$. This means that each $U_x$ meets $S$ in at most one point ($x$ if $x \in S$). We have that $\{U_x: x \in X\}$ is an open cover of $X$. By compactness, there is a finite subcover $U = \{U_{x_i}: i \in [n]\}$ where
+$$X = \bigcup_{i = 1}^n U_{x_n}.$$
+Since this covers $S$, we have that $S \subseteq U = \bigcup_{i = 1}^n U_{x_n}$. But each $U_{x_i}$ contains at most one point of $S$, so $U$ has at most $n$ points. This contradicts the assumption that $S$ is infinite, so some point of $X$ must be a limit point of $S$.
+
+\subsection*{Problem 24.7}
+Since $X$ is compact, for any $x \in X$, we can simply pick any open neighborhood $U \ni x$ and then take $K = X$, so that $x \in U \subseteq K$ where $U$ is an open neighborhood and $K$ is compact. \\
+
+Let $X$ be a discrete, infinite set where each singleton $\{x\}$ is defined as open. Then singletons are compact so every point is a subset of an open neighborhood that is a subset of a compact set in $X$. \\
+
+$\Q$ is not locally compact. Pick any rational $q \in \Q$. An open neighborhood of $q \in \Q$ looks like $U = (q - \eps, q + \eps) \cap \Q$ and contains infinitely many rationals. But you can choose a sequence of distinct rationals converging to an irrational in $\R$, which has no finite subcover. So there is no compact $K \subseteq \Q$ with $U \subseteq K$. \\
+
+The integers are locally compact but not compact. It isn't compact because the open cover $\{\{n\}: n \in \Z\}$ has no finite subcover. But, since infinite sets where singletons are open are locally compact, $\Z$ is compact.
+
+\subsection*{Problem 24.8}
+\subsubsection*{Part 1)}
+Since closed intervals are compact, we can write
+$$\R = \bigcup_{n \in \Z} [n, n + 1],$$
+and since $\Z$ is countable, $\R$ is a countable union of compact subsets, so it is $\sigma$-compact.
+
+\subsubsection*{Part 2)}
+Singletons $\{x\}$ are compact because, given any open cover $\mcO = \{U_\alpha : \alpha \in A\}$ of $\{x\}$, there must be at least one $\alpha \in A$ with $x \in U_\alpha$, so $\{U_\alpha\}$ is a finite subcover of $\mcO$. So a countable set is a countable union of compact subsets, which means it is $\sigma$-compact.
+
+\subsubsection*{Part 3)}
+Let $\B = \{B_i: i \in \N\}$ be a countable basis for $(X, \T)$ where $X$ is locally compact. For each $i \in \N$, choose some $x_i \in B_i$. By local compactness, there is some open $U_i$ and compact $K_i$ where $x_i \in B_i \subseteq U_i \subseteq K_i$. Since $\B$ covers $X$ and $B_i \subseteq K_i$ for all $i \in \N$, we have that
+$$X = \bigcup_{i \in \N} B_i = \bigcup_{i \in \N} K_i,$$
+so $X$ is a countable union of open sets, and therefore it is $\sigma$-compact.
+
+\end{document}

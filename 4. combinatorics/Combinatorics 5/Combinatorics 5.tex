@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{Combinatorics 5}
+\author{Siddharth K}
+\date{October 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+The posets with underlying set $\{a, b, c, d\}$ are:
+\begin{enumerate}
+    \item No relations,
+    \item $a \le b$,
+    \item $b \le a$, $c \le a$,
+    \item $a \le b$, $a \le c$,
+    \item $a \le b$, $c \le d$,
+    \item $b \le a$, $c \le a$, $d \le a$,
+    \item $a \le b$, $a \le c$, $a \le d$,
+    \item $a \le c$, $a \le d$, $b \le c$, $b \le d$,
+    \item $a \le b$, $b \le c$,
+    \item $a \le b$, $a \le c$, $c \le d$,
+    \item $a \le b$, $c \le b$, $d \le c$,
+    \item $a \le b$, $a \le c$, $b \le d$,
+    \item $b \le a$, $c \le a$, $d \le b$,
+    \item $a \le b$, $a \le c$, $b \le d$, $c \le d$,
+    \item $a \le b$, $b \le c$, $c \le d$,
+    \item $a \le b$, $c \le b$, $c \le d$.
+\end{enumerate}
+
+\section*{Problem 2}
+
+Let the set be $S = \{a, b, c, d, e, f\}$. From the Hasse diagram's edges, we have that
+$$b \ge d, \quad b \ge e,$$
+$$c \ge e, \quad c \ge f,$$
+$$a \ge d, \quad a \ge f.$$
+Our goal is to find $f: S\to [6]$ with $f(x) \le f(y)$ if $x \le y$ for all $x, y \in S$. Since $a, b,$ and $c$ are each $\ge$ two other elements, we have that $\{a, b, c\} \subseteq \{3, 4, 5, 6\}$. We can split this into two cases: \\
+
+Case 1: assume $\{a, b, c\} = \{4, 5, 6\}$. Then $\{d, e, f\} = \{1, 2, 3\}$, and choices of $a, b, c$ are independent from choices of $d, e, f$, so the number of ways is $(3!)(3!) = 36$. \\
+
+Case 2: assume $3 \in \{a, b, c\}$. First, choose either $a, b,$ or $c$ to be $3$ (assume it's $a$ WLOG, can be done in $3$ ways). Since $a \ge d$ and $a \ge f$, $\{d, f\} = \{1, 2\}$, so $d$ and $f$ can be chosen in $2$ ways. Then, since $b \ge e$ and $c \ge e$, $e = 4$ and $\{b, c\} = \{5, 6\}$. So $b$ and $c$ can be chosen in $2$ ways. The result is $3\cdot 2\cdot 2 = 12$. \\
+
+Adding the two results, the total count is $48$.
+
+\section*{Problem 4}
+
+Given arbitrary $N \in \mathbb{N}$, we can construct an antichain of size $\ge N$. If $N$ is even, consider the points:
+$$S = \{(i, N - i + 1, 1, \ldots, 1): i \in [N]\}.$$
+Then, given any two $x, y \in S$, if $x[0] \le y[0]$ then $x[1] \ge y[1]$ and $x[0] \neq x[1]$ and $y[0] \neq y[1]$. So $x \not\le y$ and $y \not\le x$, and $S$ is an antichain of size $N$. If $N$ is odd, construct an antichain of size $N + 1$ in this way. \\
+
+To show there is no infinite antichain, we use induction on $k$. If $k = 1$, then $\mathbb{N}$ is totally ordered so there is no antichain of size $> 1$. \\
+
+Now, assume true for $k - 1$. Take any infinite sequence $v^{(1)}, v^{(2)}, \ldots$ with each $v^{(i)} = (a^{(i)}_1, \ldots, a^{(i)}_k)$. From the first coordinates $a^{(1)}_1, a^{(2)}_1, \ldots$, select a nondecreasing subsequence $a^{(i_1)}_1, a^{(i_2)}_1, \ldots$ and take the corresponding vectors $v^{(i_1)}, v^{(i_2)}, \ldots$. Define $w^{(i)}$ as the last $k - 1$ items in $v^{(i)}$. By the induction hypothesis, among the $w^{(i)}$, there exist $i, j$ with $w^{(i)} \le w^{(j)}$. Together with the nondecreasing first coordinates, we get $v^{(i)} \le v^{(j)}$.
+
+\section*{Problem 9}
+Define $A_n = \{n, n + 1, \ldots\}$ and the chain $C = \{A_n: n \in \mathbb{N}\} \cup \{\varnothing\}$. This is a chain since $A_1 \supseteq A_2 \supseteq \cdots \supseteq \varnothing$, and it's countable. To show that this is maximal, let $S \subseteq \mathbb{N}$ be comparable with every set in $C$. If $S = \varnothing$ we're done, so assume $S \neq \varnothing$ and let $m = \min(S)$. Then $S \subseteq A_m$ but $S \not\subseteq A_{m + 1}$. So we must have $A_{m + 1} \subseteq S$. Therefore, $S$ contains all integers $> m$, so $S = A_m$ and $S \in C$. So no new subset can be added while keeping it a valid chain, and therefore $C$ is maximal.
+
+\section*{Problem 10}
+The only possible end result is where the a6 pawn promotes to a knight, goes to c8, and the rook goes to a8, allowing Bg2\#. The minimum number of pawn moves required is $5$, the minimum number of knight moves is $5$, and the minimum number of rook moves is $2$. \\
+
+Now, we count the number of ways to move a knight from a1 to c8. Working backward, the knight can come from either d6 or e7, so the number of ways from each of those squares is $1$. Then, we can move to d6 from b5, f7, or f5, and we can move to e7 from d5, f5, or g7, so the counts for each of those is $1$, except for f5 which is $1 + 1 = 2$. Continuing to backtrack (and limiting the path length to $5$), we get that the number of knight paths from a1 to c8 is $10$. \\
+
+Finally, we can place any two moves of certain pieces between the required pawn, knight, and rook moves. At this point, I had trouble figuring out how to incorporate every possible extra movement of the rook, pawns, and knight into the total count.
+
+\section*{Problem 15}
+The minimum value of $r(\mathcal{A})$ is $m + 1$, since every added distinct hyperplane increases the number of regions by at least $1$ (it splits at least one existing region), and this can be achieved using parallel planes.
+
+\end{document}

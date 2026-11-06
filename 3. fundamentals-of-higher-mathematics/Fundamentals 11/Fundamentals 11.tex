@@ -1,0 +1,145 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\title{Fundamentals Chapter 11}
+\author{Siddharth K}
+\date{January 2025}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1a.} First, we need to show that $|x - y| = 0$ iff $x = y$. If $x = y$ then $x - y = 0$, so $|x - y| = 0$. To show that if $|x - y| = 0$ then $x = y$, assume $x \neq y$. Then $y = x + z$ for some nonzero $z$, so $|x - y| = |x - (x + z)| = |-z| \neq 0$, which is a contradiction. So $x = y$. \\
+
+Now, we must show that $|x - y| \le |x - z| + |y - z|$. To do this, we can define $a = x - z$ and $b = z - y$ so that the inequality becomes
+$$|a + b| \le |a| + |b|.$$
+Now, we square both sides and simplify, leaving us with
+$$a^2 + b^2 + 2ab \le a^2 + b^2 + 2|ab|,$$
+$$ab \le |ab|,$$
+which we know is true. So the original inequality is true as well and $d(x, y) = |x - y|$ is a metric. \\
+
+\textbf{1b.} We want to show that $d(x, y) = \|x - y\|$ is a metric on $\R^2$. From a similar argument to before, $\|x - y\| = 0$ iff $x = y$. \\
+
+Now, to prove the triangle inequality, we let $a = \|x - z\|$ and $b = \|z - y\|$, so that the desired result is
+$$\|a + b\| \le \|a\| + \|b\|.$$
+Let $a = (a_1, a_2)$ and $b = (b_1, b_2)$. Because both sides of the inequality are always nonnegative, we can square both sides to obtain
+$$\|a + b\|^2 \le \|a\|^2 + \|b\|^2,$$
+or
+$$(a_1 + b_1)^2 + (a_2 + b_2)^2 \le (a_1^2 + a_2^2) + (b_1^2 + b_2^2) + 2\sqrt{(a_1^2 + a_2^2)(b_1^2 + b_2^2)}.$$
+Expanding and simplifying gives us
+$$a_1b_1 + a_2b_2 \le \sqrt{(a_1^2 + a_2^2)(b_1^2 + b_2^2)}.$$
+Assume the LHS is negative. Then, since the square root is positive, the inequality holds. So assume the LHS is nonnegative. This lets us square both sides:
+$$(a_1b_1 + a_2b_2)^2 \le (a_1^2 + a_2^2)(b_1^2 + b_2^2).$$
+Simplifying and then factoring gives us
+$$(a_1b_2 - a_2b_1)^2 \ge 0,$$
+which we know is always true. Therefore, the original inequality is also true, and $d(x, y) = \|x - y\|$ is a metric on $\R^2$. \\
+
+\textbf{2.} To prove that $\rho(x, y) \le \rho(x, z) + \rho(z, y)$, we can consider six different cases corresponding to the six different orderings of $x, y, z$: \\
+
+Case 1: $z \le y \le x$. In this case, the inequality is equivalent to $x - y \le x - z + 1$, or $z - y \le 1$, which is true because $z \le y$. \\
+
+Case 2: $y \le z \le x$. The inequality is equivalent to $x - y \le x - z + z - y$, or $0 \le 0$ which is true. \\
+
+Case 3: $z \le x \le y$. The inequality is $1 \le x - z + 1$, or $z \le x$ which is true. \\
+
+Case 4: $x \le z \le y$. The inequality is $1 \le 1 + 1$, which is true. \\
+
+Case 5: $y \le x \le z$. The inequality is $x - y \le 1 + z - y$, or $x \le 1 + z$, which is true. \\
+
+Case 6: $x \le y \le z$. The inequality is $1 \le 1 + z - y$, or $y \le z$, which is true. \\
+
+We can see that $\rho(x, y) \neq \rho(y, x)$ because one of them is $|x - y|$ and the other is $1$. Since $\rho(x, y) = 0$ iff $x = y$, this can only be true if $\rho(x, y) \le \rho(x, z) + \rho(y, z)$ is false. \\
+
+\textbf{3a.} By the definition of $d$, $d(x, y) = 0$ iff $x = y$. To show the triangle inequality, first consider the case where $x = y$. Here, the inequality simplifies to $0 \le 2d(x, z)$, which is true. \\
+
+Now, assume $x \neq y$. Then the inequality simplifies to $1 \le d(x, z) + d(y, z)$. This is only false if $d(x, z)$ and $d(y, z)$ are both $0$, which would imply that $x = z$ and $y = z$ so $x = y$, which is a contradiction. So the inequality is true. \\
+
+\textbf{3b.} In the case where $x = y$, $d(x, y) = 0$ so it is $\le d(x, z)$ and $d(z, y)$. If $x \neq y$, then $d(x, z)$ and $d(y, z)$ can't both be $0$ at the same time, so $d(x, y) \le \max(d(x, z), d(y, z)) = 1$. \\
+
+\textbf{5a.} Let $N > \frac{2}{\eps}$. Then, if $m, n \ge N$,
+$$\left|\frac{1}{n} - \frac{1}{m}\right| \le \left|\frac{1}{n}\right| + \left|\frac{1}{m}\right| = \frac{1}{n} + \frac{1}{m} \le \frac{2}{N} < \eps.$$
+
+\textbf{5b.} Let $N > \frac{2}{\eps}$. Then, if $m, n \ge N$,
+$$\left|\frac{\sin(n)}{n} - \frac{\sin(m)}{m}\right| \le \left|\frac{\sin(n)}{n}\right| + \left|\frac{\sin(m)}{m}\right| \le \frac{1}{n} + \frac{1}{m} \le \frac{2}{N} < \eps.$$
+
+\textbf{5c.} We can rewrite $\frac{2n^2 + 1}{n^2}$ and $\frac{2n + 1}{n}$ as $2 + \frac{1}{n^2}$ and $2 + \frac{1}{n}$ respectively. Let $m, n \ge N > \max\left(\frac{2}{\eps}, \sqrt{\frac{2}{\eps}}\right)$. \\
+
+In the case where $m, n$ are odd:
+$$\left|2 + \frac{1}{n^2} - 2 - \frac{1}{m^2}\right| \le \frac{1}{n^2} + \frac{1}{m^2} < \frac{2}{N^2} < \epsilon.$$
+In the case where $m$ is odd and $n$ is even:
+$$\left|2 + \frac{1}{n} - 2 - \frac{1}{m^2}\right| \le \frac{1}{n} + \frac{1}{m^2} < \frac{N + 1}{N^2} \le \frac{2}{N} < \epsilon.$$
+The case where $m$ is even and $n$ is odd is essentially the same as the above case. \\
+In the case where $m, n$ are even:
+$$\left|2 + \frac{1}{n} - 2 - \frac{1}{m}\right| \le \frac{1}{n} + \frac{1}{m} < \frac{2}{N} < \epsilon.$$
+
+\textbf{5d.} The sequence is bounded above by $\pi$ and monotone increasing. Therefore, it is Cauchy. \\
+
+\textbf{6a.} We know that, given any $\eps > 0$, there exists $N$ such that, if $n, m > N$, then $|x_n - x_m| < \eps$. We wish to show that
+$$\left||x_n| - |x_m|\right| < \eps$$
+as well. We claim that $\left||x_n| - |x_m|\right| \le |x_n - x_m|$. To show this, we can square both sides and rearrange:
+$$(|x_n| - |x_m|)^2 \le (x_n - x_m)^2,$$
+$$x_n^2 + x_m^2 - 2|x_nx_m| \le x_n^2 + x_m^2 - 2x_nx_m,$$
+$$x_nx_m \le |x_nx_m|,$$
+which is true. So our claim is true, and if $n, m > N$, then
+$$\left||x_n| - |x_m|\right| \le |x_n - x_m| < \eps.$$
+
+\textbf{6b.} Fix $\eps > 0$. We know that there exists $N_1$ such that if $n, m > N_1$ then $|x_n - x_m| < \eps/2$, and there exists $N_2$ such that if $n, m > N_2$ then $|y_n - y_m| < \eps/2$. Let $N = \max(N_1, N_2)$. If $n, m > N$, then
+$$|(x_n + y_n) - (x_m + y_m)| \le |x_n - x_m| + |y_n - y_m| < \frac{\eps}{2} + \frac{\eps}{2} = \eps.$$
+
+\textbf{6c.} Since $x_n$ and $y_n$ are Cauchy, they are bounded, so $\sup|x_n|$ and $\sup|y_n|$ exist. For all $\eps > 0$, there exist $N_1$ and $N_2$ such that
+$$|x_n - x_m| < \frac{\eps}{2\sup|y_n|} \text{ if } n, m > N_1,$$
+$$|y_n - y_m| < \frac{\eps}{2\sup|x_n|} \text{ if } n, m > N_2.$$
+If $n, m > \max(N_1, N_2)$ then
+$$|x_ny_n - x_my_m| = |(x_ny_n - x_ny_m) + x_ny_m - x_my_m|$$
+$$= |x_n(y_n - y_m) + y_m(x_n - x_m)| \le |x_n(y_n - y_m)| + |y_m(x_n - x_m)|$$
+$$= |x_n||y_n - y_m| + |y_m||x_n - x_m| < |x_n|\frac{\eps}{2\sup|x_n|} + |y_m|\frac{\eps}{2\sup|y_n|}$$
+$$ \le \frac{\eps}{2} + \frac{\eps}{2} = \eps.$$
+So $x_ny_n$ is Cauchy. \\
+
+\textbf{7a.} We need to show that there exists $\eps > 0$ such that for all $N$, there exist $m, n > N$ such that $|n - m| \ge \eps$. Let $\eps = \frac{1}{2}$. Given $n, m > N$ where $m \ge n + 1$, $|n - m| \ge 1 > \eps$. \\
+
+\textbf{7b.} Fix $\eps$, and let $m = N + 1$ and $n \ge (\eps + \sqrt{N + 1})^2$. Then
+$$\left|\sqrt{n} - \sqrt{m}\right| = \sqrt{n} - \sqrt{N + 1} \ge \eps + \sqrt{N + 1} - \sqrt{N + 1} = \eps.$$
+
+\textbf{7c.} Let $\eps = \frac{1}{2}$. Given any $N$, choose odd $n$ and even $m$. Then $|c_n - c_m| = 1 \ge \eps$. \\
+
+\textbf{8.} Let $a = x - z$ and $b = z - y$. Then we wish to prove that
+$$\|a + b\| \le \|a\| + \|b\|.$$
+Squaring both sides, we get
+$$\|a + b\|^2 \le \|a\|^2 + \|b\|^2 + 2\|a\|\|b\|,$$
+$$\la a + b, a + b \ra \le \la a, a \ra + \la b, b \ra + 2\|a\|\|b\|.$$
+We can further simplify the LHS as:
+$$\la a + b, a + b \ra = \la a, a + b \ra + \la b, a + b \ra$$
+$$= \overline{\la a + b, a \ra} + \overline{\la a + b, b \ra} = \overline{\la a, a \ra + \la b, a \ra} + \overline{\la a, b \ra + \la b, b \ra}$$
+$$= \la a, a \ra + \la a, b \ra + \la b, a \ra + \la b, b \ra.$$
+Plugging this into the inequality and canceling terms, we are left with
+$$\la a, b \ra + \la b, a \ra \le 2\|a\|\|b\|.$$
+By Cauchy-Schwarz, $\la a, b \ra \le \|a\|\|b\|$ and $\la b, a \ra \le \|a\|\|b\|$. Adding those two yields the desired inequality. \\
+
+\textbf{10.} Let's say $d(a, b) = d_1$, $d(a, c) = d_2$, and $d(b, c) = d_3$. Define $f: \{a, b, c\} \to \R^2$ so that $f(a) = (0, 0)$ and $f(b) = (d_1, 0)$. Now, $f(c)$ needs to be chosen such that $\|f(c) - f(a)\| = d_2$ and $\|f(b) - f(a)\| = d_3$. So $f(c)$ is the intersection between the circle centered at $f(a)$ with radius $d_2$ and the circle centered at $f(b)$ with radius $d_3$. Since $d_1 \le d_2 + d_3$, this point exists, and we have found an isometry. \\
+
+\textbf{11a.} To show that all elements of $D_n$ are isometries, we can start by proving that reflections across any line preserve distance. Let $a, b \in \R^2$ and denote a reflection about line $\ell$ by $f_\ell$. We can denote $a, b$ by points $A, B$, and $f_\ell(a), f_\ell(b)$ by $A', B'$. Also, define $X$ to be the intersection of $\ell$ and $AA'$, and $Y$ to be the intersection of $\ell$ and $BB'$. \\
+
+Our goal is to show that $AB = A'B'$. In the case where $A, B$ are on the same side of $\ell$, by the Pythagorean theorem, we have that
+$$AB^2 = (AX - BY)^2 + XY^2,$$
+$$A'B'^2 = (A'X - B'Y)^2 + XY^2.$$
+Since $A', B'$ are reflections about $\ell$, $AX = A'X$ and $BX = B'X$, so $AB^2 = A'B'^2$, or $AB = A'B'$. \\
+
+In the case where $A, B$ are on opposite sides of $\ell$, we have that
+$$AB^2 = (AX + BY)^2 + XY^2,$$
+$$A'B'^2 = (A'X + B'Y)^2 + XY^2,$$
+$$AB^2 = A'B'^2.$$
+So reflections preserve distance. \\
+
+Now, we show that rotations preserve distance. Let $a, b \in \R^2$, and $f_\theta$ denote rotation about some point $O$ by $\theta$ radians. Denote $a, b$ by points $A, B$ and $f_\theta(a), f_\theta(b)$ by $A', B'$. Consider the triangles $OAB$ and $OA'B'$. Since $f_\theta$ is a rotation, $OA = OA'$ and $OB = OB'$. Also, since $\angle AOB = \angle A'OB' = \theta$, the two triangles are congruent, so $AB = A'B'$. Therefore, rotations preserve distance, and all elements of $D_n$ are isometries. \\
+
+\textbf{11b.} Other isometries of the plane are translations or combinations of reflections, rotations, and translations.
+
+\end{document}

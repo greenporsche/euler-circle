@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+
+\title{Chapter 28 Problem Set}
+\author{Siddharth K}
+\date{May 2024}
+
+\begin{document}
+
+\maketitle
+
+\textbf{1a. 1b.} The sequence $a_n$ converges to $0$ because every value is exactly $0$, and similarly $b_n$ converges to $1$.
+\newline
+
+\textbf{1c. 1d.} Let $N = \frac{1}{\epsilon}$. If $n > N$, then $|\frac{1}{n} - 0| < \frac{1}{N} = \epsilon$. Similarly, let $N = \frac{1}{\sqrt{\epsilon}}$. Then if $n > N$, $|\frac{1}{n^2} - 0| < \frac{1}{N^2} = \epsilon$. So they both converge to $0$.
+\newline
+
+\textbf{2.} Consider two equivalent Cauchy sequences $a_n$ and $b_n$. We know that for all $n \ge N$ and $\epsilon > 0$, $|a_n - b_n| < \epsilon$. So $||a_n| - |b_n|| \le |a_n - b_n| < \epsilon$.
+\newline
+
+\textbf{3.} We need to show that if $a = (a_1, a_2, a_3, \ldots)$ and $b = (b_1, b_2, b_3, \ldots)$ are Cauchy sequences then $ab = (a_1b_1, a_2b_2, \ldots)$ is too. So we have to prove that there exists $N$ such that for all $m, n > N$ and $\epsilon > 0$, $|a_nb_n - a_mb_m| < \epsilon$. Since $a$ and $b$ are Cauchy, there exists $m, n > N_1$ and $\epsilon > 0$ such that $|a_n - a_m| < \frac{\epsilon}{2|b_n|}$, and similarly for $b$. We can manipulate the expression as such: $$|a_nb_n - a_mb_m| = |a_nb_n - a_nb_m + a_nb_m - a_mb_m| \le |a_nb_n - a_nb_m| + |a_nb_m - a_mb_n|$$$$ = |a_n||b_n - b_m| + |b_m||a_n - b_m| \le \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.$$
+\newline
+
+\textbf{4a.} The set $\mathbb{Q}$ is dense. Given $\epsilon > 0$, let $n = \lceil \log_{10}\epsilon \rceil$. Then, let $s \in \mathbb{Q}$ have the same digits as $\alpha$ up to the $n$'th digit. For example, if $\alpha = 1.534\ldots$ and $n = -2$, then $s = 1.53$. This gives us $|\alpha - s| < 10^n \le 10^{\log_{10}\epsilon} = \epsilon$.
+\newline
+
+\textbf{4b.} The set of dyadic rationals is dense. Choose $n > \log_{2}\left(\frac{1}{\epsilon}\right)$ and $m > \frac{\alpha - \epsilon}{\epsilon}$. Then $|\alpha - \frac{m}{2^n}| < |\alpha - \frac{\frac{\alpha - \epsilon}{\epsilon}}{\frac{1}{\epsilon}}| = |\alpha - (\alpha - \epsilon)| = \epsilon$.
+\newline
+
+\textbf{4c.} The set $\mathbb{Z}$ is not dense. Let $\alpha = 0.5$ and $\epsilon = 0.5$. Then no element $s \in \mathbb{Z}$ satisfies $|\alpha - s| < \epsilon$.
+\newline
+
+\textbf{4d.} The set of positive real numbers is not dense. Let $\alpha = -1$ and $\epsilon = 1$. No positive real number is within $1$ of $-1$.
+\newline
+
+\textbf{4e.} This set described is dense. Since $\mathbb{Q}$ is dense, we can find $x \in \mathbb{Q}$ such that $|\sqrt{\alpha} - x| < \sqrt{\alpha + \epsilon} - \sqrt{\alpha}$. Also, $|\sqrt{\alpha} + x| = |x - \sqrt{\alpha} + 2\sqrt{\alpha}| \le |x - \sqrt{\alpha}| + 2|\sqrt{\alpha}| = |\alpha - x| + 2\sqrt{\alpha}$. This gives us $$|\alpha - x^2| = |\sqrt{\alpha} - x||\sqrt{\alpha} + x| \le |\sqrt{\alpha} - x|(|\sqrt{\alpha} - x| + 2\sqrt{\alpha})$$$$ < (\sqrt{\alpha + \epsilon} - \sqrt{\alpha})((\sqrt{\alpha + \epsilon} - \sqrt{\alpha}) + 2\sqrt{a}) = \alpha + \epsilon - \alpha = \epsilon.$$
+\newline
+
+\textbf{4f.} The set of numbers of the form $q\pi$ is dense. Choose $\frac{\alpha - \epsilon}{\pi} < q < \frac{\alpha + \epsilon}{\pi}$. Then $|\alpha - q\pi| < |\alpha - (\alpha - \epsilon)| = \epsilon$.
+\newline
+
+\textbf{5.} Assume there does exist a finite subset $S \in \mathbb{R}$ which is dense. Since it is finite, there exists a minimum positive difference between any two of its elements, which we can call $x$. If we let $\epsilon = \frac{x}{2}$, then we cannot satisfy the condition for a set being dense, since there doesn't exist $s \in S$ such that $|\alpha - s| < \epsilon$.
+\newline
+
+\end{document}

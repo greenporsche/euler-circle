@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+% Added stuff
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bigp}[1]{\left(#1\right)}
+\newcommand{\bigb}[1]{\left[#1\right]}
+\newcommand{\bigabs}[1]{\left|#1\right|}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\emptyset}{\varnothing}
+
+\title{p-adic Analysis 7}
+\author{Siddharth K}
+\date{May 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+We can take an infinite sequence of roots of unity of order not divisible by $p$ in $\C_p$, $\zeta_1, \zeta_2, \ldots$. This sequence is in $o_{\C_p}$ because $|\zeta_n| = 1$, so it is bounded.
+
+If $\zeta_m \neq \zeta_n$, $|\zeta_m - \zeta_n| \le 1$ but since $\zeta_m - \zeta_n \not\in m_{\C_p}$, we do not have $|\zeta_m - \zeta_n| < 1$, so $|\zeta_m - \zeta_n| = 1$ for all $m \neq n$. Therefore no subsequence can be Cauchy.
+
+\section*{Problem 2}
+Let
+$$B = \overline{B}_r(a) = \{x \in \C_p: |x - a| \le r\}.$$
+Take any $x \in B$, so that $|x - a| \le r$. Consider
+$$B_r(x) = \{y \in \C_p: |y - x| < r\}.$$
+We claim that $B_r(x) \subseteq \overline{B}_r(a)$. If $y \in B_r(x)$, then $|y - x| < r$, and by the ultrametric triangle inequality,
+$$|y - a| = |(y - x) + (x - a)| \le \max(|y - x|, |x - a|) \le r,$$
+so $y \in \overline{B}_r(a)$, and therefore, every closed ball of positive radius in $\C_p$ is open.
+
+\section*{Problem 7}
+Take a decreasing sequence of closed balls, $B_1 \supseteq B_2 \supseteq \cdots$ where $r_n$ and $a_n$ are the radii and centers respectively. We have that $r_1 \ge r_2 \ge \cdots$. If we assume that $r_n \to 0$, $a_n$ must be a Cauchy sequence. Since finite extensions of $\Q_p$ are complete, $a_n \to a$ for some $a \in K$. Now fix $n$. For all $m \ge n$, we have that $a_m \in B_n$, so $a \in B_n$. This holds for all $n$, so $a \in \bigcap B_n$, so the intersection is nonempty.
+
+If we assume that $r_n \not\to 0$, they have a positive lower bound, $r$. Between any two positive real numbers, there are only finitely many possible absolute values of elements in $K$. So the radii can only decrease finitely many times before the radius stabilizes to $r$. So for sufficiently large $n$, the balls have the same radius. Since $B_{n + 1} \subseteq B_n$ and $r_{n + 1} = r_n$, $B_{n + 1} = B_n$. So for some $N$, $\bigcap B_n = B_N$, which is nonempty.
+
+\section*{Problem 9}
+\subsection*{Part (a)}
+The coefficients are $a_0 = 1$ and $a_i = p$, so the points are
+$$(0, 0), (1, 1), (2, 1), (3, 1), \ldots.$$
+The lower convex hull is the line $y = 0$ for $x \ge 0$.
+
+\subsection*{Part (b)}
+For odd exponents, the points are
+$$(1, 0), (3, 1), (5, 2), (7, 3), \ldots$$
+which lie on the line $y = (x - 1) / 2$. For even exponents, the points are
+$$(2, 2), (4, 3), (6, 4), (8, 5), \ldots$$
+which lie on the line $y = x/2 + 1$, which are all above the odd line. Also $a_0 = 1$, which gives us $(0, 0)$. So the lower convex hull is the segment from $(0, 0)$ to $(1, 0)$, and then the line $y = (x - 1) / 2$.
+
+\subsection*{Part (c)}
+Since $v_p(a_n) = n^2$, the points lie on the parabola $y = x^2$, so the Newton polygon consists of the line segments between each $(i, i^2)$ for $i \ge 0$.
+
+\section*{Problem 10}
+Yes, it can happen. Take
+$$f(x) = \sum_{n = 0}^\infty p^{-n^2}x^n.$$
+The Newton polygon consists of the points $(n, -n^2)$. Since the slopes between points constantly grow larger as $n \to \infty$, any non-vertical line will eventually be above some points of the polygon. So the only valid lower boundary is the vertical ray $\{(0, y) : y \le 0\}$.
+
+\end{document}

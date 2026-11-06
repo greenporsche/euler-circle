@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newcommand{\bigp}[1]{\left(#1\right)}
+
+\title{Combinatorics 7}
+\author{Siddharth K}
+\date{October 2025}
+
+\begin{document}
+
+\maketitle
+
+\section*{Problem 1}
+Each coefficient, $n$, in the generating function counts the number of sequences of length $14$ whose entries are in $\{0, 3, 8\}$ and whose sum is $n$. The coefficient of $x^{30}$ is
+$$\binom{14}{4, 10, 0} + \binom{14}{9, 2, 3} = 21021.$$
+
+\section*{Problem 2}
+Given that $a_{n + 1} = 2a_n + 3^n$, multiply the recurrence by $x^{n + 1}$ and sum over $n$:
+$$\sum_{n = 0}^\infty a_{n + 1}x^{n + 1} = 2\sum_{n = 0}^\infty a_nx^{n + 1} + \sum_{n = 0}^\infty 3^nx^{n + 1} = 2xA(x) + a_0 + \frac{x}{1 - 3x},$$
+$$A(x)(1 - 2x) = 2 + \frac{x}{1 - 3x} \implies A(x) = \frac{2 - 5x}{(1 - 2x)(1 - 3x)}.$$
+Splitting into partial fractions, we have
+$$A(x) = \frac{1}{1 - 2x} + \frac{1}{1 - 3x} = \sum_{n = 0}^\infty 2^nx^n + \sum_{n = 0}^\infty 3^nx^n,$$
+so
+$$a_n = 2^n + 3^n.$$
+
+\section*{Problem 3}
+Setting $k = 2$ in the result from Problem 6, we have that
+$$\sum_{n = 0}^\infty n^2x^n = \frac{x(1 + x)}{(1 - x)^3}.$$
+Substituting $x = \frac{1}{2}$, we get
+$$\sum_{n = 0}^\infty \frac{n^2}{2^n} = \frac{\frac{1}{2}(1 + \frac{1}{2})}{(1 - \frac{1}{2})^3} = \frac{(1/2)(3/2)}{(1/2)^3} = 6.$$
+
+\section*{Problem 4}
+Let $x$ be the decimal on the RHS, which is equal to
+$$\sum_{n = 1}^\infty \frac{F_{n - 1}}{10^{2n}} = x.$$
+By the Fibonacci recurrence,
+$$x = \sum_{n = 1}^\infty \frac{F_{n - 1}}{10^{2n}} = \sum_{n = 1}^\infty \frac{F_{n - 2}}{10^{2n}} + \sum_{n = 1}^\infty \frac{F_{n - 3}}{10^{2n}} = \frac{1}{10^2}\sum_{n = 1}^\infty \frac{F_{n - 2}}{10^{2(n-1)}} + \frac{1}{10^4}\sum_{n = 1}^\infty \frac{F_{n - 3}}{10^{2(n-2)}},$$
+$$\sum_{n = 1}^\infty \frac{F_{n - 2}}{10^{2(n-1)}} = \sum_{n = 2}^\infty \frac{F_{n - 2}}{10^{2(n-1)}} + \frac{F_{-1}}{10^0} = x + 1,$$
+$$\sum_{n = 1}^\infty \frac{F_{n - 3}}{10^{2(n-2)}} = \sum_{n = 2}^\infty \frac{F_{n - 3}}{10^{2(n-2)}} + \frac{F_{-1}}{10^0} + \frac{F_{-2}}{10^{-2}} = x + 1 - 100 = x - 99,$$
+$$x = \frac{1}{10^2}(x + 1) + \frac{1}{10^4}(x - 99),$$
+$$10^4x = 100(x + 1) + (x - 99) = 101x + 1,$$
+$$(10^4 - 101)x = 1 \implies x = \frac{1}{9899}.$$
+
+\section*{Problem 5}
+We have that
+$$B(x) = \sum_{n = 0}^\infty \bigp{\sum_{k = 0}^n a_k}x^n = \sum_{n = 0}^\infty \sum_{k = n}^\infty a_nx^k = \sum_{n = 0}^\infty a_n\sum_{k = n}^\infty x^k$$
+$$= \sum_{n = 0}^\infty a_n \frac{x^n}{1 - x} = \frac{A(x)}{1 - x}.$$
+
+\section*{Problem 6}
+$$\sum_{n = 0}^\infty n^kx^n = \sum_{n = 0}^\infty \bigp{x\frac{d}{dx}}^k(x^n) = \bigp{x\frac{d}{dx}}^k\sum_{n = 0}^\infty x^n = \bigp{x\frac{d}{dx}}^k\bigp{\frac{1}{1 -x}}.$$
+Let $k = 1$:
+$$\sum_{n = 0}^\infty nx^n = x\frac{d}{dx}\bigp{\frac{1}{1 - x}} = \frac{x}{(1 - x)^2}.$$
+Let $k = 2$:
+$$\sum_{n = 0}^\infty n^2x^n = \bigp{x\frac{d}{dx}}\bigp{\bigp{x\frac{d}{dx}}\bigp{\frac{1}{1-x}}} = x\frac{d}{dx}\bigp{\frac{x}{(1 - x)^2}}$$
+$$= -\frac{x^2 + x}{(x - 1)^3}.$$
+
+\section*{Problem 15}
+If $A(x) = \sum_{n = 0}^\infty a_nx^n$, then $A(-x) = \sum_{n = 0}^\infty (-1)^na_n(-x)^n$, so
+$$\frac{1}{2}(A(x) + A(-x)) = \sum_{n = 0}^\infty a_{2n}x^{2n},$$
+$$\sum_{n = 0}^\infty a_{2n}x^n = \frac{1}{2}(A(\sqrt{x}) + A(-\sqrt{x})).$$
+Also, we have that
+$$\sum_{n = 0}^\infty a_{n + 1}x^n = \frac{1}{x}\sum_{n = 0}^\infty a_{n + 1}x^{n + 1} = \frac{1}{x}(A(x) + A(0)),$$
+so
+$$\sum_{n = 0}^\infty a_{2n + 1}x^n = \frac{1}{2x}(A(\sqrt{x}) + A(-\sqrt{x}) - A(0)).$$
+To find $\sum_{n = 0}^\infty a_{3n}x^n$, let $\omega = e^{2\pi i/3}$. Then $1 + \omega + \omega^2 = 0$. Then
+$$\sum_{n = 0}^\infty a_{3n}x^{3k} = \frac{1}{3}\sum_{n = 0}^\infty a_{3n}(1 + \omega^n + \omega^{2n})x^{3n} = \frac{1}{3}(A(x) + A(\omega x) + A(\omega^2x)).$$
+So
+$$\sum_{n = 0}^\infty a_{3n}x^n = \frac{1}{3}(A(\sqrt[3]x) + A(\omega \sqrt[3]x) + A(\omega^2\sqrt[3]x)).$$
+
+\end{document}
