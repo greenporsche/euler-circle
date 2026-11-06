@@ -28,6 +28,8 @@ I also wrote an expository paper on hyperplane arrangements as a final project.
 - Face posets and oriented sign-vector structure
 - Connection to piecewise-linear functions in neural networks (single-layer ReLU networks define hyperplane arrangements whose regions correspond to the network's linear pieces)
 
+I also gave a presentation on the paper (Nov 2025, in the `Hyperplane Arrangements Presentation` folder).
+
 ## Course Info
 
 - **Course page:** https://eulercircle.com/classes/combinatorics/

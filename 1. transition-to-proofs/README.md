@@ -51,7 +51,7 @@ This was my first proof-based math course. I went from writing informal argument
 | Transitions 31 | Jun 2024 | Intermediate Value Theorem, uniform continuity |
 | Transitions 32 | Jun 2024 | Series convergence/divergence, comparison test, alternating series, partial sums |
 
-> Note: Problem sets 11 and 22 are not included.
+> Note: Problem sets 11 and 22 are not included. Problem sets 1–6 weren't written in LaTeX, so their folders contain only the PDF.
 
 ## Course Info
 
