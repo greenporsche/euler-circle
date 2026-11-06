@@ -15,7 +15,7 @@ My solutions for the [Generating Functions](https://eulercircle.com/classes/gene
 
 ## Paper Summary
 
-**Generating Functions Paper Summary** (Oct 2026) -- a one-page preview of my expository paper for this course, on how many children the root of a large random tree has. Topics include:
+**Generating Functions Paper Summary** (Oct 2026) -- a short preview of my expository paper for this course, on how many children the root of a large random tree has. Topics include:
 
 - Plane trees: T(z) = z/(1 - T(z)), with a bivariate generating function marking the root's degree; in the limit, P(root has k children) = k/2^(k+1)
 - Cayley trees (labeled, children unordered): T(z) = z*e^(T(z)); in the limit, P(root has k children) = e^(-1)/(k-1)!
